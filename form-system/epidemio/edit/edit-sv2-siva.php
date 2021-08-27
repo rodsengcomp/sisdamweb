@@ -11,8 +11,19 @@ include_once '../../../conecta.php';
 <?php
 
 $id = $_GET['id'];
+$year = $_GET['year'] ?? 'atual';
 
-$consulta_sinan = "SELECT * FROM sv2 WHERE id='$id'";
+if($year == 'atual'):
+    $sv2 = 'sv2';
+    $list = 'list-sv2';
+    $edit = '';
+else:
+    $sv2 = 'sv2_'.$year;
+    $list = 'list-sv2-arquivo&year='.$year;
+    $edit = '&year='.$year;
+endif;
+
+$consulta_sinan = "SELECT * FROM $sv2 WHERE id='$id'";
 $resultado_sinan = $conectar->query($consulta_sinan);
 $editar_sinan_siva = mysqli_fetch_assoc($resultado_sinan);
 
@@ -28,7 +39,7 @@ $editar_sinan_siva = mysqli_fetch_assoc($resultado_sinan);
                     </li>
                     <li class="active">Edição Sv2 Siva</li>
                 </ol>
-                <button type="button" class="btn btn-default btn-lg btn-block">EDITAR SV2 - SIVA</button>
+                <button type="button" class="btn btn-default btn-lg btn-block">EDITAR SV2 - SIVA - <?php if($year == 'atual'): echo date('Y');else:echo $year;endif;?></button>
             </div>
         </div>
     </div>
@@ -292,6 +303,7 @@ $editar_sinan_siva = mysqli_fetch_assoc($resultado_sinan);
                         <input type="hidden" name="longitude" id="longitude" value="<?php echo $editar_sinan_siva['longsv2']; ?>">
                         <input type="hidden" name="idrua" value="<?php echo $editar_sinan_siva['idrua']; ?>">
                         <input type="hidden" name="tipo" value="siva">
+                        <input type="hidden" name="year" value="<?=$year?>">
                     </div>
 
                     <div class="form-group text-center">
@@ -301,21 +313,21 @@ $editar_sinan_siva = mysqli_fetch_assoc($resultado_sinan);
                         } ?>" data-toggle="tooltip" title="GRAVAR OS DADOS" class="btn btn-labeled btn-success"><span
                                     class="btn-label"><i class="glyphicon glyphicon-floppy-disk"></i></span> <u>G</u>RAVAR
                         </button>&nbsp;&nbsp;&nbsp;&nbsp;
-                        <a href='suvisjt.php?pag=edit-sv2-suvis&id=<?php echo $editar_sinan_siva['id']; ?>'>
+                        <a href='suvisjt.php?pag=edit-sv2-suvis&id=<?=$editar_sinan_siva['id'].$edit;?>'>
                             <button accesskey="S" type="button" style="<?php if ($_SESSION['usuarioNivelAcesso'] == 0) {
                                 echo 'display: none;';
                             } ?>" data-toggle="tooltip" title="SV2 SUVIS" class="btn btn-labeled btn-warning"><span
                                         class="btn-label"><i class="glyphicon glyphicon-pencil"></i></span>&nbsp;&nbsp;&nbsp;<u>S</u>UVIS&nbsp;&nbsp;
                             </button>
                         </a>&nbsp;&nbsp;&nbsp;&nbsp;
-                        <a href='suvisjt.php?pag=edit-sv2-siva-outros&id=<?php echo $editar_sinan_siva['id']; ?>'>
+                        <a href='suvisjt.php?pag=edit-sv2-siva-outros&id=<?=$editar_sinan_siva['id'].$edit;?>'>
                             <button accesskey="V" type="button" style="<?php if ($_SESSION['usuarioNivelAcesso'] == 0) {
                                 echo 'display: none;';
                             } ?>" data-toggle="tooltip" title="SV2 SIVA OUTROS" class="btn btn-labeled btn-default">
                                 <span class="verm"><span class="btn-label"><i class="glyphicon glyphicon-pencil"></i></span></span>SI<u>V</u>A&nbsp;<span class="verm">OUT</span>
                             </button>
                         </a>&nbsp;&nbsp;&nbsp;&nbsp;
-                        <a href='suvisjt.php?pag=edit-sv2-surto&id=<?php echo $editar_sinan_siva['id']; ?>'>
+                        <a href='suvisjt.php?pag=edit-sv2-surto&id=<?=$editar_sinan_siva['id'].$edit;?>'>
                             <button accesskey="U" type="button" style="<?php if ($_SESSION['usuarioNivelAcesso'] == 0) {
                                 echo 'display: none;';
                             } ?>" data-toggle="tooltip" title="SV2 SURTO" class="btn btn-labeled btn-primary"><span
@@ -323,7 +335,7 @@ $editar_sinan_siva = mysqli_fetch_assoc($resultado_sinan);
                                             class="glyphicon glyphicon-pencil"></i></span>&nbsp;S<u>U</u>RTO&nbsp;
                             </button>
                         </a>&nbsp;&nbsp;&nbsp;&nbsp;
-                        <a href='suvisjt.php?pag=list-sv2'
+                        <a href='suvisjt.php?pag=<?=$list?>'
                         <button type='button' data-toggle="tooltip" title="LISTAR REGISTROS" accesskey="L"
                                 class="btn btn-labeled btn-info"><span class="btn-label"><i
                                         class="glyphicon glyphicon-list"></i></span> <u>L</u>ISTAR
@@ -359,7 +371,7 @@ $editar_sinan_siva = mysqli_fetch_assoc($resultado_sinan);
 
                                 <div class="modal-footer">
                                     <div class="text-center">
-                                        <a href='suvisjt.php?pag=del-sisdamweb&form=sv2&id=<?php echo $editar_sinan_siva['id']; ?>&sinan=<?php echo $editar_sinan_siva['sinan']; ?>&agravo=<?php echo $editar_sinan_siva['agravo']; ?>&nome=<?php echo $editar_sinan_siva['nome']; ?>'>
+                                        <a href='suvisjt.php?pag=del-sisdamweb&form=sv2&id=<?php echo $editar_sinan_siva['id']; ?>&sinan=<?php echo $editar_sinan_siva['sinan']; ?>&agravo=<?php echo $editar_sinan_siva['agravo']; ?>&nome=<?=$editar_sinan_siva['nome'].'&form=sv2'.$edit;?>'>
                                             <button type="button" class="btn btn-success">SIM</button>
                                         </a>&nbsp;&nbsp;&nbsp;&nbsp;
                                         <button type="button" class="btn btn-danger" data-dismiss="modal">NÃO</button>

@@ -13,7 +13,11 @@
 */
 
 // tabela DB para usar
-$table = 'sv2';
+$tabela = 'sv2';
+
+$table = " ( 
+SELECT * FROM " . $tabela . " WHERE lixeira=0
+)temp";
 
 // chave primária da tabela
 $primaryKey = 'id';

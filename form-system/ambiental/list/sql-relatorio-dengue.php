@@ -4,6 +4,7 @@
 
 //contagens
 $count_ndoc = "COUNT($table_sql.nDoc)";
+$count_sinan = "COUNT($table_sinan.NU_NOTIFIC)";
 
 //exames
 $positivo = 'Reagente';
@@ -13,6 +14,7 @@ $col_ina = "Coleta Inadequada";
 $inconclusivo = "Inconclusivo";
 
 //Unidades
+$ama_joamar_nu_notif = '6148395';
 $ama_joamar = 'AMA J JOAMAR'; $ama_wamberto = 'AMA WAMBERTO DIAS DA COSTA';
 $ubs_albertina = 'UBS V ALBERTINA DR OSVALDO MARCAL'; $ubs_mariquinha = 'UBS DONA MARIQUINHA SCIASCIA'; $ubs_toledo = 'UBS DR JOSE TOLEDO PIZA'; $ubs_apuana = 'UBS J APUANA';
 $ubs_flor = 'UBS J FLOR DE MAIO'; $ubs_fontalis = 'UBS J FONTALIS'; $ubs_joamar = 'UBS J JOAMAR'; $ubs_jacana = 'UBS JACANA'; $ubs_pedras = 'UBS JARDIM DAS PEDRAS';
@@ -47,7 +49,7 @@ $ubs_res_toledo = "SELECT COUNT($table_sql.nDoc) FROM $table_sql WHERE UBS1='$ub
 
 //Unidade Notificacao
 $un_not_albertina = "SELECT COUNT($table_sql.nDoc) FROM $table_sql WHERE UnidadeNotificadora='$ubs_albertina'";
-$un_not_ama_joamar = "SELECT COUNT($table_sql.nDoc) FROM $table_sql WHERE UnidadeNotificadora='$ama_joamar'";
+$un_not_ama_joamar = "SELECT COUNT($table_sinan.NU_NOTIFIC) FROM $table_sinan WHERE ID_UNIDADE=$ama_joamar_nu_notif";
 $un_not_apuana = "SELECT COUNT($table_sql.nDoc) FROM $table_sql WHERE UnidadeNotificadora='$ubs_apuana'";
 $un_not_edu = "SELECT COUNT($table_sql.nDoc) FROM $table_sql WHERE UnidadeNotificadora='$ubs_edu'";
 $un_not_flor = "SELECT COUNT($table_sql.nDoc) FROM $table_sql WHERE UnidadeNotificadora='$ubs_flor'";

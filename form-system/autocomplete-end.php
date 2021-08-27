@@ -33,7 +33,7 @@ function retorna($rua, $db)
             $arr['latitude'] = $dados->latitude;
             $arr['longitude'] = $dados->longitude;
             $arr['idrua'] = $dados->id;
-            $arr['ruagoogle'] = utf8_encode($dados->ruagoogle);
+            $arr['ruagoogle'] = $dados->ruagoogle;
         }
     } else
         $arr['rua'] = 'não encontrado';

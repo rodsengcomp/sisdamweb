@@ -23,7 +23,11 @@
                 dom: "lBfrtip",processing: true, serverside: true, ajax: 'form-system/list/list-arq-system/system-proc-list-arq/proc-list-sv2-arq.php?yearMemo=<?php echo $yearSv2Of ?>',
                 "lengthMenu": [[4, 10, 25, 50, -1], [4, 10, 25, 50, "Todos"]], "aaSorting": [ 0, 'desc' ],
                 "aoColumnDefs": [{"bVisible": false,"aTargets": [14]},{"bVisible": false,"aTargets": [15]},{"bVisible": false,"aTargets": [16]},{"bVisible": false,"aTargets": [19]},
-                    {"bVisible": false,"aTargets": [20]},{"bVisible": false,"aTargets": [22]},{"bVisible": false,"aTargets": [23]},{"bVisible": false,"aTargets": [24]},{"bSearchable": false,"bVisible": false,"aTargets": [25]}],
+                    {"bVisible": false,"aTargets": [20]},{"bVisible": false,"aTargets": [22]},{"bVisible": false,"aTargets": [23]},{"bVisible": false,"aTargets": [24]},{"bSearchable": false,"bVisible": false,"aTargets": [25]},
+                    {"aTargets": [1], "mRender": function (data, type, full) {
+                            return '<a href="suvisjt.php?pag=edit-sv2-' + full[28] + '&id=' + full[0] + '&year=<?=$yearSv2Of?>" role="button" class="btn btn-dark rounded-circle">' +
+                                '<span class="glyphicon glyphicon-pencil"></a>';}}
+                ],
                 buttons: [ {extend:'excel',title:'SisdamWeb - Sv2 <?php echo $unidade.' - '.$yearSv2Of; ?>',header: 'SisdamWeb - Sv2 <?php echo $unidade.' - '.$yearSv2Of; ?>',filename:'SisdamWeb - Sv2 <?php echo $unidade.' - '.$yearSv2Of; ?>',className: 'btn btn-success',text:'<span class="fa fa-file-excel-o"></span>' },
                     {extend: 'pdfHtml5',exportOptions: {columns: ':visible'},title:'SisdamWeb - Sv2 <?php echo $unidade.' - '.$yearSv2Of; ?>',header: 'SisdamWeb - Sv2 <?php echo $unidade.' - '.$yearSv2Of; ?>',filename:'SisdamWeb - Sv2 <?php echo $unidade.' - '.$yearSv2Of; ?>',orientation: 'landscape',pageSize: 'LEGAL',className: 'btn btn-danger',text:'<span class="fa fa-file-pdf-o"></span>'},
                     {extend:'print', exportOptions: {columns: ':visible'},title:'SisdamWeb - Sv2 <?php echo $unidade.' - '.$yearSv2Of; ?>',header: 'SisdamWeb - Sv2 <?php echo $unidade.' - '.$yearSv2Of; ?>',filename:'SisdamWeb - Sv2 <?php echo $unidade.' - '.$yearSv2Of; ?>',orientation:'landscape',className: 'btn btn-secondary',text:'<span class="fa fa-print"></span>'},
@@ -45,6 +49,12 @@
                    <button type="button" onClick="window.print()" class="btn btn-danger btn-labeled btn-lg btn-block"><span class="btn-label"><i
                                    class="fa fa-print"></i></span>&nbsp;ARQUIVO&nbsp;- LISTA - SV2 - <?php echo $unidade.' - '.$yearSv2Of; ?></button>
                </div>
+               <?php
+                   if (isset($_SESSION['msgdelerro'])) {echo $_SESSION['msgdelerro'];unset($_SESSION['msgdelerro']);}
+                   if (isset($_SESSION['msgdel'])) {echo $_SESSION['msgdel'];unset($_SESSION['msgdel']);}
+                   if (isset($_SESSION['msgerro'])) {echo $_SESSION['msgerro'];unset($_SESSION['msgerro']);}
+                   if (isset($_SESSION['msgedit'])) {echo $_SESSION['msgedit'];unset($_SESSION['msgedit']);}
+               ?>
            </div>
        </div>
 
@@ -53,7 +63,9 @@
                 <thead>
                 <tr class="table-danger">
                     <th class="text-center">ID</th>
+                    <th class="text-center"><span class="glyphicon glyphicon-pencil"></th>
                     <th class="text-center">SINAN</th>
+                    <th class="text-center">PROT.</th>
                     <th class="text-center">ENTRADA</th>
                     <th class="text-center">SE</th>
                     <th class="text-center">AGRAVO</th>
@@ -63,6 +75,7 @@
                     <th class="text-center">ATENDIDO</th>
                     <th class="text-center">SEXO</th>
                     <th class="text-center">IDADE</th>
+                    <th class="text-center">DA</th>
                     <th class="text-center">LOG</th>
                     <th class="text-center">ENDEREÇO</th>
                     <th class="text-center">NUM</th>

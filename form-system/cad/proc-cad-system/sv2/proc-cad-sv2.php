@@ -50,7 +50,7 @@ $sql_tuberculose = $conectar->query("SELECT id FROM sv2 WHERE sinan='$sinan' AND
 $sql_sv2_suvis = $conectar->query("SELECT id FROM sv2 WHERE sinan='$sinan' AND datanot='$datanot' AND protocolo='$protocolo' AND agravo='$agravo' AND nome='$nome' AND agravo<>'TUBERCULOSE'");
 
 # Verificando se tabela já tem id com sinan e doença iguais.
-$sql_sv2_covid = $conectar->query("SELECT id FROM sv2 WHERE protocolo='$protocolo' AND nome='$nome' AND agravo='COVID-19'");
+$sql_sv2_covid = $conectar->query("SELECT id FROM sv2 WHERE protocolo='$protocolo' AND nome='$nome' AND agravo='COVID-19' AND tipo LIKE 'covid%'");
 
 # Verificando se tabela já tem id com sinan e doença iguais.
 // $sql_sv2_covid = $conectar->query("SELECT id FROM sv2 WHERE protocolo='$protocolo' AND agravo='COVID-19'");

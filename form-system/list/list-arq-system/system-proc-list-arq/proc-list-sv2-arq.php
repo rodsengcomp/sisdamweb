@@ -16,7 +16,11 @@
 $yearSv2Arq = $_GET["yearMemo"];
 
 // tabela DB para usar
-$table = 'sv2_'.$yearSv2Arq;
+$tabela = 'sv2_'.$yearSv2Arq;
+
+$table = " ( 
+SELECT * FROM " . $tabela . " WHERE lixeira=0
+)temp";
 
 // chave primária da tabela
 $primaryKey = 'id';
@@ -29,44 +33,47 @@ $primaryKey = 'id';
 
 $columns = array(
     array('db' => 'id', 'dt' => 0),
-    array('db' => 'sinan', 'dt' => 1),
-    array('db' => 'dataentrada', 'dt' => 2),
-    array('db' => 'se', 'dt' => 3),
-    array('db' => 'agravo', 'dt' => 4),
-    array('db' => 'tel', 'dt' => 5),
-    array('db' => 'nome', 'dt' => 6),
-    array('db' => 'datanot', 'dt' => 7),
-    array('db' => 'localate', 'dt' => 8),
-    array('db' => 'sexo', 'dt' => 9),
-    array('db' => 'idade', 'dt' => 10),
-    array('db' => 'log', 'dt' => 11),
-    array('db' => 'rua', 'dt' => 12),
-    array('db' => 'num', 'dt' => 13),
-    array('db' => 'comp', 'dt' => 14),
-    array('db' => 'bairro', 'dt' => 15),
-    array('db' => 'cep', 'dt' => 16),
-    array('db' => 'localvd', 'dt' => 17),
-    array('db' => 'suvis', 'dt' => 18),
-    array('db' => 'cidade', 'dt' => 19),
-    array('db' => 'dataobito', 'dt' => 20),
-    array('db' => 'usuariocad', 'dt' => 21),
+    array('db' => 'id', 'dt' => 1),
+    array('db' => 'sinan', 'dt' => 2),
+    array('db' => 'protocolo', 'dt' => 3),
+    array('db' => 'dataentrada', 'dt' => 4),
+    array('db' => 'se', 'dt' => 5),
+    array('db' => 'agravo', 'dt' => 6),
+    array('db' => 'tel', 'dt' => 7),
+    array('db' => 'nome', 'dt' => 8),
+    array('db' => 'datanot', 'dt' => 9),
+    array('db' => 'localate', 'dt' => 10),
+    array('db' => 'sexo', 'dt' => 11),
+    array('db' => 'idade', 'dt' => 12),
+    array('db' => 'da', 'dt' => 13),
+    array('db' => 'log', 'dt' => 14),
+    array('db' => 'rua', 'dt' => 15),
+    array('db' => 'num', 'dt' => 16),
+    array('db' => 'comp', 'dt' => 17),
+    array('db' => 'bairro', 'dt' => 18),
+    array('db' => 'cep', 'dt' => 19),
+    array('db' => 'localvd', 'dt' => 20),
+    array('db' => 'suvis', 'dt' => 21),
+    array('db' => 'cidade', 'dt' => 22),
+    array('db' => 'dataobito', 'dt' => 23),
+    array('db' => 'usuariocad', 'dt' => 24),
     array(
         'db' => 'criado',
-        'dt' => 22,
+        'dt' => 25,
         'formatter' => function ($d, $row) {
             return date('d/m/Y H:i:s', strtotime($d));
         }
     ),
-    array('db' => 'usuarioalt', 'dt' => 23),
+    array('db' => 'usuarioalt', 'dt' => 26),
     array(
         'db' => 'alterado',
-        'dt' => 24,
+        'dt' => 27,
         'formatter' => function ($d, $row) {
             return date('d/m/Y H:i:s', strtotime($d));
         }
     ),
-    array('db' => 'tipo', 'dt' => 25),
-    array('db' => 'ocorrencia', 'dt' => 26)
+    array('db' => 'tipo', 'dt' => 28),
+    array('db' => 'ocorrencia', 'dt' => 29)
 );
 
 // SQL server connection information

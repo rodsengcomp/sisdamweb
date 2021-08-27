@@ -251,7 +251,7 @@ $row_result_dengue = mysqli_fetch_assoc($result_dengue);
                             <td class="text-center" style="font-weight: bold"> <?php foreach($conectar->query($ns1_neg_ubs_mariquinha) as $row) {echo $row[$count_ndoc];}?> </td>
                             <td class="text-center" style="font-weight: bold"> <?php foreach($conectar->query($tr_neg_ubs_mariquinha) as $row) {echo $row[$count_ndoc];}?> </td>
                             <td class="text-center" style="font-weight: bold" data-toggle="tooltip" data-placement="left" title="Notificados AMA J. JOAMAR"> N A.J. :
-                                <?php foreach($conectar->query($un_not_ama_joamar) as $row) {echo $row[$count_ndoc];}?> </td>
+                                <?php foreach($conectar->query($un_not_ama_joamar) as $row) {echo $row[$count_sinan];}?> </td>
                         </tr>
 
                         <tr>

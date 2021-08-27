@@ -15,6 +15,7 @@ TRUNCATE TABLE esus_aline_atual_final_mes;
 
 -- 1º passo : Carregar os registros extraidos no mês do sistema esus-notifica para atualizar o banco - Acesse https://notifica.saude.gov.br/exportacoes
 
+-- LOAD DATA INFILE 'C:/csv/esus/esus_27072021/esus_julho_27072021.csv'
 LOAD DATA INFILE 'e:/csv/esus/esus_/esus_0803_2.csv'
 INTO TABLE `esus_total`
 CHARACTER SET utf8
@@ -38,6 +39,7 @@ ALTER TABLE `esus_total` DROP `id`;
 
 -- 2º Passo : Carregar tabela online Uvis e-SUS
 
+-- LOAD DATA INFILE 'C:/csv/esus/esus_270721/esus_julho_27072021.csv'
 -- Importar tabela diária Aline Esus (Copiar a tabela online e colocar excel local e editar campos protocolo e cadastro exame para numero)
 LOAD DATA INFILE 'e:/csv/esus/esus_/esus_aline_.csv'
 INTO TABLE `esus_aline`
@@ -177,7 +179,7 @@ esus.unidade_de_atendimento AS localate,
 esus.`Telefone Celular` AS tel, esus.`Número (ou SN para Sem Número)` AS num,esus.`Complemento` AS comp, esus.Da AS da, esus.`cep` AS cep,
 "" AS log, esus.Logradouro AS rua, "" AS bairro, esus.Ubs AS localvd, "UVIS JACANA-TREMEMBE" AS suvis,
 "SAO PAULO" AS cidade, "" AS idrua, "" AS dataobito,NOW() AS criado, esus.LATSIRGAS AS latsv2, esus.LONSIRGAS AS longsv2,
-"sisdamweb D791749" AS usuariocad, "" AS alterado, "" AS usuarioalt, "" AS ocorrencia, "suvis" AS tipo
+"sisdamweb D788796" AS usuariocad, "" AS alterado, "" AS usuarioalt, "" AS ocorrencia, "suvis" AS tipo
 FROM sv2 RIGHT JOIN esus ON sv2.protocolo = esus.`Número da Notificação`
 WHERE sv2.protocolo IS NULL;
 
@@ -185,30 +187,51 @@ WHERE sv2.protocolo IS NULL;
 -- Comando SQL para apagar um ou mais dos de cada registro duplicado esus_total (mantém um dos registros)
 DELETE a FROM esus_total AS a, esus_total AS b WHERE a.`Número da Notificação` IS NOT NULL AND b.`Número da Notificação`
 IS NOT NULL AND a.`Número da Notificação` > 1 AND b.`Número da Notificação` > 1 AND a.`Número da Notificação`=b.`Número da Notificação`
-AND a.id < b.id
+AND a.id < b.id;
 
 -- Comando SQL para apagar um ou mais dos de cada registro duplicado esus_total (mantém um dos registros)
 DELETE a FROM sv2 AS a, sv2 AS b WHERE a.`protocolo` IS NOT NULL AND b.`protocolo`
 IS NOT NULL AND a.`protocolo` > 1 AND b.`protocolo` > 1 AND a.`protocolo`=b.`protocolo`
-AND a.id < b.id
+AND a.id < b.id;
 
 -- Comando SQL para apagar um ou mais dos de cada registro duplicado esus_aline_atual_final (mantém um dos registros)
 DELETE a FROM esus_aline_atual_final AS a, esus_aline_atual_final AS b WHERE a.`PROT_ESUS` IS NOT NULL AND b.`PROT_ESUS`
 IS NOT NULL AND a.`PROT_ESUS` > 1 AND b.`PROT_ESUS` > 1 AND a.`PROT_ESUS`=b.`PROT_ESUS`
-AND a.id < b.id
+AND a.id < b.id;
 
 
-                                    PARA ATUALIZAR OS CASOS DO ANO DE 2020
+                    -- PARA ATUALIZAR OS CASOS DO ANO DE 2020
 
 -- Script para inserção de casos novos no sv2 (Apenas se no script 5º Passo acima apresentar novas linhas inseridas):
 insert into sv2_2020
 SELECT "" AS id, "0000000" AS sinan, esus.`Número da Notificação` AS `protocolo`, esus.`Data da Notificação` AS datanot,
-"COVID-19" AS agravo, esus.`Nome Completo` AS nome,CONCAT(FLOOR(DATEDIFF(CURDATE(),esus.`Data de Nascimento`) / 365.25),"A") AS idade,
-esus.`Sexo` AS sexo, DATE_FORMAT(CURRENT_DATE,'%d/%m/%Y') AS dataentrada,esus.`Se Dt Sint` AS se,esus.`Data do início dos sintomas` AS data1sint,
-esus.unidade_de_atendimento AS localate,
-esus.`Telefone Celular` AS tel, esus.`Número (ou SN para Sem Número)` AS num,esus.`Complemento` AS comp, esus.Da AS da, esus.`cep` AS cep,
-"" AS log, esus.Logradouro AS rua, "" AS bairro, esus.Ubs AS localvd, "UVIS JACANA-TREMEMBE" AS suvis,
-"SAO PAULO" AS cidade, "" AS idrua, "" AS dataobito,NOW() AS criado, esus.LATSIRGAS AS latsv2, esus.LONSIRGAS AS longsv2,
-"sisdamweb D791749" AS usuariocad, "" AS alterado, "" AS usuarioalt, "" AS ocorrencia, "suvis" AS tipo
+       "COVID-19" AS agravo, esus.`Nome Completo` AS nome,CONCAT(FLOOR(DATEDIFF(CURDATE(),esus.`Data de Nascimento`) / 365.25),"A") AS idade,
+       esus.`Sexo` AS sexo, DATE_FORMAT(CURRENT_DATE,'%d/%m/%Y') AS dataentrada,esus.`Se Dt Sint` AS se,esus.`Data do início dos sintomas` AS data1sint,
+       esus.unidade_de_atendimento AS localate,
+       esus.`Telefone Celular` AS tel, esus.`Número (ou SN para Sem Número)` AS num,esus.`Complemento` AS comp, esus.Da AS da, esus.`cep` AS cep,
+       "" AS log, esus.Logradouro AS rua, "" AS bairro, esus.Ubs AS localvd, "UVIS JACANA-TREMEMBE" AS suvis,
+       "SAO PAULO" AS cidade, "" AS idrua, "" AS dataobito,NOW() AS criado, esus.LATSIRGAS AS latsv2, esus.LONSIRGAS AS longsv2,
+       "sisdamweb D791749" AS usuariocad, "" AS alterado, "" AS usuarioalt, "" AS ocorrencia, "suvis" AS tipo
 FROM sv2_2020 RIGHT JOIN esus ON sv2_2020.protocolo = esus.`Número da Notificação`
 WHERE sv2_2020.protocolo IS NULL;
+
+-- PARA ATUALIZAR OS CASOS DE VIOLENCIA ALINE - ANO DE 2020
+
+SELECT vio_2020.NU_NOTIFIC AS sinan, vio_2020.DT_NOTIFIC AS datanot, vio_2020.ID_AGRAVO AS agravo, vio_2020.NM_PACIENT AS nome,vio_2020.DT_NASC AS idade, vio_2020.CS_SEXO AS sexo,
+       vio_2020.DT_OCOR AS data1sint, vio_2020.ID_UNIDADE AS cnes_vio
+FROM sv2_2020 RIGHT JOIN vio_2020 ON sv2_2020.sinan = vio_2020.NU_NOTIFIC
+WHERE sv2_2020.sinan IS NULL
+
+SELECT "" AS id, vio_2020.NU_NOTIFIC AS sinan, '' AS `protocolo`, vio_2020.DT_NOTIFIC AS datanot,
+       "COVID-19" AS agravo, esus.`Nome Completo` AS nome,CONCAT(FLOOR(DATEDIFF(CURDATE(),esus.`Data de Nascimento`) / 365.25),"A") AS idade,
+       esus.`Sexo` AS sexo, DATE_FORMAT(CURRENT_DATE,'%d/%m/%Y') AS dataentrada,esus.`Se Dt Sint` AS se,esus.`Data do início dos sintomas` AS data1sint,
+       esus.unidade_de_atendimento AS localate,
+       esus.`Telefone Celular` AS tel, esus.`Número (ou SN para Sem Número)` AS num,esus.`Complemento` AS comp, esus.Da AS da, esus.`cep` AS cep,
+       "" AS log, esus.Logradouro AS rua, "" AS bairro, esus.Ubs AS localvd, "UVIS JACANA-TREMEMBE" AS suvis,
+       "SAO PAULO" AS cidade, "" AS idrua, "" AS dataobito,NOW() AS criado, esus.LATSIRGAS AS latsv2, esus.LONSIRGAS AS longsv2,
+       "sisdamweb D791749" AS usuariocad, "" AS alterado, "" AS usuarioalt, "" AS ocorrencia, "suvis" AS tipo
+FROM sv2_2020 RIGHT JOIN esus ON sv2_2020.protocolo = esus.`Número da Notificação`
+WHERE sv2_2020.protocolo IS NULL;
+
+SELECT vio_aline_2020.sinan, vio_aline_2020.datanot, vio_aline_2020.agravo, vio_aline_2020.nome,vio_aline_2020.idade, vio_aline_2020.sexo, vio_aline_2020.data1sint, vio_aline_2020.cnes_vio AS cnes, cnes.estabelecimento AS notificante
+FROM vio_aline_2020 LEFT JOIN cnes ON vio_aline_2020.cnes_vio = cnes.`cnes`;
