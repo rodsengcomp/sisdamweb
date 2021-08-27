@@ -1,0 +1,5 @@
+/* Mover para baixo conteúdo, porque temos uma barra de navegação fixa que é 50px * altura*/
+body {
+    padding-top: 35px;
+    padding-bottom: 15px;
+}

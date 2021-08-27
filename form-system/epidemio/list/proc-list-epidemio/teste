@@ -1,0 +1,70 @@
+#include <iostream>
+#include <stdlib.h>
+#include <stdio.h>
+#include <locale.h>//Biblioteca para utilizar a variável setlocale que corrige a ascentuação
+
+/*=============================================================================================================
+*    eXcript.com - fb.com/eXcript
+*    https://github.com/dorathoto/CPlusPlus_Univesp
+*    Semana 5: Operadores Aritméticos do C++, Construindo uma Calculadora com C++, Módulo da Divisão em C++,
+*    Operadores Relacionais do C++
+*    Autor : Rodolfo R. R. de Jesus
+* ============================================================================================================*/
+
+int main() {
+
+    float tensao, corrente, resistencia;
+    int opcao;
+    char continuar;
+
+    while (1) {
+        cout << "\n" << endl;
+        cout << " *** Calculadora da Lei de Ohm ***\n" << endl;
+        cout << "\n" << endl;
+        cout << "Grandezas Permitidas: V, A e R\n" << endl;
+        cout << "\n" << endl;
+        cout << "Escolha uma grandeza:\n" << endl;
+        cout << "\n" << endl;
+        cout << "1. Tensao[Volts]\n" << endl;
+        cout << "2. Corrente[Amperes]\n" << endl;
+        cout << "3. resistencia[Resistencia]\n" << endl;
+        scanf("%d", &opcao);
+        if (opcao == 1) // Cálculo de tensão
+        {
+            cout << "Digite o valor da corrente:" << endl;
+            scanf("%f", &corrente);
+            cout << "Digite o valor da resistencia:" << endl;
+            scanf("%f", &resistencia);
+            tensao = resistencia * corrente;
+            cout << "O valor da tensao e: %.2fV\n", tensao);
+        } else if (opcao == 2) // Cálculo de corrente
+        {
+            cout << "Digite o valor da tensao:" << endl;
+            scanf("%f", &tensao);
+            cout << "Digite o valor da resistencia:" << endl;
+            scanf("%f", &resistencia);
+            corrente = tensao / resistencia;
+            cout << "O valor da corrente é: %.2fA\n", corrente);
+        } else if (opcao == 3) // Cálculo de resistencia
+        {
+            cout << "Digite o valor da tensão:" << endl;
+            scanf("%f", &tensao);
+            cout << "Digite o valor da corrente:" << endl;
+            scanf("%f", &corrente);
+            resistencia = tensao / corrente;
+            cout << "O valor da resistencia: %.2fΩ\n\n", resistencia);
+        } else // Opção invalida
+        {
+            cout << "Opcao invalida!\n" << endl;
+        }
+        cout << "Deseja continuar?(S/N)" << endl;"
+        scanf("%s", &continuar);
+        if (continuar == 's' || continuar == 'S') {
+            cout << "\n" << endl;
+        } else {
+            cout << "Fim de programa" << endl;
+            break;
+        }
+    }
+}
+
