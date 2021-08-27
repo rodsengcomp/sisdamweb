@@ -22,7 +22,7 @@
             foreach ($menu_principal->fetchAll() as $result_menu_principal):
                 $id = $result_menu_principal['id'];
                 echo '<li>';
-                echo '<a style="color: #F4A460" class="dropdown-toggle" href="suvisjt.php">' . $result_menu_principal['nome'] . '<span class="caret"></span></a>';
+                echo '<a style="color: #FFC0CB" class="dropdown-toggle" href="suvisjt.php">' . $result_menu_principal['nome'] . '<span class="caret"></span></a>';
                 $submenus = $pdo->prepare("SELECT * FROM menu_sub WHERE id_menu=? ORDER BY id");
                 $submenus->execute(array($id));
 
@@ -31,7 +31,7 @@
                     foreach ($submenus->fetchAll() as $submenus_linha):
                         $idsub = $submenus_linha['id'];
                         echo '<li>';
-                        echo '<a style="color: #FF4500" class="dropdown-toggle" href="' . $submenus_linha['pag'] . '">' . $submenus_linha['nome'] . '<span class="caret"></span></a>';
+                        echo '<a style="color: #FF0000" class="dropdown-toggle" href="' . $submenus_linha['pag'] . '">' . $submenus_linha['nome'] . '<span class="caret"></span></a>';
                         $submenus_subs = $pdo->prepare("SELECT * FROM menu_sub_sub WHERE id_menu_sub=? ORDER BY id");
                         $submenus_subs->execute(array($idsub));
 
@@ -39,7 +39,7 @@
                             echo '<ul class="dropdown-menu">';
                             foreach ($submenus_subs->fetchAll() as $submenus_subs_linha):
                                 echo '<li>';
-                                echo '<a style="color: #FF4500" class="dropdown-toggle" href="' . $submenus_subs_linha['pag'] . '">' . $submenus_subs_linha['nome'] . '</a>';
+                                echo '<a style="color: #FF0000" class="dropdown-toggle" href="' . $submenus_subs_linha['pag'] . '">' . $submenus_subs_linha['nome'] . '</a>';
                                 echo '</li>';
                             endforeach;
                             echo '</ul>';

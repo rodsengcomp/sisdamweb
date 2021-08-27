@@ -71,7 +71,7 @@ include_once 'menus/menu-index.php';
 
     <div class="carousel-inner" role="listbox">
         <div class="item active">
-            <img class="first-slide" src="./imagens/fevereiro_verm_lar/fevereiro_verm_lar_1.jpg" alt="First slide">
+            <img class="first-slide" src="./imagens/campanha_meses/cada_cor_mes_1.jpg" alt="First slide">
             <div class="container">
                 <div class="carousel-caption" style="text-shadow: 2px 2px 6px rgba(0, 78, 48, 1);">
                     <!--<h1>Inovação</h1>
@@ -82,7 +82,7 @@ include_once 'menus/menu-index.php';
             </div>
         </div>
         <div class="item">
-            <img class="second-slide" src="./imagens/fevereiro_verm_lar/fevereiro_verm_lar_2.jpg" alt="Second slide">
+            <img class="second-slide" src="./imagens/campanha_meses/cada_cor_mes_2.jpg" alt="Second slide">
             <div class="container">
                 <div class="carousel-caption" style="text-shadow: 2px 2px 6px rgba(186, 78, 48, 1);">
                     <!-- <h1>Compromisso</h1>
@@ -92,7 +92,7 @@ include_once 'menus/menu-index.php';
             </div>
         </div>
         <div class="item">
-            <img class="third-slide" src="./imagens/fevereiro_verm_lar/fevereiro_verm_lar_3.jpg" alt="Third slide">
+            <img class="third-slide" src="./imagens/campanha_meses/cada_cor_mes_junho.jpg" alt="Third slide">
             <div class="container">
                 <div class="carousel-caption" style="text-shadow: 2px 2px 6px rgba(184, 233, 58, 0.9);">
                     <!--<h1>Qualidade</h1>
@@ -117,34 +117,34 @@ include_once 'menus/menu-index.php';
 <div class="container">
     <!-- Exemplo row of columns -->
     <div class="row">
-        <div style="color: #4B0082" class="col-md-4">
-            <h2>A doença de Alzheimer</h2>
-            <p>Causada por uma degeneração progressiva dos neurônios, inicialmente caracteriza-se pela perda de memória, confusão e desorientação, ansiedade, agitação, ilusão,
-                desconfiança, alteração de personalidade e do senso crítico. Começam a surgir dificuldades de realizar as atividades de vida diária (tomar banho, cozinhar, telefonar etc.).
-                Na fase intermediária os pacientes sofrem para reconhecer familiares, amigos e ambientes conhecidos, há possibilidade de alucinações, perda de apetite e de peso, incontinência
-                urinária, dificuldades na comunicação, movimentos e falas repetitivas, problemas com sono, a necessidade de apoio para atividades rotineiras aumenta. Na fase final a dependência
-                total já está estabelecida. A imobilidade é crescente, com tendência a assumir a posição de proteção (fetal).</p>
+        <div style="color: #ff0000" class="col-md-4">
+            <h2>Junho Vermelho</h2>
+            <p>A campanha Junho Vermelho, realizada este mês por instituições públicas e privadas da área da saúde, busca conscientizar a população sobre a importância da doação de sangue e,
+                desse modo, angariar mais doadores voluntários. O Ministério da Saúde estima que, no ano passado, devido à pandemia de covid-19, <strong><a class="text-danger"
+                target="_blank" href="https://agenciabrasil.ebc.com.br/saude/noticia/2021-01/queda-na-doacao-de-sangue-devido-pandeia-preocupa-hemocentros">
+                o número de doações tenha diminuído 20%</a></strong>, na comparação com o ano anterior. No primeiro trimestre de 2021, a taxa de doação voluntária da população brasileira era de 1,6%, dentro do padrão estabelecido pela
+                Organização Mundial da Saúde (OMS). O diretor médico da Santa Casa de Misericórdia do Rio de Janeiro, João Tyll, diz que a doação pode ser realizada com segurança, uma vez que são adotadas medidas de prevenção para evitar a propagação do vírus, sem risco para os doadores.
+                <br><strong><a target="_blank" class="text-danger" href="https://agenciabrasil.ebc.com.br/saude/noticia/2021-06/campanha-junho-vermelho-busca-doadores-voluntarios-de-sangue">Fonte: Agência Brasil</a></strong>
+            </p>
         </div>
-        <div style="color: #FF4500" class="col-md-4">
-            <h2>Leucemia</h2>
-            <p>um tipo de câncer que afeta os tecidos que formam células sanguíneas e impede que o corpo combata infecções.
-                Com causas desconhecidas, a doença costuma se manifestar de forma repentina e agressiva. No entanto, as perspectivas de cura são boas — as chances de se recuperar chegam a 90%, caso seja diagnosticada nos estágios iniciais.
-                Para que isso seja possível, é necessário ficar atento a alguns sinais de alerta:</p>
-            <p>• Dores nas articulações e nos ossos, febre persistente, sem razão aparente;</p>
-            <p>• Infecções frequentes, sangramento nasal e na gengiva;</p>
-            <p>• Perda de peso involuntária, surgimento repentino de hematomas no corpo, tontura frequente
+        <div style="color: #ff8000" class="col-md-4">
+            <h2>Junho Laranja</h2>
+            <p>A Sociedade Brasileira de Queimaduras (SBQ) promove o Junho Laranja, um mês de conscientização sobre as queimaduras como grande problema de saúde pública, e que tem a data
+                de 6 de junho como o Dia Nacional de Combate às Queimaduras. O tema da campanha em 2021 será “Álcool e fogo: mantenha o distanciamento. Contra queimaduras, prevenção é a
+                vacina”. Em tempos de pandemia da covid 19, o uso do álcool se tornou uma grande preocupação dos especialistas em queimaduras. Com o incentivo ao uso para prevenção ao
+                coronavírus e a liberação da venda do álcool 70% na versão líquida, foi percebido um aumento considerável da ocorrência de acidentes com o produto. Segundo a SBQ,
+                somente em 2020 quase mil pessoas foram internadas em centros de atendimento especializado por queimaduras graves no Brasil.<strong><a class="text-primary"
+               href="https://portalcovid19.saude.rn.gov.br/noticias/junho-laranja-e-o-mes-nacional-de-prevencao-de-queimaduras/"> Fonte: portalcovid19/RN</a></strong>
             </p>
 
         </div>
-        <div style="color: #4B0082" class="col-md-4">
-            <h2>Lúpus</h2>
-            <p>O que é? Doença que faz com que o sistema imunológico passe a atacar células do próprio corpo, que passam a ser vistas como inimigas.Quais os sintomas?
-                Confusão mental, manchas avermelhadas na pele, febre persistente, dor nas articulações e fadiga.
-            <h2>Fibromialgia</h2>
-            O que é?
-            Síndrome que provoca dores fortes em todo o corpo por longos períodos de tempo.
-            Quais os sintomas?
-            Dor generalizada, inchaço e sensibilidade nas articulações, fadiga e perda de memória.
+        <div style="color: #1e7e34" class="col-md-4">
+            <h2>Cores das Campanhas</h2>
+            <p>Ainda não existe um calendário oficial estabelecido sobre a cor de cada mês. Dessa maneira, associações médicas, por exemplo, quando reunidas podem determinar a cor para um
+                mês como forma de conscientização. A disseminação das campanhas ocorrem, sobremaneira, de acordo com o engajamento da mídia, empresas, clínicas, hospitais, indústria
+                farmacêutica, organizações não governamentais, instituições públicas ou privadas e até com a participação de monumentos que são iluminados com a cor do mês. Ou seja,
+                <strong class="text-info">quanto maior for a divulgação, maior é a chance de a cor escolhida seja fixada na mente das pessoas e associadas imediatamente à sua causa</strong>
+                .<strong><a class="text-danger" href="https://www.bioanalise.com.br/blog/entenda-o-significado-das-cores-dos-meses-nas-campanhas-de-saude/" target="_blank"> Fonte: Bio Análise</a></strong>
             </p>
         </div>
     </div>
