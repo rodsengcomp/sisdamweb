@@ -72,6 +72,11 @@ $(document).ready(function() {
         remote : 'autocomp/rua-auto.php?query=%QUERY'
     });
 
+    $('input.especie').typeahead({
+        name: 'especie',
+        remote : 'autocomp/especie-auto.php?query=%QUERY'
+    });
+
     $('input.nomecad').typeahead({
         name: 'nomecad',
         remote : 'autocomp/nomecad-auto.php?query=%QUERY'

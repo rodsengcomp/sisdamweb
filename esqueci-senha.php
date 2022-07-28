@@ -27,13 +27,8 @@ include_once 'header-login.php';
         <img id="logo-img" class="logo-img" src="imagens/livrologin.png"/>
         <form class="form-signin" id="esqueci-senha" method="POST" action="alterasenha/envia-nova-senha.php">
             <div class="alert alert-success" role="alert">
-                Informe seu e-mail e enviaremos instruções para você criar sua senha.
+                Contate os administradores do sistema ou envie e-mail para : <strong><a href="mailto:rrrjesus@prefeitura.sp.gov.br" data-toggle=tooltip title="Email do Suporte">rrrjesus@prefeitura.sp.gov.br</a></strong> com <strong>Nome, RF e e-mail</strong> com assunto : <strong>Reset de Senha</strong>.
             </div>
-            <input type="text" id="inputEmail" class="form-control" data-toggle="tooltip" data-placement="right"
-                   title="Digite seu email cadastrado - Ex: a@a.com" name="email" placeholder="email" autofocus>
-            <button class="btn btn-lg btn-primary btn-block btn-signin" data-toggle="tooltip" data-placement="right"
-                    title="Entrar no Sistema SisdamJT" type="submit">Enviar
-            </button>
             <div class="signin-help">
                 <p class="text-center text-danger">
                     <?php

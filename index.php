@@ -71,7 +71,7 @@ include_once 'menus/menu-index.php';
 
     <div class="carousel-inner" role="listbox">
         <div class="item active">
-            <img class="first-slide" src="./imagens/campanha_meses/cada_cor_mes_1.jpg" alt="First slide">
+            <img class="first-slide" src="./imagens/campanha_junho_meio_ambiente/dia_da_imunizacao.jpeg" alt="First slide">
             <div class="container">
                 <div class="carousel-caption" style="text-shadow: 2px 2px 6px rgba(0, 78, 48, 1);">
                     <!--<h1>Inovação</h1>
@@ -82,7 +82,7 @@ include_once 'menus/menu-index.php';
             </div>
         </div>
         <div class="item">
-            <img class="second-slide" src="./imagens/campanha_meses/cada_cor_mes_2.jpg" alt="Second slide">
+            <img class="second-slide" src="./imagens/campanha_junho_meio_ambiente/dia_mundial_do_meio_ambiente.jpeg" alt="Second slide">
             <div class="container">
                 <div class="carousel-caption" style="text-shadow: 2px 2px 6px rgba(186, 78, 48, 1);">
                     <!-- <h1>Compromisso</h1>
@@ -92,7 +92,7 @@ include_once 'menus/menu-index.php';
             </div>
         </div>
         <div class="item">
-            <img class="third-slide" src="./imagens/campanha_meses/cada_cor_mes_junho.jpg" alt="Third slide">
+            <img class="third-slide" src="./imagens/campanha_meses/cada_cor_mes_2.jpg" alt="Third slide">
             <div class="container">
                 <div class="carousel-caption" style="text-shadow: 2px 2px 6px rgba(184, 233, 58, 0.9);">
                     <!--<h1>Qualidade</h1>
@@ -117,34 +117,33 @@ include_once 'menus/menu-index.php';
 <div class="container">
     <!-- Exemplo row of columns -->
     <div class="row">
-        <div style="color: #ff0000" class="col-md-4">
-            <h2>Junho Vermelho</h2>
-            <p>A campanha Junho Vermelho, realizada este mês por instituições públicas e privadas da área da saúde, busca conscientizar a população sobre a importância da doação de sangue e,
-                desse modo, angariar mais doadores voluntários. O Ministério da Saúde estima que, no ano passado, devido à pandemia de covid-19, <strong><a class="text-danger"
-                target="_blank" href="https://agenciabrasil.ebc.com.br/saude/noticia/2021-01/queda-na-doacao-de-sangue-devido-pandeia-preocupa-hemocentros">
-                o número de doações tenha diminuído 20%</a></strong>, na comparação com o ano anterior. No primeiro trimestre de 2021, a taxa de doação voluntária da população brasileira era de 1,6%, dentro do padrão estabelecido pela
-                Organização Mundial da Saúde (OMS). O diretor médico da Santa Casa de Misericórdia do Rio de Janeiro, João Tyll, diz que a doação pode ser realizada com segurança, uma vez que são adotadas medidas de prevenção para evitar a propagação do vírus, sem risco para os doadores.
-                <br><strong><a target="_blank" class="text-danger" href="https://agenciabrasil.ebc.com.br/saude/noticia/2021-06/campanha-junho-vermelho-busca-doadores-voluntarios-de-sangue">Fonte: Agência Brasil</a></strong>
+        <div style="color: black" class="col-md-4">
+            <h2>Dia das Mulheres</h2>
+            <p>O Dia Internacional da Mulher é uma data comemorativa que foi oficializada pela Organização das Nações Unidas na década de 1970.
+                Essa data simboliza a luta histórica das mulheres para terem suas condições equiparadas às dos homens. Inicialmente, essa data remetia à
+                reivindicação por igualdade salarial, mas, atualmente, simboliza a luta das mulheres não apenas contra a desigualdade salarial, mas também
+                contra o machismo e a violência.
+                <strong><a class="text-info" href="https://brasilescola.uol.com.br/historiab/feminismo.htm" target="_blank"> Acesse também: Feminismo no Brasil - a evolução desse movimento em nosso país</a></strong>
             </p>
         </div>
-        <div style="color: #ff8000" class="col-md-4">
-            <h2>Junho Laranja</h2>
-            <p>A Sociedade Brasileira de Queimaduras (SBQ) promove o Junho Laranja, um mês de conscientização sobre as queimaduras como grande problema de saúde pública, e que tem a data
-                de 6 de junho como o Dia Nacional de Combate às Queimaduras. O tema da campanha em 2021 será “Álcool e fogo: mantenha o distanciamento. Contra queimaduras, prevenção é a
-                vacina”. Em tempos de pandemia da covid 19, o uso do álcool se tornou uma grande preocupação dos especialistas em queimaduras. Com o incentivo ao uso para prevenção ao
-                coronavírus e a liberação da venda do álcool 70% na versão líquida, foi percebido um aumento considerável da ocorrência de acidentes com o produto. Segundo a SBQ,
-                somente em 2020 quase mil pessoas foram internadas em centros de atendimento especializado por queimaduras graves no Brasil.<strong><a class="text-primary"
-               href="https://portalcovid19.saude.rn.gov.br/noticias/junho-laranja-e-o-mes-nacional-de-prevencao-de-queimaduras/"> Fonte: portalcovid19/RN</a></strong>
-            </p>
+        <div style="color: #d33333" class="col-md-4">
+            <h2>História do Dia Internacional da Mulher</h2>
+            <p>O Dia Internacional da Mulher existe, enquanto data comemorativa, como resultado da luta das mulheres por meio de manifestações, greves, comitês etc.
+                Essa mobilização política, ao longo do século XX, deu importância para o 8 de março como um momento de reflexão e de luta. A construção dessa data
+                está relacionada a uma sucessão de acontecimentos.
+                Uma primeira história que ficou muito conhecida como fundadora desse dia narra que, em 8 de março de 1857, 129 operárias morreram carbonizadas em um incêndio ocorrido nas instalações de uma fábrica têxtil na cidade de Nova York. Supostamente, esse incêndio teria sido intencional, causado pelo proprietário da fábrica, como forma de repressão extrema às greves e levantes das operárias, por isso teria trancado suas funcionárias na fábrica e ateado fogo nelas. Essa história, contudo, é falsa e, por isso, o 8 de março não está ligado a ela.</p>
 
         </div>
         <div style="color: #1e7e34" class="col-md-4">
-            <h2>Cores das Campanhas</h2>
-            <p>Ainda não existe um calendário oficial estabelecido sobre a cor de cada mês. Dessa maneira, associações médicas, por exemplo, quando reunidas podem determinar a cor para um
-                mês como forma de conscientização. A disseminação das campanhas ocorrem, sobremaneira, de acordo com o engajamento da mídia, empresas, clínicas, hospitais, indústria
-                farmacêutica, organizações não governamentais, instituições públicas ou privadas e até com a participação de monumentos que são iluminados com a cor do mês. Ou seja,
-                <strong class="text-info">quanto maior for a divulgação, maior é a chance de a cor escolhida seja fixada na mente das pessoas e associadas imediatamente à sua causa</strong>
-                .<strong><a class="text-danger" href="https://www.bioanalise.com.br/blog/entenda-o-significado-das-cores-dos-meses-nas-campanhas-de-saude/" target="_blank"> Fonte: Bio Análise</a></strong>
+            <h2>Outra História ...</h2>
+            <p>Existe, no entanto, outra história que remonta a um <strong>incêndio que de fato aconteceu em Nova York</strong>, no dia 25 de março de 1911.
+                Esse incêndio aconteceu na Triangle Shirtwaist Company e <strong>vitimou 146 pessoas</strong>, 125 mulheres e 21 homens, sendo a maioria dos mortos judeus.
+                Essa história é considerada um
+                dos marcos para o estabelecimento do Dia das Mulheres. As causas desse incêndio foram as péssimas instalações elétricas associadas à composição do
+                solo e das repartições da fábrica e, também, à grande quantidade de tecido presente no recinto, o que serviu de combustível para o fogo.
+                Além disso, alguns proprietários de fábricas da época, incluindo o da Triangle, trancavam seus funcionários na fábrica durante o expediente como
+                forma de conter motins e greves. No momento em que a Triangle pegou fogo, as portas estavam trancadas.
+                <strong><a class="text-success" href="https://brasilescola.uol.com.br/datas-comemorativas/dia-da-mulher.htm" target="_blank"> Fonte: Brasil Escola</a></strong>
             </p>
         </div>
     </div>

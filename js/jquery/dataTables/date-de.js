@@ -1,11 +1,11 @@
 /**
- * This sorting plug-in for DataTables will correctly sort data in date time or date
- * format typically used in Germany:
+ * Este plug-in de classificação para DataTables classificará corretamente os dados em data hora ou data
+ * * formato normalmente usado na Alemanha:
  * date and time:`dd.mm.YYYY HH:mm`
  * just date:`dd.mm.YYYY`.
  *
- * Please note that this plug-in is **deprecated*. The
- * [datetime](//datatables.net/blog/2014-12-18) plug-in provides enhanced
+ * Observe que este plug-in é **obsoleto*. O
+ * [datetime](//datatables.net/blog/2014-12-18) plug-in fornece melhorias
  * functionality and flexibility.
  *
  *  @name Date (dd.mm.YYYY) or date and time (dd.mm.YYYY HH:mm)

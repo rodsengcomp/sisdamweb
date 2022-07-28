@@ -228,10 +228,10 @@ while($rows_edit_end = mysqli_fetch_assoc($resultado_edit_end)){?>
                         <div class="form-group">
 
                             <label class="col-sm-1 control-label">OBS</label>
-                            <div class="col-sm-7"><input id="obs" readonly data-toggle="tooltip" title="Preenchimento Automatico"
+                            <div class="col-sm-8"><input id="obs" readonly data-toggle="tooltip" title="Preenchimento Automatico"
                                  class="form-control" type="text" name="obs" value="<?php echo $rows_edit_end['DS_OBS']; ?>" placeholder="Avenida Francisco Rodrigues"></div>
 
-                            <label class="col-sm-2 control-label">TESTE RÁPIDO</label>
+                            <label class="col-sm-1 control-label">TESTE RÁP.</label>
                             <div class="col-sm-2"><input type="text" tabindex="4" class="form-control testerapido" name="testerapido" data-toggle="tooltip" title="Ex: Francisco Rodrigues ..."
                                  id="ruaselect" placeholder="NOME DO ENDEREÇO" value="Exame Nao Realizado"></div>
 

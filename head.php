@@ -108,6 +108,8 @@ $usuariologin = $_SESSION['usuarioLogin'];
             src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.colVis.min.js"></script>
     <script type="text/javascript" language="javascript"
             src="js/jquery/dataTables/moment.min.js"></script>
+    <script type="text/javascript" language="javascript"
+            src="https://cdn.datatables.net/rowgroup/1.2.0/js/dataTables.rowGroup.min.js"></script>
 
 
 
@@ -129,8 +131,15 @@ $usuariologin = $_SESSION['usuarioLogin'];
     <script type="text/javascript" src="js/calendario.js"></script>
 
 
-    <!-- Custom Fonts -->
-    <link href="css/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- CSS para Fontes Customizadas Fontawesome https://fontawesome.com/ -->
+    <link href="css/fontawesome/css/all.css" rel="stylesheet"> <!--load all styles -->
+    <link href="css/fontawesome/css/brands.css" rel="stylesheet"> <!--load all styles -->
+    <link href="css/fontawesome/css/fontawesome.css" rel="stylesheet"> <!--load all styles -->
+    <link href="css/fontawesome/css/light.css" rel="stylesheet"> <!--load all styles -->
+    <link href="css/fontawesome/css/regular.css" rel="stylesheet"> <!--load all styles -->
+    <link href="css/fontawesome/css/solid.css" rel="stylesheet"> <!--load all styles -->
+    <link href="css/fontawesome/css/svg-with-js.css" rel="stylesheet"> <!--load all styles -->
+    <link href="css/fontawesome/css/v4-shims.css" rel="stylesheet"> <!--load all styles -->
 </head>
 
 <!-- SQL Resultado CCZ

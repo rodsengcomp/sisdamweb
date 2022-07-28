@@ -722,6 +722,180 @@ $(function() {
             }
         });
 
+        $("#cad-esporo-animal").validate({
+            rules: {
+                ruagoogle: {
+                    required: true
+                },
+                nomeanimal: {
+                    required: true,
+                    minlength: 2,
+                },  
+                especie: {
+                    required: true,
+                    remote: "remote/ambiental/val-especie.php"
+                },
+                nome: {
+                    required: true,
+                    minlength: 2,
+                },
+                da: {
+                    required: true,
+                    remote: "remote/pesquisar/val-da.php"
+                },
+                setor: {
+                    required: true,
+                    remote: "remote/pesquisar/val-setor.php"
+                },
+                cep: {
+                    required: true
+                },
+                log: {
+                    required: true,
+                    remote: "remote/pesquisar/val-log.php"
+                },
+                ruaoutros: {
+                    required: true,
+                    remote: "remote/pesquisar/val-rua-outros.php",
+                    //ascento: true
+                },
+                bairro: {
+                    required: true,
+                    minlength: 3,
+                    //ascento: true
+                },
+                ubs: {
+                    required: true,
+                    remote: "remote/pesquisar/val-ubs.php"
+                },
+                cidade: {
+                    required: true,
+                    remote: "remote/pesquisar/val-cidade.php"
+                }
+            },
+            messages: {
+                ruagoogle: {
+                    required: "ok"
+                },
+                nomeanimal: {
+                    required: "Digite o nome do Animal",
+                    minlength: "Mínimo de duas letras"
+                },  
+                especie: {
+                    required: "Digite uma Espécie",
+                    remote: "Espécie não encontrada"
+                },
+                nome: {
+                    required: "Digite o nome do Proprietário",
+                    minlength: "Mínimo de duas letras"
+                },
+                da: {
+                    required: "Digite o Da",
+                    remote: "Da inválido"
+                },
+                setor: {
+                    required: "Digite um Setor",
+                    remote: "Setor inválido."
+                },
+                cep: {
+                    required: "Digite o Cep"
+                },
+                log: {
+                    required: "Digite um Logradouro",
+                    remote: "Digite um logradouro válido"
+                },
+                ruaoutros: {
+                    required: "Digite um Endereço",
+                    remote: "Rua em duplicidade",
+                    //ascento: "Retire ascentos, ç e caracteres"
+                },
+                bairro: {
+                    required: "Digite um Bairro",
+                    minlength: "Digite um Bairro válido",
+                    //ascento: "Retire ascentos, ç e caracteres"
+                },
+                ubs: {
+                    required: "Digite uma Ubs",
+                    remote: "Ubs não encontrada"
+                },
+                cidade: {
+                    required: "Digite uma cidade",
+                    remote: "remote/valida_cidade.php"
+                }
+            }
+    
+    
+        });
+    
+        $("#edit-esporo-animal").validate({
+            rules: {
+                da: {
+                    required: true,
+                    remote: "remote/pesquisar/val-da.php"
+                },
+                setor: {
+                    required: true,
+                    remote: "remote/pesquisar/val-setor.php"
+                },
+                cep: {
+                    required: true
+                },
+                log: {
+                    required: true,
+                    remote: "remote/pesquisar/val-log.php"
+                },
+                ruaoutros: {
+                    required: true
+                },
+                bairro: {
+                    required: true,
+                    minlength: 3,
+                    //ascento: true
+                },
+                ubs: {
+                    required: true
+                },
+                cidade: {
+                    required: true,
+                    remote: "remote/pesquisar/val-cidade.php"
+                }
+            },
+            messages: {
+                da: {
+                    required: "Digite o Da",
+                    remote: "Da inválido"
+                },
+                setor: {
+                    required: "Digite um Setor",
+                    remote: "Setor inválido."
+                },
+                cep: {
+                    required: "Digite um Cep"
+                },
+                log: {
+                    required: "Digite um Logradouro",
+                    remote: "Digite um logradouro válido"
+                },
+                ruaoutros: {
+                    required: "Digite um Endereço"
+                },
+                bairro: {
+                    required: "Digite um Bairro",
+                    minlength: "Digite um Bairro válido",
+                    //ascento: "Retire ascentos, ç e caracteres"
+                },
+                ubs: {
+                    required: "Digite uma Ubs"
+                },
+                cidade: {
+                    required: "Digite uma cidade",
+                    remote: "remote/valida_cidade.php"
+                }
+            }
+    
+    
+        });
+
 
     });
 });

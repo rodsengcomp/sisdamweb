@@ -26,7 +26,7 @@ $primaryKey = 'Nr_Pedido';
 
 $columns = array(
                array('db' => 'Nr_Pedido', 'dt' => 0),
-               array('db' => 'Data_Pedido', 'dt' => 1),
+                array('db' => 'Data_Pedido', 'dt' => 1,),
                array('db' => 'SeqProcedimento', 'dt' => 2),
                array('db' => 'Solicitante', 'dt' => 3),
                array('db' => 'Distrito', 'dt' => 4),

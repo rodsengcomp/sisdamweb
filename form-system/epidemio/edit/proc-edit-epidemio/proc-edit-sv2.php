@@ -52,13 +52,13 @@ else:
 endif;
 
 # Verificando se tabela já tem id com sinan, agravo iguais que não seja tuberculose.
-$sql_tuberculose = $conectar->query("SELECT id FROM " . $sv2 . " WHERE sinan='" . $sinan . "' AND agravo='TUBERCULOSE' AND localate='" . $localate . "' AND id<>'" . $id . "'");
+$sql_tuberculose = $conectar->query("SELECT id FROM " . $sv2 . " WHERE sinan='" . $sinan . "' AND agravo='TUBERCULOSE' AND lixeira<>1 AND localate='" . $localate . "' AND id<>'" . $id . "'");
 
 # Verificando se tabela já tem id com sinan e doença iguais.
 # $sql_sv2_suvis = $conectar->query("SELECT id FROM sv2 WHERE sinan='$sinan' AND agravo='$agravo' AND agravo<>'TUBERCULOSE' AND nome='$nome' AND id<>'$id'");
 
 # Verificando se tabela já tem id com sinan e doença iguais.
-$sql_sv2_suvis = $conectar->query("SELECT id FROM " . $sv2 . " WHERE sinan='" . $sinan . "' AND protocolo='" . $protocolo . "' AND agravo='" . $agravo . "' AND nome='" . $nome . "' AND datanot='" . $datanot . "' AND agravo<>'TUBERCULOSE'  AND id<>'" . $id . "'");
+$sql_sv2_suvis = $conectar->query("SELECT id FROM " . $sv2 . " WHERE sinan='" . $sinan . "' AND protocolo='" . $protocolo . "' AND lixeira<>1 AND agravo='" . $agravo . "' AND nome='" . $nome . "' AND datanot='" . $datanot . "' AND agravo<>'TUBERCULOSE'  AND id<>'" . $id . "'");
 
 ?>
 

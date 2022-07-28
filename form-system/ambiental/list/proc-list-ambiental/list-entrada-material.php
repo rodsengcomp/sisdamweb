@@ -25,19 +25,19 @@ $primaryKey = 'id_controle';
 // índices
 
 $columns = array(
-    array('db' => 'id_controle', 'dt' => 0),
-    array('db' => 'id_controle', 'dt' => 1),
-    array('db' => 'material', 'dt' => 2),
-    array('db' => 'qtd', 'dt' => 3),
-    array('db' => 'entrada', 'dt' => 4, 'formatter' => function ($d, $row) {
-        return date('d/m/Y', strtotime($d));
-    }),
-    array('db' => 'n_memo', 'dt' => 5),
-    array('db' => 'obs', 'dt' => 6),
-    array('db' => 'usuariocad', 'dt' => 7),
-    array('db' => 'criado', 'dt' => 8, 'formatter' => function ($d, $row) {
-        return date('d/m/Y H:i:s', strtotime($d));
-    })
+        array('db' => 'id_controle', 'dt' => 0),
+        array('db' => 'id_controle', 'dt' => 1),
+        array('db' => 'material', 'dt' => 2),
+        array('db' => 'qtd', 'dt' => 3),
+        array('db' => 'entrada', 'dt' => 4, 'formatter' => function ($d, $row) {
+            return date('d/m/Y', strtotime($d));
+        }),
+        array('db' => 'n_memo', 'dt' => 5),
+        array('db' => 'obs', 'dt' => 6),
+        array('db' => 'usuariocad', 'dt' => 7),
+        array('db' => 'criado', 'dt' => 8, 'formatter' => function ($d, $row) {
+            return date('d/m/Y H:i:s', strtotime($d));
+        })
 );
 
 // SQL server connection information

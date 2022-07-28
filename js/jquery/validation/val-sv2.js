@@ -194,7 +194,7 @@ $(function() {
                     rangelength: [5, 7]
                 },
                 protocolocad: {
-                    rangelength: [5, 12]
+                    rangelength: [5, 14]
                 },
                 datanot: {
                     required: true,
@@ -275,7 +275,7 @@ $(function() {
                     rangelength:"Min 5 e Máx de 7 numeros"
                 },
                 protocolocad: {
-                    rangelength: "Min 5 e Máx de 12 numeros"
+                    rangelength: "Min 5 e Máx de 14 numeros"
                 },
                 datanot: {
                     required:"Digite uma data válida",
@@ -359,7 +359,7 @@ $(function() {
                     rangelength: [5, 7]
                 },
                 protocolocad: {
-                    rangelength: [5, 12]
+                    rangelength: [5, 14]
                 },
                 datanot: {
                     required: true,
@@ -439,7 +439,7 @@ $(function() {
                     rangelength:"Min 5 e Máx de 7 numeros"
                 },
                 protocolocad: {
-                    rangelength: "Min 5 e Máx de 12 numeros"
+                    rangelength: "Min 5 e Máx de 14 numeros"
                 },
                 datanot: {
                     required:"Digite uma data válida",
@@ -522,7 +522,7 @@ $(function() {
                     rangelength: [5, 7]
                 },
                 protocolocad: {
-                    rangelength: [5, 12]
+                    rangelength: [5, 14]
                 },
                 datanot: {
                     required: true,
@@ -605,7 +605,7 @@ $(function() {
                     rangelength:"Min 5 e Máx de 7 numeros"
                 },
                 protocolocad: {
-                    rangelength: "Min 5 e Máx de 12 numeros"
+                    rangelength: "Min 5 e Máx de 14 numeros"
                 },
                 datanot: {
                     required:"Digite uma data válida",
@@ -691,7 +691,7 @@ $(function() {
                     rangelength: [5, 7]
                 },
                 protocolocad: {
-                    rangelength: [5, 12]
+                    rangelength: [5, 14]
                 },
                 datanot: {
                     required: true,
@@ -774,7 +774,7 @@ $(function() {
                     rangelength:"Min 5 e Máx de 7 numeros"
                 },
                 protocolocad: {
-                    rangelength: "Min 5 e Máx de 12 numeros"
+                    rangelength: "Min 5 e Máx de 14 numeros"
                 },
                 datanot: {
                     required:"Digite uma data válida",

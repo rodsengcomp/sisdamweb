@@ -380,6 +380,50 @@ if ($_SESSION['usuarioNivelAcesso'] <> ''){
                 {extend:'colvis',titleAttr: 'Select Colunas',className: 'btn btn-info',text:'<span class="fa fa-list"></span>'} ]
         });
 
+        $('#list-ial-esporo').DataTable({responsive: {details: {display: $.fn.dataTable.Responsive.display.modal({header: function (row) {var data = row.data();
+                            return 'Detalhes do Pedido : ' + data[1];}}),renderer: function ( api, rowIdx, columns ) {var data = $.map( columns, function ( col, i ) {
+                        return '<tr>'+'<td>'+col.title+':'+'</td> '+'<td>'+col.data+'</td>'+'</tr>';} ).join('');
+                        return $('<table/>').append( data ); } } },
+            "language": {"sEmptyTable": "Nenhum registro encontrado","sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros","sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
+                "sInfoFiltered": "(Filtrados de _MAX_ registros)","sInfoThousands": ".","sLengthMenu": "_MENU_ Resultados por Página","sLoadingRecords": "Carregando...",
+                "sProcessing": "Processando...","sZeroRecords": "Nenhum registro encontrado","sSearch": "Pesquisar","oPaginate": {"sNext": "Próximo","sPrevious": "Anterior","sFirst": "Primeiro","sLast": "Último"},
+                "oAria": {"sSortAscending": "Ordenar colunas de forma ascendente","sPrevious": "Ordenar colunas de forma descendente"}},
+            dom: "lBfrtip",processing: true, serverside: true, ajax: 'form-system/ambiental/list/proc-list-ambiental/list-ial-esporo.php',
+            "lengthMenu": [[4, 10, 25, 50, -1], [4, 10, 25, 50, "Todos"]], "aaSorting": [ 0, 'desc' ],
+            "aoColumnDefs": [
+                //{ type: 'de_datetime', targets: 1 },
+                //{"bVisible": false,"aTargets": [2]},
+                //{"aTargets": [2], // o numero 2 é o nº da coluna
+                //"mRender": function (data, type, full) { //aqui é uma funçãozinha para pegar os ids
+                //return full[2] + '\n' +full[3] + '\n' +full[4] ;
+                //}
+                //}
+                {
+                    "aTargets": [14], // o numero é o nº da coluna
+                    "mRender": function (data, type, full) { //aqui é uma funçãozinha para pegar os ids
+                        var ialgal = full[14];
+                        switch (ialgal) {
+                            case '':
+                                ialgal = '<button class="btn btn-warning my-2 my-sm-0">SEM EXAME</button>';
+                                break;
+                            case 'Negativo':
+                                ialgal = '<button class="btn btn-success my-2 my-sm-0">NEGATIVO</button>';
+                                break;
+                            case 'Positivo':
+                                ialgal = '<button class="btn btn-danger my-2 my-sm-0">POSITIVO</button>';
+                                break;
+                            default: ialgal = '<button class="btn btn-info my-2 my-sm-0">NÃO ENCONTRADO</button>';
+                        }
+                        return ialgal;
+                    }
+                }
+            ],
+            buttons: [ {extend:'excel',title:'RESULTADOS ESPORO ANIMAL',header: 'RESULTADOS ESPORO ANIMAL',filename:'RESULTADOS ESPORO ANIMAL',className: 'btn btn-success',text:'<span class="fa fa-file-excel-o"></span>' },
+                {extend: 'pdfHtml5',exportOptions: {columns: ':visible'},title:'RESULTADOS ESPORO ANIMAL',header: 'RESULTADOS ESPORO ANIMAL',filename:'RESULTADOS ESPORO ANIMAL',orientation: 'landscape',pageSize: 'LEGAL',className: 'btn btn-danger',text:'<span class="fa fa-file-pdf-o"></span>'},
+                {extend:'print', exportOptions: {columns: ':visible'},orientation: 'landscape',title:'RESULTADOS ESPORO ANIMAL',header: 'RESULTADOS ESPORO ANIMAL',filename:'RESULTADOS ESPORO ANIMAL',className: 'btn btn-default',text:'<span class="fa fa-print"></span>'},
+                {extend:'colvis',titleAttr: 'Select Colunas',className: 'btn btn-info',text:'<span class="fa fa-list"></span>'} ]
+        });
+
         $('#list-bloq-deng').DataTable({responsive: {details: {display: $.fn.dataTable.Responsive.display.modal({header: function (row) {var data = row.data();
                             return 'Detalhes do Sinan : ' + data[1];}}),renderer: function ( api, rowIdx, columns ) {var data = $.map( columns, function ( col, i ) {
                         return '<tr>'+'<td>'+col.title+':'+'</td> '+'<td>'+col.data+'</td>'+'</tr>';} ).join('');
@@ -973,6 +1017,63 @@ if ($_SESSION['usuarioNivelAcesso'] <> ''){
                 }
             ],
             buttons: [ {extend:'excel',title:'PE / IE <?php echo date('Y');?>',header: 'PE / IE <?php echo date('Y');?>',filename:'PE / IE <?php echo date('Y');?>',className: 'btn btn-success',text:'<span class="fa fa-file-excel-o"></span>' },
+                {extend: 'pdfHtml5',exportOptions: {columns: ':visible'},title:'PE / IE <?php echo date('Y');?>',header: 'PE / IE <?php echo date('Y');?>',filename:'PE / IE <?php echo date('Y');?>',orientation: 'landscape',pageSize: 'LEGAL',className: 'btn btn-danger',text:'<span class="fa fa-file-pdf-o"></span>'},
+                {extend:'print',exportOptions: {columns: ':visible'},title:'PE / IE <?php echo date('Y');?>',header: 'PE / IE <?php echo date('Y');?>',filename:'PE / IE <?php echo date('Y');?>',className: 'btn btn-default',text:'<span class="fa fa-print"></span>'},
+                {extend:'colvis',className: 'btn btn-info',text:'<span class="fa fa-list"></span>'} ]
+        });
+
+        $('#list-esporo').DataTable({responsive: {details: {display: $.fn.dataTable.Responsive.display.modal({header: function (row) {var data = row.data();
+                            return data[5] + ' ' + data[4];}}),renderer: function ( api, rowIdx, columns ) {var data = $.map( columns, function ( col, i ) {
+                        return '<tr>'+'<td>'+col.title+':'+'</td> '+'<td>'+col.data+'</td>'+'</tr>';} ).join('');
+                        return $('<table/>').append( data ); } } },
+            "language": {"sEmptyTable": "Nenhum registro encontrado","sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros","sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
+                "sInfoFiltered": "(Filtrados de _MAX_ registros)","sInfoThousands": ".","sLengthMenu": "_MENU_ Resultados por Página","sLoadingRecords": "Carregando...",
+                "sProcessing": "Processando...","sZeroRecords": "Nenhum registro encontrado","sSearch": "Pesquisar","oPaginate": {"sNext": "Próximo","sPrevious": "Anterior","sFirst": "Primeiro","sLast": "Último"},
+                "oAria": {"sSortAscending": "Ordenar colunas de forma ascendente","sPrevious": "Ordenar colunas de forma descendente"}},
+            dom: "lBfrtip",processing: true, serverside: true, ajax: 'form-system/ambiental/list/proc-list-ambiental/list-esporo.php',
+            "lengthMenu": [[4, 10, 25, 50, -1], [4, 10, 25, 50, "Todos"]],
+            order: [[6, 'asc'], [5, 'asc']],
+            rowGroup: {
+                dataSrc: [6, 4 ]
+            },
+            columnDefs: [ {
+                targets: [ 4, 7 ],
+                visible: false
+            } ],
+            "aoColumnDefs": [
+                {"bVisible": false,"aTargets": [0]},
+                {"bVisible": false,"aTargets": [1]},
+                {"bVisible": false,"aTargets": [4]},
+                {"bVisible": false,"aTargets": [6]},
+                {"bVisible": false,"aTargets": [11]},
+                {"bVisible": false,"aTargets": [12]},
+                {"bVisible": false,"aTargets": [13]},
+                {"bVisible": false,"aTargets": [14]},
+                {
+                    "aTargets": [3], // o numero 6 é o nº da coluna
+                    "mRender": function (data, type, full) { //aqui é uma funçãozinha para pegar os ids
+                        return full[3] + ' <a href="http://10.47.171.110/sisdamweb/suvisjt.php?pag=edit-esporo-animal&id='+ full[30]+'" role="button" class="btn btn-warning rounded-circle"><strong><span class="glyphicon glyphicon-pencil"></strong></a>';
+                    }
+                },
+                {"aTargets": [5], // o numero 2 é o nº da coluna
+                    "mRender": function (data, type, full) { //aqui é uma funçãozinha para pegar os ids
+                        return  '<a target="_blank" href="https://www.google.com.br/maps/dir/?api=1&origin=R. Maria Amália Lopes Azevedo, 3676 - Vila Albertina&destination=' + full[5] + ', ' + full[7] +' - ' + full[24] + '&travelmode=driving" role="button" class="btn btn-default rounded-circle"><img src="imagens/maps_64dp.png" width="20"></a> ' +
+                            full[5] + ', ' + full[7] + ' - ' + full[24] ;
+                    }
+                },
+                {"aTargets": [7], // o numero 2 é o nº da coluna
+                    "mRender": function (data, type, full) { //aqui é uma funçãozinha para pegar os ids
+                        
+                        return  full[25] + full[26] + '<br> ' + full[27] + full[28];
+                    }
+                },
+                {"aTargets": [9], // o numero 2 é o nº da coluna
+                    "mRender": function (data, type, full) { //aqui é uma funçãozinha para pegar os ids
+                        return  full[9] + '<br>' + full[29] + ' mg/dia';
+                    }
+                }
+            ],
+            buttons: [ {extend:'excel',title:'PE / IE <?php echo date('Y');?>',header: 'PE / IE <?php echo date('Y');?>',filename:'PE / IE <?php echo date('Y');?>',className: 'btn btn-success',text:'<span class="fal fa-file-excel"></span>' },
                 {extend: 'pdfHtml5',exportOptions: {columns: ':visible'},title:'PE / IE <?php echo date('Y');?>',header: 'PE / IE <?php echo date('Y');?>',filename:'PE / IE <?php echo date('Y');?>',orientation: 'landscape',pageSize: 'LEGAL',className: 'btn btn-danger',text:'<span class="fa fa-file-pdf-o"></span>'},
                 {extend:'print',exportOptions: {columns: ':visible'},title:'PE / IE <?php echo date('Y');?>',header: 'PE / IE <?php echo date('Y');?>',filename:'PE / IE <?php echo date('Y');?>',className: 'btn btn-default',text:'<span class="fa fa-print"></span>'},
                 {extend:'colvis',className: 'btn btn-info',text:'<span class="fa fa-list"></span>'} ]

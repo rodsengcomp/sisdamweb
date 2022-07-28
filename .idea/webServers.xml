@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="8f1433c5-19ae-444f-8e4c-fa9795f15acb" name="10.47.171.110" url="http://10.47.171.110/sisdamweb/">
+        <fileTransfer mountedRoot="V:\xampp\htdocs\sisdamweb" accessType="MOUNT" port="0" />
+      </webServer>
+    </option>
+  </component>
+</project>
