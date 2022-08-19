@@ -70,13 +70,6 @@ $(function() {
     });
 
     // Datepicker datanot para contar data atual
-    $('#datanotcad').datepicker({
-        dateFormat: 'dd/mm/yy',
-        maxDate: "+0",
-        onClose: function() {$(this).valid();},
-    });
-
-    // Datepicker datanot para contar data atual
     $('#dataobitocad').datepicker({
         dateFormat: 'dd/mm/yy',
         maxDate: "+0",
@@ -96,6 +89,27 @@ $(function() {
         maxDate: "+0",
         onClose: function() {$(this).valid();},
     })//.datepicker("setDate", new Date()); (opcional para imprimir data no formulario ao iniciar
+
+    // Datepicker datanot para contar data atual
+    $('#datanotcad').datepicker({
+        dateFormat: 'dd/mm/yy',
+        maxDate: "+0",
+        onClose: function() {$(this).valid();},
+    });
+
+    // Datepicker dataentrada para contar data atual
+    $('#dataentcad').datepicker({
+        dateFormat: 'dd/mm/yy',
+        maxDate: "+0",
+        onClose: function() {$(this).valid();},
+    });
+
+        // Datepicker dataentrada para contar data atual
+        $('#dataentcad2').datepicker({
+            dateFormat: 'dd/mm/yy',
+            maxDate: "+0",
+            onClose: function() {$(this).valid();},
+        });
 
 // Validation method databloedit para comparar com data atual
     $.validator.addMethod("maxDateBloq", function(e) {
@@ -217,6 +231,81 @@ $(function() {
             diferencaAnos--;
         return diferencaAnos;
     }
+
+    // Validation method dataEntrada não pode ser maior que data notificação
+    $.validator.addMethod("validaEntN", function(e) {
+        var curDateEN = $('#dataentcad').datepicker("getDate");
+        var maxDateEN = $('#datanotcad').datepicker("getDate");
+        console.log(this.value, curDateEN, maxDateEN);
+        if (maxDateEN > curDateEN) {
+            return false;
+        }
+        return true;
+    });
+
+    // Validation method dataEntrada não pode ser maior que data notificação
+    $.validator.addMethod("validaEntN2", function(e) {
+        var curDateEN2 = $('#dataentcad2').datepicker("getDate");
+        var maxDateEN2 = $('#datanotcad').datepicker("getDate");
+        console.log(this.value, curDateEN2, maxDateEN2);
+        if (maxDateEN2 > curDateEN2) {
+            return false;
+        }
+        return true;
+    });
+
+    // Validation method dataEntrada não pode ser maior que data notificação
+    $.validator.addMethod("validaEntNesp", function(e) {
+        var curDateENesp = $('#dataentesp').datepicker("getDate");
+        var maxDateENesp = $('#datanotcad').datepicker("getDate");
+        console.log(this.value, curDateEN, maxDateEN);
+        if (maxDateENesp > curDateENesp) {
+            return false;
+        }
+        return true;
+    });
+
+    // Validation method dataentrada para comparar com data atual
+    $.validator.addMethod("maxDateE", function(e) {
+        var curDateE = $('#dataentcad').datepicker("getDate");
+        var maxDateE = new Date();
+        maxDateE.setDate(maxDateE.getDate());
+        maxDateE.setHours(0, 0, 0, 0); // parte do tempo claro para resultados corretos
+        console.log(this.value, curDateE, maxDateE);
+        if (curDateE > maxDateE) {
+            $(this).datepicker("setDate", maxDateE);
+            return false;
+        }
+        return true;
+    });
+
+    // Validation method dataentrada para comparar com data atual
+    $.validator.addMethod("maxDateE2", function(e) {
+        var curDateE2 = $('#dataentcad2').datepicker("getDate");
+        var maxDateE2 = new Date();
+        maxDateE2.setDate(maxDateE2.getDate());
+        maxDateE2.setHours(0, 0, 0, 0); // parte do tempo claro para resultados corretos
+        console.log(this.value, curDateE2, maxDateE2);
+        if (curDateE2 > maxDateE2) {
+            $(this).datepicker("setDate", maxDateE2);
+            return false;
+        }
+        return true;
+    });
+
+        // Validation method dataentrada para comparar com data atual
+        $.validator.addMethod("maxDateEsp", function(e) {
+            var curDateEsp = $('#dataentesp').datepicker("getDate");
+            var maxDateEsp = new Date();
+            maxDateEsp.setDate(maxDateEsp.getDate());
+            maxDateEsp.setHours(0, 0, 0, 0); // parte do tempo claro para resultados corretos
+            console.log(this.value, curDateEsp, maxDateEsp);
+            if (curDateE2 > maxDateEsp) {
+                $(this).datepicker("setDate", maxDateEsp);
+                return false;
+            }
+            return true;
+        });
 
      $("#edicao_end_dengue").validate({
         rules: {
@@ -727,6 +816,11 @@ $(function() {
                 ruagoogle: {
                     required: true
                 },
+                datanot: {
+                    required: true,
+                    dateBR: true,
+                    maxDateN: true
+                },
                 nomeanimal: {
                     required: true,
                     minlength: 2,
@@ -735,9 +829,39 @@ $(function() {
                     required: true,
                     remote: "remote/ambiental/val-especie.php"
                 },
-                nome: {
+                tutor: {
                     required: true,
                     minlength: 2,
+                },
+                situacao: {
+                    required: true,
+                    remote: "remote/ambiental/val-situacao.php"
+                },
+                rua: {
+                    required: true,
+                    remote: "remote/pesquisar/val-rua.php",
+                    //ascento: true
+                },
+                num: {
+                    required: true
+                },
+                lat: {
+                    required: true
+                },
+                lng: {
+                    required: true
+                },
+                cep: {
+                    required: true
+                },
+                bairro: {
+                    required: true,
+                    minlength: 3,
+                    //ascento: true
+                },
+                log: {
+                    required: true,
+                    remote: "remote/pesquisar/val-log.php"
                 },
                 da: {
                     required: true,
@@ -747,35 +871,32 @@ $(function() {
                     required: true,
                     remote: "remote/pesquisar/val-setor.php"
                 },
-                cep: {
-                    required: true
-                },
-                log: {
-                    required: true,
-                    remote: "remote/pesquisar/val-log.php"
-                },
-                ruaoutros: {
-                    required: true,
-                    remote: "remote/pesquisar/val-rua-outros.php",
-                    //ascento: true
-                },
-                bairro: {
-                    required: true,
-                    minlength: 3,
-                    //ascento: true
-                },
                 ubs: {
                     required: true,
                     remote: "remote/pesquisar/val-ubs.php"
                 },
-                cidade: {
-                    required: true,
-                    remote: "remote/pesquisar/val-cidade.php"
+                medicamento: {
+                    remote: "remote/ambiental/val-medicamento.php"
+                },
+                dataentrada: {
+                    dateBR: true,
+                    maxDateE: true,
+                    validaEntN : true
+                },
+                dataentrada2: {
+                    dateBR: true,
+                    maxDateE2: true,
+                    validaEntN2 : true
                 }
             },
             messages: {
                 ruagoogle: {
                     required: "ok"
+                },
+                datanot: {
+                    required:"Digite uma data válida",
+                    dateBR: "Informe uma data válida",
+                    maxDateN: "Digite a data até hoje"
                 },
                 nomeanimal: {
                     required: "Digite o nome do Animal",
@@ -785,9 +906,39 @@ $(function() {
                     required: "Digite uma Espécie",
                     remote: "Espécie não encontrada"
                 },
-                nome: {
-                    required: "Digite o nome do Proprietário",
+                tutor: {
+                    required: "Digite o nome do Tutor",
                     minlength: "Mínimo de duas letras"
+                },
+                situacao: {
+                    required: "Digite uma Situação",
+                    remote: "Situação não encontrada"
+                },
+                rua: {
+                    required: "Digite um Endereço",
+                    remote: "Rua não encontrada",
+                    //ascento: "Retire ascentos, ç e caracteres"
+                },
+                num: {
+                    required: "Digite um Número"
+                },
+                lat: {
+                    required: "Digite uma Latitude"
+                },
+                lng: {
+                    required: "Digite uma Longitude"
+                },
+                cep: {
+                    required: "Digite o Cep"
+                },
+                bairro: {
+                    required: "Digite um Bairro",
+                    minlength: "Digite um Bairro válido",
+                    //ascento: "Retire ascentos, ç e caracteres"
+                },
+                log: {
+                    required: "Digite um Logradouro",
+                    remote: "Digite um logradouro válido"
                 },
                 da: {
                     required: "Digite o Da",
@@ -797,38 +948,80 @@ $(function() {
                     required: "Digite um Setor",
                     remote: "Setor inválido."
                 },
-                cep: {
-                    required: "Digite o Cep"
-                },
-                log: {
-                    required: "Digite um Logradouro",
-                    remote: "Digite um logradouro válido"
-                },
-                ruaoutros: {
-                    required: "Digite um Endereço",
-                    remote: "Rua em duplicidade",
-                    //ascento: "Retire ascentos, ç e caracteres"
-                },
-                bairro: {
-                    required: "Digite um Bairro",
-                    minlength: "Digite um Bairro válido",
-                    //ascento: "Retire ascentos, ç e caracteres"
-                },
                 ubs: {
                     required: "Digite uma Ubs",
                     remote: "Ubs não encontrada"
                 },
-                cidade: {
-                    required: "Digite uma cidade",
-                    remote: "remote/valida_cidade.php"
+                medicamento: {
+                    remote: "Medicamento inválido"
+                },
+                dataentrada: {
+                    required:"Digite uma data válida",
+                    dateBR: "Informe uma data válida",
+                    maxDateE: "Digite a data até hoje",
+                    validaEntN : "Não pode ser menor que Data de Entrada"
+                },
+                dataentrada2: {
+                    required:"Digite uma data válida",
+                    dateBR: "Informe uma data válida",
+                    maxDateE2: "Digite a data até hoje",
+                    validaEntN2 : "Não pode ser menor que Data de Entrada"
                 }
             }
     
     
         });
-    
         $("#edit-esporo-animal").validate({
             rules: {
+                ruagoogle: {
+                    required: true
+                },
+                datanot: {
+                    dateBR: true,
+                    maxDateN: true
+                },
+                nomeanimal: {
+                    required: true,
+                    minlength: 2,
+                },
+                especie: {
+                    required: true,
+                    remote: "remote/ambiental/val-especie.php"
+                },
+                tutor: {
+                    required: true,
+                    minlength: 2,
+                },
+                situacao: {
+                    required: true,
+                    remote: "remote/ambiental/val-situacao.php"
+                },
+                rua: {
+                    required: true,
+                    remote: "remote/pesquisar/val-rua.php",
+                    //ascento: true
+                },
+                num: {
+                    required: true
+                },
+                lat: {
+                    required: true
+                },
+                lng: {
+                    required: true
+                },
+                cep: {
+                    required: true
+                },
+                bairro: {
+                    required: true,
+                    minlength: 3,
+                    //ascento: true
+                },
+                log: {
+                    required: true,
+                    remote: "remote/pesquisar/val-log.php"
+                },
                 da: {
                     required: true,
                     remote: "remote/pesquisar/val-da.php"
@@ -837,30 +1030,69 @@ $(function() {
                     required: true,
                     remote: "remote/pesquisar/val-setor.php"
                 },
-                cep: {
-                    required: true
-                },
-                log: {
-                    required: true,
-                    remote: "remote/pesquisar/val-log.php"
-                },
-                ruaoutros: {
-                    required: true
-                },
-                bairro: {
-                    required: true,
-                    minlength: 3,
-                    //ascento: true
-                },
                 ubs: {
-                    required: true
-                },
-                cidade: {
                     required: true,
-                    remote: "remote/pesquisar/val-cidade.php"
+                    remote: "remote/pesquisar/val-ubs.php"
+                },
+                medicamento: {
+                    remote: "remote/ambiental/val-medicamento.php"
+                },
+                dataentradaesp: {
+                    dateBR: true,
+                    maxDateEsp: true,
+                    validaEntNesp : true
                 }
             },
             messages: {
+                ruagoogle: {
+                    required: "ok"
+                },
+                datanot: {
+                    dateBR: "Informe uma data válida",
+                    maxDateN: "Digite a data até hoje"
+                },
+                nomeanimal: {
+                    required: "Digite o nome do Animal",
+                    minlength: "Mínimo de duas letras"
+                },
+                especie: {
+                    required: "Digite uma Espécie",
+                    remote: "Espécie não encontrada"
+                },
+                tutor: {
+                    required: "Digite o nome do Tutor",
+                    minlength: "Mínimo de duas letras"
+                },
+                situacao: {
+                    required: "Digite uma Situação",
+                    remote: "Situação não encontrada"
+                },
+                rua: {
+                    required: "Digite um Endereço",
+                    remote: "Rua não encontrada",
+                    //ascento: "Retire ascentos, ç e caracteres"
+                },
+                num: {
+                    required: "Digite um Número"
+                },
+                lat: {
+                    required: "Digite uma Latitude"
+                },
+                lng: {
+                    required: "Digite uma Longitude"
+                },
+                cep: {
+                    required: "Digite o Cep"
+                },
+                bairro: {
+                    required: "Digite um Bairro",
+                    minlength: "Digite um Bairro válido",
+                    //ascento: "Retire ascentos, ç e caracteres"
+                },
+                log: {
+                    required: "Digite um Logradouro",
+                    remote: "Digite um logradouro válido"
+                },
                 da: {
                     required: "Digite o Da",
                     remote: "Da inválido"
@@ -869,34 +1101,22 @@ $(function() {
                     required: "Digite um Setor",
                     remote: "Setor inválido."
                 },
-                cep: {
-                    required: "Digite um Cep"
-                },
-                log: {
-                    required: "Digite um Logradouro",
-                    remote: "Digite um logradouro válido"
-                },
-                ruaoutros: {
-                    required: "Digite um Endereço"
-                },
-                bairro: {
-                    required: "Digite um Bairro",
-                    minlength: "Digite um Bairro válido",
-                    //ascento: "Retire ascentos, ç e caracteres"
-                },
                 ubs: {
-                    required: "Digite uma Ubs"
+                    required: "Digite uma Ubs",
+                    remote: "Ubs não encontrada"
                 },
-                cidade: {
-                    required: "Digite uma cidade",
-                    remote: "remote/valida_cidade.php"
-                }
+                medicamento: {
+                    remote: "Medicamento inválido"
+                },
+                dataentradaesp: {
+                    dateBR: "Informe uma data válida",
+                    maxDateEsp: "Digite a data até hoje",
+                    validaEntNesp : "Não pode ser menor que Data de Entrada"
+                },
             }
-    
-    
+
+
         });
-
-
     });
 });
 

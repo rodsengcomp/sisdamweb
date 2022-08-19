@@ -66,11 +66,11 @@
                        placeholder="senha" size="7" class="form-control">
             </div>
             <button type="submit" id="buttonlogin1" class="btn btn-labeled btn-success"><span class="btn-label"><i
-                            class="fal fa-print"></i></span> Acessar
+                            class="fal fa-user"></i></span> Acessar
             </button>
             <a href='./esqueci-senha.php'
             <button type="submit" id="buttonlogin" class="btn btn-labeled btn-danger"><span class="btn-label"><i
-                            class="fa fa-question-circle"></i></span>Esqueci senha
+                            class="fal fa-question-circle"></i></span>Esqueci senha
             </button>
             </a>
         </form>

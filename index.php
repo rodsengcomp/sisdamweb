@@ -48,11 +48,18 @@ do emprego público, mas deixaram um legado de comprometimento e amor pela profi
     <!-- Custom styles for this template -->
     <link href="css/carousel.css" rel="stylesheet">
     <!-- Custom Fonts -->
-    <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="css/btn-circle.css">
 
     <!-- Custom Fonts -->
-    <link href="css/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- CSS para Fontes Customizadas Fontawesome https://fontawesome.com/ -->
+    <link href="css/fontawesome/css/all.css" rel="stylesheet"> <!--load all styles -->
+    <link href="css/fontawesome/css/brands.css" rel="stylesheet"> <!--load all styles -->
+    <link href="css/fontawesome/css/fontawesome.css" rel="stylesheet"> <!--load all styles -->
+    <link href="css/fontawesome/css/light.css" rel="stylesheet"> <!--load all styles -->
+    <link href="css/fontawesome/css/regular.css" rel="stylesheet"> <!--load all styles -->
+    <link href="css/fontawesome/css/solid.css" rel="stylesheet"> <!--load all styles -->
+    <link href="css/fontawesome/css/svg-with-js.css" rel="stylesheet"> <!--load all styles -->
+    <link href="css/fontawesome/css/v4-shims.css" rel="stylesheet"> <!--load all styles -->
 </head>
 
 <body>

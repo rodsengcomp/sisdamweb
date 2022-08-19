@@ -77,6 +77,21 @@ $(document).ready(function() {
         remote : 'autocomp/especie-auto.php?query=%QUERY'
     });
 
+    $('input.situacao').typeahead({
+        name: 'situacao',
+        remote : 'autocomp/situacao-auto.php?query=%QUERY'
+    });
+
+    $('input.medicamento').typeahead({
+        name: 'medicamento',
+        remote : 'autocomp/mdc-esp-anm-auto.php?query=%QUERY'
+    });
+
+    $('input.entregador').typeahead({
+        name: 'entregador',
+        local: ['UVIS', 'DVZ']
+    });
+
     $('input.nomecad').typeahead({
         name: 'nomecad',
         remote : 'autocomp/nomecad-auto.php?query=%QUERY'

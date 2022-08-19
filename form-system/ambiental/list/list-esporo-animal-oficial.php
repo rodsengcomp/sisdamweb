@@ -15,6 +15,11 @@ date_default_timezone_set('America/Sao_Paulo');
 
 ?>
 
+<!-- Função para reload  -->
+<script> function FunctionReload() {
+        window.location.replace("http://10.47.171.110/sisdamweb/suvisjt.php?pag=list-bloq-ial&sinan=<?php echo $agravo_sinan_sql;?>&tabela=<?php echo $agravo_tabela_sql;?>&ial=<?php echo $agravo_ial;?>&buttons=<?php echo $agravo_buttons;?>&agravo=<?php echo $agravo;?>");
+    } </script>
+
 <!-- Início do HTML 5 da Página-->
 <div class="container-fluid" role="main" xmlns="http://www.w3.org/1999/html">
     <!-- Começando a página de Título -->
@@ -43,7 +48,7 @@ date_default_timezone_set('America/Sao_Paulo');
 
     <div class="row espaco">
         <div class="text-center">
-            <a href='suvisjt.php?pag=cad-esporo-animal'
+            <a href='suvisjt.php?pag=cad-espo-animal'
             <button type='button' style="<?php if ($_SESSION['usuarioNivelAcesso'] == 4) {
                 echo 'display: none;';
             } ?>" accesskey="N" data-toggle="tooltip" title="Lista de Casos de Esporotricose Animal - JT"
@@ -67,7 +72,9 @@ date_default_timezone_set('America/Sao_Paulo');
             <th class="text-center"><i class="fal fa-light fa-phone"></i> TELEFONE</th>
             <th class="text-center"><i class="fal fa-question"></i> SITUAÇÃO</th>
             <th class="text-center"><i class="fal fa-light fa-briefcase-medical"></i> MEDICAMENTO</th>
-            <th class="text-center"><i class="fal fa-thin fa-calendar"></i> ÚLT. ENTREGA</th>
+            <th class="text-center"><i class="fal fa-thin fa-calendar"></i> 1ªENTREGA</th>
+            <th class="text-center"><i class="fal fa-thin fa-calendar"></i> 2ªENTREGA</th>
+            <th class="text-center"><i class="fal fa-thin fa-calendar"></i> 3ªENTREGA</th>
             <th class="text-center"><i class="fal fa-exclamation"></i> OBSERVAÇÃO</th>
         </tr>
         </thead>

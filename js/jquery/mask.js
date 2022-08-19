@@ -5,6 +5,7 @@
 jQuery(function($){
     $("#sinanedi").mask("9999999");
     $("#dataentcad").mask("99/99/9999");
+    $("#dataentcad2").mask("99/99/9999");
     $("#datatid").mask("99/99/9999");
     $("#dataentedi").mask("99/99/9999");
     $("#datatram").mask("99/99/9999");
@@ -21,6 +22,8 @@ jQuery(function($){
     $("#telcad").mask("(99) 99999999?9");
     $("#tel1").mask("(99) 99999999?9");
     $("#tel2").mask("(99) 99999999?9");
+    $("#tels1").mask("99999999?9");
+    $("#tels2").mask("99999999?9");
     $("#teledi").mask("(99) 99999999?9");
     $("#cepcad").mask("99999-999");
     $("#ceprua").mask("99999-999");

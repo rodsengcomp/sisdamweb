@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.5.2
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: 28-Ago-2017 às 12:23
--- Versão do servidor: 10.1.21-MariaDB
--- PHP Version: 5.6.30
+-- Host: 10.47.171.110:3306
+-- Tempo de geração: 19-Ago-2022 às 20:55
+-- Versão do servidor: 10.4.13-MariaDB
+-- versão do PHP: 7.4.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -17,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `sisdam`
+-- Banco de dados: `sisdam`
 --
 
 -- --------------------------------------------------------
@@ -40,34 +41,40 @@ CREATE TABLE `menu_principal` (
 -- Extraindo dados da tabela `menu_principal`
 --
 
-INSERT INTO `menu_principal` (`id`, `nome`, `tipomenu` , `usuariocad`, `criado`, `usuarioalt`, `alterado`) VALUES
-(1, 'Pesquisar', 'System' , 'ADMIN', '2017-07-13 21:05:22', 'ADMIN', '2017-07-14 01:10:15'),
-(2, 'Pesquisar', 'System' , 'ADMIN', '2017-07-13 21:05:22', 'ADMIN', '2017-07-14 01:10:15'),
-(3, 'Pesquisar', 'System' , 'ADMIN', '2017-07-13 21:05:22', 'ADMIN', '2017-07-14 01:10:15'),
-(4, 'Pesquisar', 'System' , 'ADMIN', '2017-07-13 21:05:22', 'ADMIN', '2017-07-14 01:10:15'),
-(5, 'Epidemiológica', 'System' , 'ADMIN', '2017-07-14 01:11:51', NULL, NULL),
-(6, 'Pesquisar', 'System' , 'ADMIN', '2017-07-13 21:05:22', 'ADMIN', '2017-07-14 01:10:15'),
-(7, 'Administrativo', 'System' , 'ADMIN', '2017-07-14 01:12:33', NULL, NULL);
+INSERT INTO `menu_principal` (`id`, `nome`, `tipomenu`, `usuariocad`, `criado`, `usuarioalt`, `alterado`) VALUES
+(3, 'Pesquisar', 'System', 'D788796', '2017-07-13 21:05:22', 'D788796', '2021-03-03 09:11:44'),
+(5, 'Epidemiológica', 'System', 'D788796', '2017-07-14 01:11:51', NULL, NULL),
+(7, 'Administrativo', 'System', 'D788796', '2017-07-14 01:12:33', NULL, NULL),
+(8, 'Ambiental', 'System', 'D788796', '2018-01-18 11:22:57', NULL, NULL),
+(9, 'Sanitária', 'System', 'D788796', '2018-05-22 17:25:30', NULL, NULL),
+(10, 'Ajuda', 'System', 'D788796', '2018-06-27 08:57:48', NULL, NULL),
+(11, 'Links', 'Admin', 'D788796', '2018-12-27 00:00:00', NULL, NULL),
+(12, 'Icones', 'Admin', 'D788796', '2018-12-27 00:00:00', NULL, NULL),
+(13, 'Menus', 'Admin', NULL, NULL, NULL, NULL),
+(14, 'Arquivo', 'System', 'D788796', '2019-01-24 10:00:07', NULL, NULL),
+(15, 'Impressos', 'System', 'D788796', '2019-05-27 14:21:51', NULL, NULL);
 
 --
--- Indexes for dumped tables
+-- Índices para tabelas despejadas
 --
 
 --
--- Indexes for table `menu_principal`
+-- Índices para tabela `menu_principal`
 --
 ALTER TABLE `menu_principal`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT de tabelas despejadas
 --
 
 --
--- AUTO_INCREMENT for table `menu_principal`
+-- AUTO_INCREMENT de tabela `menu_principal`
 --
 ALTER TABLE `menu_principal`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

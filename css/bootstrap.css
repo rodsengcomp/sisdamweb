@@ -6105,6 +6105,11 @@ button.close {
   margin: 0;
   line-height: 1.42857143;
 }
+.modal-title-dark {
+  margin: 0;
+  line-height: 1.42857143;
+  color: black;
+}
 .modal-body {
   position: relative;
   padding: 15px;
