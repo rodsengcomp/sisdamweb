@@ -5,7 +5,7 @@
  * Date: 09/06/2017
  * Time: 08:39
  */
-error_reporting(0);
+error_reporting(1);
 include_once 'config.php';
 
 // Criando a conexão ...
@@ -83,12 +83,8 @@ class conecta extends config
     }
 }
 
-/** @var  $consulta_config */
-$consulta_config = "SELECT * FROM config_system";
-$resultado_config = $conectar->query($consulta_config);
-$exibir_config = mysqli_fetch_assoc($resultado_config);
 
-$pag_principal = $exibir_config['pag_principal'];
-$unidade = $exibir_config['unidade_name'];
+$pag_principal = 'suvisjt.php';
+$unidade = 'JACANA-TREMEMBE';
 
 ?>

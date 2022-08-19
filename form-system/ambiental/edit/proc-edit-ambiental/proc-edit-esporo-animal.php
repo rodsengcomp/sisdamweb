@@ -3,7 +3,7 @@
 <!-- Sisdam Web - 2.0 - 2017 - Todos os direitos reservados -->
 
 <?php
-error_reporting(0);
+error_reporting(1);
 include_once '../../../../locked/seguranca.php';
 include_once '../../../../conecta.php';
 ?>
@@ -75,11 +75,12 @@ $id_med = $med_id['id_med_esp'];
 // Monta o caminho de destino com o nome do arquivo
 $data_s = date('Y-d-m', strtotime($dtent));
 
+if ($conectar->connect_error)
 //Se conectando com o Banco de Dados e tratando possível erro de conexão ...
-if ($conexao = $conectar->query($conectar)) die ('<div class="form-group"><a href="javascript:history.back()" <button type=\'button\' class=\'btn btn-danger\' accesskey="V"><span class="glyphicon glyphicon-arrow-left"></span> <u>V</u>OLTAR</button></a><h4><strong><div class="alert alert-danger text-center" role="alert">ERROR : 01 FALHA AO CONECTAR !!! SE PERSISTIR CONTATE: sisdamjt@gmail.com</h4></strong></div>');
+if ($conectar->connect_error) die ('<div class="form-group"><a href="javascript:history.back()" <button type=\'button\' class=\'btn btn-danger\' accesskey="V"><span class="glyphicon glyphicon-arrow-left"></span> <u>V</u>OLTAR</button></a><h4><strong><div class="alert alert-danger text-center" role="alert">ERROR : 01 FALHA AO CONECTAR !!! SE PERSISTIR CONTATE: sisdamjt@gmail.com</h4></strong></div>');
 
 # Verificando se tabela já tem id com nve e nome do animal.
-$sql_nve = $conectar->query("SELECT id_esp FROM esporotricose_animal WHERE nve='$nve' AND nomeanimal='$nomeanimal' AND especie='$id_esp' AND id_esp<>'$id'");
+$sql_nve = $conectar->query("SELECT id_esp FROM esporo_an WHERE nve='$nve' AND nome_animal='$nomeanimal' AND especie='$id_esp' AND id_esp<>'$id'");
 
 if($acao === 'editar') :
     if ($sql_nve->num_rows > 0) :

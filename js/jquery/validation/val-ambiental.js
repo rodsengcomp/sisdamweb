@@ -1019,16 +1019,13 @@ $(function() {
                     //ascento: true
                 },
                 log: {
-                    required: true,
-                    remote: "remote/pesquisar/val-log.php"
+                    required: true
                 },
                 da: {
-                    required: true,
-                    remote: "remote/pesquisar/val-da.php"
+                    required: true
                 },
                 setor: {
-                    required: true,
-                    remote: "remote/pesquisar/val-setor.php"
+                    required: true
                 },
                 ubs: {
                     required: true,
@@ -1090,16 +1087,13 @@ $(function() {
                     //ascento: "Retire ascentos, ç e caracteres"
                 },
                 log: {
-                    required: "Digite um Logradouro",
-                    remote: "Digite um logradouro válido"
+                    required: "Digite um Logradouro"
                 },
                 da: {
-                    required: "Digite o Da",
-                    remote: "Da inválido"
+                    required: "Digite o Da"
                 },
                 setor: {
-                    required: "Digite um Setor",
-                    remote: "Setor inválido."
+                    required: "Digite um Setor"
                 },
                 ubs: {
                     required: "Digite uma Ubs",

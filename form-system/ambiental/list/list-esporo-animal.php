@@ -5,10 +5,81 @@
 
 <?php
 
+error_reporting(1);
+
 //Algumas funções da tabela
 include_once 'functions.php';
+
+?>
 //Todos os chamamentos javascript e códigos de modal's
-include_once 'modals-ambiental.php';
+<script type="text/javascript">
+    $(document).ready(function() {
+            $('[data-toggle="tooltip"]').tooltip()
+
+        $('#list-esporo').DataTable({responsive: {details: {display: $.fn.dataTable.Responsive.display.modal({header: function (row) {var data = row.data();
+                            return data[5] + ' ' + data[4];}}),renderer: function ( api, rowIdx, columns ) {var data = $.map( columns, function ( col, i ) {
+                        return '<tr>'+'<td>'+col.title+':'+'</td> '+'<td>'+col.data+'</td>'+'</tr>';} ).join('');
+                        return $('<table/>').append( data ); } } },
+            "language": {"sEmptyTable": "Nenhum registro encontrado","sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros","sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
+                "sInfoFiltered": "(Filtrados de _MAX_ registros)","sInfoThousands": ".","sLengthMenu": "_MENU_ Resultados por Página","sLoadingRecords": "Carregando...",
+                "sProcessing": "Processando...","sZeroRecords": "Nenhum registro encontrado","sSearch": "Pesquisar","oPaginate": {"sNext": "Próximo","sPrevious": "Anterior","sFirst": "Primeiro","sLast": "Último"},
+                "oAria": {"sSortAscending": "Ordenar colunas de forma ascendente","sPrevious": "Ordenar colunas de forma descendente"}},
+            dom: "lBfrtip",processing: true, serverside: true, ajax: 'form-system/ambiental/list/proc-list-ambiental/list-esporo.php',
+            "lengthMenu": [[4, 10, 25, 50, -1], [4, 10, 25, 50, "Todos"]],
+            order: [[6, 'asc'], [5, 'asc']],
+            rowGroup: {
+                dataSrc: [6, 4 ]
+            },
+            columnDefs: [ {
+                targets: [ 4, 7 ],
+                visible: false
+            } ],
+            "aoColumnDefs": [
+                {"bVisible": false,"aTargets": [4]},
+                {"bVisible": false,"aTargets": [6]},
+                {
+                    "aTargets": [3], // o numero 6 é o nº da coluna
+                    "mRender": function (data, type, full) { //aqui é uma funçãozinha para pegar os ids
+                        return full[3] + ' <a href="suvisjt.php?pag=edit-esporo-animal&id='+ full[16]+'" role="button" class="btn btn-warning rounded-circle"><strong><span class="glyphicon glyphicon-pencil"></strong></a>';
+                    }
+                },
+                {"aTargets": [5], // o numero 2 é o nº da coluna
+                    "mRender": function (data, type, full) { //aqui é uma funçãozinha para pegar os ids
+                        return  '<a target="_blank" href="https://www.google.com.br/maps/dir/?api=1&origin=R. Maria Amália Lopes Azevedo, 3676 - Vila Albertina&destination=' + full[5] + '&travelmode=driving" role="button" class="btn btn-default rounded-circle"><img src="imagens/maps_64dp.png" width="20"></a> ' +
+                            full[5] ;
+                    }
+                },
+                {"aTargets": [7], // o numero 2 é o nº da coluna
+                    "mRender": function (data, type, full) { //aqui é uma funçãozinha para pegar os ids
+
+                        return  full[7] + '<br> ' + full[17];
+                    }
+                },
+                {"aTargets": [9], // o numero 2 é o nº da coluna
+                    "mRender": function (data, type, full) { //aqui é uma funçãozinha para pegar os ids
+                        return  full[9] + '<br>' + full[10];
+                    }
+                },
+                {"aTargets": [10], // o numero 2 é o nº da coluna
+                    "mRender": function (data, type, full) { //aqui é uma funçãozinha para pegar os ids
+                        return  full[11] + '<br>' + full[12] + '<br>' + full[13] + '<br>' + full[14];
+                    }
+                },
+                {"aTargets": [11], // o numero 2 é o nº da coluna
+                    "mRender": function (data, type, full) { //aqui é uma funçãozinha para pegar os ids
+                        return  full[15];
+                    }
+                }
+            ],
+            buttons: [ {extend:'excel',title:'PE / IE <?php echo date('Y');?>',header: 'PE / IE <?php echo date('Y');?>',filename:'PE / IE <?php echo date('Y');?>',className: 'btn btn-success',text:'<span class="fal fa-file-excel"></span>' },
+                {extend: 'pdfHtml5',exportOptions: {columns: ':visible'},title:'PE / IE <?php echo date('Y');?>',header: 'PE / IE <?php echo date('Y');?>',filename:'PE / IE <?php echo date('Y');?>',orientation: 'landscape',pageSize: 'LEGAL',className: 'btn btn-danger',text:'<span class="fa fa-file-pdf-o"></span>'},
+                {extend:'print',exportOptions: {columns: ':visible'},title:'PE / IE <?php echo date('Y');?>',header: 'PE / IE <?php echo date('Y');?>',filename:'PE / IE <?php echo date('Y');?>',className: 'btn btn-default',text:'<span class="fa fa-print"></span>'},
+                {extend:'colvis',className: 'btn btn-info',text:'<span class="fa fa-list"></span>'} ]
+        });
+    });
+</script>
+
+<?php
 
 // DEFINE O FUSO HORARIO COMO O HORARIO DE BRASILIA
 date_default_timezone_set('America/Sao_Paulo');

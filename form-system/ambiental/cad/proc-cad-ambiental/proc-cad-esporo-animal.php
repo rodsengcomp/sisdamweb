@@ -70,7 +70,7 @@ $data_s = date('Y-d-m', strtotime($dtent));
 $data_s2 = date('Y-d-m', strtotime($dtent2));
 
 //Se conectando com o Banco de Dados e tratando possível erro de conexão ...
-if ($conexao = $conectar->query($conectar)) die ('<div class="form-group"><a href="javascript:history.back()" <button type=\'button\' class=\'btn btn-danger\' accesskey="V"><span class="glyphicon glyphicon-arrow-left"></span> <u>V</u>OLTAR</button></a><h4><strong><div class="alert alert-danger text-center" role="alert">ERROR : 01 FALHA AO CONECTAR !!! SE PERSISTIR CONTATE: sisdamjt@gmail.com</h4></strong></div>');
+if ($conectar->connect_error) die ('<div class="form-group"><a href="javascript:history.back()" <button type=\'button\' class=\'btn btn-danger\' accesskey="V"><span class="glyphicon glyphicon-arrow-left"></span> <u>V</u>OLTAR</button></a><h4><strong><div class="alert alert-danger text-center" role="alert">ERROR : 01 FALHA AO CONECTAR !!! SE PERSISTIR CONTATE: sisdamjt@gmail.com</h4></strong></div>');
 
 # Verificando se tabela já tem id com nve e nome do animal.
 $sql_nve = $conectar->query("SELECT id_esp FROM esporotricose_animal WHERE nve='$nve' AND nomeanimal='$nomeanimal' AND especie='$id_esp'");

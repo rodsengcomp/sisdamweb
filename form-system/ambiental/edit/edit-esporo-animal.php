@@ -279,13 +279,13 @@ $countlixo = $contarlixo->num_rows;
                             if ($countlixo == 0):
                                 echo '<button type="button" class="btn btn-primary btn-labeled btn-lg btn-block"><span class="btn-label"><i
                                             class="fa fa-pills"></i></span>ENTREGA DE MEDICAMENTOS ESPOROTRICOSE ANIMAL</button><br>';
-                                echo '<a href="form-system/ambiental/print/print-esporo-animal.php?id='.$id.'" accesskey="S" role="button" class="btn btn-primary"><i class="fa fa-print"></i> <u>I</u>MPRIMIR</a>';
+                                echo '<a target=”_blank” href="form-system/ambiental/print/print-esporo-animal.php?id='.$id.'" accesskey="S" role="button" class="btn btn-primary"><i class="fa fa-print"></i> <u>I</u>MPRIMIR</a>';
                             elseif ($id_lixeira === 'false'):
                                 echo '<button type="button" class="btn btn-primary btn-labeled btn-lg btn-block"><span class="btn-label"><i
                                             class="fa fa-pills"></i></span>ENTREGA DE MEDICAMENTOS ESPOROTRICOSE ANIMAL</button><br>';
                                 echo '<a href="suvisjt.php?pag=edit-esporo-animal&id='.$id.'&lixeira=true" role="button" accesskey="L" data-toggle="tooltip" title="GRAVAR OS DADOS" 
                                             class="btn btn-labeled btn-default mb-2 mr-sm-4"><span class="btn-label">' .$countlixo. '</span><i class="fa fa-trash-alt"></i> <u>L</u>IXEIRA</a>';
-                                echo '<a href="form-system/ambiental/print/print-esporo-animal.php?id='.$id.'" accesskey="S" role="button" class="btn btn-primary"><i class="fa fa-print"></i> <u>I</u>MPRIMIR</a>';
+                                echo '<a target=”_blank” href="form-system/ambiental/print/print-esporo-animal.php?id='.$id.'" accesskey="S" role="button" class="btn btn-primary"><i class="fa fa-print"></i> <u>I</u>MPRIMIR</a>';
                             else:
                                     echo '<button type="button" class="btn btn-default btn-labeled btn-lg btn-block"><span class="btn-label"><i
                                             class="fa fa-pills"></i></span>LIXEIRA - ENTREGA DE MEDICAMENTOS ESPOROTRICOSE ANIMAL</button><br>';
