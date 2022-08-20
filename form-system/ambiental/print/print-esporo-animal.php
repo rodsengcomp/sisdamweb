@@ -33,7 +33,7 @@ if (!empty($id) && is_numeric($id)):
     if(!empty(is_numeric($id))):
     // Captura os dados do cliente solicitado
         $sql = $conectar->query("SELECT esporo_an.id_esp, esporo_an.nve, esporo_an.ano, esporo_an.data_entrada, esporo_an.nome_animal,
-        especie_animal.especie, esporo_an.id_rua, ruas.log, ruas.rua, ruas.ruagoogle, esporo_an.rua_esp_a, esporo_an.numero, esporo_an.complemento,
+        especie_animal.especie, esporo_an.id_rua, ruas.log, ruas.rua, ruas.bairro, ruas.ruagoogle, esporo_an.rua_esp_a, esporo_an.numero, esporo_an.complemento,
         esporo_an.bairro_esp_a, esporo_an.tutor, esporo_an.telefone1, 
         esporo_an.telefone2, esporo_an.dsg_medc, esporo_medc.nm_mdc_esp_an, 
         esporo_an_sd_medc.data_medc, esporo_an_sd_medc.qtd_medc, esporo_an_sd_medc.nm_rec_medc, situacao_esporo.sit_esp, esporo_an.obs
@@ -48,7 +48,7 @@ if (!empty($id) && is_numeric($id)):
         $ed_print = mysqli_fetch_assoc($sql);
 
         $cs_medc = $conectar->query("SELECT esporo_an_sd_medc.id_sd, esporo_an_sd_medc.id_medc, esporo_an_sd_medc.data_medc, esporo_an_sd_medc.dsg_medc, esporo_an_sd_medc.qtd_medc, esporo_an_sd_medc.nm_ent_medc, esporo_an_sd_medc.nm_rec_medc, 
-                                    esporo_an_sd_medc.id_an_esp, esporo_medc.nm_mdc_esp_an 
+                                    esporo_an_sd_medc.id_an_esp, esporo_medc.nm_mdc_esp_an
                                 FROM esporo_an_sd_medc
                                 LEFT JOIN esporo_medc ON esporo_an_sd_medc.id_medc = esporo_medc.id_med_esp
                                 WHERE id_an_esp=$id AND esporo_an_sd_medc.lixeira = 0
@@ -134,7 +134,8 @@ margin-left:0cm;line-height:150%'><span style='font-family:"Arial",sans-serif'>R
                         else: echo '_______________________________________________________________'; endif;?>,</span></p>
 
                 <p class=MsoNormal style='margin-top:6.0pt;margin-right:0cm;margin-bottom:6.0pt;
-margin-left:0cm;line-height:150%'><span style='font-family:"Arial",sans-serif'>Bairro ______________________________________, CEP _________________________,</span></p>
+margin-left:0cm;line-height:150%'><span style='font-family:"Arial",sans-serif'>Bairro : <?php if(!empty($ed_print['bairro'])) : echo '<u> '.ucwords(strtolower($ed_print['bairro'])).'</u>';
+                        else: echo '_______________________________________________________________'; endif;?>,</span></p>, CEP _________________________,</span></p>
 
                 <p class=MsoNormal style='margin-top:6.0pt;margin-right:0cm;margin-bottom:6.0pt;
 margin-left:0cm;line-height:150%'><span style='font-family:"Arial",sans-serif'>Telefone Residencial <?php if(!empty($ed_print['telefone1'])) : echo '<u>    '.$ed_print['telefone1'].'    </u>';
@@ -146,7 +147,7 @@ margin-left:0cm;line-height:150%'><span style='font-family:"Arial",sans-serif'>T
 line-height:150%;font-family:"Arial",sans-serif'>Responsável pelo animal abaixo descrito:</span></b></p>
 
                 <p class=MsoNormal style='margin-top:6.0pt;margin-right:0cm;margin-bottom:6.0pt;
-margin-left:0cm;line-height:150%'><span style='font-family:"Arial",sans-serif'>Nome : <u>   <?=ucfirst($ed_print['nome_animal'])?>   </u>       Pelagem ____________________________</span></p>
+margin-left:0cm;line-height:150%'><span style='font-family:"Arial",sans-serif'>Nome : <u>   <?=ucwords(strtolower($ed_print['nome_animal']))?>   </u>       Pelagem ____________________________</span></p>
 
                 <p class=MsoNormal style='margin-top:6.0pt;margin-right:0cm;margin-bottom:6.0pt;
 margin-left:0cm;line-height:150%'><span style='font-family:"Arial",sans-serif'>Espécie  ___________________       Porte _______________________________</span></p>
