@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: 10.47.171.110:3306
--- Tempo de geração: 19-Ago-2022 às 20:54
--- Versão do servidor: 10.4.13-MariaDB
--- versão do PHP: 7.4.7
+-- Host: 127.0.0.1
+-- Tempo de geração: 22-Ago-2022 às 04:19
+-- Versão do servidor: 10.4.24-MariaDB
+-- versão do PHP: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -176,7 +176,8 @@ INSERT INTO `pag_system` (`id`, `name_pag`, `caminho`, `usuariocad`, `criado`, `
 (148, 'proc-cad-esporo-animal', 'form-system/ambiental/cad/proc-cad-ambiental/proc-cad-esporo-animal.php', 'D788796', '2022-08-02 09:27:19', NULL, NULL),
 (149, 'proc-edit-esporo-animal', 'form-system/ambiental/edit/proc-edit-ambiental/proc-edit-esporo-animal.php', 'D788796', '2022-08-12 14:24:20', NULL, NULL),
 (150, 'cad-med-an-esp-an', 'form-system/ambiental/cad/cad-med-sd-espo-animal.php', 'D788796', '2022-08-15 11:24:32', NULL, NULL),
-(151, 'imprimir-ficha-esporo-animal', 'form-system/ambiental/print/print-esporo-animal.php', 'D788796', '2022-08-19 15:08:18', NULL, NULL);
+(151, 'imprimir-ficha-esporo-animal', 'form-system/ambiental/print/print-esporo-animal.php', 'D788796', '2022-08-19 15:08:18', NULL, NULL),
+(152, 'listar-medicamentos-esporotricose-animal', 'form-system/ambiental/list/list-esporo-medical.php', 'D788796', '2022-08-21 21:17:44', NULL, NULL);
 
 --
 -- Índices para tabelas despejadas
@@ -196,7 +197,7 @@ ALTER TABLE `pag_system`
 -- AUTO_INCREMENT de tabela `pag_system`
 --
 ALTER TABLE `pag_system`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=152;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=153;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
