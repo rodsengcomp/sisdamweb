@@ -7,16 +7,13 @@
 
 error_reporting(1);
 
-//Algumas funções da tabela
-include_once 'functions.php';
-
 ?>
 //Todos os chamamentos javascript e códigos de modal's
 <script type="text/javascript">
     $(document).ready(function() {
-            $('[data-toggle="tooltip"]').tooltip()
+        $('[data-toggle="tooltip"]').tooltip()
 
-        $('#list-esporo').DataTable({responsive: {details: {display: $.fn.dataTable.Responsive.display.modal({header: function (row) {var data = row.data();
+        $('#list-esporo-medical').DataTable({responsive: {details: {display: $.fn.dataTable.Responsive.display.modal({header: function (row) {var data = row.data();
                             return data[5] + ' ' + data[4];}}),renderer: function ( api, rowIdx, columns ) {var data = $.map( columns, function ( col, i ) {
                         return '<tr>'+'<td>'+col.title+':'+'</td> '+'<td>'+col.data+'</td>'+'</tr>';} ).join('');
                         return $('<table/>').append( data ); } } },
@@ -24,52 +21,27 @@ include_once 'functions.php';
                 "sInfoFiltered": "(Filtrados de _MAX_ registros)","sInfoThousands": ".","sLengthMenu": "_MENU_ Resultados por Página","sLoadingRecords": "Carregando...",
                 "sProcessing": "Processando...","sZeroRecords": "Nenhum registro encontrado","sSearch": "Pesquisar","oPaginate": {"sNext": "Próximo","sPrevious": "Anterior","sFirst": "Primeiro","sLast": "Último"},
                 "oAria": {"sSortAscending": "Ordenar colunas de forma ascendente","sPrevious": "Ordenar colunas de forma descendente"}},
-            dom: "lBfrtip",processing: true, serverside: true, ajax: 'form-system/ambiental/list/proc-list-ambiental/list-esporo.php',
+            dom: "lBfrtip",processing: true, serverside: true, ajax: 'form-system/ambiental/list/proc-list-ambiental/list-esporo-medical.php',
             "lengthMenu": [[4, 10, 25, 50, -1], [4, 10, 25, 50, "Todos"]],
-            order: [[6, 'asc'], [5, 'asc']],
-            rowGroup: {
-                dataSrc: [6, 4 ]
-            },
-            columnDefs: [ {
-                targets: [ 4, 7 ],
-                visible: false
-            } ],
             "aoColumnDefs": [
-                {"bVisible": false,"aTargets": [4]},
-                {"bVisible": false,"aTargets": [6]},
+                {
+                    "aTargets": [0], // o numero 6 é o nº da coluna
+                    "mRender": function (data, type, full) { //aqui é uma funçãozinha para pegar os ids
+                        return '<a href="suvisjt.php?pag=edicao-esporo-animal-medicamentos&id='+ full[0]+'" role="button" class="btn btn-warning rounded-circle"><strong><span class="fa fa-pencil"></strong></a>';
+                    }
+                },
+                {
+                    "aTargets": [2], // o numero 6 é o nº da coluna
+                    "mRender": function (data, type, full) { //aqui é uma funçãozinha para pegar os ids
+                        return full[2] + ' MG';
+                    }
+                },
                 {
                     "aTargets": [3], // o numero 6 é o nº da coluna
                     "mRender": function (data, type, full) { //aqui é uma funçãozinha para pegar os ids
-                        return full[3] + ' <a href="suvisjt.php?pag=edit-esporo-animal&id='+ full[16]+'" role="button" class="btn btn-warning rounded-circle"><strong><span class="glyphicon glyphicon-pencil"></strong></a>';
+                        return full[3] + ' CPS';
                     }
                 },
-                {"aTargets": [5], // o numero 2 é o nº da coluna
-                    "mRender": function (data, type, full) { //aqui é uma funçãozinha para pegar os ids
-                        return  '<a target="_blank" href="https://www.google.com.br/maps/dir/?api=1&origin=R. Maria Amália Lopes Azevedo, 3676 - Vila Albertina&destination=' + full[5] + '&travelmode=driving" role="button" class="btn btn-default rounded-circle"><img src="imagens/maps_64dp.png" width="20"></a> ' +
-                            full[5] ;
-                    }
-                },
-                {"aTargets": [7], // o numero 2 é o nº da coluna
-                    "mRender": function (data, type, full) { //aqui é uma funçãozinha para pegar os ids
-
-                        return  full[7] + '<br> ' + full[17];
-                    }
-                },
-                {"aTargets": [9], // o numero 2 é o nº da coluna
-                    "mRender": function (data, type, full) { //aqui é uma funçãozinha para pegar os ids
-                        return  full[9] + '<br>' + full[10];
-                    }
-                },
-                {"aTargets": [10], // o numero 2 é o nº da coluna
-                    "mRender": function (data, type, full) { //aqui é uma funçãozinha para pegar os ids
-                        return  full[11] + '<br>' + full[12] + '<br>' + full[13] + '<br>' + full[14];
-                    }
-                },
-                {"aTargets": [11], // o numero 2 é o nº da coluna
-                    "mRender": function (data, type, full) { //aqui é uma funçãozinha para pegar os ids
-                        return  full[15];
-                    }
-                }
             ],
             buttons: [ {extend:'excel',title:'PE / IE <?php echo date('Y');?>',header: 'PE / IE <?php echo date('Y');?>',filename:'PE / IE <?php echo date('Y');?>',className: 'btn btn-success',text:'<span class="fal fa-file-excel"></span>' },
                 {extend: 'pdfHtml5',exportOptions: {columns: ':visible'},title:'PE / IE <?php echo date('Y');?>',header: 'PE / IE <?php echo date('Y');?>',filename:'PE / IE <?php echo date('Y');?>',orientation: 'landscape',pageSize: 'LEGAL',className: 'btn btn-danger',text:'<span class="fa fa-file-pdf-o"></span>'},
@@ -96,7 +68,7 @@ date_default_timezone_set('America/Sao_Paulo');
                     <li class="active">Lista de Esporotricose Animal</li>
                 </ol>
                 <button type="button"  data-toggle="tooltip" title="Lista de Casos de Esporotricose Animal - JT" class="btn btn-dark btn-labeled btn-lg btn-block"><i class="btn-label"><i
-                                class="fa fa-pills"></i></i>LISTA DE ESPOROTRICOSE ANIMAL - JT</button>
+                            class="fa fa-pills"></i></i>LISTA DE MEDICAMENTOS - ESPOROTRICOSE ANIMAL - JT</button>
 
                 <!--<img id="logo-img" class="img-responsive center-block" alt="Responsive image" src="imagens/manutencao-desculpe.jpg"/>-->
 
@@ -114,10 +86,10 @@ date_default_timezone_set('America/Sao_Paulo');
 
     <div class="row espaco">
         <div class="text-center">
-            <a href='suvisjt.php?pag=cad-esporo-animal'
+            <a href='suvisjt.php?pag=cadastro-medicamento-esporo-animal'
             <button type='button' style="<?php if ($_SESSION['usuarioNivelAcesso'] == 4) {
                 echo 'display: none;';
-            } ?>" accesskey="N" data-toggle="tooltip" title="Lista de Casos de Esporotricose Animal - JT"
+            } ?>" accesskey="N" data-toggle="tooltip" title="Lista de Medicamentos de Esporotricose Animal - JT"
                     class="btn btn-labeled btn-success"><span class="btn-label"><i class="fa fa-plus-circle"></i> </span> <u>N</u>OVO</button>
             </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         </div>
@@ -125,21 +97,15 @@ date_default_timezone_set('America/Sao_Paulo');
     <!-- Terminando a página de Título -->
 
     <!--------------------------------------------- * Tabela de Bloqueios * --------------------------------------->
-    <table id="list-esporo" class="table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+    <table id="list-esporo-medical" class="table table-hover table-striped table-bordered" cellspacing="0" width="100%">
         <thead>
         <tr>
-            <th class="text-center">NVE</th>
-            <th class="text-center">ANO</th>
-            <th class="text-center"><i class="fal fa-thin fa-calendar"></i> INÍCIO</th>
-            <th class="text-center"><i class="fal fa-light fa-cat"></i> / <i class="fal fa-light fa-dog"></i> ANIMAL</th>
-            <th class="text-center">ESPECIE</th>
-            <th class="text-center"><i class="fal fa-light fa-map-pin"></i> ENDEREÇO</th>
-            <th class="text-center">PROPRIETÁRIO</th>
-            <th class="text-center"><i class="fal fa-light fa-phone"></i> TELEFONE</th>
-            <th class="text-center"><i class="fal fa-question"></i> SITUAÇÃO</th>
-            <th class="text-center"><i class="fal fa-light fa-briefcase-medical"></i> MEDICAMENTO</th>
-            <th class="text-center"><i class="fal fa-thin fa-calendar"></i> ÚLT. ENTREGA</th>
-            <th class="text-center"><i class="fal fa-exclamation"></i> OBSERVAÇÃO</th>
+            <th class="text-center"><i class="fal fa-pencil"></i> EDITAR</th>
+            <th class="text-center"><i class="fal fa-pills"></i> MEDICAMENTO</th>
+            <th class="text-center"><i class="fal fa-pills"></i> DOSAGEM</th>
+            <th class="text-center"><i class="fal fa-pills"></i> QUANTIDADE</th>
+            <th class="text-center"><i class="fal fa-user"></i> CADASTRO</th>
+            <th class="text-center"><i class="fal fa-thin fa-calendar"></i> DT. CADASTRO</th>
         </tr>
         </thead>
         <tbody>

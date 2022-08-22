@@ -160,13 +160,9 @@ $countlixo = $contarlixo->num_rows;
                     <div class="form-group">
 
                         <label class="col-sm-1 control-label">TUTOR</label>
-                        <div class="col-sm-4">
+                        <div class="col-sm-5">
                             <input type="text" tabindex="5" class="form-control" name="tutor"  data-toggle="tooltip" title="Nome do Proprietário do Animal"
                                 onchange="upperCaseF(this)" value="<?php echo strtoupper($editar_esp_an['tutor']); ?>"></div>
-
-                        <div class="col-sm-1">
-                            <a href='suvisjt.php?pag=cad-med-an-esp-an&id=<?php echo $editar_esp_an['id_esp']; ?>' role='button' tabindex="18" data-toggle="tooltip" title="REGISTRAR MEDICAMENTO" accesskey="L"
-                                 class="btn btn-labeled btn-info"><span class="btn-label"><i class="fa fa-plus-circle"></i></span><i class="fa fa-pills"></i> <u>M</u>ED. </a></div>
 
                         <label for="inputTelefone1" class="col-sm-1 control-label">TEL 1</label>
                         <div class="col-sm-2">
@@ -248,7 +244,7 @@ $countlixo = $contarlixo->num_rows;
                                                          class="form-control" name="obs" onchange="upperCaseF(this)" placeholder="Informações sobre o caso de esporotricose animal" rows="2"><?php echo $editar_esp_an['obs'];?></textarea></div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group pb-0">
                         <label for="inputDataEntrada" class="col-sm-1 control-label">MEDIC.</label>
                         <div class="col-sm-2"><input <?php if($id_edit == 'true'): echo 'autofocus'; endif;?> tabindex="19" type="text" class="form-control" data-toggle="tooltip"
                                                      title="Data da 1ª entrega" name="dataentrada" id="dataentesp" placeholder="00/00/0000" value="<?php echo $id_data; ?>"></div>
@@ -272,28 +268,38 @@ $countlixo = $contarlixo->num_rows;
                     </div>
             </fieldset>
 
-                    <!-- Fim da Pagina de Titulo -->
+            <div class="page-header pt-0">
+            </div>
+
+                    <!-- Fim da Pagina de Titulo -->    <!-- Pagina de Titulo -->
+            <div class="row">
+                <div class="col-md-12">
                     <div class="form-group text-center">
-                        <div class="col-sm-12">
                             <?php
                             if ($countlixo == 0):
                                 echo '<button type="button" class="btn btn-primary btn-labeled btn-lg btn-block"><span class="btn-label"><i
                                             class="fa fa-pills"></i></span>ENTREGA DE MEDICAMENTOS ESPOROTRICOSE ANIMAL</button><br>';
-                                echo '<a target=”_blank” href="form-system/ambiental/print/print-esporo-animal.php?id='.$id.'" accesskey="S" role="button" class="btn btn-primary"><i class="fa fa-print"></i> <u>I</u>MPRIMIR</a>';
+                                echo '<a href="suvisjt.php?pag=edit-esporo-animal&id='.$id.'&edit=true" role="button" accesskey="I" data-toggle="tooltip" title="NOVO MEDICAMENTO" 
+                                            class="btn btn-labeled btn-success mb-2 mr-sm-4"><span class="btn-label"><i class="fa fa-pills"></i></span> <u>N</u>OVO</a>';
+                                echo '<a target=”_blank” href="form-system/ambiental/print/print-esporo-animal.php?id='.$id.'" role="button" accesskey="I" data-toggle="tooltip" title="IMPRIMIR" 
+                                            class="btn btn-labeled btn-primary mb-2 mr-sm-4"><span class="btn-label"><i class="fa fa-print"></i></span> <u>I</u>MPRIMIR</a>';
                             elseif ($id_lixeira === 'false'):
                                 echo '<button type="button" class="btn btn-primary btn-labeled btn-lg btn-block"><span class="btn-label"><i
                                             class="fa fa-pills"></i></span>ENTREGA DE MEDICAMENTOS ESPOROTRICOSE ANIMAL</button><br>';
                                 echo '<a href="suvisjt.php?pag=edit-esporo-animal&id='.$id.'&lixeira=true" role="button" accesskey="L" data-toggle="tooltip" title="GRAVAR OS DADOS" 
-                                            class="btn btn-labeled btn-default mb-2 mr-sm-4"><span class="btn-label">' .$countlixo. '</span><i class="fa fa-trash-alt"></i> <u>L</u>IXEIRA</a>';
-                                echo '<a target=”_blank” href="form-system/ambiental/print/print-esporo-animal.php?id='.$id.'" accesskey="S" role="button" class="btn btn-primary"><i class="fa fa-print"></i> <u>I</u>MPRIMIR</a>';
+                                            class="btn btn-labeled btn-default mb-2 mr-sm-4"><span class="btn-label"><i class="fa fa-trash-alt"></i></span><span class="badge" style="background-color: #c9302c">'.$countlixo.'</span> &nbsp;<u>L</u>IXEIRA</a>';;
+                                echo '<a target=”_blank” href="form-system/ambiental/print/print-esporo-animal.php?id='.$id.'" role="button" accesskey="I" data-toggle="tooltip" title="IMPRIMIR" 
+                                            class="btn btn-labeled btn-primary mb-2 mr-sm-4"><span class="btn-label"><i class="fa fa-print"></i></span> <u>I</u>MPRIMIR</a>';
                             else:
                                     echo '<button type="button" class="btn btn-default btn-labeled btn-lg btn-block"><span class="btn-label"><i
                                             class="fa fa-pills"></i></span>LIXEIRA - ENTREGA DE MEDICAMENTOS ESPOROTRICOSE ANIMAL</button><br>';
-                                    echo '<a href="suvisjt.php?pag=edit-esporo-animal&id='.$id.'" accesskey="S" role="button" class="btn btn-danger"><i class="fa fa-arrow-circle-o-left"></i><u>S</u>AIR</a>';
+                                    echo '<a href="suvisjt.php?pag=edit-esporo-animal&id='.$id.'" role="button" accesskey="S" data-toggle="tooltip" title="SAIR DA LIXEIRA" 
+                                            class="btn btn-labeled btn-danger mb-2 mr-sm-4"><span class="btn-label"><i class="fa fa-arrow-circle-o-left"></i></span> <u>S</u>AIR</a>';
                                 endif;
                             ?>
-                        </div>
                     </div>
+                </div>
+            </div>
                     <!--------------------------------------------- * Tabela de Bloqueios * --------------------------------------->
                     <table id="list-edit-esporo-medc" class="table table-hover table-striped table-bordered" cellspacing="0" width="100%">
                         <thead>
@@ -323,7 +329,7 @@ $countlixo = $contarlixo->num_rows;
                 <button type="submit" tabindex="25" accesskey="G" style="<?php if ($_SESSION['usuarioNivelAcesso'] == 4) {
                     echo 'display: none;';
                 } ?>" data-toggle="tooltip" title="GRAVAR OS DADOS" class="btn btn-labeled btn-success mb-2 mr-sm-4"><span
-                            class="btn-label"><i class="glyphicon glyphicon-floppy-disk"></i></span> <u>G</u>RAVAR
+                            class="btn-label"><i class="fa fa-floppy-o"></i></span> <u>G</u>RAVAR
                 </button>
                 <a href='suvisjt.php?pag=list-esporo-animal' role='button' tabindex="26" data-toggle="tooltip" title="LISTAR REGISTROS" accesskey="L"
                    class="btn btn-labeled btn-info mb-2 mr-sm-4"><span class="btn-label"><i

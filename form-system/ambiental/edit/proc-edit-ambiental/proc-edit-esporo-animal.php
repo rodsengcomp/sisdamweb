@@ -82,43 +82,47 @@ if ($conectar->connect_error) die ('<div class="form-group"><a href="javascript:
 # Verificando se tabela já tem id com nve e nome do animal.
 $sql_nve = $conectar->query("SELECT id_esp FROM esporo_an WHERE nve='$nve' AND nome_animal='$nomeanimal' AND especie='$id_esp' AND id_esp<>'$id'");
 
-if($acao === 'editar') :
-    if ($sql_nve->num_rows > 0) :
-        header("Location: suvisjt.php?pag=edit-esporo-animal&id=$id");
-        $_SESSION['msgedit'] = "<div class='alert alert-danger text-center' id='msgerroredit' role='alert'><strong>ANIMAL : </strong>$nomeanimal - <strong>TUTOR : </strong>$tutor - <strong>NÃO EDITADO - DUPLICIDADE !!!</strong></div>";
-    else :
-        $conectar->query("UPDATE esporo_an SET nve = '$nve', ano = '$ano', data_entrada = '$datanot', nome_animal = '$nomeanimal', especie = '$id_esp', tutor = '$tutor',
-                                id_rua = '$idrua', telefone1 = '$tel1', telefone2 = '$tel2', situacao = '$id_sit', rua_esp_a = '$ruagoogle', numero = '$num', complemento = '$comp',
-                                lat = '$lat', lng = '$lng', obs = '$obs', alterado = '$usuariologin', data_alterado = NOW() WHERE id_esp ='$id'");
-        if($id_sd_med != ''):
-            $conectar->query("UPDATE esporo_an_sd_medc SET data_medc = '$data_s', id_medc = '$id_med', dsg_medc = '$dsg', qtd_medc = '$qtd',nm_ent_medc = '$nment', nm_rec_medc = '$nmrecep',
-                                    alterado = '$usuariologin', data_alterado = NOW() WHERE id_an_esp = '$id' AND id_sd = '$id_sd_med'");
+if ($_SESSION['usuarioNivelAcesso'] == "") :
+    header("Location: suvisjt.php");
+else:
+    if($acao === 'editar') :
+        if ($sql_nve->num_rows > 0) :
             header("Location: suvisjt.php?pag=edit-esporo-animal&id=$id");
-            $_SESSION['msgedit'] = "<div class='alert alert-warning text-center'><strong>MEDICAMENTO : </strong>$med - $dsg MG/DIA - $qtd CÁPSULAS - <strong>EDITADO COM SUCESSO !!!</strong></div>";
-        else:
-            if ($id_med != ''):
-                $conectar->query("INSERT INTO esporo_an_sd_medc (id_an_esp ,data_medc ,id_medc , dsg_medc, qtd_medc ,nm_ent_medc ,nm_rec_medc , criado ,data_criado)
-                                        VALUES ('$id', '$data_s','$id_med', '$dsg', '$qtd', '$nment', '$nmrecep', '$usuariologin', NOW())");
+            $_SESSION['msgedit'] = "<div class='alert alert-danger text-center' id='msgerroredit' role='alert'><strong>ANIMAL : </strong>$nomeanimal - <strong>TUTOR : </strong>$tutor - <strong>NÃO EDITADO - DUPLICIDADE !!!</strong></div>";
+        else :
+            $conectar->query("UPDATE esporo_an SET nve = '$nve', ano = '$ano', data_entrada = '$datanot', nome_animal = '$nomeanimal', especie = '$id_esp', tutor = '$tutor',
+                                    id_rua = '$idrua', telefone1 = '$tel1', telefone2 = '$tel2', situacao = '$id_sit', rua_esp_a = '$ruagoogle', numero = '$num', complemento = '$comp',
+                                    lat = '$lat', lng = '$lng', obs = '$obs', alterado = '$usuariologin', data_alterado = NOW() WHERE id_esp ='$id'");
+            if($id_sd_med != ''):
+                $conectar->query("UPDATE esporo_an_sd_medc SET data_medc = '$data_s', id_medc = '$id_med', dsg_medc = '$dsg', qtd_medc = '$qtd',nm_ent_medc = '$nment', nm_rec_medc = '$nmrecep',
+                                        alterado = '$usuariologin', data_alterado = NOW() WHERE id_an_esp = '$id' AND id_sd = '$id_sd_med'");
                 header("Location: suvisjt.php?pag=edit-esporo-animal&id=$id");
-                $_SESSION['msgedit'] = "<div class='alert alert-success text-center' id='msgedit' role='alert'><strong>MEDICAMENTO : </strong>$med - $dsg MG/DIA - $qtd CÁPSULAS - <strong>INSERIDO COM SUCESSO !!!</strong></div>";
+                $_SESSION['msgedit'] = "<div class='alert alert-warning text-center'><strong>MEDICAMENTO : </strong>$med - $dsg MG/DIA - $qtd CÁPSULAS - <strong>EDITADO COM SUCESSO !!!</strong></div>";
             else:
-                header("Location: suvisjt.php?pag=edit-esporo-animal&id=$id");
-                $_SESSION['msgedit'] = "<div class='alert alert-success text-center' id='msgedit' role='alert'><strong>ANIMAL : </strong>$nomeanimal - <strong>TUTOR : </strong>$tutor - <strong>EDITADO COM SUCESSO !!!</strong></div>";
+                if ($id_med != ''):
+                    $conectar->query("INSERT INTO esporo_an_sd_medc (id_an_esp ,data_medc ,id_medc , dsg_medc, qtd_medc ,nm_ent_medc ,nm_rec_medc , criado ,data_criado)
+                                            VALUES ('$id', '$data_s','$id_med', '$dsg', '$qtd', '$nment', '$nmrecep', '$usuariologin', NOW())");
+                    header("Location: suvisjt.php?pag=edit-esporo-animal&id=$id");
+                    $_SESSION['msgedit'] = "<div class='alert alert-success text-center' id='msgedit' role='alert'><strong>MEDICAMENTO : </strong>$med - $dsg MG/DIA - $qtd CÁPSULAS - <strong>INSERIDO COM SUCESSO !!!</strong></div>";
+                else:
+                    header("Location: suvisjt.php?pag=edit-esporo-animal&id=$id");
+                    $_SESSION['msgedit'] = "<div class='alert alert-success text-center' id='msgedit' role='alert'><strong>ANIMAL : </strong>$nomeanimal - <strong>TUTOR : </strong>$tutor - <strong>EDITADO COM SUCESSO !!!</strong></div>";
+                endif;
             endif;
         endif;
     endif;
-endif;
 
-if($acao === 'deletar') :
-    $conectar->query("UPDATE esporo_an_sd_medc SET lixeira = 1, excluido = '$usuariologin', data_excluido = NOW() WHERE id_an_esp = '$id_get' AND id_sd = '$id_sd_med_get'");
-    header("Location: suvisjt.php?pag=edit-esporo-animal&id=$id_get");
-    $_SESSION['msgedit'] = "<div class='alert alert-success text-center' id='msgedit' role='alert'><strong>MEDICAMENTO : </strong>$id_med_get - $id_dsg_get MG/DIA - $id_qtd_get CÁPSULAS - <strong>ENVIADO A LIXEIRA COM SUCESSO !!!</strong></div>";
-endif;
+    if($acao === 'deletar') :
+        $conectar->query("UPDATE esporo_an_sd_medc SET lixeira = 1, excluido = '$usuariologin', data_excluido = NOW() WHERE id_an_esp = '$id_get' AND id_sd = '$id_sd_med_get'");
+        header("Location: suvisjt.php?pag=edit-esporo-animal&id=$id_get");
+        $_SESSION['msgedit'] = "<div class='alert alert-success text-center' id='msgedit' role='alert'><strong>MEDICAMENTO : </strong>$id_med_get - $id_dsg_get MG/DIA - $id_qtd_get CÁPSULAS - <strong>ENVIADO A LIXEIRA COM SUCESSO !!!</strong></div>";
+    endif;
 
-if($acao === 'reativar') :
-    $conectar->query("UPDATE esporo_an_sd_medc SET lixeira = 0, excluido = '$usuariologin', data_excluido = NOW() WHERE id_an_esp = '$id_get' AND id_sd = '$id_sd_med_get'");
-    header("Location: suvisjt.php?pag=edit-esporo-animal&id=$id_get");
-    $_SESSION['msgedit'] = "<div class='alert alert-success text-center' id='msgedit' role='alert'><strong>MEDICAMENTO : </strong>$id_med_get - $id_dsg_get MG/DIA - $id_qtd_get CÁPSULAS - <strong>REATIVADO COM SUCESSO !!!</strong></div>";
+    if($acao === 'reativar') :
+        $conectar->query("UPDATE esporo_an_sd_medc SET lixeira = 0, excluido = '$usuariologin', data_excluido = NOW() WHERE id_an_esp = '$id_get' AND id_sd = '$id_sd_med_get'");
+        header("Location: suvisjt.php?pag=edit-esporo-animal&id=$id_get");
+        $_SESSION['msgedit'] = "<div class='alert alert-success text-center' id='msgedit' role='alert'><strong>MEDICAMENTO : </strong>$id_med_get - $id_dsg_get MG/DIA - $id_qtd_get CÁPSULAS - <strong>REATIVADO COM SUCESSO !!!</strong></div>";
+    endif;
 endif;
 
 ?>
