@@ -100,11 +100,14 @@ if ($sql_nve->num_rows > 0) {?>
         $row = $id_es_sl->fetch_assoc();
         $ultimo_id = $row['id_esp'];
 
-    $conectar->query("INSERT INTO esporo_an_sd_medc (id_an_esp ,data_medc ,id_medc , dsg_medc, qtd_medc ,nm_ent_medc ,nm_rec_medc, criado ,data_criado)
-                            VALUES ('$ultimo_id', '$data_s','$id_med', '$dsg', '$qtd1', '$nment1', '$nmrecep1', '$usuariologin', NOW())");
-
-    $conectar->query("INSERT INTO esporo_an_sd_medc (id_an_esp ,data_medc ,id_medc , dsg_medc, qtd_medc ,nm_ent_medc ,nm_rec_medc , criado ,data_criado)
-                            VALUES ('$ultimo_id', '$data_s2','$id_med', '$dsg', '$qtd2', '$nment2', '$nmrecep2', '$usuariologin', NOW())");
+        if(!empty($data_s)):
+            $conectar->query("INSERT INTO esporo_an_sd_medc (id_an_esp ,data_medc ,id_medc , dsg_medc, qtd_medc ,nm_ent_medc ,nm_rec_medc, criado ,data_criado)
+                                VALUES ('$ultimo_id', '$data_s','$id_med', '$dsg', '$qtd1', '$nment1', '$nmrecep1', '$usuariologin', NOW())");
+        endif;
+        if(!empty($data_s2)):
+            $conectar->query("INSERT INTO esporo_an_sd_medc (id_an_esp ,data_medc ,id_medc , dsg_medc, qtd_medc ,nm_ent_medc ,nm_rec_medc , criado ,data_criado)
+                                VALUES ('$ultimo_id', '$data_s2','$id_med', '$dsg', '$qtd2', '$nment2', '$nmrecep2', '$usuariologin', NOW())");
+        endif;
         ?>
        <?php
     include_once 'form-cad-esporo-animal.php';
