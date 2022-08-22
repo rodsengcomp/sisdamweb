@@ -135,7 +135,7 @@ margin-left:0cm;line-height:150%'><span style='font-family:"Arial",sans-serif'>R
 
                 <p class=MsoNormal style='margin-top:6.0pt;margin-right:0cm;margin-bottom:6.0pt;
 margin-left:0cm;line-height:150%'><span style='font-family:"Arial",sans-serif'>Bairro : <?php if(!empty($ed_print['bairro'])) : echo '<u> '.ucwords(strtolower($ed_print['bairro'])).'</u>';
-                        else: echo '_______________________________________________________________'; endif;?>,</span></p>, CEP _________________________,</span></p>
+                        else: echo '_____________________________________'; endif;?>, CEP _________________________,</span></p>
 
                 <p class=MsoNormal style='margin-top:6.0pt;margin-right:0cm;margin-bottom:6.0pt;
 margin-left:0cm;line-height:150%'><span style='font-family:"Arial",sans-serif'>Telefone Residencial <?php if(!empty($ed_print['telefone1'])) : echo '<u>    '.$ed_print['telefone1'].'    </u>';
