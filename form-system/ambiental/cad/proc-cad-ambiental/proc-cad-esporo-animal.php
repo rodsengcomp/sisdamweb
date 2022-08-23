@@ -10,6 +10,7 @@ include_once '../../../../conecta.php';
 <?php
 #Recolhendo os dados do formulário
 
+$acao =        mysqli_real_escape_string($conectar, $_POST["acao"]); // ID RUA
 $ruagoogle =   mysqli_real_escape_string($conectar, $_POST["ruagoogle"]); // ID RUA
 $nve =         mysqli_real_escape_string($conectar, $_POST["nve"]); // NVE
 $ano =         mysqli_real_escape_string($conectar, $_POST["ano"]); // ANO
@@ -75,42 +76,56 @@ if ($conectar->connect_error) die ('<div class="form-group"><a href="javascript:
 # Verificando se tabela já tem id com nve e nome do animal.
 $sql_nve = $conectar->query("SELECT id_esp FROM esporotricose_animal WHERE nve='$nve' AND nomeanimal='$nomeanimal' AND especie='$id_esp'");
 
-if ($sql_nve->num_rows > 0) {?>
-    <div class="form-group"><div class="alert alert-danger text-center" id="usuarioerro" role="alert">
-            <strong><?php echo $especie ?> : <?php echo $nomeanimal ?></strong> - TUTOR : <?php echo $tutor ?> NÃO CADASTRADO : MOTIVO : EM DUPLICIDADE</strong></div></div>
+if(!empty($acao) && $acao === 'cadastrar') :
+    if ($sql_nve->num_rows > 0) {?>
+        <div class="form-group"><div class="alert alert-danger text-center" id="usuarioerro" role="alert">
+                <strong><?php echo $especie ?> : <?php echo $nomeanimal ?></strong> - TUTOR : <?php echo $tutor ?> NÃO CADASTRADO : MOTIVO : EM DUPLICIDADE</strong></div></div>
 
-    <?php include_once 'form-cad-esporo-animal.php'; ?>
+        <?php include_once 'form-cad-esporo-animal.php'; ?>
 
-    <div class="form-group text-center">
-        <a href="javascript:history.back()"><button type="button" accesskey="E" class='btn btn-labeled btn-warning'><span class="btn-label"><i class="glyphicon glyphicon-pencil"></i></span><u>E</u>DITAR </button></a>&nbsp;&nbsp;&nbsp;<a href='suvisjt.php?pag=list-memo-oficio'
-            <button type='button' style="<?php if ($_SESSION['usuarioNivelAcesso'] <> 1) {
-            echo 'display: none;';
-        } ?>" accesskey="L" class="btn btn-labeled btn-info"><span class="btn-label"><i class="glyphicon glyphicon-list"></i></span><u>L</u>ISTAR</button></a>&nbsp;&nbsp;&nbsp;
-        <a href='suvisjt.php'  <button type='button' style="<?php if ($_SESSION['usuarioNivelAcesso'] <> 1) {
-            echo 'display: none;';
-        } ?>" accesskey="S" class="btn btn-labeled btn-danger"><span class="btn-label"><i class="glyphicon glyphicon-remove"></i>
-            </span><u>S</u>AIR </button></a>
-    </div>
+        <div class="form-group text-center">
+            <a href="javascript:history.back()"><button type="button" accesskey="E" class='btn btn-labeled btn-warning'><span class="btn-label"><i class="glyphicon glyphicon-pencil"></i></span><u>E</u>DITAR </button></a>&nbsp;&nbsp;&nbsp;<a href='suvisjt.php?pag=list-memo-oficio'
+                <button type='button' style="<?php if ($_SESSION['usuarioNivelAcesso'] <> 1) {
+                echo 'display: none;';
+            } ?>" accesskey="L" class="btn btn-labeled btn-info"><span class="btn-label"><i class="glyphicon glyphicon-list"></i></span><u>L</u>ISTAR</button></a>&nbsp;&nbsp;&nbsp;
+            <a href='suvisjt.php'  <button type='button' style="<?php if ($_SESSION['usuarioNivelAcesso'] <> 1) {
+                echo 'display: none;';
+            } ?>" accesskey="S" class="btn btn-labeled btn-danger"><span class="btn-label"><i class="glyphicon glyphicon-remove"></i>
+                </span><u>S</u>AIR </button></a>
+        </div>
 
-<?php } else {
-    $conectar->query("INSERT INTO esporotricose_animal (nve, ano, data_entrada, nome_animal, especie, tutor, id_rua, telefone1, telefone2, situacao, rua_esp_a, numero, complemento, lat, lng, obs, criado, data_criado)
-                            VALUES ('$nve', '$ano', '$datanot','$nomeanimal', '$id_esp', '$tutor', '$idrua', '$tel1', '$tel2', '$id_sit', '$ruagoogle', '$num', '$comp', '$lat', '$lng', '$obs', '$usuariologin', NOW())");
-        $id_ea = "SELECT MAX(id_esp) as id_esp FROM esporotricose_animal";
-        $id_es_sl = $conectar->query($id_ea);
-        $row = $id_es_sl->fetch_assoc();
-        $ultimo_id = $row['id_esp'];
+    <?php } else {
+        $conectar->query("INSERT INTO esporotricose_animal (nve, ano, data_entrada, nome_animal, especie, tutor, id_rua, telefone1, telefone2, situacao, rua_esp_a, numero, complemento, lat, lng, obs, criado, data_criado)
+                                VALUES ('$nve', '$ano', '$datanot','$nomeanimal', '$id_esp', '$tutor', '$idrua', '$tel1', '$tel2', '$id_sit', '$ruagoogle', '$num', '$comp', '$lat', '$lng', '$obs', '$usuariologin', NOW())");
+            $id_ea = "SELECT MAX(id_esp) as id_esp FROM esporotricose_animal";
+            $id_es_sl = $conectar->query($id_ea);
+            $row = $id_es_sl->fetch_assoc();
+            $ultimo_id = $row['id_esp'];
+
+            if(!empty($data_s)):
+                $conectar->query("INSERT INTO esporo_an_sd_medc (id_an_esp ,data_medc ,id_medc , dsg_medc, qtd_medc ,nm_ent_medc ,nm_rec_medc, criado ,data_criado)
+                                    VALUES ('$ultimo_id', '$data_s','$id_med', '$dsg', '$qtd1', '$nment1', '$nmrecep1', '$usuariologin', NOW())");
+            endif;
+            if(!empty($data_s2)):
+                $conectar->query("INSERT INTO esporo_an_sd_medc (id_an_esp ,data_medc ,id_medc , dsg_medc, qtd_medc ,nm_ent_medc ,nm_rec_medc , criado ,data_criado)
+                                    VALUES ('$ultimo_id', '$data_s2','$id_med', '$dsg', '$qtd2', '$nment2', '$nmrecep2', '$usuariologin', NOW())");
+            endif;
+            ?>
+           <?php
+        include_once 'form-cad-esporo-animal.php';
+    }
+endif;
+
+if(!empty($acao) && $acao === 'cadastrar-medicamento') :
 
         if(!empty($data_s)):
-            $conectar->query("INSERT INTO esporo_an_sd_medc (id_an_esp ,data_medc ,id_medc , dsg_medc, qtd_medc ,nm_ent_medc ,nm_rec_medc, criado ,data_criado)
-                                VALUES ('$ultimo_id', '$data_s','$id_med', '$dsg', '$qtd1', '$nment1', '$nmrecep1', '$usuariologin', NOW())");
+            $conectar->query("INSERT INTO esporo_an_ent_medc (nm_esp_medc ,dsg_esp_medc, qtd_esp_medc , criado ,data_criado)
+                                        VALUES ('$id_med', '$dsg', '$qtd1', '$usuariologin', NOW())");
         endif;
-        if(!empty($data_s2)):
-            $conectar->query("INSERT INTO esporo_an_sd_medc (id_an_esp ,data_medc ,id_medc , dsg_medc, qtd_medc ,nm_ent_medc ,nm_rec_medc , criado ,data_criado)
-                                VALUES ('$ultimo_id', '$data_s2','$id_med', '$dsg', '$qtd2', '$nment2', '$nmrecep2', '$usuariologin', NOW())");
-        endif;
-        ?>
-       <?php
-    include_once 'form-cad-esporo-animal.php';
-}
+
+        include_once 'form-cad-esporo-animal.php';
+
+endif;
+
 ?>
 

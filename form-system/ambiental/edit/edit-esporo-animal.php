@@ -269,7 +269,7 @@ $countlixo = $contarlixo->num_rows;
             </fieldset>
 
             <div class="page-header pt-0">
-            </div>
+            </div
 
                     <!-- Fim da Pagina de Titulo -->    <!-- Pagina de Titulo -->
             <div class="row">

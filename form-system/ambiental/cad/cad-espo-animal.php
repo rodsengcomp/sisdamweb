@@ -223,6 +223,7 @@ include_once '../../conecta.php';
                         <input type="hidden" name="ano" value="<?php echo date('Y') ;?>">
                         <input type="hidden" name="datacadastro" value="<?php echo date("d/m/Y"); ?>">
                         <input type="hidden" id="idrua" name="idrua"></div>
+                        <input type="hidden" name="acao" value="cadastro">
 
                     <div class="form-group text-center">
                         <div class="col-sm-12">

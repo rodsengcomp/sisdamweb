@@ -175,7 +175,7 @@ INSERT INTO `pag_system` (`id`, `name_pag`, `caminho`, `usuariocad`, `criado`, `
 (147, 'edit-esporo-animal', 'form-system/ambiental/edit/edit-esporo-animal.php', 'D788796', '2022-07-28 15:36:33', NULL, NULL),
 (148, 'proc-cad-esporo-animal', 'form-system/ambiental/cad/proc-cad-ambiental/proc-cad-esporo-animal.php', 'D788796', '2022-08-02 09:27:19', NULL, NULL),
 (149, 'proc-edit-esporo-animal', 'form-system/ambiental/edit/proc-edit-ambiental/proc-edit-esporo-animal.php', 'D788796', '2022-08-12 14:24:20', NULL, NULL),
-(150, 'cad-med-an-esp-an', 'form-system/ambiental/cad/cad-med-sd-espo-animal.php', 'D788796', '2022-08-15 11:24:32', NULL, NULL),
+(150, 'cad-med-an-esp-an', 'form-system/ambiental/cad/cad-med-ent-espo-animal.php', 'D788796', '2022-08-15 11:24:32', NULL, NULL),
 (151, 'imprimir-ficha-esporo-animal', 'form-system/ambiental/print/print-esporo-animal.php', 'D788796', '2022-08-19 15:08:18', NULL, NULL),
 (152, 'listar-medicamentos-esporotricose-animal', 'form-system/ambiental/list/list-esporo-medical.php', 'D788796', '2022-08-21 21:17:44', NULL, NULL);
 

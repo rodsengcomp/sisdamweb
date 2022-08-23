@@ -8,7 +8,7 @@
 error_reporting(1);
 
 ?>
-//Todos os chamamentos javascript e códigos de modal's
+<!-- Todos os chamamentos javascript-->
 <script type="text/javascript">
     $(document).ready(function() {
         $('[data-toggle="tooltip"]').tooltip()
@@ -56,6 +56,11 @@ error_reporting(1);
 // DEFINE O FUSO HORARIO COMO O HORARIO DE BRASILIA
 date_default_timezone_set('America/Sao_Paulo');
 
+$consulta_situacao = "SELECT * FROM situacao_esporo WHERE id_st_esp='$id_situacao'";
+$resultado_situacao = $conectar->query($consulta_situacao);
+
+$consulta_e = $conectar->query("SELECT SUM(esporo_an_ent_medc.qtd_esp_medc) AS entrada FROM esporo_an_ent_medc");
+$consulta_s = $conectar->query("SELECT SUM(esporo_an_sd_medc.qtd_medc) AS saida FROM esporo_an_sd_medc");
 ?>
 
 <!-- Início do HTML 5 da Página-->
@@ -95,7 +100,17 @@ date_default_timezone_set('America/Sao_Paulo');
         </div>
     </div>
     <!-- Terminando a página de Título -->
+<?php
+while ($row =  $consulta_e->fetch_assoc()) {
+    $total_e = $row['entrada'];
+    echo $total_e."<br>";
+}
 
+while ($row =  $consulta_s->fetch_assoc()) {
+    $total_s = $row['saida'];
+    echo $total_s."<br>";
+}
+?>
     <!--------------------------------------------- * Tabela de Bloqueios * --------------------------------------->
     <table id="list-esporo-medical" class="table table-hover table-striped table-bordered" cellspacing="0" width="100%">
         <thead>
