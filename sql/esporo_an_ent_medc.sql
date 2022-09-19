@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 10.47.171.110:3306
--- Tempo de geração: 19-Ago-2022 às 20:53
+-- Tempo de geração: 19-Set-2022 às 21:23
 -- Versão do servidor: 10.4.13-MariaDB
 -- versão do PHP: 7.4.7
 
@@ -29,22 +29,20 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `esporo_an_ent_medc` (
   `id_esp_ent` int(11) NOT NULL,
+  `dt_cadastro` text NOT NULL,
   `nm_esp_medc` int(11) NOT NULL,
   `dsg_esp_medc` int(11) NOT NULL,
-  `qdt_esp_medc` int(11) NOT NULL,
+  `qtd_esp_medc` int(11) NOT NULL,
+  `lixeira` int(11) NOT NULL DEFAULT 0,
   `criado` text NOT NULL,
   `dt_criado` timestamp NOT NULL DEFAULT current_timestamp(),
   `alterado` text NOT NULL,
-  `dt_alterado` text NOT NULL
+  `dt_alterado` text NOT NULL,
+  `excluido` text NOT NULL,
+  `data_excluido` date DEFAULT NULL,
+  `reativado` text NOT NULL,
+  `data_reativado` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Extraindo dados da tabela `esporo_an_ent_medc`
---
-
-INSERT INTO `esporo_an_ent_medc` (`id_esp_ent`, `nm_esp_medc`, `dsg_esp_medc`, `qdt_esp_medc`, `criado`, `dt_criado`, `alterado`, `dt_alterado`) VALUES
-(1, 1, 100, 250, 'D788796', '2022-08-11 17:28:29', '', ''),
-(2, 1, 100, 50, 'D788796', '2022-08-11 17:28:29', '', '');
 
 --
 -- Índices para tabelas despejadas
@@ -64,7 +62,7 @@ ALTER TABLE `esporo_an_ent_medc`
 -- AUTO_INCREMENT de tabela `esporo_an_ent_medc`
 --
 ALTER TABLE `esporo_an_ent_medc`
-  MODIFY `id_esp_ent` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_esp_ent` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
