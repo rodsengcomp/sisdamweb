@@ -44,12 +44,16 @@ $usuariologin = $_SESSION['usuarioLogin'];
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 
+    <!-- Remix Icon -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+
     <!--Chamada Autocomplete-->
     <script type="text/javascript" src="js/jquery/jquery.js"></script>
 
     <!--Chamada filtro tabela--->
     <script src="js/jquery/1.12.4.jquery.min.js"></script>
     <script type="text/javascript" src="js/jquery/mask.js"></script>
+    <script type="text/javascript" src="js/maps/markerclustererplus.min.js"></script>
 
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->

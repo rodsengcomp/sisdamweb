@@ -290,7 +290,7 @@ $(function() {
                     maxDateTram: "Digite uma data até hoje"
                 },
                 resptid: {
-                    required: "Digite um Nome"
+                    required: "Digite um Nome",
                     ascento: "Retire ç e ascentos"
                 }
             }

@@ -10,6 +10,7 @@ $usuarioid = $_SESSION['usuarioId'];
 $usuarionome = $_SESSION['usuarioNome'];
 $usuariologin = $_SESSION['usuarioLogin'];
 $usuarioniveldeacesso = $_SESSION['usuarioNivelAcesso'];
+
 ?>
 
 <!DOCTYPE html>

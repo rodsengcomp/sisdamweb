@@ -25,7 +25,7 @@ $lixo = $_GET['lixeira'] ?? '';
                     {
                         "aTargets": [0], // o numero 6 é o nº da coluna
                         "mRender": function (data, type, full) { //aqui é uma funçãozinha para pegar os ids
-                        return ' <a href="#" role="button" disabled class="btn btn-warning rounded-circle"><strong><span class="glyphicon glyphicon-pencil"></strong></a>';
+                        return ' <a href="#" role="button" disabled class="btn btn-warning rounded-circle"><strong><span class="fa fa-pencil-alt"></strong></a>';
                     }
                     },
                     <?php else: ?>
@@ -58,7 +58,7 @@ $lixo = $_GET['lixeira'] ?? '';
                                     '<h3 class="modal-title-dark text-center"><i class="fa fa-trash-alt"></i>&nbsp;&nbsp; Reativar Medicamento</h3></div>' +
                                 '<div class="modal-body"><h3 class="text-center"> Deseja reativar ' + full[2] + ' - ' + full[4] + ' Cápsulas ?</h3></div>' +
                                 '<div class="modal-footer text-center"><button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-minus-octagon"></i>  NÃO</button>' +
-                                '&nbsp;&nbsp;&nbsp;&nbsp;<a href="suvisjt.php?pag=proc-edit-esporo-animal&id='+ full[0]+'&id_sd=' + full[7] + '&data_medc=' + full[1] + '&id_med=' + full[2] + '&dsg=' + full[3] + '&qtd='+ full[4] +'&nm_ent_medc='+ full[5] + '&nm_rec_medc='+ full[6] + '&acao=reativar" role="button" class="btn btn-success"><i class="fa fa-check-circle-o"></i><strong>  SIM</strong></a></div></div></div></div>' +
+                                '&nbsp;&nbsp;&nbsp;&nbsp;<a href="suvisjt.php?pag=proc-edit-esporo-animal&id='+ full[0]+'&id_sd=' + full[7] + '&data_medc=' + full[1] + '&id_med=' + full[2] + '&dsg=' + full[3] + '&qtd='+ full[4] +'&nm_ent_medc='+ full[5] + '&nm_rec_medc='+ full[6] + '&acao=reativar-saida-medicamento" role="button" class="btn btn-success"><i class="fa fa-check-circle-o"></i><strong>  SIM</strong></a></div></div></div></div>' +
                             '<button type="button" class="btn btn-warning rounded-circle" data-toggle="modal" data-target="#ModalLixoEsp"><i class="fa fa-arrow-alt-circle-up"></i></button>';
                         }
                     },
@@ -72,7 +72,7 @@ $lixo = $_GET['lixeira'] ?? '';
                                 '<h3 class="modal-title text-center"><i class="fa fa-trash-alt"></i>&nbsp;&nbsp; Deletar Medicamento</h3></div>' +
                                 '<div class="modal-body"><h3 class="text-center"> Deseja apagar ' + full[2] + ' - ' + full[4] + ' Cápsulas ?</h3></div>' +
                                 '<div class="modal-footer text-center"><button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-minus-octagon"></i>  NÃO</button>' +
-                                '&nbsp;&nbsp;&nbsp;&nbsp;<a href="suvisjt.php?pag=proc-edit-esporo-animal&id='+ full[0]+'&id_sd=' + full[7] + '&data_medc=' + full[1] + '&id_med=' + full[2] + '&dsg=' + full[3] + '&qtd='+ full[4] +'&nm_ent_medc='+ full[5] + '&nm_rec_medc='+ full[6] + '&acao=deletar" role="button" class="btn btn-success"><i class="fa fa-check-circle-o"></i><strong>  SIM</strong></a></div></div></div></div>' +
+                                '&nbsp;&nbsp;&nbsp;&nbsp;<a href="suvisjt.php?pag=proc-edit-esporo-animal&id='+ full[0]+'&id_sd=' + full[7] + '&data_medc=' + full[1] + '&id_med=' + full[2] + '&dsg=' + full[3] + '&qtd='+ full[4] +'&nm_ent_medc='+ full[5] + '&nm_rec_medc='+ full[6] + '&acao=deletar-saida-medicamento" role="button" class="btn btn-success"><i class="fa fa-check-circle-o"></i><strong>  SIM</strong></a></div></div></div></div>' +
                                 '<button type="button" class="btn btn-danger rounded-circle" data-toggle="modal" data-target="#ModalLixoEsp"><i class="fa fa-trash-alt"></i></button>';
                         }
                     },

@@ -148,10 +148,10 @@ error_reporting(0);
                 <a href='suvisjt.php?pag=edit-esporo-animal&id=<?=$id?>' role='button' accesskey="E" data-toggle="tooltip" title="EDITAR REGISTRO ESPOROTRICOSE ANIMAL"
                    class="btn btn-labeled btn-warning mb-2 mr-sm-4"><span class="btn-label"><i class="glyphicon glyphicon-pencil"></i></span><u>E</u>DITAR&nbsp;&nbsp;</a>
 
-                <a href='suvisjt.php?pag=cad-esporo-animal' role='button' accesskey="N" data-toggle="tooltip" title="NOVO REGISTRO ESPOROTRICOSE ANIMAL"
+                <a href='suvisjt.php?pag=cadastro-esporotricose-animal' role='button' accesskey="N" data-toggle="tooltip" title="NOVO REGISTRO ESPOROTRICOSE ANIMAL"
                    class="btn btn-labeled btn-success mb-2 mr-sm-4"><span class="btn-label"><i class="glyphicon glyphicon-plus-sign"></i></span><u>N</u>OVO&nbsp;&nbsp;</a>
 
-                <a href='suvisjt.php?pag=list-esporo-animal' role='button' title="LISTAR REGISTROS" accesskey="L"
+                <a href='suvisjt.php?pag=listar-esporotricose-animal' role='button' title="LISTAR REGISTROS" accesskey="L"
                    class="btn btn-labeled btn-info mb-2 mr-sm-4"><span class="btn-label"><i
                             class="glyphicon glyphicon-list"></i></span> <u>L</u>ISTAR</a>
                 <a target="_blank"

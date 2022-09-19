@@ -55,6 +55,19 @@ include_once '../../conecta.php';
         } ?>" role="alert"><strong>PARA CADASTRAR É NECESSARIO FAZER O LOGIN!!!</strong></div>
     </div>
 
+    <div class="form-group text-center">
+        <?php
+        if (isset($_SESSION['msgcad'])) {
+            echo $_SESSION['msgcad'];
+            unset($_SESSION['msgcad']);
+        }
+        if (isset($_SESSION['msgerrocad'])) {
+            echo $_SESSION['msgerrocad'];
+            unset($_SESSION['msgerrocad']);
+        }
+        ?>
+    </div>
+
     <div class="row">
 
         <div class="col-md-12">
@@ -190,7 +203,6 @@ include_once '../../conecta.php';
                                 title="Data da 1ª entrega" name="dataentrada" id="dataentcad" placeholder="00/00/0000"></div>
 
                         <label for="inputDataEntrada" class="col-sm-1 control-label">QTD:</label>
-
                             <div class="col-sm-1"><input type="number" tabindex="20" data-toggle="tooltip" title="Quantidade de comprimidos" maxlength="5"
                                        class="form-control" name="qtd1" placeholder="000"></div>
 
@@ -223,7 +235,7 @@ include_once '../../conecta.php';
                         <input type="hidden" name="ano" value="<?php echo date('Y') ;?>">
                         <input type="hidden" name="datacadastro" value="<?php echo date("d/m/Y"); ?>">
                         <input type="hidden" id="idrua" name="idrua"></div>
-                        <input type="hidden" name="acao" value="cadastro">
+                        <input type="hidden" name="acao" value="cadastrar">
 
                     <div class="form-group text-center">
                         <div class="col-sm-12">
@@ -232,7 +244,7 @@ include_once '../../conecta.php';
                             } ?>" data-toggle="tooltip" title="GRAVAR OS DADOS" class="btn btn-labeled btn-success mb-2 mr-sm-4"><span
                                         class="btn-label"><i class="glyphicon glyphicon-floppy-disk"></i></span> <u>G</u>RAVAR
                             </button>
-                            <a href='suvisjt.php?pag=list-esporo-animal' role='button' tabindex="28" data-toggle="tooltip" title="LISTAR REGISTROS" accesskey="L"
+                            <a href='suvisjt.php?pag=listar-esporotricose-animal' role='button' tabindex="28" data-toggle="tooltip" title="LISTAR REGISTROS" accesskey="L"
                                     class="btn btn-labeled btn-info mb-2 mr-sm-4"><span class="btn-label"><i
                                             class="glyphicon glyphicon-list"></i></span> <u>L</u>ISTAR</a>
                             <a target="_blank"

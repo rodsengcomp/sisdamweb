@@ -41,6 +41,26 @@
  * @param {Array.<google.maps.Marker>=} opt_markers Optional markers to add to
  *   the cluster.
  * @param {Object=} opt_options support the following options:
+ * 'gridSize': (número) O tamanho da grade de um cluster em pixels.
+ *     'maxZoom': (número) O nível máximo de zoom que um marcador pode fazer parte de um
+ *                conjunto.
+ *     'zoomOnClick': (boolean) Se o comportamento padrão de clicar em um
+ *                    cluster é dar zoom nele.
+ *     'averageCenter': (boolean) se o centro de cada cluster deve ser
+ *                      a média de todos os marcadores no cluster.
+ *     'minimumClusterSize': (number) O número mínimo de marcadores em um
+ *                           cluster antes que os marcadores estejam ocultos e uma contagem
+ *                           é mostrado.
+ *     'styles': (objeto) Um objeto que possui propriedades de estilo:
+ *       'url': (string) O URL da imagem.
+ *       'altura': (número) A altura da imagem.
+ *       'width': (número) A largura da imagem.
+ *       'anchor': (Array) A posição da âncora do texto do rótulo.
+ *       'textColor': (string) A cor do texto.
+ *       'textSize': (número) O tamanho do texto.
+ *       'backgroundPosition': (string) A posição do fundo x, y.
+ *       'iconAnchor': (Array) A posição da âncora do ícone x, y.
+ *
  *     'gridSize': (number) The grid size of a cluster in pixels.
  *     'maxZoom': (number) The maximum zoom level that a marker can be part of a
  *                cluster.
@@ -191,6 +211,10 @@ function MarkerClusterer(map, opt_markers, opt_options) {
  * @private
  */
 MarkerClusterer.prototype.MARKER_CLUSTER_IMAGE_PATH_ = '../images/m';
+
+MarkerClusterer.prototype.onClick = function() { 
+  return true; 
+};
 
 
 /**
@@ -1052,11 +1076,19 @@ ClusterIcon.prototype.triggerClusterClick = function(event) {
   // Trigger the clusterclick event.
   google.maps.event.trigger(markerClusterer, 'clusterclick', this.cluster_, event);
 
-  if (markerClusterer.isZoomOnClick()) {
-    // Zoom into the cluster.
-    this.map_.fitBounds(this.cluster_.getBounds());
+  var zoom = this.map_.getZoom();
+  var maxZoom = markerClusterer.getMaxZoom();
+  // if we have reached the maxZoom and there is more than 1 marker in this cluster
+  // use our onClick method to popup a list of options
+  if (zoom >= maxZoom && this.cluster_.markers_.length > 1) {
+    return markerClusterer.onClickZoom(this);
   }
-};
+
+    if (markerClusterer.isZoomOnClick()) {
+      // Zoom into the cluster.
+      this.map_.fitBounds(this.cluster_.getBounds());
+    }
+  };
 
 
 /**

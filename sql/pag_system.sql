@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Tempo de geração: 22-Ago-2022 às 04:19
--- Versão do servidor: 10.4.24-MariaDB
--- versão do PHP: 8.1.6
+-- Host: 10.47.171.110:3306
+-- Tempo de geração: 19-Ago-2022 às 20:54
+-- Versão do servidor: 10.4.13-MariaDB
+-- versão do PHP: 7.4.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -171,13 +171,12 @@ INSERT INTO `pag_system` (`id`, `name_pag`, `caminho`, `usuariocad`, `criado`, `
 (143, 'proc-edit-cnes', 'form-system/epidemio/edit/proc-edit-epidemio/edit-cnes.php', NULL, NULL, NULL, NULL),
 (144, 'list-esporo-animal', 'form-system/ambiental/list/list-esporo-animal.php', 'D788796', '2022-07-21 11:07:45', NULL, NULL),
 (145, 'list-lab-esporo', 'form-system/ambiental/list/list-lab-esporo.php', 'D788796', '2022-07-21 11:37:41', NULL, NULL),
-(146, 'cad-esporo-animal', 'form-system/ambiental/cad/cad-espo-animal.php', 'D788796', '2022-07-28 15:24:45', NULL, NULL),
+(146, 'cadastro-esporotricose-animal', 'form-system/ambiental/cad/cad-espo-animal.php', 'D788796', '2022-07-28 15:24:45', NULL, NULL),
 (147, 'edit-esporo-animal', 'form-system/ambiental/edit/edit-esporo-animal.php', 'D788796', '2022-07-28 15:36:33', NULL, NULL),
 (148, 'proc-cad-esporo-animal', 'form-system/ambiental/cad/proc-cad-ambiental/proc-cad-esporo-animal.php', 'D788796', '2022-08-02 09:27:19', NULL, NULL),
 (149, 'proc-edit-esporo-animal', 'form-system/ambiental/edit/proc-edit-ambiental/proc-edit-esporo-animal.php', 'D788796', '2022-08-12 14:24:20', NULL, NULL),
-(150, 'cad-med-an-esp-an', 'form-system/ambiental/cad/cad-med-ent-espo-animal.php', 'D788796', '2022-08-15 11:24:32', NULL, NULL),
-(151, 'imprimir-ficha-esporo-animal', 'form-system/ambiental/print/print-esporo-animal.php', 'D788796', '2022-08-19 15:08:18', NULL, NULL),
-(152, 'listar-medicamentos-esporotricose-animal', 'form-system/ambiental/list/list-esporo-medical.php', 'D788796', '2022-08-21 21:17:44', NULL, NULL);
+(150, 'cad-med-an-esp-an', 'form-system/ambiental/cad/cad-med-sd-espo-animal.php', 'D788796', '2022-08-15 11:24:32', NULL, NULL),
+(151, 'imprimir-ficha-esporo-animal', 'form-system/ambiental/print/print-esporo-animal.php', 'D788796', '2022-08-19 15:08:18', NULL, NULL);
 
 --
 -- Índices para tabelas despejadas
@@ -197,7 +196,7 @@ ALTER TABLE `pag_system`
 -- AUTO_INCREMENT de tabela `pag_system`
 --
 ALTER TABLE `pag_system`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=153;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=152;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

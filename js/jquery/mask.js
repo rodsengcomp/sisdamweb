@@ -1,5 +1,6 @@
 /**
  * Created by Rodolfo on 09/06/2017.
+ * https://igorescobar.github.io/jQuery-Mask-Plugin/docs.html
  */
 
 jQuery(function($){
@@ -8,6 +9,7 @@ jQuery(function($){
     $("#dataentcad2").mask("99/99/9999");
     $("#datatid").mask("99/99/9999");
     $("#dataentedi").mask("99/99/9999");
+    $("#dataentesp").mask("99/99/9999");
     $("#datatram").mask("99/99/9999");
     $("#databloqedit").mask("99/99/9999");
     $("#datanebedit").mask("99/99/9999");
@@ -38,7 +40,6 @@ jQuery(function($){
     $("#id_menu").mask("9?9");
     $("#docproc").mask("9999-9.999.999-9");
     $("#inspsivisa").mask("?999/99");
-
 
     $("#datasancad").mask("99/99/9999");
     $("#dataprazocad").mask("99/99/9999");

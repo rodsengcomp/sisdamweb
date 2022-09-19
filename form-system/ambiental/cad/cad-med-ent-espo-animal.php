@@ -35,10 +35,14 @@ include_once '../../conecta.php';
 
     <div class="form-group text-center">
         <?php
-        if (isset($_SESSION['msgerroredit'])) {
-            echo $_SESSION['msgerroredit'];
-            unset($_SESSION['msgerroredit']);
-        }
+        if (isset($_SESSION['msgerrorcad'])) :
+            echo $_SESSION['msgerrorcad'];
+            unset($_SESSION['msgerrorcad']);
+        endif;
+        if (isset($_SESSION['msgcad'])) :
+            echo $_SESSION['msgcad'];
+            unset($_SESSION['msgcad']);
+        endif;
         ?>
     </div>
 
@@ -50,7 +54,7 @@ include_once '../../conecta.php';
                 echo 'disabled';
 
             } ?>>
-                <form class="form-horizontal" id="cad-esporo-animal" method="POST" action="suvisjt.php?pag=proc-cad-esporo-animal">
+                <form class="form-horizontal" id="cad-medicamento-esporo-animal" method="POST" action="suvisjt.php?pag=proc-cad-esporo-animal">
 
                     <div class="form-group">
                         <label for="inputDataEntrada" class="col-sm-1 control-label">ENTRADA</label>
@@ -58,16 +62,15 @@ include_once '../../conecta.php';
                                                      title="Data da 1ª entrega" name="dataentrada" id="dataentcad" placeholder="00/00/0000"></div>
 
                         <label for="inputDataEntrada" class="col-sm-1 control-label">MEDICAMEN.</label>
-                        <div class="col-sm-2"><input type="text" tabindex="16" data-toggle="tooltip" title="Nome do Medicamento"
-                                                     class="form-control medicamento" name="medicamento" placeholder="ITRACONAZOL"></div>
+                        <div class="col-sm-2"><input type="text" data-toggle="tooltip" title="Nome do Medicamento"
+                                                     class="form-control medicamento" name="medicamento" placeholder="ITRACONAZOL" readonly value="ITRACONAZOL"></div>
 
                         <label for="inputDataEntrada" class="col-sm-1 control-label">DOSE/MG</label>
-                        <div class="col-sm-1"><input type="number" tabindex="17" data-toggle="tooltip" title="Nome do Medicamento" maxlength="5"
+                        <div class="col-sm-1"><input type="number" tabindex="2" data-toggle="tooltip" title="Nome do Medicamento" maxlength="5"
                                                      class="form-control" name="dsg" placeholder="100"></div>
 
                         <label for="inputDataEntrada" class="col-sm-1 control-label">QTD:</label>
-
-                        <div class="col-sm-1"><input type="number" tabindex="20" data-toggle="tooltip" title="Quantidade de comprimidos" maxlength="5"
+                        <div class="col-sm-1"><input type="number" tabindex="3" data-toggle="tooltip" title="Quantidade de comprimidos" maxlength="5"
                                                      class="form-control" name="qtd1" placeholder="000"></div>
 
                     </div>
@@ -78,18 +81,17 @@ include_once '../../conecta.php';
 
                 <div class="form-group text-center">
                     <div class="col-sm-12">
-                        <input type="hidden" name="id" value="<?php echo $editar_esp_an['id_esp']; ?>">
-                        <button type="submit" tabindex="17" accesskey="G" style="<?php if ($_SESSION['usuarioNivelAcesso'] == 4) {
+                        <button type="submit" tabindex="4" accesskey="G" style="<?php if ($_SESSION['usuarioNivelAcesso'] == 4) {
                             echo 'display: none;';
                         } ?>" data-toggle="tooltip" title="GRAVAR OS DADOS" class="btn btn-labeled btn-success mb-2 mr-sm-4"><span
-                                    class="btn-label"><i class="glyphicon glyphicon-floppy-disk"></i></span> <u>G</u>RAVAR
+                                    class="btn-label"><i class="fa fa-compact-disc"></i></span> <u>G</u>RAVAR
                         </button>
-                        <a href='suvisjt.php?pag=listar-medicamentos-esporotricose-animal' role='button' tabindex="18" data-toggle="tooltip" title="LISTAR REGISTROS" accesskey="L"
+                        <a href='suvisjt.php?pag=listar-medicamentos-esporotricose-animal' role='button' tabindex="5" data-toggle="tooltip" title="LISTAR REGISTROS" accesskey="L"
                            class="btn btn-labeled btn-info mb-2 mr-sm-4"><span class="btn-label"><i
-                                        class="glyphicon glyphicon-list"></i></span> <u>L</u>ISTAR</a>
+                                        class="fa fa-list-alt"></i></span> <u>L</u>ISTAR</a>
                         <a target="_blank"
                            href='http://www.buscacep.correios.com.br/sistemas/buscacep/buscaCepEndereco.cfm'
-                           role='button' tabindex="19" data-toggle="tooltip" title="BUSCA CEP CORREIOS" accesskey="S"
+                           role='button' tabindex="6" data-toggle="tooltip" title="BUSCA CEP CORREIOS" accesskey="S"
                            class="btn btn-labeled btn-default mb-2 mr-sm-4"><span class="btn-label"><img
                                         src="imagens/correios.png" width="20"/></span></span> BUSCA CEP</a>
                     </div>

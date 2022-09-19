@@ -12,7 +12,13 @@
             var mapOptions = {
                 center: new gmaps.LatLng(-23.550002,-46.634238),
                 zoom: 11,
-                mapTypeId: gmaps.MapTypeId.ROADMAP
+                mapTypeId: gmaps.MapTypeId.ROADMAP,
+                styles: [{
+                  featureType : "poi",
+                  stylers : [{
+                      visibility : "off"
+                  }]
+                }]
             };
 
             var map = new gmaps.Map($("#map_canvas").get(0), mapOptions);

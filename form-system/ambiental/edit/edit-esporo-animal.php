@@ -15,9 +15,8 @@ $id_nm_rec = $_GET['nm_rec_medc'] ?? '';
 $id_lixeira = $_GET['lixeira'] ?? 'false';
 $id_edit = $_GET['edit'] ?? 'false';
 
-$consulta_esp_an = "SELECT * FROM esporo_an WHERE id_esp='$id'";
-$resultado_esp_an = $conectar->query($consulta_esp_an);
-$editar_esp_an = mysqli_fetch_assoc($resultado_esp_an);
+$consulta_esp_an = $conectar->query("SELECT * FROM esporo_an WHERE id_esp='$id'");
+$editar_esp_an = mysqli_fetch_assoc($consulta_esp_an);
 
 // Trazendo o id da especie
 $id_especie = $editar_esp_an['especie'];
@@ -48,7 +47,7 @@ $countlixo = $contarlixo->num_rows;
 ?>
 
 <style>
-    #mapcad {
+    #mapesp {
         width: 1140px;
         height: 200px;
         border: 10px solid #ccc;;
@@ -71,6 +70,74 @@ $countlixo = $contarlixo->num_rows;
         width: 50%;
     }
 </style>
+
+<script type="text/javascript">
+    function initialize() {
+        var latlng = new google.maps.LatLng(<?=$editar_esp_an['lat'];?>,<?=$editar_esp_an['lng'];?>);
+        var map = new google.maps.Map(document.getElementById('mapesp'), {
+            center: latlng,
+            zoom: 16
+        });
+        var marker = new google.maps.Marker({
+            map: map,
+            position: latlng,
+            draggable: true,
+            anchorPoint: new google.maps.Point(0, -29)
+        });
+        var input = document.getElementById('searchInput');
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+        var geocoder = new google.maps.Geocoder();
+        var autocomplete = new google.maps.places.Autocomplete(input);
+        autocomplete.bindTo('bounds', map);
+        var infowindow = new google.maps.InfoWindow();
+        autocomplete.addListener('place_changed', function() {
+            infowindow.close();
+            marker.setVisible(false);
+            var place = autocomplete.getPlace();
+            if (!place.geometry) {
+                window.alert("O endereço não foi localizado");
+                return;
+            }
+
+            // If the place has a geometry, then present it on a map.
+            if (place.geometry.viewport) {
+                map.fitBounds(place.geometry.viewport);
+            } else {
+                map.setCenter(place.geometry.location);
+                map.setZoom(17);
+            }
+
+            marker.setPosition(place.geometry.location);
+            marker.setVisible(true);
+
+            bindDataToForm(place.formatted_address,place.geometry.location.lat(),place.geometry.location.lng());
+            infowindow.setContent(place.formatted_address);
+            infowindow.open(map, marker);
+
+        });
+        // this function will work on marker move event into map
+        google.maps.event.addListener(marker, 'dragend', function() {
+            geocoder.geocode({'latLng': marker.getPosition()}, function(results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    if (results[0]) {
+                        bindDataToForm(results[0].formatted_address,marker.getPosition().lat(),marker.getPosition().lng());
+                        infowindow.setContent(results[0].formatted_address);
+                        infowindow.open(map, marker);
+                    }
+                }
+            });
+        });
+    }
+
+    function bindDataToForm(address,lat,lng){
+        /*document.getElementById('location').value = address;*/
+        document.getElementById('lat').value = lat;
+        document.getElementById('lng').value = lng;
+    }
+    google.maps.event.addDomListener(window, 'load', initialize);
+
+    /*http://www.expertphp.in/article/autocomplete-search-address-form-using-google-map-and-get-data-into-form-example*/
+</script>
 
 <div class="container theme-showcase" role="main" xmlns="http://www.w3.org/1999/html">
 
@@ -113,7 +180,6 @@ $countlixo = $contarlixo->num_rows;
 
     <div class="row">
 
-        <?php echo $countlixo;?>
 
         <div class="col-md-12">
             <fieldset <?php
@@ -127,10 +193,35 @@ $countlixo = $contarlixo->num_rows;
              ?>>
                 <form class="form-horizontal" id="edit-esporo-animal" method="POST" action="suvisjt.php?pag=proc-edit-esporo-animal&acao=editar">
 
+                    <br>
+                    <?php
+
+                        $idruad = $rua['id'];
+                        $numer = $editar_esp_an['numero'];
+
+                        $cood = $conectar->query ("SELECT lat, lng FROM esporo_an WHERE id_rua='$idruad' AND numero='$numer' AND pin='1'");
+                        $cs_cood = mysqli_fetch_assoc($cood);
+
+                        $pino = $conectar->query ("SELECT pin FROM esporo_an WHERE id_rua='$idruad' AND numero='$numer' AND id_esp=$id");
+                        $cs_pino = mysqli_fetch_assoc($pino);
+
+                        echo $cs_pino['pin'];
+                        echo '<br>';
+
+                        $latcood = $cs_cood['lat'];
+                        $lngcood = $cs_cood['lng'];
+
+                        echo '<br>';
+                        echo substr($latcood,0,10);
+                        echo '<br>';
+                        echo substr($lngcood,0,10);
+                    ?>
+
+
                     <div class="form-group" id="apresentacao">
                         <input id="searchInput" tabindex="11" style="margin-top: 10px;" class="form-control" type="text"
                                name="ruagoogle" placeholder="Digite o local" value="<?php echo $editar_esp_an['rua_esp_a']; ?>">
-                        <div id="mapcad"></div>
+                        <div id="mapesp"></div>
                     </div>
 
                     <div class="form-group">
@@ -143,7 +234,7 @@ $countlixo = $contarlixo->num_rows;
                         <div class="col-sm-2">
                             <input tabindex="2" type="text" class="form-control" data-toggle="tooltip"
                                    title="Não pode ser maior que hoje" name="datanot" id="datanotcad"
-                                   placeholder="00/00/0000" value="<?php echo $editar_esp_an['data_entrada']; ?>">
+                                   placeholder="00/00/0000" value="<?php echo date('d/m/Y', strtotime($editar_esp_an['data_entrada'])); ?>">
                         </div>
 
                         <label class="col-sm-1 control-label">ANIMAL</label>
@@ -229,7 +320,7 @@ $countlixo = $contarlixo->num_rows;
                                                      data-toggle="tooltip" title="Preenchimento Automatico" value="<?php echo strtoupper($rua['setor']); ?>"></div>
 
                         <label for="inputPagGuia" class="col-sm-1 control-label">PGGUIA</label>
-                        <div class="col-sm-1"><input type="text" readonly class="form-control" name="pgguia" id="pgguia" placeholder="A00-A00"
+                        <div class="col-sm-1"><input type="text"  readonly class="form-control" name="pgguia" placeholder="0000"
                                                      data-toggle="tooltip" title="Preenchimento Automatico" value="<?php echo strtoupper($rua['pgguia']); ?>"></div>
 
                             <label class="col-sm-1 control-label">UBS REF</label>
@@ -283,13 +374,21 @@ $countlixo = $contarlixo->num_rows;
                                             class="btn btn-labeled btn-success mb-2 mr-sm-4"><span class="btn-label"><i class="fa fa-pills"></i></span> <u>N</u>OVO</a>';
                                 echo '<a target=”_blank” href="form-system/ambiental/print/print-esporo-animal.php?id='.$id.'" role="button" accesskey="I" data-toggle="tooltip" title="IMPRIMIR" 
                                             class="btn btn-labeled btn-primary mb-2 mr-sm-4"><span class="btn-label"><i class="fa fa-print"></i></span> <u>I</u>MPRIMIR</a>';
+                                echo '<a href="suvisjt.php?pag=listar-medicamentos-esporotricose-animal" role="button" accesskey="E" data-toggle="tooltip" title="ENTRADAS DE MEDICAMENTOS" 
+                                            class="btn btn-labeled btn-success mb-2 mr-sm-4"><span class="btn-label"><i class="fa fa-pills"></i></span> <u>E</u>NTRADAS</a>';
+                                echo '<a href="suvisjt.php?pag=listar-saida-de-medicamentos-esporotricose-animal" role="button" accesskey="S" data-toggle="tooltip" title="SAÍDAS DE MEDICAMENTOS" 
+                                            class="btn btn-labeled btn-danger mb-2 mr-sm-4"><span class="btn-label"><i class="fa fa-pills"></i></span> <u>S</u>AÍDAS</a>';
                             elseif ($id_lixeira === 'false'):
                                 echo '<button type="button" class="btn btn-primary btn-labeled btn-lg btn-block"><span class="btn-label"><i
                                             class="fa fa-pills"></i></span>ENTREGA DE MEDICAMENTOS ESPOROTRICOSE ANIMAL</button><br>';
                                 echo '<a href="suvisjt.php?pag=edit-esporo-animal&id='.$id.'&lixeira=true" role="button" accesskey="L" data-toggle="tooltip" title="GRAVAR OS DADOS" 
-                                            class="btn btn-labeled btn-default mb-2 mr-sm-4"><span class="btn-label"><i class="fa fa-trash-alt"></i></span><span class="badge" style="background-color: #c9302c">'.$countlixo.'</span> &nbsp;<u>L</u>IXEIRA</a>';;
+                                            class="btn btn-labeled btn-default mb-2 mr-sm-4"><span class="btn-label"><i class="fa fa-trash-alt"></i></span><span class="badge" style="background-color: #c9302c">'.$countlixo.'</span> &nbsp;<u>L</u>IXEIRA</a>';
                                 echo '<a target=”_blank” href="form-system/ambiental/print/print-esporo-animal.php?id='.$id.'" role="button" accesskey="I" data-toggle="tooltip" title="IMPRIMIR" 
                                             class="btn btn-labeled btn-primary mb-2 mr-sm-4"><span class="btn-label"><i class="fa fa-print"></i></span> <u>I</u>MPRIMIR</a>';
+                                echo '<a href="suvisjt.php?pag=listar-medicamentos-esporotricose-animal" role="button" accesskey="E" data-toggle="tooltip" title="ENTRADAS DE MEDICAMENTOS" 
+                                            class="btn btn-labeled btn-success mb-2 mr-sm-4"><span class="btn-label"><i class="fa fa-pills"></i></span> <u>E</u>NTRADAS</a>';
+                                echo '<a href="suvisjt.php?pag=listar-saida-de-medicamentos-esporotricose-animal" role="button" accesskey="S" data-toggle="tooltip" title="SAÍDAS DE MEDICAMENTOS" 
+                                            class="btn btn-labeled btn-danger mb-2 mr-sm-4"><span class="btn-label"><i class="fa fa-pills"></i></span> <u>S</u>AÍDAS</a>';
                             else:
                                     echo '<button type="button" class="btn btn-default btn-labeled btn-lg btn-block"><span class="btn-label"><i
                                             class="fa fa-pills"></i></span>LIXEIRA - ENTREGA DE MEDICAMENTOS ESPOROTRICOSE ANIMAL</button><br>';
@@ -320,18 +419,20 @@ $countlixo = $contarlixo->num_rows;
                     </table>
 
                     <input type="hidden" name="ano" value="<?php echo $editar_esp_an['ano'];?>">
+                    <input type="hidden" name="esp_id" value="<?php echo $editar_esp_an['especie'];?>">
                     <input type="hidden" id="idrua" name="idrua" value="<?php echo strtoupper($rua['id']); ?>"></div>
                     <input type="hidden" name="idmedc" value="<?php echo $id_sd_med; ?>"></div>
+                    <input type="hidden" name="id" value="<?php echo $editar_esp_an['id_esp'];?>">
+                    <input type="hidden" name="pin" value="<?php echo $editar_esp_an['pin'];?>">
 
         <div class="form-group text-center">
             <div class="col-sm-12">
-                <input type="hidden" name="id" value="<?php echo $editar_esp_an['id_esp']; ?>">
                 <button type="submit" tabindex="25" accesskey="G" style="<?php if ($_SESSION['usuarioNivelAcesso'] == 4) {
                     echo 'display: none;';
                 } ?>" data-toggle="tooltip" title="GRAVAR OS DADOS" class="btn btn-labeled btn-success mb-2 mr-sm-4"><span
                             class="btn-label"><i class="fa fa-floppy-o"></i></span> <u>G</u>RAVAR
                 </button>
-                <a href='suvisjt.php?pag=list-esporo-animal' role='button' tabindex="26" data-toggle="tooltip" title="LISTAR REGISTROS" accesskey="L"
+                <a href='suvisjt.php?pag=listar-esporotricose-animal' role='button' tabindex="26" data-toggle="tooltip" title="LISTAR REGISTROS" accesskey="L"
                    class="btn btn-labeled btn-info mb-2 mr-sm-4"><span class="btn-label"><i
                                 class="glyphicon glyphicon-list"></i></span> <u>L</u>ISTAR</a>
                 <a target="_blank"

@@ -104,12 +104,19 @@ $(function() {
         onClose: function() {$(this).valid();},
     });
 
-        // Datepicker dataentrada para contar data atual
-        $('#dataentcad2').datepicker({
-            dateFormat: 'dd/mm/yy',
-            maxDate: "+0",
-            onClose: function() {$(this).valid();},
-        });
+    // Datepicker dataentrada para contar data atual
+    $('#dataentcad2').datepicker({
+        dateFormat: 'dd/mm/yy',
+        maxDate: "+0",
+        onClose: function() {$(this).valid();},
+    });
+
+    // Datepicker dataentrada para contar data atual
+    $('#dataentesp').datepicker({
+        dateFormat: 'dd/mm/yy',
+        maxDate: "+0",
+        onClose: function() {$(this).valid();},
+    });
 
 // Validation method databloedit para comparar com data atual
     $.validator.addMethod("maxDateBloq", function(e) {
@@ -1019,13 +1026,16 @@ $(function() {
                     //ascento: true
                 },
                 log: {
-                    required: true
+                    required: true,
+                    remote: "remote/pesquisar/val-log.php"
                 },
                 da: {
-                    required: true
+                    required: true,
+                    remote: "remote/pesquisar/val-da.php"
                 },
                 setor: {
-                    required: true
+                    required: true,
+                    remote: "remote/pesquisar/val-setor.php"
                 },
                 ubs: {
                     required: true,
@@ -1087,13 +1097,16 @@ $(function() {
                     //ascento: "Retire ascentos, ç e caracteres"
                 },
                 log: {
-                    required: "Digite um Logradouro"
+                    required: "Digite um Logradouro",
+                    remote: "Digite um logradouro válido"
                 },
                 da: {
-                    required: "Digite o Da"
+                    required: "Digite o Da",
+                    remote: "Da inválido"
                 },
                 setor: {
-                    required: "Digite um Setor"
+                    required: "Digite um Setor",
+                    remote: "Setor inválido."
                 },
                 ubs: {
                     required: "Digite uma Ubs",

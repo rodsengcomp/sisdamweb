@@ -1,10 +1,13 @@
-<script type="text/javascript">
-    window.print();
+<!--Chamada filtro tabela--->
+<script src="../../../js/jquery/1.12.4.jquery.min.js"></script>
+
+<script>
+    $(function () {
+        setTimeout(function () { window.print(); }, 200);
+        window.onfocus = function () { setTimeout(function () { window.close(); }, 200); }
+    });
 </script>
 
-<style>
-    @media print{@page {margin: 1.5cm;size: portrait;}
-</style>
 
 <?php
 error_reporting(0);
@@ -32,11 +35,11 @@ if (!empty($id) && is_numeric($id)):
 
     if(!empty(is_numeric($id))):
     // Captura os dados do cliente solicitado
-        $sql = $conectar->query("SELECT esporo_an.id_esp, esporo_an.nve, esporo_an.ano, esporo_an.data_entrada, esporo_an.nome_animal,
-        especie_animal.especie, esporo_an.id_rua, ruas.log, ruas.rua, ruas.bairro, ruas.ruagoogle, esporo_an.rua_esp_a, esporo_an.numero, esporo_an.complemento,
-        esporo_an.bairro_esp_a, esporo_an.tutor, esporo_an.telefone1, 
-        esporo_an.telefone2, esporo_an.dsg_medc, esporo_medc.nm_mdc_esp_an, 
-        esporo_an_sd_medc.data_medc, esporo_an_sd_medc.qtd_medc, esporo_an_sd_medc.nm_rec_medc, situacao_esporo.sit_esp, esporo_an.obs
+        $sql = $conectar->query("SELECT esporo_an.id_esp, esporo_an.nve, esporo_an.ano, esporo_an.data_entrada, esporo_an.nome_animal, esporo_an.especie AS especieid,especie_animal.especie, esporo_an.id_rua, 
+        esporo_an.rua_esp_a, esporo_an.numero, esporo_an.complemento, esporo_an.tutor, esporo_an.rg, esporo_an.cpf, 
+        esporo_an.telefone1, esporo_an.dsg_medc, esporo_medc.nm_mdc_esp_an, esporo_an_sd_medc.data_medc, esporo_an_sd_medc.qtd_medc, esporo_an_sd_medc.nm_rec_medc, 
+        ruas.id AS id_rua, ruas.log, ruas.rua, ruas.bairro, ruas.cep,ruas.ruagoogle,
+        situacao_esporo.sit_esp, esporo_an.obs
         FROM esporo_an
         LEFT JOIN especie_animal ON esporo_an.especie = especie_animal.id_especie
         LEFT JOIN situacao_esporo ON esporo_an.situacao = situacao_esporo.id_st_esp
@@ -48,20 +51,20 @@ if (!empty($id) && is_numeric($id)):
         $ed_print = mysqli_fetch_assoc($sql);
 
         $cs_medc = $conectar->query("SELECT esporo_an_sd_medc.id_sd, esporo_an_sd_medc.id_medc, esporo_an_sd_medc.data_medc, esporo_an_sd_medc.dsg_medc, esporo_an_sd_medc.qtd_medc, esporo_an_sd_medc.nm_ent_medc, esporo_an_sd_medc.nm_rec_medc, 
-                                    esporo_an_sd_medc.id_an_esp, esporo_medc.nm_mdc_esp_an
-                                FROM esporo_an_sd_medc
-                                LEFT JOIN esporo_medc ON esporo_an_sd_medc.id_medc = esporo_medc.id_med_esp
-                                WHERE id_an_esp=$id AND esporo_an_sd_medc.lixeira = 0
-                                ORDER BY data_medc ASC");
+        esporo_an_sd_medc.id_an_esp, esporo_medc.nm_mdc_esp_an
+        FROM esporo_an_sd_medc
+        LEFT JOIN esporo_medc ON esporo_an_sd_medc.id_medc = esporo_medc.id_med_esp
+        WHERE id_an_esp=$id AND esporo_an_sd_medc.lixeira = 0
+        ORDER BY data_medc ASC");
     else:
         $_SESSION['msgerro'] = '<div class="alert alert-danger text-center text-uppercase" role="alert">
                 <strong>ERRO AO EDITAR: DOCUMENTO COM O Nº : '.$id.' - '.$id.' - NÃO ENCONTRADO !!!</strong></div>';
-        header("Location: suvisjt.php?pag=list-esporo-animal");
+        header("Location: suvisjt.php?pag=listar-esporotricose-animal");
     endif;
 
 
 else:
-    header("Location: suvisjt.php?pag=list-esporo-animal");
+    header("Location: suvisjt.php?pag=listar-esporotricose-animal");
     $_SESSION['msgedit'] = '<div class="alert alert-danger text-center text-uppercase" role="alert">
                                 <strong>ERRO AO EDITAR: DOCUMENTO COM O Nº : ' . $id . ' - ' . $id . ' - NÃO ENCONTRADO !!!</strong></div></div>';
 
@@ -73,13 +76,15 @@ endif;
 
 <head>
 
+
+
     <!--<head>-->
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="">
+    <link rel="icon" href="../../../imagens/sv2ico.ico">
     <meta http-equiv=Content-Type content="text/html; charset=windows-1252">
     <meta name=Generator content="Microsoft Word 15 (filtered)">
 
@@ -101,6 +106,9 @@ endif;
         @page WordSection1
         {size:612.1pt 792.1pt; margin:1.0cm 2.0cm 2.0cm 3.0cm;}
         div.WordSection1 {page:WordSection1;}
+        @page WordSection2
+        {size:612.1pt 792.1pt; margin:1.0cm 2.0cm 2.0cm 3.0cm;}
+        div.WordSection2 {page:WordSection2;}
         /* List Definitions */
         ol{margin-bottom:0cm;}
         ul {margin-bottom:0cm;}
@@ -117,29 +125,30 @@ endif;
 
             <div class=WordSection1 style="margin:1.0cm 0.5cm 2.0cm 2.0cm;">
 
-                <img src="../../../imagens/logo_pmsp.jpg"><br><br> <!-- Logo da prefeitura -->
+                <img src="../../../imagens/esporo_animal/logo_ficha_esporo_animal1.jpg"><br><br> <!-- Logo da prefeitura -->
 
                 <p class=MsoNormal align=center style='margin-top:24.0pt;margin-right:0cm;
-margin-bottom:18.0pt;margin-left:0cm;text-align:center;line-height:150%'><b><span style='font-size:12.0pt;line-height:150%;font-family:"Arial",sans-serif'>Termo de Compromisso para Tratamento de Animal com Esporotricose</span></b></p>
+margin-bottom:18.0pt;margin-left:0cm;text-align:center;line-height:150%'><b><span style='font-size:12.0pt;line-height:150%;font-family:"Arial",sans-serif'>Termo de Compromisso para Tratamento de Animal com Esporotricose <?=$ed_print['id_rua']?></span></b></p>
+
+                <p class=MsoNormal style='margin-top:6.0pt;margin-right:0cm;margin-bottom:6.0pt;margin-left:0cm;line-height:150%'>
+                    <span style='font-family:"Arial",sans-serif'>Eu,<?php if(!empty($ed_print['tutor'])) : echo '<u> '.ucwords(strtolower(mb_convert_encoding($ed_print['tutor'],'HTML-ENTITIES','UTF-8'))).'</u>';
+                        else: echo '__________________________________________________________________________,'; endif;?></span></p>
 
                 <p class=MsoNormal style='margin-top:6.0pt;margin-right:0cm;margin-bottom:6.0pt;
-margin-left:0cm;line-height:150%'><span style='font-family:"Arial",sans-serif'>Eu,__________________________________________________________________________,</span></p>
-
-                <p class=MsoNormal style='margin-top:6.0pt;margin-right:0cm;margin-bottom:6.0pt;
-margin-left:0cm;line-height:150%'><span style='font-family:"Arial",sans-serif'>Portador do R.G nº________________________, CPF nº ___________________________,</span></p>
+margin-left:0cm;line-height:150%'><span style='font-family:"Arial",sans-serif'>Portador do R.G nº:<?php if(!empty($ed_print['rg'])) : echo '<u> '.ucwords(strtolower($ed_print['rg'])).'</u>';
+                        else: echo '_______________________,'; endif;?> CPF nº:<?php if(!empty($ed_print['cpf'])) : echo '<u> '.ucwords(strtolower($ed_print['cpf'])).'</u>';
+                        else: echo '___________________________,'; endif;?></span></p>
 
                 <p class=MsoNormal style='margin-top:6.0pt;margin-right:0cm;margin-bottom:6.0pt;
 margin-left:0cm;line-height:150%'><span style='font-family:"Arial",sans-serif'>Residente à
-                        <?php if(!empty($ed_print['rua_esp_a'])) : echo '<u> '.$ed_print['rua_esp_a'].' - '.$ed_print['complemento'].'</u>';
+                        <?php if(!empty($ed_print['id_rua'])) : echo '<u> '.ucwords(strtolower($ed_print['log'])).' '.ucwords(strtolower($ed_print['rua'])).', '.$ed_print['numero'].' '.$ed_print['complemento'].' - '.ucwords(strtolower($ed_print['bairro'])).', São Paulo - SP, '.$ed_print['cep'].'</u>';
                         else: echo '_______________________________________________________________'; endif;?>,</span></p>
 
                 <p class=MsoNormal style='margin-top:6.0pt;margin-right:0cm;margin-bottom:6.0pt;
-margin-left:0cm;line-height:150%'><span style='font-family:"Arial",sans-serif'>Bairro : <?php if(!empty($ed_print['bairro'])) : echo '<u> '.ucwords(strtolower($ed_print['bairro'])).'</u>';
-                        else: echo '_____________________________________'; endif;?>, CEP _________________________,</span></p>
+margin-left:0cm;line-height:150%'><span style='font-family:"Arial",sans-serif'><?php if(empty($ed_print['id_rua'])) : echo 'Bairro : _______________________________, CEP _______________________________'; endif;?></span></p>
 
                 <p class=MsoNormal style='margin-top:6.0pt;margin-right:0cm;margin-bottom:6.0pt;
-margin-left:0cm;line-height:150%'><span style='font-family:"Arial",sans-serif'>Telefone Residencial <?php if(!empty($ed_print['telefone1'])) : echo '<u>    '.$ed_print['telefone1'].'    </u>';
-                    else: echo '__________________________________'; endif;?>, Celular : <?php if(!empty($ed_print['telefone2'])) : echo '<u>    '.$ed_print['telefone2'].'    </u>';
+margin-left:0cm;line-height:150%'><span style='font-family:"Arial",sans-serif'>Telefone <?php if(!empty($ed_print['telefone1'])) : echo '<u>    '.$ed_print['telefone1'].'    </u>';
                     else: echo '__________________________________'; endif;?>,</span></p>
 
                 <p class=MsoNormal style='margin-top:24.0pt;margin-right:0cm;margin-bottom:
@@ -147,10 +156,13 @@ margin-left:0cm;line-height:150%'><span style='font-family:"Arial",sans-serif'>T
 line-height:150%;font-family:"Arial",sans-serif'>Responsável pelo animal abaixo descrito:</span></b></p>
 
                 <p class=MsoNormal style='margin-top:6.0pt;margin-right:0cm;margin-bottom:6.0pt;
-margin-left:0cm;line-height:150%'><span style='font-family:"Arial",sans-serif'>Nome : <u>   <?=ucwords(strtolower($ed_print['nome_animal']))?>   </u>       Pelagem ____________________________</span></p>
+margin-left:0cm;line-height:150%'><span style='font-family:"Arial",sans-serif'>Nome : <u>   <?=ucwords(strtolower(mb_convert_encoding($ed_print['nome_animal'],'HTML-ENTITIES','UTF-8')))?>   </u>       Pelagem ____________________________</span></p>
 
                 <p class=MsoNormal style='margin-top:6.0pt;margin-right:0cm;margin-bottom:6.0pt;
-margin-left:0cm;line-height:150%'><span style='font-family:"Arial",sans-serif'>Espécie  ___________________       Porte _______________________________</span></p>
+margin-left:0cm;line-height:150%'><span style='font-family:"Arial",sans-serif'>Espécie 
+                    <?php if(!empty($ed_print['especieid'])) : echo '<u>'.ucwords(strtolower($ed_print['especie'])).'       </u>';
+                        else: echo ' ___________________       '; endif;?>
+                         Porte _______________________________</span></p>
 
                 <p class=MsoNormal style='margin-top:6.0pt;margin-right:0cm;margin-bottom:6.0pt;
 margin-left:0cm;line-height:150%'><span style='font-family:"Arial",sans-serif'>Sexo ______________________       Nº do RGA __________________________</span></p>
@@ -256,290 +268,261 @@ período de tratamento, pelos telefones, 2974-7818, 2974-7817 ou 2978-8000
                     </tr>
                 </table>
 
+
+
                 <span style='font-size:11.0pt;line-height:115%;font-family:"Arial",sans-serif'><br clear=all style='page-break-before:always'></span>
 
-                <p class=MsoNormal align=center style='text-align:center'><span style='line-height:115%;font-family:"Arial",sans-serif'>&nbsp;</span></p>
-
-                <p class=MsoNormal align=center style='text-align:center'><span style='font-size:16.0pt;line-height:115%;font-family:"Arial",sans-serif'>&nbsp;</span></p>
-
-                <p class=MsoNormal align=center style='text-align:center'><span style='font-size:16.0pt;line-height:115%;font-family:"Arial",sans-serif'>&nbsp;</span></p><br><br>
-
-                <p class=MsoNormal align=center style='text-align:center'><span style='font-size:16.0pt;line-height:115%;font-family:"Arial",sans-serif'>CONTROLE DE ENTREGA DE MEDICAÇÃO</span></p>
-
-                <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
-"Arial",sans-serif'>&nbsp;</span></p>
-
-                <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
-"Arial",sans-serif'>&nbsp;</span></p>
-
-                <table class=MsoNormalTable border=1 cellspacing=0 cellpadding=0
-                       style='border-collapse:collapse;border:none'>
-                    <tr style='height:30.85pt'>
-                        <td width=94 style='width:70.7pt;border:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;
-  height:30.85pt'>
-                            <p class=MsoNormal align=center style='text-align:center'><span
-                                        style='font-size:12.0pt;line-height:115%;font-family:"Arial",sans-serif'>DATA</span></p>
-                        </td>
-                        <td width=140 style='width:104.8pt;border:solid windowtext 1.0pt;border-left:
-  none;padding:0cm 5.4pt 0cm 5.4pt;height:30.85pt'>
-                            <p class=MsoNormal align=center style='text-align:center'><span
-                                        style='font-size:12.0pt;line-height:115%;font-family:"Arial",sans-serif'>MEDICAMENTO</span></p>
-                        </td>
-                        <td width=136 style='width:101.8pt;border:solid windowtext 1.0pt;border-left:
-  none;padding:0cm 5.4pt 0cm 5.4pt;height:30.85pt'>
-                            <p class=MsoNormal align=center style='text-align:center'><span
-                                        style='font-size:12.0pt;line-height:115%;font-family:"Arial",sans-serif'>QUANTIDADE DE CÁPSULAS</span></p>
-                        </td>
-                        <td width=152 style='width:114.25pt;border:solid windowtext 1.0pt;border-left:
-  none;padding:0cm 5.4pt 0cm 5.4pt;height:30.85pt'>
-                            <p class=MsoNormal align=center style='text-align:center'><span
-                                        style='font-size:12.0pt;line-height:115%;font-family:"Arial",sans-serif'>NOME ENTREGADOR</span></p>
-                        </td>
-                        <td width=169 style='width:126.95pt;border:solid windowtext 1.0pt;border-left:
-  none;padding:0cm 5.4pt 0cm 5.4pt;height:30.85pt'>
-                            <p class=MsoNormal align=center style='text-align:center'><span
-                                        style='font-size:12.0pt;line-height:115%;font-family:"Arial",sans-serif'>ASSINATURA RECEBEDOR</span></p>
-                        </td>
-                    </tr>
-
-                    <?php while ($row_medc = mysqli_fetch_assoc($cs_medc)){ ?>
-
-                    <tr style='height:32.65pt'>
-                        <td width=94 valign=top style='width:70.7pt;border:solid windowtext 1.0pt;
-  border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:32.65pt'>
-                            <p class=MsoNormal style="padding-top: 1rem;text-align: center;"><span style='font-size:12.0pt;line-height:115%;font-family:
-  "Arial",sans-serif'>&nbsp;</span><?php echo date('d/m/Y', strtotime($row_medc['data_medc'])); ?></p>
-                        </td>
-                        <td width=140 valign=top style='width:104.8pt;border-top:none;border-left:
-  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
-  padding:0cm 5.4pt 0cm 5.4pt;height:32.65pt'>
-                            <p class=MsoNormal style="padding-top: 1rem;text-align: center;"><span style='font-size:12.0pt;line-height:115%;font-family:
-  "Arial",sans-serif'>&nbsp;</span><?php echo $row_medc['nm_mdc_esp_an'].' '.$row_medc['dsg_medc']; ?> MG/DIA</p>
-                        </td>
-                        <td width=136 valign=top style='width:101.8pt;border-top:none;border-left:
-  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
-  padding:0cm 5.4pt 0cm 5.4pt;height:32.65pt'>
-                            <p class=MsoNormal style="padding-top: 1rem;text-align: center;"><span style='font-size:12.0pt;line-height:115%;font-family:
-  "Arial",sans-serif'>&nbsp;</span><?php echo $row_medc['qtd_medc']; ?> CP</p>
-                        </td>
-                        <td width=152 valign=top style='width:114.25pt;border-top:none;border-left:
-  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
-  padding:0cm 5.4pt 0cm 5.4pt;height:32.65pt'>
-                            <p class=MsoNormal style="padding-top: 1rem;text-align: center;"><span style='font-size:12.0pt;line-height:115%;font-family:
-  "Arial",sans-serif'>&nbsp;</span><?php echo $row_medc['nm_ent_medc']; ?></p>
-                        </td>
-                        <td width=169 valign=top style='width:126.95pt;border-top:none;border-left:
-  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
-  padding:0cm 5.4pt 0cm 5.4pt;height:32.65pt'>
-                            <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
-  "Arial",sans-serif'>&nbsp;</span></p>
-                        </td>
-                    </tr>
-
-                    <?php } ?>
-                    <tr style='height:32.6pt'>
-                        <td width=94 valign=top style='width:70.7pt;border:solid windowtext 1.0pt;
-  border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:42.6pt'>
-                            <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
-  "Arial",sans-serif'>&nbsp;</span></p>
-                        </td>
-                        <td width=140 valign=top style='width:70.7pt;border:solid windowtext 1.0pt;
-  border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:42.6pt'>
-                            <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
-  "Arial",sans-serif'>&nbsp;</span></p>
-                        </td>
-                        <td width=136 valign=top style='width:70.7pt;border:solid windowtext 1.0pt;
-  border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:42.6pt'>
-                            <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
-  "Arial",sans-serif'>&nbsp;</span></p>
-                        </td>
-                        <td width=152 valign=top style='width:70.7pt;border:solid windowtext 1.0pt;
-  border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:42.6pt'>
-                            <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
-  "Arial",sans-serif'>&nbsp;</span></p>
-                        </td>
-                        <td width=169 valign=top style='width:70.7pt;border:solid windowtext 1.0pt;
-  border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:42.6pt'>
-                            <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
-  "Arial",sans-serif'>&nbsp;</span></p>
-                        </td>
-                    </tr>
-
-                    <tr style='height:32.6pt'>
-                        <td width=94 valign=top style='width:70.7pt;border:solid windowtext 1.0pt;
-  border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:42.6pt'>
-                            <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
-  "Arial",sans-serif'>&nbsp;</span></p>
-                        </td>
-                        <td width=140 valign=top style='width:70.7pt;border:solid windowtext 1.0pt;
-  border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:42.6pt'>
-                            <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
-  "Arial",sans-serif'>&nbsp;</span></p>
-                        </td>
-                        <td width=136 valign=top style='width:70.7pt;border:solid windowtext 1.0pt;
-  border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:42.6pt'>
-                            <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
-  "Arial",sans-serif'>&nbsp;</span></p>
-                        </td>
-                        <td width=152 valign=top style='width:70.7pt;border:solid windowtext 1.0pt;
-  border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:42.6pt'>
-                            <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
-  "Arial",sans-serif'>&nbsp;</span></p>
-                        </td>
-                        <td width=169 valign=top style='width:70.7pt;border:solid windowtext 1.0pt;
-  border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:42.6pt'>
-                            <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
-  "Arial",sans-serif'>&nbsp;</span></p>
-                        </td>
-                    </tr>
-
-                    <tr style='height:32.6pt'>
-                        <td width=94 valign=top style='width:70.7pt;border:solid windowtext 1.0pt;
-  border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:42.6pt'>
-                            <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
-  "Arial",sans-serif'>&nbsp;</span></p>
-                        </td>
-                        <td width=140 valign=top style='width:70.7pt;border:solid windowtext 1.0pt;
-  border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:42.6pt'>
-                            <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
-  "Arial",sans-serif'>&nbsp;</span></p>
-                        </td>
-                        <td width=136 valign=top style='width:70.7pt;border:solid windowtext 1.0pt;
-  border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:42.6pt'>
-                            <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
-  "Arial",sans-serif'>&nbsp;</span></p>
-                        </td>
-                        <td width=152 valign=top style='width:70.7pt;border:solid windowtext 1.0pt;
-  border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:42.6pt'>
-                            <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
-  "Arial",sans-serif'>&nbsp;</span></p>
-                        </td>
-                        <td width=169 valign=top style='width:70.7pt;border:solid windowtext 1.0pt;
-  border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:42.6pt'>
-                            <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
-  "Arial",sans-serif'>&nbsp;</span></p>
-                        </td>
-                    </tr>
-
-                    <tr style='height:32.6pt'>
-                        <td width=94 valign=top style='width:70.7pt;border:solid windowtext 1.0pt;
-  border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:42.6pt'>
-                            <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
-  "Arial",sans-serif'>&nbsp;</span></p>
-                        </td>
-                        <td width=140 valign=top style='width:70.7pt;border:solid windowtext 1.0pt;
-  border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:42.6pt'>
-                            <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
-  "Arial",sans-serif'>&nbsp;</span></p>
-                        </td>
-                        <td width=136 valign=top style='width:70.7pt;border:solid windowtext 1.0pt;
-  border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:42.6pt'>
-                            <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
-  "Arial",sans-serif'>&nbsp;</span></p>
-                        </td>
-                        <td width=152 valign=top style='width:70.7pt;border:solid windowtext 1.0pt;
-  border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:42.6pt'>
-                            <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
-  "Arial",sans-serif'>&nbsp;</span></p>
-                        </td>
-                        <td width=169 valign=top style='width:70.7pt;border:solid windowtext 1.0pt;
-  border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:42.6pt'>
-                            <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
-  "Arial",sans-serif'>&nbsp;</span></p>
-                        </td>
-                    </tr>
-
-                    <tr style='height:32.6pt'>
-                        <td width=94 valign=top style='width:70.7pt;border:solid windowtext 1.0pt;
-  border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:42.6pt'>
-                            <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
-  "Arial",sans-serif'>&nbsp;</span></p>
-                        </td>
-                        <td width=140 valign=top style='width:70.7pt;border:solid windowtext 1.0pt;
-  border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:42.6pt'>
-                            <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
-  "Arial",sans-serif'>&nbsp;</span></p>
-                        </td>
-                        <td width=136 valign=top style='width:70.7pt;border:solid windowtext 1.0pt;
-  border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:42.6pt'>
-                            <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
-  "Arial",sans-serif'>&nbsp;</span></p>
-                        </td>
-                        <td width=152 valign=top style='width:70.7pt;border:solid windowtext 1.0pt;
-  border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:42.6pt'>
-                            <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
-  "Arial",sans-serif'>&nbsp;</span></p>
-                        </td>
-                        <td width=169 valign=top style='width:70.7pt;border:solid windowtext 1.0pt;
-  border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:42.6pt'>
-                            <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
-  "Arial",sans-serif'>&nbsp;</span></p>
-                        </td>
-                    </tr>
-
-                    <tr style='height:32.6pt'>
-                        <td width=94 valign=top style='width:70.7pt;border:solid windowtext 1.0pt;
-  border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:42.6pt'>
-                            <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
-  "Arial",sans-serif'>&nbsp;</span></p>
-                        </td>
-                        <td width=140 valign=top style='width:70.7pt;border:solid windowtext 1.0pt;
-  border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:42.6pt'>
-                            <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
-  "Arial",sans-serif'>&nbsp;</span></p>
-                        </td>
-                        <td width=136 valign=top style='width:70.7pt;border:solid windowtext 1.0pt;
-  border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:42.6pt'>
-                            <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
-  "Arial",sans-serif'>&nbsp;</span></p>
-                        </td>
-                        <td width=152 valign=top style='width:70.7pt;border:solid windowtext 1.0pt;
-  border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:42.6pt'>
-                            <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
-  "Arial",sans-serif'>&nbsp;</span></p>
-                        </td>
-                        <td width=169 valign=top style='width:70.7pt;border:solid windowtext 1.0pt;
-  border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:42.6pt'>
-                            <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
-  "Arial",sans-serif'>&nbsp;</span></p>
-                        </td>
-                    </tr>
-
-                    <tr style='height:32.6pt'>
-                        <td width=94 valign=top style='width:70.7pt;border:solid windowtext 1.0pt;
-  border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:42.6pt'>
-                            <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
-  "Arial",sans-serif'>&nbsp;</span></p>
-                        </td>
-                        <td width=140 valign=top style='width:70.7pt;border:solid windowtext 1.0pt;
-  border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:42.6pt'>
-                            <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
-  "Arial",sans-serif'>&nbsp;</span></p>
-                        </td>
-                        <td width=136 valign=top style='width:70.7pt;border:solid windowtext 1.0pt;
-  border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:42.6pt'>
-                            <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
-  "Arial",sans-serif'>&nbsp;</span></p>
-                        </td>
-                        <td width=152 valign=top style='width:70.7pt;border:solid windowtext 1.0pt;
-  border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:42.6pt'>
-                            <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
-  "Arial",sans-serif'>&nbsp;</span></p>
-                        </td>
-                        <td width=169 valign=top style='width:70.7pt;border:solid windowtext 1.0pt;
-  border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:42.6pt'>
-                            <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
-  "Arial",sans-serif'>&nbsp;</span></p>
-                        </td>
-                    </tr>
-                </table>
-
-
             </div>
+            <footer class="footer">
+                <p class=MsoNormal style='text-align:center;'><span style='font-size:12.0pt;line-height:150%;font-family:"Arial",sans-serif'><strong>Divisão de Vigilância em Saúde</strong></span></p>
+                <p class=MsoNormal style='text-align:center;'><span style='font-size:12.0pt;line-height:150%;font-family:"Arial",sans-serif'><strong>Rua:</strong> Santa Eulália, 86 – Santana – São Paulo/SP – CEP 02031-020</span></p>
+                <p class=MsoNormal style='text-align:center;'><span style='font-size:12.0pt;line-height:150%;font-family:"Arial",sans-serif'><strong>Telefone:</strong> PABX (11) 3397-8900 - <strong>e-mail:</strong> zoonoses@prefeitura.sp.gov.br</span></p>
+                <p class=MsoNormal style='text-align:center;'><span style='font-size:12.0pt;line-height:150%;font-family:"Arial",sans-serif'><strong>Núcleo de Vigilância Epidemiológica:</strong> (11) 3397-8918 / 3397-8917</span></p>
+            </footer>
 
         </div>
 
     </div>
+
+
+
+    <div style="page-break-after: always">
+        <div class="row justify-content-center">
+            <div class="col-sm-6">
+                <div class=WordSection2 style="margin:1.0cm 0.5cm 2.0cm 2.0cm;">
+                    <img style="padding-top: 3rem" src="../../../imagens/esporo_animal/logo_ficha_esporo_animal1.jpg"><br><br> <!-- Logo da prefeitura -->
+
+                        <p class=MsoNormal align=center style='text-align:center'><span style='font-size:16.0pt;line-height:115%;font-family:"Arial",sans-serif'>CONTROLE DE ENTREGA DE MEDICAÇÃO</span></p>
+
+                        <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
+            "Arial",sans-serif'>&nbsp;</span></p>
+
+                        <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
+            "Arial",sans-serif'>&nbsp;</span></p>
+
+                    <table class=MsoNormalTable border=1 cellspacing=0 cellpadding=0
+                           style='border-collapse:collapse;border:none'>
+                        <tr style='height:30.85pt'>
+                            <td width=94 style='width:70.7pt;border:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;
+      height:30.85pt'>
+                                <p class=MsoNormal align=center style='text-align:center'><span
+                                            style='font-size:12.0pt;line-height:115%;font-family:"Arial",sans-serif'>DATA</span></p>
+                            </td>
+                            <td width=140 style='width:104.8pt;border:solid windowtext 1.0pt;border-left:
+      none;padding:0cm 5.4pt 0cm 5.4pt;height:30.85pt'>
+                                <p class=MsoNormal align=center style='text-align:center'><span
+                                            style='font-size:12.0pt;line-height:115%;font-family:"Arial",sans-serif'>MEDICAMENTO</span></p>
+                            </td>
+                            <td width=136 style='width:101.8pt;border:solid windowtext 1.0pt;border-left:
+      none;padding:0cm 5.4pt 0cm 5.4pt;height:30.85pt'>
+                                <p class=MsoNormal align=center style='text-align:center'><span
+                                            style='font-size:12.0pt;line-height:115%;font-family:"Arial",sans-serif'>QUANTIDADE DE CÁPSULAS</span></p>
+                            </td>
+                            <td width=152 style='width:114.25pt;border:solid windowtext 1.0pt;border-left:
+      none;padding:0cm 5.4pt 0cm 5.4pt;height:30.85pt'>
+                                <p class=MsoNormal align=center style='text-align:center'><span
+                                            style='font-size:12.0pt;line-height:115%;font-family:"Arial",sans-serif'>NOME ENTREGADOR</span></p>
+                            </td>
+                            <td width=169 style='width:126.95pt;border:solid windowtext 1.0pt;border-left:
+      none;padding:0cm 5.4pt 0cm 5.4pt;height:30.85pt'>
+                                <p class=MsoNormal align=center style='text-align:center'><span
+                                            style='font-size:12.0pt;line-height:115%;font-family:"Arial",sans-serif'>ASSINATURA RECEBEDOR</span></p>
+                            </td>
+                        </tr>
+
+                        <?php while ($row_medc = mysqli_fetch_assoc($cs_medc)){ ?>
+
+                        <tr style='height:32.65pt'>
+                            <td width=94 valign=top style='width:70.7pt;border:solid windowtext 1.0pt;
+      border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:32.65pt'>
+                                <p class=MsoNormal style="padding-top: 1rem;text-align: center;"><span style='font-size:12.0pt;line-height:115%;font-family:
+      "Arial",sans-serif'>&nbsp;</span><?php echo date('d/m/Y', strtotime($row_medc['data_medc'])); ?></p>
+                            </td>
+                            <td width=140 valign=top style='width:104.8pt;border-top:none;border-left:
+      none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+      padding:0cm 5.4pt 0cm 5.4pt;height:32.65pt'>
+                                <p class=MsoNormal style="padding-top: 1rem;text-align: center;"><span style='font-size:12.0pt;line-height:115%;font-family:
+      "Arial",sans-serif'>&nbsp;</span><?php echo $row_medc['nm_mdc_esp_an'].' '.$row_medc['dsg_medc']; ?> MG/DIA</p>
+                            </td>
+                            <td width=136 valign=top style='width:101.8pt;border-top:none;border-left:
+      none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+      padding:0cm 5.4pt 0cm 5.4pt;height:32.65pt'>
+                                <p class=MsoNormal style="padding-top: 1rem;text-align: center;"><span style='font-size:12.0pt;line-height:115%;font-family:
+      "Arial",sans-serif'>&nbsp;</span><?php echo $row_medc['qtd_medc']; ?> CP</p>
+                            </td>
+                            <td width=152 valign=top style='width:114.25pt;border-top:none;border-left:
+      none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+      padding:0cm 5.4pt 0cm 5.4pt;height:32.65pt'>
+                                <p class=MsoNormal style="padding-top: 1rem;text-align: center;"><span style='font-size:12.0pt;line-height:115%;font-family:
+      "Arial",sans-serif'>&nbsp;</span><?php echo $row_medc['nm_ent_medc']; ?></p>
+                            </td>
+                            <td width=169 valign=top style='width:126.95pt;border-top:none;border-left:
+      none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+      padding:0cm 5.4pt 0cm 5.4pt;height:32.65pt'>
+                                <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
+      "Arial",sans-serif'>&nbsp;</span></p>
+                            </td>
+                        </tr>
+
+                        <?php } ?>
+                        <tr style='height:32.6pt'><td width=94 valign=top style='width:70.7pt;border:solid windowtext 1.0pt;
+      border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:42.6pt'>
+                                <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
+      "Arial",sans-serif'>&nbsp;</span></p></td><td width=140 valign=top style='width:70.7pt;border:solid windowtext 1.0pt;
+      border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:42.6pt'>
+                                <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
+      "Arial",sans-serif'>&nbsp;</span></p></td><td width=136 valign=top style='width:70.7pt;border:solid windowtext 1.0pt;
+      border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:42.6pt'>
+                                <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
+      "Arial",sans-serif'>&nbsp;</span></p></td><td width=152 valign=top style='width:70.7pt;border:solid windowtext 1.0pt;
+      border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:42.6pt'>
+                                <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
+      "Arial",sans-serif'>&nbsp;</span></p></td><td width=169 valign=top style='width:70.7pt;border:solid windowtext 1.0pt;
+      border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:42.6pt'>
+                                <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
+      "Arial",sans-serif'>&nbsp;</span></p></td>
+                        </tr>
+
+                        <tr style='height:32.6pt'><td width=94 valign=top style='width:70.7pt;border:solid windowtext 1.0pt;
+      border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:42.6pt'>
+                                <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
+      "Arial",sans-serif'>&nbsp;</span></p></td><td width=140 valign=top style='width:70.7pt;border:solid windowtext 1.0pt;
+      border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:42.6pt'>
+                                <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
+      "Arial",sans-serif'>&nbsp;</span></p></td><td width=136 valign=top style='width:70.7pt;border:solid windowtext 1.0pt;
+      border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:42.6pt'>
+                                <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
+      "Arial",sans-serif'>&nbsp;</span></p></td><td width=152 valign=top style='width:70.7pt;border:solid windowtext 1.0pt;
+      border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:42.6pt'>
+                                <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
+      "Arial",sans-serif'>&nbsp;</span></p></td><td width=169 valign=top style='width:70.7pt;border:solid windowtext 1.0pt;
+      border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:42.6pt'>
+                                <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
+      "Arial",sans-serif'>&nbsp;</span></p></td>
+                        </tr>
+
+                        <tr style='height:32.6pt'><td width=94 valign=top style='width:70.7pt;border:solid windowtext 1.0pt;
+      border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:42.6pt'>
+                                <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
+      "Arial",sans-serif'>&nbsp;</span></p></td><td width=140 valign=top style='width:70.7pt;border:solid windowtext 1.0pt;
+      border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:42.6pt'>
+                                <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
+      "Arial",sans-serif'>&nbsp;</span></p></td><td width=136 valign=top style='width:70.7pt;border:solid windowtext 1.0pt;
+      border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:42.6pt'>
+                                <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
+      "Arial",sans-serif'>&nbsp;</span></p></td><td width=152 valign=top style='width:70.7pt;border:solid windowtext 1.0pt;
+      border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:42.6pt'>
+                                <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
+      "Arial",sans-serif'>&nbsp;</span></p></td><td width=169 valign=top style='width:70.7pt;border:solid windowtext 1.0pt;
+      border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:42.6pt'>
+                                <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
+      "Arial",sans-serif'>&nbsp;</span></p></td>
+                        </tr>
+
+                        <tr style='height:32.6pt'><td width=94 valign=top style='width:70.7pt;border:solid windowtext 1.0pt;
+      border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:42.6pt'>
+                                <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
+      "Arial",sans-serif'>&nbsp;</span></p></td><td width=140 valign=top style='width:70.7pt;border:solid windowtext 1.0pt;
+      border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:42.6pt'>
+                                <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
+      "Arial",sans-serif'>&nbsp;</span></p></td><td width=136 valign=top style='width:70.7pt;border:solid windowtext 1.0pt;
+      border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:42.6pt'>
+                                <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
+      "Arial",sans-serif'>&nbsp;</span></p></td><td width=152 valign=top style='width:70.7pt;border:solid windowtext 1.0pt;
+      border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:42.6pt'>
+                                <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
+      "Arial",sans-serif'>&nbsp;</span></p></td><td width=169 valign=top style='width:70.7pt;border:solid windowtext 1.0pt;
+      border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:42.6pt'>
+                                <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
+      "Arial",sans-serif'>&nbsp;</span></p></td>
+                        </tr>
+
+
+
+                        <tr style='height:32.6pt'><td width=94 valign=top style='width:70.7pt;border:solid windowtext 1.0pt;
+      border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:42.6pt'>
+                                <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
+      "Arial",sans-serif'>&nbsp;</span></p></td><td width=140 valign=top style='width:70.7pt;border:solid windowtext 1.0pt;
+      border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:42.6pt'>
+                                <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
+      "Arial",sans-serif'>&nbsp;</span></p></td><td width=136 valign=top style='width:70.7pt;border:solid windowtext 1.0pt;
+      border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:42.6pt'>
+                                <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
+      "Arial",sans-serif'>&nbsp;</span></p></td><td width=152 valign=top style='width:70.7pt;border:solid windowtext 1.0pt;
+      border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:42.6pt'>
+                                <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
+      "Arial",sans-serif'>&nbsp;</span></p></td><td width=169 valign=top style='width:70.7pt;border:solid windowtext 1.0pt;
+      border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:42.6pt'>
+                                <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
+      "Arial",sans-serif'>&nbsp;</span></p></td>
+                        </tr>
+
+                        <tr style='height:32.6pt'><td width=94 valign=top style='width:70.7pt;border:solid windowtext 1.0pt;
+      border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:42.6pt'>
+                                <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
+      "Arial",sans-serif'>&nbsp;</span></p></td><td width=140 valign=top style='width:70.7pt;border:solid windowtext 1.0pt;
+      border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:42.6pt'>
+                                <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
+      "Arial",sans-serif'>&nbsp;</span></p></td><td width=136 valign=top style='width:70.7pt;border:solid windowtext 1.0pt;
+      border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:42.6pt'>
+                                <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
+      "Arial",sans-serif'>&nbsp;</span></p></td><td width=152 valign=top style='width:70.7pt;border:solid windowtext 1.0pt;
+      border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:42.6pt'>
+                                <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
+      "Arial",sans-serif'>&nbsp;</span></p></td><td width=169 valign=top style='width:70.7pt;border:solid windowtext 1.0pt;
+      border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:42.6pt'>
+                                <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
+      "Arial",sans-serif'>&nbsp;</span></p></td>
+                        </tr>
+
+                        <tr style='height:32.6pt'><td width=94 valign=top style='width:70.7pt;border:solid windowtext 1.0pt;
+      border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:42.6pt'>
+                                <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
+      "Arial",sans-serif'>&nbsp;</span></p></td><td width=140 valign=top style='width:70.7pt;border:solid windowtext 1.0pt;
+      border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:42.6pt'>
+                                <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
+      "Arial",sans-serif'>&nbsp;</span></p></td><td width=136 valign=top style='width:70.7pt;border:solid windowtext 1.0pt;
+      border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:42.6pt'>
+                                <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
+      "Arial",sans-serif'>&nbsp;</span></p></td><td width=152 valign=top style='width:70.7pt;border:solid windowtext 1.0pt;
+      border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:42.6pt'>
+                                <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
+      "Arial",sans-serif'>&nbsp;</span></p></td><td width=169 valign=top style='width:70.7pt;border:solid windowtext 1.0pt;
+      border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:42.6pt'>
+                                <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
+      "Arial",sans-serif'>&nbsp;</span></p></td>
+                        </tr>
+
+                        <tr style='height:32.6pt'><td width=94 valign=top style='width:70.7pt;border:solid windowtext 1.0pt;
+      border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:42.6pt'>
+                                <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
+      "Arial",sans-serif'>&nbsp;</span></p></td><td width=140 valign=top style='width:70.7pt;border:solid windowtext 1.0pt;
+      border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:42.6pt'>
+                                <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
+      "Arial",sans-serif'>&nbsp;</span></p></td><td width=136 valign=top style='width:70.7pt;border:solid windowtext 1.0pt;
+      border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:42.6pt'>
+                                <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
+      "Arial",sans-serif'>&nbsp;</span></p></td><td width=152 valign=top style='width:70.7pt;border:solid windowtext 1.0pt;
+      border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:42.6pt'>
+                                <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
+      "Arial",sans-serif'>&nbsp;</span></p></td><td width=169 valign=top style='width:70.7pt;border:solid windowtext 1.0pt;
+      border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:42.6pt'>
+                                <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
+      "Arial",sans-serif'>&nbsp;</span></p></td>
+                        </tr>
+                    </table>
+
+                    <footer class="py-5">
+                        <p class=MsoNormal style='text-align:center;'><span style='font-size:12.0pt;line-height:150%;font-family:"Arial",sans-serif'><strong>Divisão de Vigilância em Saúde</strong></span></p>
+                        <p class=MsoNormal style='text-align:center;'><span style='font-size:12.0pt;line-height:150%;font-family:"Arial",sans-serif'><strong>Rua:</strong> Santa Eulália, 86 – Santana – São Paulo/SP – CEP 02031-020</span></p>
+                        <p class=MsoNormal style='text-align:center;'><span style='font-size:12.0pt;line-height:150%;font-family:"Arial",sans-serif'><strong>Telefone:</strong> PABX (11) 3397-8900 - <strong>e-mail:</strong> zoonoses@prefeitura.sp.gov.br</span></p>
+                        <p class=MsoNormal style='text-align:center;'><span style='font-size:12.0pt;line-height:150%;font-family:"Arial",sans-serif'><strong>Núcleo de Vigilância Epidemiológica:</strong> (11) 3397-8918 / 3397-8917</span></p>
+                    </footer>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 </body>

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Tempo de geração: 22-Ago-2022 às 04:19
--- Versão do servidor: 10.4.24-MariaDB
--- versão do PHP: 8.1.6
+-- Host: 10.47.171.110:3306
+-- Tempo de geração: 19-Ago-2022 às 20:54
+-- Versão do servidor: 10.4.13-MariaDB
+-- versão do PHP: 7.4.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -142,10 +142,9 @@ INSERT INTO `menu_sub_sub` (`id`, `id_menu_sub`, `nome`, `pag`, `usuariocad`, `c
 (103, 13, 'Memo/Ofício-2020', 'suvisjt.php?pag=list-memo-oficio-arquivo&year=2020', 'D788796', '2021-01-05 09:38:19', NULL, NULL),
 (104, 13, 'Memo/Oficio-2021', 'suvisjt.php?pag=list-memo-oficio-arquivo&year=2021', 'D788796', '2022-01-04 10:16:41', NULL, NULL),
 (105, 14, 'Sv2-2021', 'suvisjt.php?pag=list-sv2-arquivo&year=2021', 'D788796', '2022-01-04 10:22:08', NULL, NULL),
-(106, 49, 'Cadastrar Esporo Animal', 'suvisjt.php?pag=cad-esporo-animal', 'D788796', '2022-06-08 14:24:06', NULL, NULL),
-(107, 49, 'Listar Esporo Animal', 'suvisjt.php?pag=list-esporo-animal', 'D788796', '2022-06-08 14:24:06', NULL, NULL),
-(108, 49, 'Exames-CCZ-Esporo-Animal', 'suvisjt.php?pag=list-lab-esporo', 'D788796', '2022-07-21 11:38:59', NULL, NULL),
-(109, 49, 'Listar Medicamentos EA', 'suvisjt.php?pag=listar-medicamentos-esporotricose-animal', 'D788796', '2022-08-21 21:14:59', NULL, NULL);
+(106, 49, 'Cadastrar', 'suvisjt.php?pag=cadastro-esporotricose-animal', 'D788796', '2022-06-08 14:24:06', NULL, NULL),
+(107, 49, 'Listar', 'suvisjt.php?pag=list-esporo-animal', 'D788796', '2022-06-08 14:24:06', NULL, NULL),
+(108, 49, 'Exames-CCZ-Esporo-Animal', 'suvisjt.php?pag=list-lab-esporo', 'D788796', '2022-07-21 11:38:59', NULL, NULL);
 
 --
 -- Índices para tabelas despejadas
@@ -165,7 +164,7 @@ ALTER TABLE `menu_sub_sub`
 -- AUTO_INCREMENT de tabela `menu_sub_sub`
 --
 ALTER TABLE `menu_sub_sub`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=109;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

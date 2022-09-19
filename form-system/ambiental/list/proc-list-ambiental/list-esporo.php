@@ -13,13 +13,15 @@
 */
 // chave primária da tabela
 $primaryKey = 'id_esp';
+$lixo = $_GET['lixeira'] ?? '0';
 
 $table = <<<EOT
  ( 
-SELECT esporo_an.id_esp, esporo_an.nve, esporo_an.ano, esporo_an.data_entrada, esporo_an.nome_animal,
+SELECT esporo_an.id_esp, esporo_an.nve, esporo_an.ano, esporo_an.data_entrada, esporo_an.nome_animal, esporo_an.lixeira,
 especie_animal.especie, esporo_an.id_rua, ruas.log, ruas.rua, ruas.ruagoogle, esporo_an.rua_esp_a, esporo_an.numero,
-esporo_an.bairro_esp_a, esporo_an.tutor, esporo_an.telefone1, 
-esporo_an.telefone2, esporo_an.dsg_medc, esporo_medc.nm_mdc_esp_an, 
+esporo_an.tutor, esporo_an.telefone1, esporo_an.dsg_medc,
+esporo_medc.nm_mdc_esp_an, 
+resultado_esporo.Nr_Pedido, resultado_esporo.Data_Pedido, resultado_esporo.Resultado,
 (SELECT  esporo_an_sd_medc.data_medc
 FROM    esporo_an_sd_medc
 WHERE   esporo_an_sd_medc.id_an_esp = esporo_an.id_esp
@@ -43,6 +45,8 @@ LEFT JOIN situacao_esporo ON esporo_an.situacao = situacao_esporo.id_st_esp
 LEFT JOIN ruas ON esporo_an.id_rua = ruas.id
 LEFT JOIN  esporo_an_sd_medc ON esporo_an.id_esp = esporo_an_sd_medc.id_an_esp 
 LEFT JOIN esporo_medc ON esporo_an_sd_medc.id_medc = esporo_medc.id_med_esp
+LEFT JOIN resultado_esporo ON esporo_an.lab = resultado_esporo.Nr_Pedido
+WHERE esporo_an.lixeira = $lixo
 GROUP BY esporo_an.id_esp
 )temp
 EOT;
@@ -58,7 +62,15 @@ EOT;
 $columns = array(
                 array('db' => 'nve', 'dt' => 0),
                 array('db' => 'ano', 'dt' => 1),
-                array('db' => 'data_entrada', 'dt' => 2),
+                array('db' => 'data_entrada', 'dt' => 2, 'formatter' => function ($d) {
+                    switch($d){
+                        case '';
+                            return '';
+                            break;
+                        default:
+                            return date('d/m/Y', strtotime($d));
+                    }
+                }),
                 array('db' => 'nome_animal', 'dt' => 3, 'formatter' => function ($d) {
                     return strtoupper($d);
                 }),
@@ -138,21 +150,33 @@ $columns = array(
                 }),
                 array('db' => 'obs', 'dt' => 15),
                 array('db' => 'id_esp', 'dt' => 16),
-                array('db' => 'telefone2', 'dt' => 17, 'formatter' => function ($d) {
+                array('db' => 'lixeira', 'dt' => 17),
+                array('db' => 'dsg_medc', 'dt' => 18),
+                array('db' => 'numero', 'dt' => 19),
+                array('db' => 'Data_Pedido', 'dt' => 20, 'formatter' => function ($d) {
                     switch($d){
-                        case 'null';
-                            return '';
                         case '';
                             return '';
                             break;
                         default:
-                            return ' '.$d;
+                            return $d;
                     }
                 }),
-                array('db' => 'dsg_medc', 'dt' => 18),
-                array('db' => 'numero', 'dt' => 19),
-                array('db' => 'bairro_esp_a', 'dt' => 20)
-
+                array('db' => 'Resultado', 'dt' => 21, 'formatter' => function ($d) {
+                    switch($d){
+                        case 'Positivo';
+                        return '<button type="button" class="btn btn-labeled btn-danger mb-2 mr-sm-4"><span class="btn-label"><i class="fa fa-vials"></i></span>POSITIVO</button>';
+                            break;
+                        case 'Negativo';
+                            return '<button type="button" class="btn btn-labeled btn-success mb-2 mr-sm-4"><span class="btn-label"><i class="fa fa-vials"></i></span>NEGATIVO</button>';
+                            break;
+                        case '';
+                            return '<button type="button" class="btn btn-labeled btn-warning mb-2 mr-sm-4"><span class="btn-label"><i class="fa fa-vials"></i></span>SEM EXAME</button>';
+                            break;
+                        default:
+                            return $d;
+                    }
+                })
 );
 
 // SQL server connection information
