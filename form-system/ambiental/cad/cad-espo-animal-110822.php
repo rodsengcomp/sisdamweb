@@ -183,7 +183,7 @@ include_once '../../conecta.php';
 
                         <label for="inputDataEntrada" class="col-sm-1 control-label">ENTREG.</label>
                             <div class="col-sm-2"><input type="text" tabindex="19" data-toggle="tooltip" title="Para quem foi entregue? (Uvis ou DVZ)"
-                                       class="form-control entregador" name="nment1" placeholder="Entregue:UVIS/DVZ"></div>
+                                       class="form-control origem" name="nment1" placeholder="Entregue:UVIS/DVZ"></div>
 
                         <label for="inputDataEntrada" class="col-sm-1 control-label">RECEP.</label>
                             <div class="col-sm-2"><input type="text" tabindex="20" data-toggle="tooltip" title="Quem recebeu o medicamento? (Nome)" maxlength="5"
@@ -204,7 +204,7 @@ include_once '../../conecta.php';
 
                         <label for="inputDataEntrada" class="col-sm-1 control-label">ENTREG.</label>
                         <div class="col-sm-2"><input type="text" tabindex="24" data-toggle="tooltip" title="Para quem foi entregue? (Uvis ou DVZ)"
-                                                     class="form-control entregador" name="nment2" placeholder="Entregue:UVIS/DVZ"></div>
+                                                     class="form-control origem" name="nment2" placeholder="Entregue:UVIS/DVZ"></div>
 
                         <label for="inputDataEntrada" class="col-sm-1 control-label">RECEP.</label>
                         <div class="col-sm-2"><input type="text" tabindex="25" data-toggle="tooltip" title="Quem recebeu o medicamento? (Nome)" maxlength="5"

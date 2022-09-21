@@ -45,7 +45,7 @@ LEFT JOIN situacao_esporo ON esporo_an.situacao = situacao_esporo.id_st_esp
 LEFT JOIN ruas ON esporo_an.id_rua = ruas.id
 LEFT JOIN  esporo_an_sd_medc ON esporo_an.id_esp = esporo_an_sd_medc.id_an_esp 
 LEFT JOIN esporo_medc ON esporo_an_sd_medc.id_medc = esporo_medc.id_med_esp
-LEFT JOIN resultado_esporo ON esporo_an.lab = resultado_esporo.Nr_Pedido
+LEFT JOIN resultado_esporo ON esporo_an.pedido = resultado_esporo.Nr_Pedido
 WHERE esporo_an.lixeira = $lixo
 GROUP BY esporo_an.id_esp
 )temp

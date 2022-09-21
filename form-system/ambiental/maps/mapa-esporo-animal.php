@@ -112,7 +112,7 @@ $row_exame_esporo = mysqli_fetch_assoc($cs_exame_esporo);
         var infowindow = new google.maps.InfoWindow();
 
         // Altere isso dependendo do nome do seu arquivo PHP ou XML
-        downloadUrl('form-system/ambiental/maps/proc-maps-ambiental/proc-maps-esporo-animal.php', function(data) {
+        downloadUrl('form-system/ambiental/maps/proc-maps-ambiental/proc-maps-esporo-animal.php?exame=positivo', function(data) {
             var xml = data.responseXML;
             var markers = xml.documentElement.getElementsByTagName("marker");
             for (var i = 0; i < markers.length; i++) {

@@ -42,8 +42,21 @@ $consulta_medc = "SELECT * FROM esporo_medc WHERE id_med_esp='$id_medc'";
 $resultado_medc = $conectar->query($consulta_medc);
 $medc = mysqli_fetch_assoc($resultado_medc);
 
+// Trazendo o id da especie
+$id_origem = $editar_esp_an['origem'];
+$consulta_origem = "SELECT * FROM origem WHERE id_origem='$id_origem'";
+$resultado_origem = $conectar->query($consulta_origem);
+$editar_origem = mysqli_fetch_assoc($resultado_origem);
+
+// Trazendo o id da especie
+$id_sexo = $editar_esp_an['sexo'];
+$cs_sexo = "SELECT * FROM sexo WHERE id='$id_sexo'";
+$rs_sexo = $conectar->query($cs_sexo);
+$editar_sexo = mysqli_fetch_assoc($rs_sexo);
+
 $contarlixo = $conectar->query("SELECT lixeira FROM esporo_an_sd_medc WHERE lixeira = 1 AND id_an_esp = $id");
 $countlixo = $contarlixo->num_rows;
+
 ?>
 
 <style>
@@ -180,7 +193,6 @@ $countlixo = $contarlixo->num_rows;
 
     <div class="row">
 
-
         <div class="col-md-12">
             <fieldset <?php
             if ($_SESSION['usuarioNivelAcesso'] == "") :
@@ -193,34 +205,9 @@ $countlixo = $contarlixo->num_rows;
              ?>>
                 <form class="form-horizontal" id="edit-esporo-animal" method="POST" action="suvisjt.php?pag=proc-edit-esporo-animal&acao=editar">
 
-                    <br>
-                    <?php
-
-                        $idruad = $rua['id'];
-                        $numer = $editar_esp_an['numero'];
-
-                        $cood = $conectar->query ("SELECT lat, lng FROM esporo_an WHERE id_rua='$idruad' AND numero='$numer' AND pin='1'");
-                        $cs_cood = mysqli_fetch_assoc($cood);
-
-                        $pino = $conectar->query ("SELECT pin FROM esporo_an WHERE id_rua='$idruad' AND numero='$numer' AND id_esp=$id");
-                        $cs_pino = mysqli_fetch_assoc($pino);
-
-                        echo $cs_pino['pin'];
-                        echo '<br>';
-
-                        $latcood = $cs_cood['lat'];
-                        $lngcood = $cs_cood['lng'];
-
-                        echo '<br>';
-                        echo substr($latcood,0,10);
-                        echo '<br>';
-                        echo substr($lngcood,0,10);
-                    ?>
-
-
                     <div class="form-group" id="apresentacao">
                         <input id="searchInput" tabindex="11" style="margin-top: 10px;" class="form-control" type="text"
-                               name="ruagoogle" placeholder="Digite o local" value="<?php echo $editar_esp_an['rua_esp_a']; ?>">
+                               name="ruagoogle" placeholder="Digite o local" value="<?=$editar_esp_an['rua_esp_a']; ?>">
                         <div id="mapesp"></div>
                     </div>
 
@@ -228,63 +215,94 @@ $countlixo = $contarlixo->num_rows;
                         <label for="inputNve" class="col-sm-1 control-label">NVE</label>
                         <div class="col-sm-1">
                             <input type="text" id="nve" <?php if($id_edit != 'true'): echo 'autofocus'; endif;?> tabindex="1" data-toggle="tooltip" title="Ex: 10" maxlength="5"
-                                   class="form-control" name="nve" placeholder="000" value="<?php echo $editar_esp_an['nve']; ?>"></div>
+                                   class="form-control" name="nve" placeholder="000" value="<?=$editar_esp_an['nve']; ?>"></div>
 
                         <label for="inputDataNot" class="col-sm-1 control-label">ENTRADA</label>
                         <div class="col-sm-2">
                             <input tabindex="2" type="text" class="form-control" data-toggle="tooltip"
                                    title="Não pode ser maior que hoje" name="datanot" id="datanotcad"
-                                   placeholder="00/00/0000" value="<?php echo date('d/m/Y', strtotime($editar_esp_an['data_entrada'])); ?>">
+                                   placeholder="00/00/0000" value="<?=date('d/m/Y', strtotime($editar_esp_an['data_entrada'])); ?>">
                         </div>
 
                         <label class="col-sm-1 control-label">ANIMAL</label>
                         <div class="col-sm-3">
                             <input type="text" tabindex="3" class="form-control" name="nomeanimal"  data-toggle="tooltip" title="Nome do Animal"
-                                value="<?php echo strtoupper($editar_esp_an['nome_animal']); ?>" onchange="upperCaseF(this)"></div>
+                                value="<?=strtoupper($editar_esp_an['nome_animal']); ?>" onchange="upperCaseF(this)"></div>
 
                         <label class="col-sm-1 control-label">ESPÉCIE</label>
                         <div class="col-sm-2">
                             <input type="text" tabindex="4" class="form-control especie" name="especie"  data-toggle="tooltip" title="Cão ou Gato"
-                                 onchange="upperCaseF(this)" value="<?php echo $especie_select['especie']; ?>"></div>
+                                 onchange="upperCaseF(this)" value="<?=$especie_select['especie']; ?>"></div>
                     </div>
 
                     <div class="form-group">
 
                         <label class="col-sm-1 control-label">TUTOR</label>
-                        <div class="col-sm-5">
+                        <div class="col-sm-4">
                             <input type="text" tabindex="5" class="form-control" name="tutor"  data-toggle="tooltip" title="Nome do Proprietário do Animal"
-                                onchange="upperCaseF(this)" value="<?php echo strtoupper($editar_esp_an['tutor']); ?>"></div>
+                                onchange="upperCaseF(this)" value="<?=strtoupper($editar_esp_an['tutor']); ?>"></div>
+
+                        <label class="col-sm-1 control-label">IDADE</label>
+                        <div class="col-sm-1"><input type="text" tabindex="12" class="form-control" name="idade" data-toggle="tooltip" title="Idade em anos"
+                                                     placeholder="Nº" value="<?=$editar_esp_an['idade'];?>"></div>
+
+                        <label for="inputOrigem" class="col-sm-1 control-label">SEXO</label>
+                        <div class="col-sm-1">
+                            <input type="text" tabindex="8" class="form-control sexos" data-toggle="tooltip" title="F OU M" name="sexos" id="sexos"
+                                   onchange="upperCaseF(this)" value="<?php if(!empty($editar_sexo['sexo'])) echo $editar_sexo['sexo'];?>" placeholder="M/F">
+                        </div>
 
                         <label for="inputTelefone1" class="col-sm-1 control-label">TEL 1</label>
                         <div class="col-sm-2">
                             <input type="text" tabindex="7" class="form-control" data-toggle="tooltip" title="Celular ou fixo sem DDD" name="tel1" id="tels1" maxlength="15"
-                               placeholder="99999-9999" value="<?php echo $editar_esp_an['telefone1']; ?>"></div>
-
-                        <label for="inputTelefone2" class="col-sm-1 control-label">TEL 2</label>
-                        <div class="col-sm-2">
-                            <input type="text" tabindex="8" class="form-control" data-toggle="tooltip" title="Celular ou fixo sem DDD" name="tel2" id="tels2" maxlength="15"
-                               placeholder="99999-9999" value="<?php echo $editar_esp_an['telefone2']; ?>"></div>
+                               placeholder="99999-9999" value="<?=$editar_esp_an['telefone1']; ?>"></div>
 
                     </div>
 
                     <div class="form-group">
+
+                        <label class="col-sm-1 control-label">PEDIDO</label>
+                        <div class="col-sm-2"><input type="text" tabindex="12" class="form-control" name="pedido" data-toggle="tooltip" title="Preenchimento Automatico"
+                                                     placeholder="123456789" value="<?=$editar_esp_an['pedido'];?>"></div>
+
+                        <label for="inputOrigem" class="col-sm-1 control-label">ORIGEM</label>
+                        <div class="col-sm-2">
+                            <input type="text" tabindex="8" class="form-control origem" data-toggle="tooltip" title="CCZ PLANTAO OU UVIS JACANA" name="origem" id="origem"
+                                   value="<?php if(!empty($editar_origem['nm_origem'])) echo $editar_origem['nm_origem'];?>" placeholder="UVIS JACANA">
+                        </div>
+
                         <label class="col-sm-1 control-label">SITUAÇÃO</label>
                         <div class="col-sm-2"><input type="text" tabindex="9" class="form-control situacao" name="situacao" data-toggle="tooltip" title="Situação do tratamento"
-                                                     value="<?php echo strtoupper($situacao['sit_esp']); ?>"></div>
+                                                     value="<?=strtoupper($situacao['sit_esp']); ?>"></div>
+
+                        <label class="col-sm-1 control-label">DIAGNÓST.</label>
+                        <div class="col-sm-2"><input type="text" onchange="upperCaseF(this)" tabindex="9" class="form-control diagnostico" name="diagnostico" data-toggle="tooltip" title="POSITIVO/NEGATIVO"
+                             value="<?php $dgt = $editar_esp_an['diagnostico'];
+                                     if($dgt == 1): echo 'POSITIVO';
+                                     elseif ($dgt == 2): echo 'NEGATIVO';
+                                    else: echo 'EM INVESTIGACAO'; endif; ?>"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputOrigem" class="col-sm-1 control-label">CASO H:</label>
+                        <div class="col-sm-1">
+                            <input type="text" tabindex="13" class="form-control casoh" data-toggle="tooltip" title="Caso humano? S ou N" name="casoh"
+                                   onchange="upperCaseF(this)" placeholder="S/N" value="<?=$editar_esp_an['casos_hum_dom'];?>">
+                        </div>
 
                         <label class="col-sm-1 control-label">ENDEREÇO</label>
-                        <div class="col-sm-3"><input type="text" tabindex="10" class="form-control rua" name="rua" data-toggle="tooltip" title="Nome da rua"
-                                                     id="ruaselect" placeholder="NOME DO ENDEREÇO" onchange="upperCaseF(this)" value="<?php echo strtoupper($rua['rua']); ?>"></div>
+                        <div class="col-sm-4"><input type="text" tabindex="10" class="form-control rua" name="rua" data-toggle="tooltip" title="Nome da rua"
+                                                     id="ruaselect" placeholder="NOME DO ENDEREÇO" onchange="upperCaseF(this)" value="<?=strtoupper($rua['rua']); ?>"></div>
 
                         <label class="col-sm-1 control-label">N</label>
                         <div class="col-sm-1"><input type="text" tabindex="12" class="form-control" name="num" data-toggle="tooltip" title="Preenchimento Automatico"
-                                                     placeholder="Nº" maxlength="6" value="<?php echo $editar_esp_an['numero'];?>"></div>
+                                                     placeholder="Nº" maxlength="6" value="<?=$editar_esp_an['numero'];?>"></div>
 
                         <label class="col-sm-1 control-label">COMP</label>
                         <div class="col-sm-2"><input type="text" tabindex="13" class="form-control" name="comp" data-toggle="tooltip" title="Preenchimento Automatico" style="<?php if ($_SESSION['usuarioNivelAcesso'] == 4) {
                                 echo 'display: none;';
                             } ?>" placeholder="CASA , APTO"
-                                                     onchange="upperCaseF(this)" value="<?php echo $editar_esp_an['complemento'];?>"></div>
+                                                     onchange="upperCaseF(this)" value="<?=$editar_esp_an['complemento'];?>"></div>
 
                     </div>
 
@@ -292,18 +310,18 @@ $countlixo = $contarlixo->num_rows;
 
                         <label class="col-sm-1 control-label">LAT/LNG</label>
                         <div class="col-sm-2"><input type="text" tabindex="14" id="lat" data-toggle="tooltip" title="Ex: 23.4587899" class="form-control"
-                                                     name="lat" placeholder="15,123456789" value="<?php echo $editar_esp_an['lat'];?>"></div>
+                                                     name="lat" placeholder="15,123456789" value="<?=$editar_esp_an['lat'];?>"></div>
 
                         <div class="col-sm-2"><input type="text" tabindex="15" id="lng" class="form-control"  data-toggle="tooltip" title="Ex: 46.458789" name="lng"
-                                                     placeholder="-19,123456789" value="<?php echo $editar_esp_an['lng'];?>"></div>
+                                                     placeholder="-19,123456789" value="<?=$editar_esp_an['lng'];?>"></div>
 
                         <label class="col-sm-1 control-label">CEP</label>
                         <div class="col-sm-2"><input type="text" class="form-control"  name="cep" readonly id="cepcad" maxlength="9" placeholder="00000-000"
-                                                     data-toggle="tooltip" title="Preenchimento Automatico" value="<?php echo strtoupper($rua['cep']); ?>"></div>
+                                                     data-toggle="tooltip" title="Preenchimento Automatico" value="<?=strtoupper($rua['cep']); ?>"></div>
 
                         <label class="col-sm-1 control-label">BAIRRO</label>
                         <div class="col-sm-3"><input type="text" class="form-control"  readonly id="bairro" name="bairro"
-                                                     data-toggle="tooltip" title="Preenchimento Automatico" placeholder="BAIRRO" value="<?php echo strtoupper($rua['bairro']); ?>"></div>
+                                                     data-toggle="tooltip" title="Preenchimento Automatico" placeholder="BAIRRO" value="<?=strtoupper($rua['bairro']); ?>"></div>
 
                     </div>
 
@@ -311,51 +329,51 @@ $countlixo = $contarlixo->num_rows;
 
                         <label class="col-sm-1 control-label">LOG</label>
                         <div class="col-sm-2"><input type="text" class="form-control"  readonly name="log" id="log" placeholder="RUA , AVENIDA"
-                                                     data-toggle="tooltip" title="Preenchimento Automatico" value="<?php echo strtoupper($rua['log']); ?>"></div>
+                                                     data-toggle="tooltip" title="Preenchimento Automatico" value="<?=strtoupper($rua['log']); ?>"></div>
 
                         <label class="col-sm-1 control-label">DA/SET</label>
                         <div class="col-sm-1"><input type="text" id="da" readonly  data-toggle="tooltip" title="Preenchimento Automatico" maxlength="2"
-                                                     class="form-control" name="da" placeholder="00" value="<?php echo strtoupper($rua['da']); ?>"></div>
+                                                     class="form-control" name="da" placeholder="00" value="<?=strtoupper($rua['da']); ?>"></div>
                         <div class="col-sm-1"><input type="text"  readonly id="setor" class="form-control" name="setor" placeholder="0000"
-                                                     data-toggle="tooltip" title="Preenchimento Automatico" value="<?php echo strtoupper($rua['setor']); ?>"></div>
+                                                     data-toggle="tooltip" title="Preenchimento Automatico" value="<?=strtoupper($rua['setor']); ?>"></div>
 
                         <label for="inputPagGuia" class="col-sm-1 control-label">PGGUIA</label>
                         <div class="col-sm-1"><input type="text"  readonly class="form-control" name="pgguia" placeholder="0000"
-                                                     data-toggle="tooltip" title="Preenchimento Automatico" value="<?php echo strtoupper($rua['pgguia']); ?>"></div>
+                                                     data-toggle="tooltip" title="Preenchimento Automatico" value="<?=strtoupper($rua['pgguia']); ?>"></div>
 
                             <label class="col-sm-1 control-label">UBS REF</label>
                             <div class="col-sm-3"><input type="text" class="form-control"  readonly id="localvd" name="localvd"  placeholder="UBS DE ABRANGÊNCIA"
-                                                         data-toggle="tooltip" title="Preenchimento Automatico" value="<?php echo strtoupper($rua['ubs']); ?>"></div>
+                                                         data-toggle="tooltip" title="Preenchimento Automatico" value="<?=strtoupper($rua['ubs']); ?>"></div>
 
                     </div>
 
                     <div class="form-group">
                         <label class="col-sm-1 control-label">OBS</label>
                         <div class="col-sm-11"><textarea id="obs" tabindex="18" data-toggle="tooltip" title="Observações sobre o caso"
-                                                         class="form-control" name="obs" onchange="upperCaseF(this)" placeholder="Informações sobre o caso de esporotricose animal" rows="2"><?php echo $editar_esp_an['obs'];?></textarea></div>
+                                                         class="form-control" name="obs" onchange="upperCaseF(this)" placeholder="Informações sobre o caso de esporotricose animal" rows="2"><?=$editar_esp_an['obs'];?></textarea></div>
                     </div>
 
                     <div class="form-group pb-0">
                         <label for="inputDataEntrada" class="col-sm-1 control-label">MEDIC.</label>
                         <div class="col-sm-2"><input <?php if($id_edit == 'true'): echo 'autofocus'; endif;?> tabindex="19" type="text" class="form-control" data-toggle="tooltip"
-                                                     title="Data da 1ª entrega" name="dataentrada" id="dataentesp" placeholder="00/00/0000" value="<?php echo $id_data; ?>"></div>
+                                                     title="Data da 1ª entrega" name="dataentrada" id="dataentesp" placeholder="00/00/0000" value="<?=$id_data; ?>"></div>
 
                         <div class="col-sm-2">
                             <input type="text" tabindex="20" data-toggle="tooltip" title="Nome do Medicamento"
-                                   class="form-control medicamento" name="medicamento" placeholder="ITRACONAZOL" value="<?php echo $id_med; ?>"></div>
+                                   class="form-control medicamento" name="medicamento" placeholder="ITRACONAZOL" value="<?=$id_med; ?>"></div>
 
                         <div class="col-sm-1">
                             <input type="number" tabindex="21" data-toggle="tooltip" title="Dosagem do Medicamento" maxlength="5"
-                                   class="form-control" name="dsg" placeholder="100" value="<?php echo $id_dsg; ?>"></div>
+                                   class="form-control" name="dsg" placeholder="100" value="<?=$id_dsg; ?>"></div>
 
                         <div class="col-sm-1"><input type="number" tabindex="22" data-toggle="tooltip" title="Quantidade de comprimidos" maxlength="5"
-                                                     class="form-control" name="qtd" placeholder="000" value="<?php echo $id_qtd; ?>"></div>
+                                                     class="form-control" name="qtd" placeholder="000" value="<?=$id_qtd; ?>"></div>
 
                         <div class="col-sm-2"><input type="text" tabindex="23" data-toggle="tooltip" title="Para quem foi entregue? (Uvis ou DVZ)"
-                                                     class="form-control entregador" name="nment" placeholder="Entregue:UVIS/DVZ" value="<?php echo $id_nm_ent; ?>"></div>
+                                                     class="form-control entregador" name="nment" placeholder="Entregue:UVIS/DVZ" value="<?=$id_nm_ent; ?>"></div>
 
                         <div class="col-sm-3"><input type="text" tabindex="24" data-toggle="tooltip" title="Quem recebeu o medicamento? (Nome)"
-                                                     class="form-control" name="nmrecep" placeholder="Nome do Receptor" onchange="upperCaseF(this)" value="<?php echo $id_nm_rec; ?>"></div>
+                                                     class="form-control" name="nmrecep" placeholder="Nome do Receptor" onchange="upperCaseF(this)" value="<?=$id_nm_rec; ?>"></div>
                     </div>
             </fieldset>
 
@@ -418,12 +436,12 @@ $countlixo = $contarlixo->num_rows;
                         </tbody>
                     </table>
 
-                    <input type="hidden" name="ano" value="<?php echo $editar_esp_an['ano'];?>">
-                    <input type="hidden" name="esp_id" value="<?php echo $editar_esp_an['especie'];?>">
-                    <input type="hidden" id="idrua" name="idrua" value="<?php echo strtoupper($rua['id']); ?>"></div>
-                    <input type="hidden" name="idmedc" value="<?php echo $id_sd_med; ?>"></div>
-                    <input type="hidden" name="id" value="<?php echo $editar_esp_an['id_esp'];?>">
-                    <input type="hidden" name="pin" value="<?php echo $editar_esp_an['pin'];?>">
+                    <input type="hidden" name="ano" value="<?=$editar_esp_an['ano'];?>">
+                    <input type="hidden" name="esp_id" value="<?=$editar_esp_an['especie'];?>">
+                    <input type="hidden" id="idrua" name="idrua" value="<?=strtoupper($rua['id']); ?>"></div>
+                    <input type="hidden" name="idmedc" value="<?=$id_sd_med; ?>"></div>
+                    <input type="hidden" name="id" value="<?=$editar_esp_an['id_esp'];?>">
+                    <input type="hidden" name="pin" value="<?=$editar_esp_an['pin'];?>">
 
         <div class="form-group text-center">
             <div class="col-sm-12">

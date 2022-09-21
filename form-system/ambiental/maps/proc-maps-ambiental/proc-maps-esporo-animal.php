@@ -1,6 +1,5 @@
 <?php
 
-
 include_once '../../../../conecta.php';
 
 function parseToXML($htmlStr)

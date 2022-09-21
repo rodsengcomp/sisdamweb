@@ -15,10 +15,10 @@ $countlixo = $contarlixo->num_rows;
 $contar = $conectar->query("SELECT lixeira FROM esporo_an WHERE lixeira = $lixo");
 $count = $contar->num_rows;
 
-$cnexamepos = $conectar->query("SELECT resultado_esporo.Resultado FROM resultado_esporo RIGHT JOIN esporo_an ON resultado_esporo.Nr_Pedido = esporo_an.lab WHERE resultado_esporo.Resultado='Positivo' AND esporo_an.lixeira = $lixo");
+$cnexamepos = $conectar->query("SELECT resultado_esporo.Resultado FROM resultado_esporo RIGHT JOIN esporo_an ON resultado_esporo.Nr_Pedido = esporo_an.pedido WHERE resultado_esporo.Resultado='Positivo' AND esporo_an.lixeira = $lixo");
 $countexamepos = $cnexamepos->num_rows;
 
-$cnexameneg = $conectar->query("SELECT resultado_esporo.Resultado FROM resultado_esporo RIGHT JOIN esporo_an ON resultado_esporo.Nr_Pedido = esporo_an.lab WHERE resultado_esporo.Resultado='Negativo' AND esporo_an.lixeira = $lixo");
+$cnexameneg = $conectar->query("SELECT resultado_esporo.Resultado FROM resultado_esporo RIGHT JOIN esporo_an ON resultado_esporo.Nr_Pedido = esporo_an.pedido WHERE resultado_esporo.Resultado='Negativo' AND esporo_an.lixeira = $lixo");
 $countexameneg = $cnexameneg->num_rows;
 
 $countexamesex = $count - ($countexamepos + $countexameneg);

@@ -164,7 +164,7 @@ $rua = mysqli_fetch_assoc($resultado_rua);
 
                         <label for="inputDataEntrada" class="col-sm-1 control-label">ENTREG.</label>
                         <div class="col-sm-2"><input type="text" tabindex="21" data-toggle="tooltip" title="Para quem foi entregue? (Uvis ou DVZ)"
-                                                     class="form-control entregador" name="nment1" placeholder="Entregue:UVIS/DVZ"></div>
+                                                     class="form-control origem" name="nment1" placeholder="Entregue:UVIS/DVZ"></div>
 
                         <label for="inputDataEntrada" class="col-sm-1 control-label">RECEP.</label>
                         <div class="col-sm-3"><input type="text" tabindex="22" data-toggle="tooltip" title="Quem recebeu o medicamento? (Nome)"
