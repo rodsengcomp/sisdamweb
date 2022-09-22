@@ -1,6 +1,5 @@
 <?php
 
-class Tables
-{
+class Tables {
 
 }

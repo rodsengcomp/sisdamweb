@@ -2,6 +2,7 @@
 session_start();
 include_once 'locked/seguranca.php';
 include_once 'conecta.php';
+//include_once 'classes/Error.php';
 
 $url = $_SERVER["REQUEST_URI"];
 $_SESSION['url'] = $url;

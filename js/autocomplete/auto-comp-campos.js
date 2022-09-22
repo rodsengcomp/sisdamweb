@@ -82,6 +82,11 @@ $(document).ready(function() {
         remote : 'autocomp/situacao-auto.php?query=%QUERY'
     });
 
+    $('input.casoh').typeahead({
+        name: 'casoh',
+        local: ['S', 'N']
+    });
+
     $('input.medicamento').typeahead({
         name: 'medicamento',
         remote : 'autocomp/mdc-esp-anm-auto.php?query=%QUERY'
@@ -90,6 +95,21 @@ $(document).ready(function() {
     $('input.entregador').typeahead({
         name: 'entregador',
         local: ['UVIS', 'DVZ']
+    });
+
+    $('input.diagnostico').typeahead({
+        name: 'diagnostico',
+        local: ['EM INVESTIGACAO', 'POSITIVO', 'NEGATIVO']
+    });
+
+    $('input.sexos').typeahead({
+        name: 'sexos',
+        remote : 'autocomp/sexo-auto.php?query=%QUERY'
+    });
+
+    $('input.origem').typeahead({
+        name: 'origem',
+        remote : 'autocomp/origem-auto.php?query=%QUERY'
     });
 
     $('input.nomecad').typeahead({
