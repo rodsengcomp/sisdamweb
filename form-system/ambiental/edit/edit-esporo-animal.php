@@ -1,5 +1,5 @@
 <?php
-error_reporting(0);
+error_reporting(1);
 include_once '../../locked/seguranca.php';
 include_once '../../conecta.php';
 include_once 'edit-modals-ambiental.php';

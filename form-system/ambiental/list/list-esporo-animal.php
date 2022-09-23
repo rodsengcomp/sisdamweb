@@ -213,6 +213,8 @@ $total_p = substr($total_r, 1);
                 <a href="suvisjt.php?pag=cadastro-esporotricose-animal" role="button" style="';
                     <?php if ($_SESSION['usuarioNivelAcesso'] == 4) : echo 'display: none;';  endif;?>" accesskey="N" data-toggle="tooltip" title="Lista de Medicamentos de Esporotricose Animal - JT"
                    class="btn btn-labeled btn-success mb-2 mr-sm-4"><span class="btn-label"><i class="fa fa-plus-circle"></i> </span> <u>N</u>OVO</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="suvisjt.php?pag=relatorio-esporotricose-animal" role="button" style="color: #1c7430; border-color: #1c7430" accesskey="C" data-toggle="tooltip" title="Controle de Acompanhamento de Casos de Esporotricose Animal JT - <?=date('Y')?>"
+                   class="btn btn-labeled btn-success mb-2 mr-sm-4"><span class="btn-label"><i class="fa fa-file-excel-o"></i> </span> <u>C</u>ONT. AC.</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <a href="suvisjt.php?pag=listar-medicamentos-esporotricose-animal" role="button" accesskey="E" data-toggle="tooltip" title="SAÍDAS DE MEDICAMENTOS"
                    class="btn btn-labeled btn-success mb-2 mr-sm-4"><span class="btn-label"><i class="fa fa-pills"></i></span> <u>E</u>NTRADAS</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <a href="suvisjt.php?pag=listar-saida-de-medicamentos-esporotricose-animal" role="button" accesskey="S" data-toggle="tooltip" title="SAÍDAS DE MEDICAMENTOS"

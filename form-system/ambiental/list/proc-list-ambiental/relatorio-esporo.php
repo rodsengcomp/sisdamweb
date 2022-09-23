@@ -3,6 +3,8 @@
  * (SELECT COUNT(id_rua) FROM esporo_an
 GROUP BY id_rua
 HAVING COUNT(id_rua) > 1) AS total_busca,
+(SELECT count(id_esp) FROM esporo_an
+WHERE esporo_an.id_rua > 1) AS total_busca,
  * */
 /*
 * Exemplo de dados do exemplo do script de processamento do lado do servidor.
@@ -17,7 +19,6 @@ HAVING COUNT(id_rua) > 1) AS total_busca,
 */
 // chave primária da tabela
 $primaryKey = 'id_esp';
-$lixo = $_GET['lixeira'] ?? '0';
 
 $table = <<<EOT
  ( 
@@ -30,8 +31,7 @@ resultado_esporo.Nr_Pedido, resultado_esporo.Data_Pedido, resultado_esporo.Resul
 suvis.suvis,
 ruas.cep, ruas.da,
 origem.nm_origem,
-(SELECT count(id_esp) FROM esporo_an
-WHERE esporo_an.id_rua > 1) AS total_busca,
+(SELECT pin FROM esporo_an WHERE ruas.id = esporo_an.id_rua ORDER BY pin DESC LIMIT 1) AS total_busca,
 (SELECT SUM(qtd_medc) FROM esporo_an_sd_medc
 WHERE esporo_an_sd_medc.id_an_esp = esporo_an.id_esp) AS total_medc,
 (SELECT  esporo_an_sd_medc.data_medc
@@ -64,7 +64,7 @@ LEFT JOIN esporo_medc ON esporo_an_sd_medc.id_medc = esporo_medc.id_med_esp
 LEFT JOIN resultado_esporo ON esporo_an.pedido = resultado_esporo.Nr_Pedido
 LEFT JOIN suvis ON esporo_an.id_uvis = suvis.id
 LEFT JOIN origem ON esporo_an.origem = origem.id_origem
-WHERE esporo_an.lixeira = $lixo
+WHERE esporo_an.lixeira = 0
 GROUP BY esporo_an.id_esp
 )temp
 EOT;
@@ -94,7 +94,7 @@ $columns = array(
                     }
                 }),
                 array('db' => 'rua', 'dt' => 5, 'formatter' => function ($d) {
-                    return ucwords(strtolower($d));
+                    return ucwords(strtolower(trim($d, '*')));
                 }),
                 array('db' => 'numero', 'dt' => 6),
                 array('db' => 'cep', 'dt' => 7),

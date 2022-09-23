@@ -48,8 +48,8 @@ while ($row_markers = mysqli_fetch_assoc($resultado_markers)) {
     echo 'name="'. $row_markers['nome_animal'].'" ';
     echo 'nametutor="'. $row_markers['tutor'].'" ';
     echo 'dt_res="'. $row_markers['Data_Pedido'].'" ';
-    echo 'resultado="'. $row_markers['Resultado'].'" ';
-    echo 'sint="'. $row_markers['data_entrada'].'" ';
+    echo 'resultado="'. strtoupper($row_markers['Resultado']).'" ';
+    echo 'sint="'. date('d/m/Y', strtotime($row_markers['data_entrada'])).'" ';
     echo 'address="'. $row_markers['log'] . ' '. $row_markers['rua'] .'" ';
     echo 'idrua="'. $row_markers['id'] .'" ';
     echo 'comp="'. $row_markers['numero']. ' '. $row_markers['complemento'].'" ';
@@ -57,6 +57,7 @@ while ($row_markers = mysqli_fetch_assoc($resultado_markers)) {
     echo 'lng="' . $row_markers['lng'] . '" ';
     echo 'type="' . strtoupper($row_markers['type']) .'_'.strtoupper($row_markers['Resultado']). '" ';
     echo 'pin="' . $row_markers['pin'] . '" ';
+    echo 'ruagoogle="' . $row_markers['rua_esp_a'] . '" ';
     echo '/>';
 }
 

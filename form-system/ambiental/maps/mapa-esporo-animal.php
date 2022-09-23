@@ -6,13 +6,15 @@
  * Time: 14:38
  */
 
+error_reporting(1);
+
 $contar = $conectar->query("SELECT lixeira FROM esporo_an WHERE lixeira = 0");
 $count = $contar->num_rows;
 
-$cnexamepos = $conectar->query("SELECT resultado_esporo.Resultado FROM resultado_esporo RIGHT JOIN esporo_an ON resultado_esporo.Nr_Pedido = esporo_an.lab WHERE resultado_esporo.Resultado='Positivo' AND esporo_an.lixeira = 0");
+$cnexamepos = $conectar->query("SELECT resultado_esporo.Resultado FROM resultado_esporo RIGHT JOIN esporo_an ON resultado_esporo.Nr_Pedido = esporo_an.pedido WHERE resultado_esporo.Resultado='Positivo' AND esporo_an.lixeira = 0");
 $countexamepos = $cnexamepos->num_rows;
 
-$cnexameneg = $conectar->query("SELECT resultado_esporo.Resultado FROM resultado_esporo RIGHT JOIN esporo_an ON resultado_esporo.Nr_Pedido = esporo_an.lab WHERE resultado_esporo.Resultado='Negativo' AND esporo_an.lixeira = 0");
+$cnexameneg = $conectar->query("SELECT resultado_esporo.Resultado FROM resultado_esporo RIGHT JOIN esporo_an ON resultado_esporo.Nr_Pedido = esporo_an.pedido WHERE resultado_esporo.Resultado='Negativo' AND esporo_an.lixeira = 0");
 $countexameneg = $cnexameneg->num_rows;
 
 $countexamesex = $count - ($countexamepos + $countexameneg);
@@ -42,8 +44,8 @@ $row_exame_esporo = mysqli_fetch_assoc($cs_exame_esporo);
                     <li class="active">Negativos <span role="button" class="btn btn-success rounded-circle"><?=$countexameneg?></span>
                     <li class="active">Sem Coleta <span role="button" class="btn btn-warning rounded-circle"><?=$countexamesex?></span>
                 </ol>
-                <button type="button"  class="btn btn-success btn-labeled btn-lg btn-block" data-toggle="tooltip" title="Lista de Bloqueios 1ª Via" ><span class="btn-label"><i
-                                class="glyphicon glyphicon-globe"></i></span>CASOS DE ESPOROTRICOSE ANIMAL - <?php echo date("Y")?></button>
+                <button type="button" style="opacity: unset" class="disabled btn btn-success btn-labeled btn-lg btn-block" data-toggle="tooltip" title="Lista de Bloqueios 1ª Via" ><span class="btn-label"><i
+                                class="fa fa-globe-americas"></i></span>CASOS DE ESPOROTRICOSE ANIMAL - <?php echo date("Y")?></button>
             </div>
         </div>
     </div>
@@ -57,6 +59,12 @@ $row_exame_esporo = mysqli_fetch_assoc($cs_exame_esporo);
         height: 70%;
         margin-left: 20px;
         margin-right: 20px;
+    }
+    a:active, a:focus {
+        outline: 0;
+        border: none;
+        color: black;
+        -moz-outline-style: none;
     }
     /* Optional: Makes the sample page fill the window. */
     html, body {
@@ -129,6 +137,7 @@ $row_exame_esporo = mysqli_fetch_assoc($cs_exame_esporo);
                 let lat = markers[i].getAttribute("lat");
                 let lng = markers[i].getAttribute("lng");
                 let pin = markers[i].getAttribute("pin");
+                let ruagoogle = markers[i].getAttribute("ruagoogle");
 
                 var point = new google.maps.LatLng(
                     parseFloat(markers[i].getAttribute("lat")),
@@ -142,7 +151,7 @@ $row_exame_esporo = mysqli_fetch_assoc($cs_exame_esporo);
                 });
 
                 if(resultado == ""){
-                    resultado = "Sem resultado"
+                    resultado = "SEM RESULTADO"
                 }
                 if(pin == 0){
                     pin = ""
@@ -153,10 +162,10 @@ $row_exame_esporo = mysqli_fetch_assoc($cs_exame_esporo);
                 let html = "";
                 let icone = "";
 
-                if(resultado == "Positivo") {
+                if(resultado == "POSITIVO") {
                     html = "#ff4122";
                     icone = "<i class='ri-close-circle-line' style='font-size: 2rem; position: absolute; left: 8%; top: 10%;'></i>";
-                } else if(resultado == "Negativo"){
+                } else if(resultado == "NEGATIVO"){
                     html = "#00FF00";
                     icone = "<i class='ri-checkbox-circle-line' style='font-size: 2rem; position: absolute; left: 8%; top: 10%;'></i>";
                 } else {
@@ -165,23 +174,25 @@ $row_exame_esporo = mysqli_fetch_assoc($cs_exame_esporo);
                 }
 
                 if(dtres == null){
-                    dtres = "Sem data"
+                    dtres = "SEM DATA"
                 }
 
                 if(sint == "0000-00-00"){
-                    sint = "Sem data"
+                    sint = "SEM DATA"
                 }
 
                 google.maps.event.addListener(marker, 'click', (function(marker, i) {
                     return function() {
                         infowindow.setContent(
                             "<p style='text-align: center; margin-bottom: 1rem; padding: 5px 0; background-color:" + html + "; font-size: 1.5rem; position: relative'><b>"
-                            + pin + name +
-                            "</b>" + icone + "</p><p> ENDEREÇO: <a target='_blank' href='suvisjt.php?pag=edit-end&id="
+                            + pin +
+                            "<a title='Editar o animal' target='_blank' href='suvisjt.php?pag=edit-esporo-animal&id=" + id +"'>"
+                            + name +
+                            "</a></b>" + icone + "</p><p> ENDEREÇO: <a target='_blank' title='Editar o endereço' href='suvisjt.php?pag=edit-end&id="
                             + idrua +
                             "'>"
-                            + address + ", " + comp +
-                            "</a></b></p><p>  TUTOR: "
+                            + address +
+                            "</a> , " + comp + "</b></p><p>  TUTOR: "
                             + nametutor +
                             "</b></p><p>  RESULTADO: "
                             + resultado +
@@ -189,9 +200,7 @@ $row_exame_esporo = mysqli_fetch_assoc($cs_exame_esporo);
                             + dtres +
                             "</b></p><p>  DATA SINTOMAS: "
                             + sint +
-                            "</b></p><p>  LAT, LNG: "
-                            + lat + " , " + lng +
-                            "</p>"
+                            "</b></p><p>  ROTA: <a title='Traçar rota' target='_blank' href='https://www.google.com.br/maps/dir/?api=1&origin=R. Maria Amália Lopes Azevedo, 3676 - Vila Albertina&destination=" + ruagoogle + "&travelmode=driving'>" + lat + " , " + lng + "</a></p>"
 
                         );
                         infowindow.open(map, marker);

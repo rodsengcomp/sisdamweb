@@ -7,21 +7,8 @@
 
 error_reporting(1);
 
-$lixo = $_GET['lixeira'] ?? '0';
-
-$contarlixo = $conectar->query("SELECT lixeira FROM esporo_an WHERE lixeira = 1");
-$countlixo = $contarlixo->num_rows;
-
-$contar = $conectar->query("SELECT lixeira FROM esporo_an WHERE lixeira = $lixo");
-$count = $contar->num_rows;
-
-$cnexamepos = $conectar->query("SELECT resultado_esporo.Resultado FROM resultado_esporo RIGHT JOIN esporo_an ON resultado_esporo.Nr_Pedido = esporo_an.pedido WHERE resultado_esporo.Resultado='Positivo' AND esporo_an.lixeira = $lixo");
-$countexamepos = $cnexamepos->num_rows;
-
-$cnexameneg = $conectar->query("SELECT resultado_esporo.Resultado FROM resultado_esporo RIGHT JOIN esporo_an ON resultado_esporo.Nr_Pedido = esporo_an.pedido WHERE resultado_esporo.Resultado='Negativo' AND esporo_an.lixeira = $lixo");
-$countexameneg = $cnexameneg->num_rows;
-
-$countexamesex = $count - ($countexamepos + $countexameneg);
+// DEFINE O FUSO HORARIO COMO O HORARIO DE BRASILIA
+date_default_timezone_set('America/Sao_Paulo');
 
 $cs_sinan = $conectar->query("SELECT CREATE_TIME FROM information_schema.tables WHERE TABLE_NAME = 'esporo_an' ORDER BY `CREATE_TIME` DESC");
 $row_sinan = mysqli_fetch_assoc($cs_sinan);
@@ -47,28 +34,13 @@ $row_exame_esporo = mysqli_fetch_assoc($cs_exame_esporo);
             dom: "lBfrtip",processing: true, serverside: true, ajax: 'form-system/ambiental/list/proc-list-ambiental/relatorio-esporo.php?lixeira=<?=$lixo?>',
             "lengthMenu": [[4, 10, 25, 50, -1], [4, 10, 25, 50, "Todos"]],
             "aoColumnDefs": [],
-            buttons: [ {extend:'excel',title:'ESPOROTRICOSE ANIMAL - JT <?php echo date('Y');?>',header: 'ESPOROTRICOSE ANIMAL - JT <?php echo date('Y');?>',filename:'ESPOROTRICOSE ANIMAL - JT <?php echo date('Y');?>',className: 'btn btn-success',text:'<span class="fal fa-file-excel"></span>' },
-                {extend: 'pdfHtml5',exportOptions: {columns: ':visible'},title:'ESPOROTRICOSE ANIMAL - JT <?php echo date('Y');?>',header: 'ESPOROTRICOSE ANIMAL - JT <?php echo date('Y');?>',filename:'ESPOROTRICOSE ANIMAL - JT <?php echo date('Y');?>',orientation: 'landscape',pageSize: 'LEGAL',className: 'btn btn-danger',text:'<span class="fa fa-file-pdf-o"></span>'},
-                {extend:'print',exportOptions: {columns: ':visible'},title:'ESPOROTRICOSE ANIMAL - JT <?php echo date('Y');?>',header: 'ESPOROTRICOSE ANIMAL - JT <?php echo date('Y');?>',filename:'ESPOROTRICOSE ANIMAL - JT <?php echo date('Y');?>',className: 'btn btn-default',text:'<span class="fa fa-print"></span>'},
+            buttons: [ {extend:'excel',title:'Controle de Acompanhamento de Casos de Esporotricose Animal JT - <?=date('Y')?>',header: 'Controle de Acompanhamento de Casos de Esporotricose Animal JT - <?=date('Y')?>',filename:'Controle de Acompanhamento de Casos de Esporotricose Animal JT - <?=date('Y')?>',className: 'btn btn-success',text:'<span class="fal fa-file-excel"></span>' },
+                {extend: 'pdfHtml5',exportOptions: {columns: ':visible'},title:'Controle de Acompanhamento de Casos de Esporotricose Animal JT - <?=date('Y')?>',header: 'Controle de Acompanhamento de Casos de Esporotricose Animal JT - <?=date('Y')?>',filename:'Controle de Acompanhamento de Casos de Esporotricose Animal JT - <?=date('Y')?>',orientation: 'landscape',pageSize: 'LEGAL',className: 'btn btn-danger',text:'<span class="fa fa-file-pdf-o"></span>'},
+                {extend:'print',exportOptions: {columns: ':visible'},orientation: 'landscape',title:'Controle de Acompanhamento de Casos de Esporotricose Animal JT - <?=date('Y')?>',header: 'Controle de Acompanhamento de Casos de Esporotricose Animal JT - <?=date('Y')?>',filename:'Controle de Acompanhamento de Casos de Esporotricose Animal JT - <?=date('Y')?>',className: 'btn btn-default',text:'<span class="fa fa-print"></span>'},
                 {extend:'colvis',className: 'btn btn-info',text:'<span class="fa fa-list"></span>'} ]
         });
     });
 </script>
-
-<?php
-
-// DEFINE O FUSO HORARIO COMO O HORARIO DE BRASILIA
-date_default_timezone_set('America/Sao_Paulo');
-
-$consulta_e = $conectar->query("SELECT SUM(esporo_an_ent_medc.qtd_esp_medc) AS entrada FROM esporo_an_ent_medc WHERE lixeira<>1");
-$consulta_s = $conectar->query("SELECT SUM(esporo_an_sd_medc.qtd_medc) AS saida FROM esporo_an_sd_medc WHERE lixeira<>1");
-
-while ($row = $consulta_e->fetch_assoc()) : $total_e = $row['entrada'];endwhile;
-while ($row = $consulta_s->fetch_assoc()) : $total_s = $row['saida']; endwhile;
-$total_r = $total_e - $total_s;
-$total_p = substr($total_r, 1);
-
-?>
 
 <!-- Início do HTML 5 da Página-->
 <div class="container-fluid" role="main" xmlns="http://www.w3.org/1999/html">
@@ -82,18 +54,10 @@ $total_p = substr($total_r, 1);
                     <li class="active">Sinan At. em - <?php echo date("d/m/Y",strtotime($row_sinan['CREATE_TIME'])) ; ?> às <?php echo date("H:i:s",strtotime($row_sinan['CREATE_TIME'])) ; ?></li>
                 </ol>
 
-                <button type="button"  data-toggle="tooltip" title="Lista de Casos de Esporotricose Animal - JT" class="btn btn-<?php if($lixo === '1') : echo 'default'; else : echo 'dark'; endif; ?> btn-labeled btn-lg btn-block"><i class="btn-label"><i
-                    class="fa fa-<?php if($lixo === '1') : echo 'trash-alt'; else : echo 'pills'; endif; ?>"></i></i><?php if($lixo === '1') : echo 'LIXEIRA '; else : echo 'LISTA'; endif; ?>DE CASOS - ESPOROTRICOSE ANIMAL - JT</button>
+                <button type="button"  data-toggle="tooltip" disabled style="opacity: unset" title="Lista de Casos de Esporotricose Animal - JT" class="btn btn-success btn-labeled btn-lg btn-block"><i class="btn-label"><i
+                    class="fa fa-file-excel-o"></i></i>CONTROLE DE CASOS - ESPOROTRICOSE ANIMAL - JT</button>
 
             </div>
-        </div>
-    </div>
-
-    <div class="row espaco">
-        <div class="text-center">
-                <a href="suvisjt.php?pag=cadastro-esporotricose-animal" role="button" style="color: #1c7430" accesskey="N" data-toggle="tooltip" title="Lista de Medicamentos de Esporotricose Animal - JT"
-                   class="btn btn-labeled btn-success mb-2 mr-sm-4"><span class="btn-label"><i class="fa fa-file-excel"></i> </span> <u>E</u>XCEL</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
         </div>
     </div>
 
