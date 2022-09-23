@@ -16,6 +16,13 @@ jQuery(function($){
     $("#idade").mask("999a");
     $("#codigo").mask("999999");
     $("#datanotcad").mask("99/99/9999");
+
+
+    $("#dataua").mask("99/99/9999");
+    $("#databa").mask("99/99/9999");
+    $("#dataft").mask("99/99/9999");
+
+
     $("#dataobitocad").mask("99/99/9999");
     $("#datanotedi").mask("99/99/9999");
     $("#data1sincad").mask("99/99/9999");

@@ -59,7 +59,7 @@ $edit_medc = mysqli_fetch_assoc($cs_stm_medc);
                 echo 'disabled';
 
             } ?>>
-                <form class="form-horizontal" id="edit-medicamento-esporo-animal" method="POST" action="suvisjt.php?pag=proc-edit-esporo-animal&acao=editar-medicamento">
+                <form class="form-horizontal" id="edit-medicamento-esporo-animal" method="POST" action="suvisjt.php?pag=proc-edit-esporo-animal">
 
 
                     <div class="form-group">
@@ -89,6 +89,7 @@ $edit_medc = mysqli_fetch_assoc($cs_stm_medc);
                 <div class="form-group text-center">
                     <div class="col-sm-12">
                         <input type="hidden" id="id" name="id" value="<?=$id?>">
+                        <input type="hidden" name="acao" value="editar-medicamento">
 
                         <button type="submit" tabindex="4" accesskey="G" style="<?php if ($_SESSION['usuarioNivelAcesso'] == 4) {
                             echo 'display: none;';

@@ -31,7 +31,7 @@ resultado_esporo.Nr_Pedido, resultado_esporo.Data_Pedido, resultado_esporo.Resul
 suvis.suvis,
 ruas.cep, ruas.da,
 origem.nm_origem,
-(SELECT pin FROM esporo_an WHERE ruas.id = esporo_an.id_rua ORDER BY pin DESC LIMIT 1) AS total_busca,
+(SELECT COUNT(id_esp) FROM esporo_an WHERE ruas.id = esporo_an.id_rua ORDER BY pin DESC LIMIT 1) AS total_busca,
 (SELECT SUM(qtd_medc) FROM esporo_an_sd_medc
 WHERE esporo_an_sd_medc.id_an_esp = esporo_an.id_esp) AS total_medc,
 (SELECT  esporo_an_sd_medc.data_medc

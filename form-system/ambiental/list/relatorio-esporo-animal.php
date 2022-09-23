@@ -24,14 +24,14 @@ $row_exame_esporo = mysqli_fetch_assoc($cs_exame_esporo);
             $('[data-toggle="tooltip"]').tooltip()
 
         $('#relatorio-esporo').DataTable({responsive: {details: {display: $.fn.dataTable.Responsive.display.modal({header: function (row) {var data = row.data();
-                            return data[5] + ' ' + data[4];}}),renderer: function ( api, rowIdx, columns ) {var data = $.map( columns, function ( col, i ) {
+                            return data[10] + ' ' + data[11];}}),renderer: function ( api, rowIdx, columns ) {var data = $.map( columns, function ( col, i ) {
                         return '<tr>'+'<td>'+col.title+':'+'</td> '+'<td>'+col.data+'</td>'+'</tr>';} ).join('');
                         return $('<table/>').append( data ); } } },
             "language": {"sEmptyTable": "Nenhum registro encontrado","sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros","sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
                 "sInfoFiltered": "(Filtrados de _MAX_ registros)","sInfoThousands": ".","sLengthMenu": "_MENU_ Resultados por Página","sLoadingRecords": "Carregando...",
                 "sProcessing": "Processando...","sZeroRecords": "Nenhum registro encontrado","sSearch": "Pesquisar","oPaginate": {"sNext": "Próximo","sPrevious": "Anterior","sFirst": "Primeiro","sLast": "Último"},
                 "oAria": {"sSortAscending": "Ordenar colunas de forma ascendente","sPrevious": "Ordenar colunas de forma descendente"}},
-            dom: "lBfrtip",processing: true, serverside: true, ajax: 'form-system/ambiental/list/proc-list-ambiental/relatorio-esporo.php?lixeira=<?=$lixo?>',
+            dom: "lBfrtip",processing: true, serverside: true, ajax: 'form-system/ambiental/list/proc-list-ambiental/relatorio-esporo.php',
             "lengthMenu": [[4, 10, 25, 50, -1], [4, 10, 25, 50, "Todos"]],
             "aoColumnDefs": [],
             buttons: [ {extend:'excel',title:'Controle de Acompanhamento de Casos de Esporotricose Animal JT - <?=date('Y')?>',header: 'Controle de Acompanhamento de Casos de Esporotricose Animal JT - <?=date('Y')?>',filename:'Controle de Acompanhamento de Casos de Esporotricose Animal JT - <?=date('Y')?>',className: 'btn btn-success',text:'<span class="fal fa-file-excel"></span>' },

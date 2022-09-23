@@ -60,28 +60,9 @@ $countlixo = $contarlixo->num_rows;
 ?>
 
 <style>
-    #mapesp {
-        width: 1140px;
-        height: 200px;
-        border: 10px solid #ccc;;
-        margin-bottom: 20px;
-    }
-
-    #apresentacao {
-        width: 1140px;
-        margin: 1% auto;
-        overflow: hidden;
-    }
-
-    #searchInput {
-        background-color: #fff;
-        font-size: 15px;
-        font-weight: 300;
-        margin-left: 12px;
-        padding: 0 11px 0 13px;
-        text-overflow: ellipsis;
-        width: 50%;
-    }
+    #mapesp {width: 1140px; height: 200px; border: 10px solid #ccc; margin-bottom: 20px;}
+    #apresentacao {width: 1140px; margin: 1% auto; overflow: hidden;}
+    #searchInput {background-color: #fff; font-size: 15px; font-weight: 300; margin-left: 12px; padding: 0 11px 0 13px; text-overflow: ellipsis; width: 50%;}
 </style>
 
 <script type="text/javascript">
@@ -154,232 +135,256 @@ $countlixo = $contarlixo->num_rows;
 
 <div class="container theme-showcase" role="main" xmlns="http://www.w3.org/1999/html">
 
-    <!-- Pagina de Titulo -->
+    <!-- begin PAGE TITLE ROW -->
     <div class="row">
         <div class="col-md-12">
             <div class="page-header">
-
-                <button type="button" class="btn btn-warning btn-labeled btn-lg btn-block"><span class="btn-label"><i
-                                class="glyphicon glyphicon-pencil"></i></span>EDITAR ESPOROTRICOSE ANIMAL</button>
+                <ol class="breadcrumb">
+                    <li><i class="fa fa-database"></i> <a href="suvisjt.php">Sisdam Web</a></li>
+                    <li class="active">Eporotricose Animal</li>
+                </ol>
+                <button type="button" style="opacity: inherit;color: #1d2124" class="btn btn-warning btn-labeled btn-lg btn-block" disabled><span class="btn-label"><i
+                                class="fa fa-pencil"></i></span>EDITAR ESPOROTRICOSE ANIMAL</button>
             </div>
         </div>
     </div>
-    <!-- Fim da Pagina de Titulo -->
 
-    <div class="form-group text-center">
-        <div class="alert alert-danger text-center" style="<?php if ($_SESSION['usuarioNivelAcesso'] < 3) {
-            echo 'display: none;';
-        } ?>" role="alert"><strong>SEU NÍVEL DE USUÁRIO NÃO PERMITE EDITAR !!!</strong></div>
-    </div>
+    <?php if ($_SESSION['usuarioNivelAcesso'] > 3):?>
+        <div class="form-group text-center"><div class="alert alert-danger text-center" role="alert"><strong>SEU NÍVEL DE USUÁRIO NÃO PERMITE EDITAR !!!</strong></div></div>
+    <?php endif;?>
 
-    <div class="form-group text-center">
-        <div class="alert alert-danger text-center" style="<?php if ($_SESSION['usuarioNivelAcesso'] <> "") {
-            echo 'display:none';
-        } ?>" role="alert"><strong>PARA EDITAR É NECESSARIO FAZER O LOGIN!!!</strong></div>
-    </div>
+    <?php if ($_SESSION['usuarioNivelAcesso'] == ''):?>
+    <div class="form-group text-center"><div class="alert alert-danger text-center" role="alert"><strong>PARA EDITAR É NECESSARIO FAZER O LOGIN!!!</strong></div></div>
+    <?php endif;?>
 
-    <div class="form-group text-center">
-        <?php
-        if (isset($_SESSION['msgerroredit'])) {
-            echo $_SESSION['msgerroredit'];
-            unset($_SESSION['msgerroredit']);
-        }
-        if (isset($_SESSION['msgedit'])) {
-            echo $_SESSION['msgedit'];
-            unset($_SESSION['msgedit']);
-        }
-        ?>
-    </div>
+    <?php
+        if (isset($_SESSION['msgedit'])):
+            echo '<div class="form-group text-center">'.$_SESSION['msgedit'].'</div>';
+        endif;
+    ?>
 
     <div class="row">
 
         <div class="col-md-12">
-            <fieldset <?php
-            if ($_SESSION['usuarioNivelAcesso'] == "") :
-                echo 'disabled';
-            elseif($id_lixeira == 'true') :
-                echo 'disabled';
-            else :
-                echo '';
-            endif;
-             ?>>
-                <form class="form-horizontal" id="edit-esporo-animal" method="POST" action="suvisjt.php?pag=proc-edit-esporo-animal">
+                <fieldset <?php
+                if ($_SESSION['usuarioNivelAcesso'] == "") : echo 'disabled';
+                elseif($id_lixeira == 'true') : echo 'disabled';
+                else : echo ''; endif;
+                 ?>>
+            <form class="form-horizontal" id="edit-esporo-animal" method="POST" action="suvisjt.php?pag=proc-edit-esporo-animal">
 
-                    <?=$editar_esp_an['pin'];?>
-                    <div class="form-group" id="apresentacao">
-                        <input id="searchInput" tabindex="15" style="margin-top: 10px;" class="form-control" type="text"
-                               name="ruagoogle" placeholder="Digite o local" value="<?=$editar_esp_an['rua_esp_a']; ?>">
-                        <div id="mapesp"></div>
+                <div class="form-group" id="apresentacao">
+                    <input id="searchInput" tabindex="15" style="margin-top: 10px;" class="form-control" type="text"
+                           name="ruagoogle" placeholder="Digite o local" value="<?=$editar_esp_an['rua_esp_a']; ?>">
+                    <div id="mapesp"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputNve" class="col-sm-1 control-label">NVE</label>
+                    <div class="col-sm-1">
+                        <input type="text" id="nve" <?php if($id_edit != 'true'): echo 'autofocus'; endif;?> tabindex="1" data-toggle="tooltip" title="Ex: 10" maxlength="5"
+                               class="form-control" name="nve" placeholder="000" value="<?=$editar_esp_an['nve']; ?>"></div>
+
+                    <label for="inputDataNot" class="col-sm-1 control-label">ENTRADA</label>
+                    <div class="col-sm-2">
+                        <input tabindex="2" type="text" class="form-control" data-toggle="tooltip"
+                               title="Não pode ser maior que hoje" name="datanot" id="datanotcad"
+                               placeholder="00/00/0000" value="<?=date('d/m/Y', strtotime($editar_esp_an['data_entrada'])); ?>">
                     </div>
 
-                    <div class="form-group">
-                        <label for="inputNve" class="col-sm-1 control-label">NVE</label>
-                        <div class="col-sm-1">
-                            <input type="text" id="nve" <?php if($id_edit != 'true'): echo 'autofocus'; endif;?> tabindex="1" data-toggle="tooltip" title="Ex: 10" maxlength="5"
-                                   class="form-control" name="nve" placeholder="000" value="<?=$editar_esp_an['nve']; ?>"></div>
+                    <label class="col-sm-1 control-label">ANIMAL</label>
+                    <div class="col-sm-3">
+                        <input type="text" tabindex="3" class="form-control" name="nomeanimal"  data-toggle="tooltip" title="Nome do Animal"
+                            value="<?=strtoupper($editar_esp_an['nome_animal']); ?>" onchange="upperCaseF(this)"></div>
 
-                        <label for="inputDataNot" class="col-sm-1 control-label">ENTRADA</label>
-                        <div class="col-sm-2">
-                            <input tabindex="2" type="text" class="form-control" data-toggle="tooltip"
-                                   title="Não pode ser maior que hoje" name="datanot" id="datanotcad"
-                                   placeholder="00/00/0000" value="<?=date('d/m/Y', strtotime($editar_esp_an['data_entrada'])); ?>">
-                        </div>
+                    <label class="col-sm-1 control-label">ESPÉCIE</label>
+                    <div class="col-sm-2">
+                        <input type="text" tabindex="4" class="form-control especie" name="especie"  data-toggle="tooltip" title="Cão ou Gato"
+                             onchange="upperCaseF(this)" value="<?=$especie_select['especie']; ?>"></div>
+                </div>
 
-                        <label class="col-sm-1 control-label">ANIMAL</label>
-                        <div class="col-sm-3">
-                            <input type="text" tabindex="3" class="form-control" name="nomeanimal"  data-toggle="tooltip" title="Nome do Animal"
-                                value="<?=strtoupper($editar_esp_an['nome_animal']); ?>" onchange="upperCaseF(this)"></div>
+                <div class="form-group">
+                    <label class="col-sm-1 control-label">TUTOR</label>
+                    <div class="col-sm-4">
+                        <input type="text" tabindex="5" class="form-control" name="tutor"  data-toggle="tooltip" title="Nome do Proprietário do Animal"
+                            onchange="upperCaseF(this)" value="<?=strtoupper($editar_esp_an['tutor']); ?>"></div>
 
-                        <label class="col-sm-1 control-label">ESPÉCIE</label>
-                        <div class="col-sm-2">
-                            <input type="text" tabindex="4" class="form-control especie" name="especie"  data-toggle="tooltip" title="Cão ou Gato"
-                                 onchange="upperCaseF(this)" value="<?=$especie_select['especie']; ?>"></div>
+                    <label class="col-sm-1 control-label">IDADE</label>
+                    <div class="col-sm-1"><input type="text" tabindex="6" class="form-control" name="idade" data-toggle="tooltip" title="Idade em anos"
+                                                 placeholder="Nº" value="<?=$editar_esp_an['idade'];?>"></div>
+
+                    <label for="inputOrigem" class="col-sm-1 control-label">SEXO</label>
+                    <div class="col-sm-1">
+                        <input type="text" tabindex="7" class="form-control sexos" data-toggle="tooltip" title="F OU M" name="sexos" id="sexos"
+                               onchange="upperCaseF(this)" value="<?php if(!empty($editar_sexo['sexo'])) echo $editar_sexo['sexo'];?>" placeholder="M/F">
                     </div>
 
-                    <div class="form-group">
+                    <label for="inputTelefone1" class="col-sm-1 control-label">TEL 1</label>
+                    <div class="col-sm-2">
+                        <input type="text" tabindex="8" class="form-control" data-toggle="tooltip" title="Celular ou fixo sem DDD" name="tel1" id="tels1" maxlength="15"
+                           placeholder="99999-9999" value="<?=$editar_esp_an['telefone1']; ?>"></div>
 
-                        <label class="col-sm-1 control-label">TUTOR</label>
-                        <div class="col-sm-4">
-                            <input type="text" tabindex="5" class="form-control" name="tutor"  data-toggle="tooltip" title="Nome do Proprietário do Animal"
-                                onchange="upperCaseF(this)" value="<?=strtoupper($editar_esp_an['tutor']); ?>"></div>
+                </div>
 
-                        <label class="col-sm-1 control-label">IDADE</label>
-                        <div class="col-sm-1"><input type="text" tabindex="6" class="form-control" name="idade" data-toggle="tooltip" title="Idade em anos"
-                                                     placeholder="Nº" value="<?=$editar_esp_an['idade'];?>"></div>
 
-                        <label for="inputOrigem" class="col-sm-1 control-label">SEXO</label>
-                        <div class="col-sm-1">
-                            <input type="text" tabindex="7" class="form-control sexos" data-toggle="tooltip" title="F OU M" name="sexos" id="sexos"
-                                   onchange="upperCaseF(this)" value="<?php if(!empty($editar_sexo['sexo'])) echo $editar_sexo['sexo'];?>" placeholder="M/F">
-                        </div>
-
-                        <label for="inputTelefone1" class="col-sm-1 control-label">TEL 1</label>
-                        <div class="col-sm-2">
-                            <input type="text" tabindex="8" class="form-control" data-toggle="tooltip" title="Celular ou fixo sem DDD" name="tel1" id="tels1" maxlength="15"
-                               placeholder="99999-9999" value="<?=$editar_esp_an['telefone1']; ?>"></div>
-
+                <div class="form-group">
+                    <label for="inputOrigem" class="col-sm-1 control-label">CASO H:</label>
+                    <div class="col-sm-1">
+                        <input type="text" tabindex="13" class="form-control casoh" data-toggle="tooltip" title="Caso humano? S ou N" name="casoh"
+                               onchange="upperCaseF(this)" placeholder="S/N" value="<?=$editar_esp_an['casos_hum_dom'];?>">
                     </div>
 
-                    <div class="form-group">
+                    <label class="col-sm-1 control-label">ENDEREÇO</label>
+                    <div class="col-sm-4"><input type="text" tabindex="14" class="form-control rua" name="rua" data-toggle="tooltip" title="Nome da rua"
+                                                 id="ruaselect" placeholder="NOME DO ENDEREÇO" onchange="upperCaseF(this)" value="<?=strtoupper($rua['rua']); ?>"></div>
 
-                        <label class="col-sm-1 control-label">PEDIDO</label>
-                        <div class="col-sm-2"><input type="text" tabindex="9" class="form-control" name="pedido" data-toggle="tooltip" title="Preenchimento Automatico"
-                                                     placeholder="123456789" value="<?=$editar_esp_an['pedido'];?>"></div>
+                    <label class="col-sm-1 control-label">N</label>
+                    <div class="col-sm-1"><input type="text" tabindex="16" class="form-control" name="num" data-toggle="tooltip" title="Preenchimento Automatico"
+                                                 placeholder="Nº" maxlength="6" value="<?=$editar_esp_an['numero'];?>"></div>
 
-                        <label for="inputOrigem" class="col-sm-1 control-label">ORIGEM</label>
-                        <div class="col-sm-2">
-                            <input type="text" tabindex="10" class="form-control origem" data-toggle="tooltip" title="CCZ PLANTAO OU UVIS JACANA" name="origem" id="origem"
-                                   value="<?php if(!empty($editar_origem['nm_origem'])) echo $editar_origem['nm_origem'];?>" placeholder="UVIS JACANA">
-                        </div>
+                    <label class="col-sm-1 control-label">COMP</label>
+                    <div class="col-sm-2"><input type="text" tabindex="17" class="form-control" name="comp" data-toggle="tooltip" title="Preenchimento Automatico" style="<?php if ($_SESSION['usuarioNivelAcesso'] == 4) {
+                            echo 'display: none;';
+                        } ?>" placeholder="CASA , APTO"
+                                                 onchange="upperCaseF(this)" value="<?=$editar_esp_an['complemento'];?>"></div>
 
-                        <label class="col-sm-1 control-label">SITUAÇÃO</label>
-                        <div class="col-sm-2"><input type="text" tabindex="11" class="form-control situacao" name="situacao" data-toggle="tooltip" title="Situação do tratamento"
-                                                     value="<?=strtoupper($situacao['sit_esp']); ?>"></div>
+                </div>
 
-                        <label class="col-sm-1 control-label">DIAGNÓST.</label>
-                        <div class="col-sm-2"><input type="text" onchange="upperCaseF(this)" tabindex="12" class="form-control diagnostico" name="diagnostico" data-toggle="tooltip" title="POSITIVO/NEGATIVO"
-                             value="<?php $dgt = $editar_esp_an['diagnostico'];
-                                     if($dgt == 1): echo 'POSITIVO';
-                                     elseif ($dgt == 2): echo 'NEGATIVO';
-                                    else: echo 'EM INVESTIGACAO'; endif; ?>"></div>
-                    </div>
 
-                    <div class="form-group">
-                        <label for="inputOrigem" class="col-sm-1 control-label">CASO H:</label>
-                        <div class="col-sm-1">
-                            <input type="text" tabindex="13" class="form-control casoh" data-toggle="tooltip" title="Caso humano? S ou N" name="casoh"
-                                   onchange="upperCaseF(this)" placeholder="S/N" value="<?=$editar_esp_an['casos_hum_dom'];?>">
-                        </div>
+                <div class="form-group">
 
-                        <label class="col-sm-1 control-label">ENDEREÇO</label>
-                        <div class="col-sm-4"><input type="text" tabindex="14" class="form-control rua" name="rua" data-toggle="tooltip" title="Nome da rua"
-                                                     id="ruaselect" placeholder="NOME DO ENDEREÇO" onchange="upperCaseF(this)" value="<?=strtoupper($rua['rua']); ?>"></div>
+                    <label class="col-sm-1 control-label">LAT/LNG</label>
+                    <div class="col-sm-2"><input type="text" tabindex="18" id="lat" data-toggle="tooltip" title="Ex: 23.4587899" class="form-control"
+                                                 name="lat" placeholder="15,123456789" value="<?=$editar_esp_an['lat'];?>"></div>
 
-                        <label class="col-sm-1 control-label">N</label>
-                        <div class="col-sm-1"><input type="text" tabindex="16" class="form-control" name="num" data-toggle="tooltip" title="Preenchimento Automatico"
-                                                     placeholder="Nº" maxlength="6" value="<?=$editar_esp_an['numero'];?>"></div>
+                    <div class="col-sm-2"><input type="text" tabindex="19" id="lng" class="form-control"  data-toggle="tooltip" title="Ex: 46.458789" name="lng"
+                                                 placeholder="-19,123456789" value="<?=$editar_esp_an['lng'];?>"></div>
 
-                        <label class="col-sm-1 control-label">COMP</label>
-                        <div class="col-sm-2"><input type="text" tabindex="17" class="form-control" name="comp" data-toggle="tooltip" title="Preenchimento Automatico" style="<?php if ($_SESSION['usuarioNivelAcesso'] == 4) {
-                                echo 'display: none;';
-                            } ?>" placeholder="CASA , APTO"
-                                                     onchange="upperCaseF(this)" value="<?=$editar_esp_an['complemento'];?>"></div>
+                    <label class="col-sm-1 control-label">CEP</label>
+                    <div class="col-sm-2"><input type="text" class="form-control"  name="cep" readonly id="cepcad" maxlength="9" placeholder="00000-000"
+                                                 data-toggle="tooltip" title="Preenchimento Automatico" value="<?=strtoupper($rua['cep']); ?>"></div>
 
-                    </div>
+                    <label class="col-sm-1 control-label">BAIRRO</label>
+                    <div class="col-sm-3"><input type="text" class="form-control"  readonly id="bairro" name="bairro"
+                                                 data-toggle="tooltip" title="Preenchimento Automatico" placeholder="BAIRRO" value="<?=strtoupper($rua['bairro']); ?>"></div>
 
-                    <div class="form-group">
+                </div>
 
-                        <label class="col-sm-1 control-label">LAT/LNG</label>
-                        <div class="col-sm-2"><input type="text" tabindex="18" id="lat" data-toggle="tooltip" title="Ex: 23.4587899" class="form-control"
-                                                     name="lat" placeholder="15,123456789" value="<?=$editar_esp_an['lat'];?>"></div>
+                <div class="form-group">
 
-                        <div class="col-sm-2"><input type="text" tabindex="19" id="lng" class="form-control"  data-toggle="tooltip" title="Ex: 46.458789" name="lng"
-                                                     placeholder="-19,123456789" value="<?=$editar_esp_an['lng'];?>"></div>
+                    <label class="col-sm-1 control-label">LOG</label>
+                    <div class="col-sm-2"><input type="text" class="form-control"  readonly name="log" id="log" placeholder="RUA , AVENIDA"
+                                                 data-toggle="tooltip" title="Preenchimento Automatico" value="<?=strtoupper($rua['log']); ?>"></div>
 
-                        <label class="col-sm-1 control-label">CEP</label>
-                        <div class="col-sm-2"><input type="text" class="form-control"  name="cep" readonly id="cepcad" maxlength="9" placeholder="00000-000"
-                                                     data-toggle="tooltip" title="Preenchimento Automatico" value="<?=strtoupper($rua['cep']); ?>"></div>
+                    <label class="col-sm-1 control-label">DA/SET</label>
+                    <div class="col-sm-1"><input type="text" id="da" readonly  data-toggle="tooltip" title="Preenchimento Automatico" maxlength="2"
+                                                 class="form-control" name="da" placeholder="00" value="<?=strtoupper($rua['da']); ?>"></div>
+                    <div class="col-sm-1"><input type="text"  readonly id="setor" class="form-control" name="setor" placeholder="0000"
+                                                 data-toggle="tooltip" title="Preenchimento Automatico" value="<?=strtoupper($rua['setor']); ?>"></div>
 
-                        <label class="col-sm-1 control-label">BAIRRO</label>
-                        <div class="col-sm-3"><input type="text" class="form-control"  readonly id="bairro" name="bairro"
-                                                     data-toggle="tooltip" title="Preenchimento Automatico" placeholder="BAIRRO" value="<?=strtoupper($rua['bairro']); ?>"></div>
+                    <label for="inputPagGuia" class="col-sm-1 control-label">PGGUIA</label>
+                    <div class="col-sm-1"><input type="text"  readonly class="form-control" name="pgguia" placeholder="0000"
+                                                 data-toggle="tooltip" title="Preenchimento Automatico" value="<?=strtoupper($rua['pgguia']); ?>"></div>
 
-                    </div>
+                        <label class="col-sm-1 control-label">UBS REF</label>
+                        <div class="col-sm-3"><input type="text" class="form-control"  readonly id="localvd" name="localvd"  placeholder="UBS DE ABRANGÊNCIA"
+                                                     data-toggle="tooltip" title="Preenchimento Automatico" value="<?=strtoupper($rua['ubs']); ?>"></div>
 
-                    <div class="form-group">
+                </div>
 
-                        <label class="col-sm-1 control-label">LOG</label>
-                        <div class="col-sm-2"><input type="text" class="form-control"  readonly name="log" id="log" placeholder="RUA , AVENIDA"
-                                                     data-toggle="tooltip" title="Preenchimento Automatico" value="<?=strtoupper($rua['log']); ?>"></div>
+        <hr style="border-top: 1px solid #92a4ad">
 
-                        <label class="col-sm-1 control-label">DA/SET</label>
-                        <div class="col-sm-1"><input type="text" id="da" readonly  data-toggle="tooltip" title="Preenchimento Automatico" maxlength="2"
-                                                     class="form-control" name="da" placeholder="00" value="<?=strtoupper($rua['da']); ?>"></div>
-                        <div class="col-sm-1"><input type="text"  readonly id="setor" class="form-control" name="setor" placeholder="0000"
-                                                     data-toggle="tooltip" title="Preenchimento Automatico" value="<?=strtoupper($rua['setor']); ?>"></div>
+            <div class="form-group">
+                <label for="inputDataNot" class="col-sm-1 control-label">ÚLT. AV.</label>
+                <div class="col-sm-2">
+                    <input tabindex="2" type="text" class="form-control" data-toggle="tooltip"
+                           title="Data da última avaliação do animal" name="dataua" id="dataua"
+                           placeholder="00/00/0000" value="<?=date('d/m/Y', strtotime($editar_esp_an['data_ult_ava'])); ?>">
+                </div>
 
-                        <label for="inputPagGuia" class="col-sm-1 control-label">PGGUIA</label>
-                        <div class="col-sm-1"><input type="text"  readonly class="form-control" name="pgguia" placeholder="0000"
-                                                     data-toggle="tooltip" title="Preenchimento Automatico" value="<?=strtoupper($rua['pgguia']); ?>"></div>
+                <label for="inputDataNot" class="col-sm-1 control-label">DT. B.AT.</label>
+                <div class="col-sm-2">
+                    <input tabindex="" type="text" class="form-control" data-toggle="tooltip"
+                           title="Data da realização de busca ativa de casos no entorno" name="databa" id="databa"
+                           placeholder="00/00/0000" value="<?=date('d/m/Y', strtotime($editar_esp_an['data_busca_ativa'])); ?>">
+                </div>
 
-                            <label class="col-sm-1 control-label">UBS REF</label>
-                            <div class="col-sm-3"><input type="text" class="form-control"  readonly id="localvd" name="localvd"  placeholder="UBS DE ABRANGÊNCIA"
-                                                         data-toggle="tooltip" title="Preenchimento Automatico" value="<?=strtoupper($rua['ubs']); ?>"></div>
+                <label class="col-sm-2 control-label">Nº CASOS SUSPEITOS</label>
+                <div class="col-sm-1">
+                    <input type="text" tabindex="16" class="form-control" name="num_casos_susp" data-toggle="tooltip"
+                         title="Nº de casos suspeitos de animais identificados na busca ativa"
+                                placeholder="Nº" maxlength="6" value="<?=$editar_esp_an['nm_casos_susp_an'];?>"></div>
 
-                    </div>
+                <label for="inputDataNot" class="col-sm-1 control-label">DT. F.TR.</label>
+                <div class="col-sm-2">
+                    <input tabindex="2" type="text" class="form-control" data-toggle="tooltip"
+                           title="Data final do tratamento" name="dataft" id="dataft"
+                           placeholder="00/00/0000" value="<?=date('d/m/Y', strtotime($editar_esp_an['data_final_trat'])); ?>">
+                </div>
+            </div>
 
-                    <div class="form-group">
-                        <label class="col-sm-1 control-label">OBS</label>
-                        <div class="col-sm-11"><textarea id="obs" tabindex="20" data-toggle="tooltip" title="Observações sobre o caso"
-                                                         class="form-control" name="obs" onchange="upperCaseF(this)" placeholder="Informações sobre o caso de esporotricose animal" rows="2"><?=$editar_esp_an['obs'];?></textarea></div>
-                    </div>
+            <div class="form-group">
 
-                    <div class="form-group pb-0">
-                        <label for="inputDataEntrada" class="col-sm-1 control-label">MEDIC.</label>
-                        <div class="col-sm-2"><input <?php if($id_edit == 'true'): echo 'autofocus'; endif;?> tabindex="21" type="text" class="form-control" data-toggle="tooltip"
-                                                     title="Data da 1ª entrega" name="dataentrada" id="dataentesp" placeholder="00/00/0000" value="<?=$id_data; ?>"></div>
+                <label class="col-sm-1 control-label">PEDIDO</label>
+                <div class="col-sm-2"><input type="text" tabindex="9" class="form-control" name="pedido" data-toggle="tooltip" title="Preenchimento Automatico"
+                                             placeholder="123456789" value="<?=$editar_esp_an['pedido'];?>"></div>
 
-                        <div class="col-sm-2">
-                            <input type="text" tabindex="22" data-toggle="tooltip" title="Nome do Medicamento"
-                                   class="form-control medicamento" name="medicamento" placeholder="ITRACONAZOL" value="<?=$id_med; ?>"></div>
+                <label for="inputOrigem" class="col-sm-1 control-label">ORIGEM</label>
+                <div class="col-sm-2">
+                    <input type="text" tabindex="10" class="form-control origem" data-toggle="tooltip" title="CCZ PLANTAO OU UVIS JACANA" name="origem" id="origem"
+                           value="<?php if(!empty($editar_origem['nm_origem'])) echo $editar_origem['nm_origem'];?>" placeholder="UVIS JACANA">
+                </div>
 
-                        <div class="col-sm-1">
-                            <input type="number" tabindex="23" data-toggle="tooltip" title="Dosagem do Medicamento" maxlength="5"
-                                   class="form-control" name="dsg" placeholder="100" value="<?=$id_dsg; ?>"></div>
+                <label class="col-sm-1 control-label">SITUAÇÃO</label>
+                <div class="col-sm-2"><input type="text" tabindex="11" class="form-control situacao" name="situacao" data-toggle="tooltip" title="Situação do tratamento"
+                                             value="<?=strtoupper($situacao['sit_esp']); ?>"></div>
 
-                        <div class="col-sm-1"><input type="number" tabindex="24" data-toggle="tooltip" title="Quantidade de comprimidos" maxlength="5"
-                                                     class="form-control" name="qtd" placeholder="000" value="<?=$id_qtd; ?>"></div>
+                <label class="col-sm-1 control-label">DIAGNÓST.</label>
+                <div class="col-sm-2"><input type="text" onchange="upperCaseF(this)" tabindex="12" class="form-control diagnostico" name="diagnostico" data-toggle="tooltip" title="POSITIVO/NEGATIVO"
+                                             value="<?php $dgt = $editar_esp_an['diagnostico'];
+                                             if($dgt == 1): echo 'POSITIVO';
+                                             elseif ($dgt == 2): echo 'NEGATIVO';
+                                             else: echo 'EM INVESTIGACAO'; endif; ?>"></div>
 
-                        <div class="col-sm-2"><input type="text" tabindex="25" data-toggle="tooltip" title="Para quem foi entregue? (Uvis ou DVZ)"
-                                                     class="form-control entregador" name="nment" placeholder="Entregue:UVIS/DVZ" value="<?=$id_nm_ent; ?>"></div>
+            </div>
 
-                        <div class="col-sm-3"><input type="text" tabindex="26" data-toggle="tooltip" title="Quem recebeu o medicamento? (Nome)"
-                                                     class="form-control" name="nmrecep" placeholder="Nome do Receptor" onchange="upperCaseF(this)" value="<?=$id_nm_rec; ?>"></div>
-                    </div>
-            </fieldset>
+                <div class="form-group">
+                    <label class="col-sm-1 control-label">OBS</label>
+                    <div class="col-sm-11"><textarea id="obs" tabindex="20" data-toggle="tooltip" title="Observações sobre o caso"
+                                                     class="form-control" name="obs" onchange="upperCaseF(this)" placeholder="Informações sobre o caso de esporotricose animal" rows="2"><?=$editar_esp_an['obs'];?></textarea></div>
+                </div>
 
-            <div class="page-header pt-0">
-            </div
+                <input type="hidden" name="ano" value="<?=$editar_esp_an['ano'];?>">
+                <input type="hidden" name="esp_id" value="<?=$editar_esp_an['especie'];?>">
+                <input type="hidden" id="idrua" name="idrua" value="<?=strtoupper($rua['id']); ?>">
+                <input type="hidden" name="idmedc" value="<?=$id_sd_med; ?>">
+                <input type="hidden" name="id" value="<?=$editar_esp_an['id_esp'];?>">
+                <input type="hidden" name="pin" value="<?=$editar_esp_an['pin'];?>">
+                <input type="hidden" name="acao" value="editar">
+
+                </fieldset>
+            <div class="form-group text-center">
+                <div class="col-sm-12">
+                    <?php if ($_SESSION['usuarioNivelAcesso'] <> ''):?>
+                        <button type="submit" tabindex="27" accesskey="G" data-toggle="tooltip" title="GRAVAR OS DADOS" class="btn btn-labeled btn-success mb-2 mr-sm-4"><span
+                                    class="btn-label"><i class="fa fa-floppy-o"></i></span> <u>G</u>RAVAR</button>
+                    <?php endif; ?>
+                    <a href='suvisjt.php?pag=listar-esporotricose-animal' role='button' tabindex="28" data-toggle="tooltip" title="LISTAR REGISTROS" accesskey="L"
+                       class="btn btn-labeled btn-info mb-2 mr-sm-4"><span class="btn-label"><i
+                                    class="fa fa-list"></i></span> <u>L</u>ISTAR</a>
+                    <a target="_blank"
+                       href='http://www.buscacep.correios.com.br/sistemas/buscacep/buscaCepEndereco.cfm'
+                       role='button' tabindex="29" data-toggle="tooltip" title="BUSCA CEP CORREIOS" accesskey="S"
+                       class="btn btn-labeled btn-default mb-2 mr-sm-4"><span class="btn-label"><img
+                                    src="imagens/correios.png" width="20"/></span></span> BUSCA CEP</a>
+                </div>
+            </div>
+            </form>
+
+        </div>
+    </div>
+
+            <hr style="border-top: 1px solid #92a4ad">
 
                     <!-- Fim da Pagina de Titulo -->    <!-- Pagina de Titulo -->
             <div class="row">
@@ -387,7 +392,7 @@ $countlixo = $contarlixo->num_rows;
                     <div class="form-group text-center">
                             <?php
                             if ($countlixo == 0):
-                                echo '<button type="button" class="btn btn-primary btn-labeled btn-lg btn-block"><span class="btn-label"><i
+                                echo '<button type="button" style="opacity: inherit" class="btn btn-primary btn-labeled btn-lg btn-block disabled"><span class="btn-label"><i
                                             class="fa fa-pills"></i></span>ENTREGA DE MEDICAMENTOS ESPOROTRICOSE ANIMAL</button><br>';
                                 echo '<a href="suvisjt.php?pag=edit-esporo-animal&id='.$id.'&edit=true" role="button" accesskey="I" data-toggle="tooltip" title="NOVO MEDICAMENTO" 
                                             class="btn btn-labeled btn-success mb-2 mr-sm-4"><span class="btn-label"><i class="fa fa-pills"></i></span> <u>N</u>OVO</a>';
@@ -416,6 +421,31 @@ $countlixo = $contarlixo->num_rows;
                                 endif;
                             ?>
                     </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-12 pb-4">
+                            <label for="inputDataEntrada" class="col-sm-1 control-label">MEDIC.</label>
+                            <div class="col-sm-2"><input <?php if($id_edit == 'true'): echo 'autofocus'; endif;?> tabindex="21" type="text" class="form-control" data-toggle="tooltip"
+                                                                                                                  title="Data da 1ª entrega" name="dataentrada" id="dataentesp" placeholder="00/00/0000" value="<?=$id_data; ?>"></div>
+
+                            <div class="col-sm-2">
+                                <input type="text" tabindex="22" data-toggle="tooltip" title="Nome do Medicamento"
+                                       class="form-control medicamento" name="medicamento" placeholder="ITRACONAZOL" value="<?=$id_med; ?>"></div>
+
+                            <div class="col-sm-1">
+                                <input type="number" tabindex="23" data-toggle="tooltip" title="Dosagem do Medicamento" maxlength="5"
+                                       class="form-control" name="dsg" placeholder="100" value="<?=$id_dsg; ?>"></div>
+
+                            <div class="col-sm-1"><input type="number" tabindex="24" data-toggle="tooltip" title="Quantidade de comprimidos" maxlength="5"
+                                                         class="form-control" name="qtd" placeholder="000" value="<?=$id_qtd; ?>"></div>
+
+                            <div class="col-sm-2"><input type="text" tabindex="25" data-toggle="tooltip" title="Para quem foi entregue? (Uvis ou DVZ)"
+                                                         class="form-control entregador" name="nment" placeholder="Entregue:UVIS/DVZ" value="<?=$id_nm_ent; ?>"></div>
+
+                            <div class="col-sm-3"><input type="text" tabindex="26" data-toggle="tooltip" title="Quem recebeu o medicamento? (Nome)"
+                                                         class="form-control" name="nmrecep" placeholder="Nome do Receptor" onchange="upperCaseF(this)" value="<?=$id_nm_rec; ?>"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
                     <!--------------------------------------------- * Tabela de Bloqueios * --------------------------------------->
@@ -437,35 +467,9 @@ $countlixo = $contarlixo->num_rows;
                         </tbody>
                     </table>
 
-                    <input type="hidden" name="ano" value="<?=$editar_esp_an['ano'];?>">
-                    <input type="hidden" name="esp_id" value="<?=$editar_esp_an['especie'];?>">
-                    <input type="hidden" id="idrua" name="idrua" value="<?=strtoupper($rua['id']); ?>"></div>
-                    <input type="hidden" name="idmedc" value="<?=$id_sd_med; ?>"></div>
-                    <input type="hidden" name="id" value="<?=$editar_esp_an['id_esp'];?>">
-                    <input type="hidden" name="pin" value="<?=$editar_esp_an['pin'];?>">
-                    <input type="hidden" name="acao" value="editar">
 
-        <div class="form-group text-center">
-            <div class="col-sm-12">
-                <button type="submit" tabindex="27" accesskey="G" style="<?php if ($_SESSION['usuarioNivelAcesso'] == 4) {
-                    echo 'display: none;';
-                } ?>" data-toggle="tooltip" title="GRAVAR OS DADOS" class="btn btn-labeled btn-success mb-2 mr-sm-4"><span
-                            class="btn-label"><i class="fa fa-floppy-o"></i></span> <u>G</u>RAVAR
-                </button>
-                <a href='suvisjt.php?pag=listar-esporotricose-animal' role='button' tabindex="28" data-toggle="tooltip" title="LISTAR REGISTROS" accesskey="L"
-                   class="btn btn-labeled btn-info mb-2 mr-sm-4"><span class="btn-label"><i
-                                class="glyphicon glyphicon-list"></i></span> <u>L</u>ISTAR</a>
-                <a target="_blank"
-                   href='http://www.buscacep.correios.com.br/sistemas/buscacep/buscaCepEndereco.cfm'
-                   role='button' tabindex="29" data-toggle="tooltip" title="BUSCA CEP CORREIOS" accesskey="S"
-                   class="btn btn-labeled btn-default mb-2 mr-sm-4"><span class="btn-label"><img
-                                src="imagens/correios.png" width="20"/></span></span> BUSCA CEP</a>
-            </div>
-        </div>
-        </form>
-    </div>
 </div>
-</div> <!-- /container -->
+</div>
 
 <script type="text/javascript"
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAhlslumr1saHPVEJHkzPssYLEsWZJQQKU&libraries=places"></script>

@@ -97,6 +97,27 @@ $(function() {
         onClose: function() {$(this).valid();},
     });
 
+    // Datepicker datanot para contar data atual
+    $('#dataua').datepicker({
+        dateFormat: 'dd/mm/yy',
+        maxDate: "+0",
+        onClose: function() {$(this).valid();},
+    });
+
+    // Datepicker datanot para contar data atual
+    $('#databa').datepicker({
+        dateFormat: 'dd/mm/yy',
+        maxDate: "+0",
+        onClose: function() {$(this).valid();},
+    });
+
+    // Datepicker datanot para contar data atual
+    $('#dataft').datepicker({
+        dateFormat: 'dd/mm/yy',
+        maxDate: "+0",
+        onClose: function() {$(this).valid();},
+    });
+
     // Datepicker dataentrada para contar data atual
     $('#dataentcad').datepicker({
         dateFormat: 'dd/mm/yy',
