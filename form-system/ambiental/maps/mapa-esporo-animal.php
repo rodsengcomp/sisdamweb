@@ -63,7 +63,6 @@ $row_exame_esporo = mysqli_fetch_assoc($cs_exame_esporo);
     a:active, a:focus {
         outline: 0;
         border: none;
-        color: black;
         -moz-outline-style: none;
     }
     /* Optional: Makes the sample page fill the window. */
@@ -186,21 +185,21 @@ $row_exame_esporo = mysqli_fetch_assoc($cs_exame_esporo);
                         infowindow.setContent(
                             "<p style='text-align: center; margin-bottom: 1rem; padding: 5px 0; background-color:" + html + "; font-size: 1.5rem; position: relative'><b>"
                             + pin +
-                            "<a title='Editar o animal' target='_blank' href='suvisjt.php?pag=edit-esporo-animal&id=" + id +"'>"
+                            "<a title='Editar o animal' style='color: black' target='_blank' href='suvisjt.php?pag=edit-esporo-animal&id=" + id +"'>"
                             + name +
-                            "</a></b>" + icone + "</p><p> ENDEREÇO: <a target='_blank' title='Editar o endereço' href='suvisjt.php?pag=edit-end&id="
+                            "</a></b>" + icone + "</p><p> <strong>ENDEREÇO:</strong> <a target='_blank' title='Editar o endereço' href='suvisjt.php?pag=edit-end&id="
                             + idrua +
                             "'>"
                             + address +
-                            "</a> , " + comp + "</b></p><p>  TUTOR: "
+                            "</a> , " + comp + "</b></p><p>  <strong>TUTOR:</strong> "
                             + nametutor +
-                            "</b></p><p>  RESULTADO: "
+                            "</b></p><p>  <strong>RESULTADO:</strong> "
                             + resultado +
-                            "</b></p><p> DATA RESULTADO: "
+                            "</b></p><p> <strong>DATA RESULTADO:</strong> "
                             + dtres +
-                            "</b></p><p>  DATA SINTOMAS: "
+                            "</b></p><p>  <strong>DATA SINTOMAS:</strong> "
                             + sint +
-                            "</b></p><p>  ROTA: <a title='Traçar rota' target='_blank' href='https://www.google.com.br/maps/dir/?api=1&origin=R. Maria Amália Lopes Azevedo, 3676 - Vila Albertina&destination=" + ruagoogle + "&travelmode=driving'>" + lat + " , " + lng + "</a></p>"
+                            "</b></p><p>  <strong>ROTA:</strong> <a title='Traçar rota' target='_blank' href='https://www.google.com.br/maps/dir/?api=1&origin=R. Maria Amália Lopes Azevedo, 3676 - Vila Albertina&destination=" + ruagoogle + "&travelmode=driving'>" + lat + " , " + lng + "</a></p>"
 
                         );
                         infowindow.open(map, marker);
