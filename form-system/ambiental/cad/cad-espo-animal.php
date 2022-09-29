@@ -72,8 +72,8 @@ include_once '../../conecta.php';
 
         <div class="col-md-12">
             <fieldset <?php
-                if ($_SESSION['usuarioNivelAcesso'] == "") {
-                    echo 'disabled';
+            if ($_SESSION['usuarioNivelAcesso'] == "") {
+                echo 'disabled';
 
             } ?>>
                 <form class="form-horizontal" id="cad-esporo-animal" method="POST" action="suvisjt.php?pag=proc-cad-esporo-animal">
@@ -114,7 +114,7 @@ include_once '../../conecta.php';
                                    onchange="upperCaseF(this)"></div>
 
                         <label class="col-sm-1 control-label">IDADE</label>
-                            <div class="col-sm-1"><input type="text" tabindex="6" class="form-control" name="idade" data-toggle="tooltip" title="Idade em anos"
+                        <div class="col-sm-1"><input type="text" tabindex="6" class="form-control" name="idade" data-toggle="tooltip" title="Idade em anos"
                                                      placeholder="Nº"></div>
 
                         <label for="inputOrigem" class="col-sm-1 control-label">SEXO</label>
@@ -131,25 +131,6 @@ include_once '../../conecta.php';
                     </div>
 
                     <div class="form-group">
-
-                        <label class="col-sm-1 control-label">PEDIDO</label>
-                        <div class="col-sm-2"><input type="text" tabindex="9" class="form-control" name="pedido" data-toggle="tooltip" title="Numero de Pedido de Exame"
-                                                     placeholder="123456789"></div>
-
-                        <label for="inputOrigem" class="col-sm-1 control-label">ORIGEM</label>
-                        <div class="col-sm-2">
-                            <input type="text" tabindex="10" class="form-control origem" data-toggle="tooltip" title="CCZ PLANTAO OU UVIS JACANA" name="origem" id="origem"
-                                   placeholder="UVIS JACANA">
-                        </div>
-
-                        <label class="col-sm-1 control-label">SITUAÇÃO</label>
-                        <div class="col-sm-2"><input type="text" tabindex="11" class="form-control situacao" name="situacao" data-toggle="tooltip" title="Situação do tratamento"></div>
-
-                        <label class="col-sm-1 control-label">DIAGNÓST.</label>
-                        <div class="col-sm-2"><input type="text" onchange="upperCaseF(this)" tabindex="12" class="form-control diagnostico" name="diagnostico" data-toggle="tooltip" title="POSITIVO/NEGATIVO"></div>
-                    </div>
-
-                    <div class="form-group">
                         <label for="inputOrigem" class="col-sm-1 control-label">CASO H:</label>
                         <div class="col-sm-1">
                             <input type="text" tabindex="13" class="form-control casoh" data-toggle="tooltip" title="Caso humano? S ou N" name="casoh"
@@ -158,17 +139,17 @@ include_once '../../conecta.php';
 
                         <label class="col-sm-1 control-label">ENDEREÇO</label>
                         <div class="col-sm-4"><input type="text" tabindex="14" class="form-control rua" name="rua" data-toggle="tooltip" title="Nome da rua" 3
-                             id="ruaselect" placeholder="NOME DO ENDEREÇO" onchange="upperCaseF(this)"></div>
+                                                     id="ruaselect" placeholder="NOME DO ENDEREÇO" onchange="upperCaseF(this)"></div>
 
                         <label class="col-sm-1 control-label">N</label>
                         <div class="col-sm-1"><input type="text" tabindex="16" class="form-control" name="num" data-toggle="tooltip" title="Preenchimento Automatico"
-                             placeholder="Nº" maxlength="6"></div>
+                                                     placeholder="Nº" maxlength="6"></div>
 
                         <label class="col-sm-1 control-label">COMP</label>
                         <div class="col-sm-2"><input type="text" tabindex="17" class="form-control" name="comp" data-toggle="tooltip" title="Preenchimento Automatico" style="<?php if ($_SESSION['usuarioNivelAcesso'] == 4) {
                                 echo 'display: none;';
                             } ?>" placeholder="CASA , APTO"
-                             onchange="upperCaseF(this)"></div>
+                                                     onchange="upperCaseF(this)"></div>
 
                     </div>
 
@@ -195,101 +176,135 @@ include_once '../../conecta.php';
                     <div class="form-group">
 
                         <label class="col-sm-1 control-label">LOG</label>
-                        <div class="col-sm-2"><input type="text" class="form-control"  readonly name="log" id="log" placeholder="RUA , AVENIDA"
+                        <div class="col-sm-3"><input type="text" class="form-control"  readonly name="log" id="log" placeholder="RUA , AVENIDA"
                                                      data-toggle="tooltip" title="Preenchimento Automatico"></div>
 
-                        <label class="col-sm-1 control-label">DA/SET</label>
+                        <label class="col-sm-1 control-label">DA</label>
                         <div class="col-sm-1"><input type="text" id="da" readonly  data-toggle="tooltip" title="Preenchimento Automatico" maxlength="2"
                                                      class="form-control" name="da" placeholder="00"></div>
-                        <div class="col-sm-1"><input type="text"  readonly id="setor" class="form-control" name="setor" placeholder="0000"
+
+                        <label class="col-sm-1 control-label">SETOR</label>
+                        <div class="col-sm-2"><input type="text"  readonly id="setor" class="form-control" name="setor" placeholder="0000"
                                                      data-toggle="tooltip" title="Preenchimento Automatico"></div>
 
                         <label for="inputPagGuia" class="col-sm-1 control-label">PGGUIA</label>
                         <div class="col-sm-2"><input type="text" readonly class="form-control" name="pgguia" id="pgguia" placeholder="A00-A00"
-                                                        data-toggle="tooltip" title="Preenchimento Automatico"></div>
-
-                        <label class="col-sm-1 control-label">UBS REF</label>
-                        <div class="col-sm-2"><input type="text" class="form-control"  readonly id="localvd" name="localvd"  placeholder="UBS DE ABRANGÊNCIA"
-                                                        data-toggle="tooltip" title="Preenchimento Automatico"></div>
+                                                     data-toggle="tooltip" title="Preenchimento Automatico"></div>
 
 
                     </div>
 
                     <div class="form-group">
-                        <label for="inputDataEntrada" class="col-sm-1 control-label">MEDICAMEN.</label>
-                        <div class="col-sm-2"><input type="text" tabindex="20" data-toggle="tooltip" title="Nome do Medicamento"
-                                                     class="form-control medicamento" name="medicamento" placeholder="ITRACONAZOL"></div>
 
-                        <label for="inputDataEntrada" class="col-sm-1 control-label">DOSAGEM</label>
-                            <div class="col-sm-1"><input type="number" tabindex="21" data-toggle="tooltip" title="Nome do Medicamento" maxlength="5"
-                                                         class="form-control" name="dsg" placeholder="100"></div>
+                        <label class="col-sm-1 control-label">UBS REF</label>
+                        <div class="col-sm-5"><input type="text" class="form-control"  readonly id="localvd" name="localvd"  placeholder="UBS DE ABRANGÊNCIA"
+                                                     data-toggle="tooltip" title="Preenchimento Automatico"></div>
 
+                        <label for="inputDataNot" class="col-sm-1 control-label">ÚLT. AV.</label>
+                        <div class="col-sm-2">
+                            <input tabindex="20" type="text" class="form-control" data-toggle="tooltip" title="Data da última avaliação do animal" name="dataua" id="dataua"
+                                   placeholder="00/00/0000">
+                        </div>
+
+                        <label for="inputDataNot" class="col-sm-1 control-label">DT. B.AT.</label>
+                        <div class="col-sm-2">
+                            <input tabindex="21" type="text" class="form-control" data-toggle="tooltip"
+                                   title="Data da realização de busca ativa de casos no entorno" name="databa" id="databa" placeholder="00/00/0000"></div>
+
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label class="col-sm-2 control-label">Nº CASOS SUSPEITOS</label>
+                        <div class="col-sm-1">
+                            <input type="text" tabindex="22" class="form-control" name="num_casos_susp" data-toggle="tooltip"
+                                   title="Nº de casos suspeitos de animais identificados na busca ativa" placeholder="Nº" maxlength="6"></div>
+
+                        <label for="inputDataNot" class="col-sm-1 control-label">DT. F.TR.</label>
+                        <div class="col-sm-2">
+                            <input tabindex="23" type="text" class="form-control" data-toggle="tooltip"
+                                   title="Data final do tratamento" name="dataft" id="dataft" placeholder="00/00/0000"></div>
+
+                        <label class="col-sm-1 control-label">PEDIDO</label>
+                        <div class="col-sm-2"><input type="text" tabindex="24" class="form-control" name="pedido" data-toggle="tooltip" title="Numero de Pedido de Exame"
+                                                     placeholder="123456789"></div>
+
+                        <label for="inputOrigem" class="col-sm-1 control-label">ORIGEM</label>
+                        <div class="col-sm-2">
+                            <input type="text" tabindex="25" class="form-control origem" data-toggle="tooltip" title="CCZ PLANTAO OU UVIS JACANA" name="origem" id="origem"
+                                   placeholder="UVIS JACANA">
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-1 control-label">SITUAÇÃO</label>
+                        <div class="col-sm-2"><input type="text" tabindex="26" class="form-control situacao" name="situacao" data-toggle="tooltip" title="Situação do tratamento"></div>
+
+                        <label class="col-sm-1 control-label">DIAGNÓST.</label>
+                        <div class="col-sm-2"><input type="text" onchange="upperCaseF(this)" tabindex="27" class="form-control diagnostico" name="diagnostico" data-toggle="tooltip" title="POSITIVO/NEGATIVO"></div>
+
+                        <label for="inputMedicamento" class="col-sm-2 control-label">MEDICAMENTO</label>
+                        <div class="col-sm-2"><input type="text" tabindex="28" data-toggle="tooltip" title="Nome do Medicamento"
+                                                     class="form-control medicamento" name="medicamento1" placeholder="ITRACONAZOL"></div>
+
+                        <label for="inputMedicamento" class="col-sm-1 control-label">DOSAGEM</label>
+                        <div class="col-sm-1"><input type="number" tabindex="29" data-toggle="tooltip" title="Dosagem do Medicamento" maxlength="5"
+                                                     class="form-control" name="dsg1" placeholder="100"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputDataEntrada" class="col-sm-1 control-label">DATA</label>
+                        <div class="col-sm-2"><input tabindex="30" type="text" class="form-control" data-toggle="tooltip"
+                                                     title="Data da 1ª entrega" name="dataentrada1" id="dataentcad" placeholder="00/00/0000"></div>
+
+                        <label for="inputDataEntrada" class="col-sm-1 control-label">QUANTIDADE</label>
+                        <div class="col-sm-1"><input type="number" tabindex="31" data-toggle="tooltip" title="Quantidade de comprimidos" maxlength="5"
+                                                     class="form-control" name="qtd1" placeholder="000"></div>
+
+                        <label for="inputDataEntrada" class="col-sm-1 control-label">ENTREGUE</label>
+                        <div class="col-sm-2"><input type="text" tabindex="32" data-toggle="tooltip" title="Para quem foi entregue? (Uvis ou DVZ)"
+                                                     class="form-control entregador" name="nment1" placeholder="Entregue:UVIS/DVZ"></div>
+
+                        <label for="inputDataEntrada" class="col-sm-1 control-label">RECEBIDO</label>
+                        <div class="col-sm-3"><input type="text" tabindex="33" data-toggle="tooltip" title="Quem recebeu o medicamento? (Nome)"
+                                                     class="form-control" name="nmrecep1" placeholder="Nome do Receptor" onchange="upperCaseF(this)"></div>
+                    </div>
+
+                    <div class="form-group">
                         <label class="col-sm-1 control-label">OBS</label>
-                        <div class="col-sm-6"><textarea id="obs" tabindex="22" data-toggle="tooltip" title="Observações sobre o caso"
+                        <div class="col-sm-11"><textarea id="obs" tabindex="34" data-toggle="tooltip" title="Observações sobre o caso"
                                                          class="form-control" name="obs" onchange="upperCaseF(this)" placeholder="Informações sobre o caso de esporotricose animal" rows="1"></textarea></div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="inputDataEntrada" class="col-sm-1 control-label">1ªMEDC</label>
-                            <div class="col-sm-2"><input tabindex="23" type="text" class="form-control" data-toggle="tooltip"
-                                title="Data da 1ª entrega" name="dataentrada" id="dataentcad" placeholder="00/00/0000"></div>
+                    <input type="hidden" name="ano" value="<?php echo date('Y') ;?>">
+                    <input type="hidden" name="datacadastro" value="<?php echo date("d/m/Y"); ?>">
+                    <input type="hidden" id="idrua" name="idrua"></div>
+                    <input type="hidden" name="acao" value="cadastrar">
+                    <input type="hidden" name="pin" value="0">
 
-                        <label for="inputDataEntrada" class="col-sm-1 control-label">QTD:</label>
-                            <div class="col-sm-1"><input type="number" tabindex="24" data-toggle="tooltip" title="Quantidade de comprimidos" maxlength="5"
-                                       class="form-control" name="qtd1" placeholder="000"></div>
-
-                        <label for="inputDataEntrada" class="col-sm-1 control-label">ENTREG.</label>
-                            <div class="col-sm-2"><input type="text" tabindex="25" data-toggle="tooltip" title="Para quem foi entregue? (Uvis ou DVZ)"
-                                       class="form-control entregador" name="nment1" placeholder="Entregue:UVIS/DVZ"></div>
-
-                        <label for="inputDataEntrada" class="col-sm-1 control-label">RECEP.</label>
-                            <div class="col-sm-3"><input type="text" tabindex="26" data-toggle="tooltip" title="Quem recebeu o medicamento? (Nome)"
-                                       class="form-control" name="nmrecep1" placeholder="Nome do Receptor" onchange="upperCaseF(this)"></div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="inputDataEntrada" class="col-sm-1 control-label">2ªMEDC</label>
-                        <div class="col-sm-2"><input tabindex="27" type="text" class="form-control" data-toggle="tooltip"
-                                                     title="Data da 2ª entrega" name="dataentrada2" id="dataentcad2" placeholder="00/00/0000"></div>
-
-                        <label for="inputDataEntrada" class="col-sm-1 control-label">QTD:</label>
-                        <div class="col-sm-1"><input type="number" tabindex="28" data-toggle="tooltip" title="Quantidade de comprimidos" maxlength="5"
-                                                     class="form-control" name="qtd2" placeholder="000"></div>
-
-                        <label for="inputDataEntrada" class="col-sm-1 control-label">ENTREG.</label>
-                        <div class="col-sm-2"><input type="text" tabindex="29" data-toggle="tooltip" title="Para quem foi entregue? (Uvis ou DVZ)"
-                                                     class="form-control entregador" name="nment2" placeholder="Entregue:UVIS/DVZ"></div>
-
-                        <label for="inputDataEntrada" class="col-sm-1 control-label">RECEP.</label>
-                        <div class="col-sm-3"><input type="text" tabindex="30" data-toggle="tooltip" title="Quem recebeu o medicamento? (Nome)"
-                                                     class="form-control" name="nmrecep2" placeholder="Nome do Receptor" onchange="upperCaseF(this)"></div>
-                    </div>
-                        <input type="hidden" name="ano" value="<?php echo date('Y') ;?>">
-                        <input type="hidden" name="datacadastro" value="<?php echo date("d/m/Y"); ?>">
-                        <input type="hidden" id="idrua" name="idrua"></div>
-                        <input type="hidden" name="acao" value="cadastrar">
-
-                    <div class="form-group text-center">
-                        <div class="col-sm-12">
-                            <button type="submit" tabindex="31" accesskey="G" style="<?php if ($_SESSION['usuarioNivelAcesso'] == 4) {
-                                echo 'display: none;';
-                            } ?>" data-toggle="tooltip" title="GRAVAR OS DADOS" class="btn btn-labeled btn-success mb-2 mr-sm-4"><span
-                                        class="btn-label"><i class="fa fa-compact-disc"></i></span> <u>G</u>RAVAR
-                            </button>
-                            <a href='suvisjt.php?pag=listar-esporotricose-animal' role='button' tabindex="32" data-toggle="tooltip" title="LISTAR REGISTROS" accesskey="L"
-                                    class="btn btn-labeled btn-info mb-2 mr-sm-4"><span class="btn-label"><i
-                                            class="fa fa-list"></i></span> <u>L</u>ISTAR</a>
-                            <a target="_blank"
-                               href='http://www.buscacep.correios.com.br/sistemas/buscacep/buscaCepEndereco.cfm'
-                               role='button' tabindex="33" data-toggle="tooltip" title="BUSCA CEP CORREIOS" accesskey="S"
-                                    class="btn btn-labeled btn-default mb-2 mr-sm-4"><span class="btn-label"><img
-                                            src="imagens/correios.png" width="20"/></span></span> BUSCA CEP</a>
-                        </div>
-                    </div>
-                </form>
-            </fieldset>
+        <div class="form-group text-center">
+            <div class="col-sm-12">
+                <button type="submit" tabindex="35" accesskey="G" style="<?php if ($_SESSION['usuarioNivelAcesso'] == 4) {
+                    echo 'display: none;';
+                } ?>" data-toggle="tooltip" title="GRAVAR OS DADOS" class="btn btn-labeled btn-success mb-2 mr-sm-4"><span
+                            class="btn-label"><i class="fa fa-compact-disc"></i></span> <u>G</u>RAVAR
+                </button>
+                <a href='suvisjt.php?pag=listar-esporotricose-animal' role='button' tabindex="36" data-toggle="tooltip" title="LISTAR REGISTROS" accesskey="L"
+                   class="btn btn-labeled btn-info mb-2 mr-sm-4"><span class="btn-label"><i
+                                class="fa fa-list"></i></span> <u>L</u>ISTAR</a>
+                <a target="_blank"
+                   href='http://www.buscacep.correios.com.br/sistemas/buscacep/buscaCepEndereco.cfm'
+                   role='button' tabindex="37" data-toggle="tooltip" title="BUSCA CEP CORREIOS" accesskey="S"
+                   class="btn btn-labeled btn-default mb-2 mr-sm-4"><span class="btn-label"><img
+                                src="imagens/correios.png" width="20"/></span></span> BUSCA CEP</a>
+            </div>
         </div>
+        </form>
+        </fieldset>
     </div>
+</div>
 </div> <!-- /container -->
 
 <script type="text/javascript"

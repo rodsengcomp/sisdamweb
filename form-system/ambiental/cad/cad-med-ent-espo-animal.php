@@ -59,15 +59,15 @@ include_once '../../conecta.php';
                     <div class="form-group">
                         <label for="inputDataEntrada" class="col-sm-1 control-label">ENTRADA</label>
                         <div class="col-sm-2"><input autofocus tabindex="1" type="text" class="form-control" data-toggle="tooltip"
-                                                     title="Data da 1ª entrega" name="dataentrada" id="dataentcad" placeholder="00/00/0000"></div>
+                                                     title="Data da 1ª entrega" name="dataentrada1" id="dataentcad" placeholder="00/00/0000"></div>
 
                         <label for="inputDataEntrada" class="col-sm-1 control-label">MEDICAMEN.</label>
                         <div class="col-sm-2"><input type="text" data-toggle="tooltip" title="Nome do Medicamento"
-                                                     class="form-control medicamento" name="medicamento" placeholder="ITRACONAZOL" readonly value="ITRACONAZOL"></div>
+                                                     class="form-control medicamento" name="medicamento1" placeholder="ITRACONAZOL" readonly value="ITRACONAZOL"></div>
 
                         <label for="inputDataEntrada" class="col-sm-1 control-label">DOSE/MG</label>
                         <div class="col-sm-1"><input type="number" tabindex="2" data-toggle="tooltip" title="Nome do Medicamento" maxlength="5"
-                                                     class="form-control" name="dsg" placeholder="100"></div>
+                                                     class="form-control" name="dsg1" placeholder="100"></div>
 
                         <label for="inputDataEntrada" class="col-sm-1 control-label">QTD:</label>
                         <div class="col-sm-1"><input type="number" tabindex="3" data-toggle="tooltip" title="Quantidade de comprimidos" maxlength="5"

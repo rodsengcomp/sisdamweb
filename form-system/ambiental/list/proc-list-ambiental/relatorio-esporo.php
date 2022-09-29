@@ -6,6 +6,7 @@ HAVING COUNT(id_rua) > 1) AS total_busca,
 (SELECT count(id_esp) FROM esporo_an
 WHERE esporo_an.id_rua > 1) AS total_busca,
  * */
+/* (SELECT COUNT(id_esp) FROM esporo_an WHERE ruas.id = esporo_an.id_rua ORDER BY pin DESC LIMIT 1) AS total_busca
 /*
 * Exemplo de dados do exemplo do script de processamento do lado do servidor.
  *
@@ -24,14 +25,14 @@ $table = <<<EOT
  ( 
 SELECT esporo_an.id_esp, esporo_an.nve, esporo_an.ano, esporo_an.data_entrada, esporo_an.nome_animal, esporo_an.lixeira,
 especie_animal.especie, esporo_an.id_rua, ruas.log, ruas.rua, ruas.ruagoogle, esporo_an.rua_esp_a, esporo_an.numero,
-esporo_an.tutor, esporo_an.telefone1, esporo_an.dsg_medc, esporo_an.origem, esporo_an.pedido, esporo_an.sexo, esporo_an.idade,
-esporo_an.diagnostico, esporo_an.id_medc, esporo_an.casos_hum_dom,
+esporo_an.tutor, esporo_an.telefone1, esporo_an.origem, esporo_an.pedido, esporo_an.sexo, esporo_an.idade,
+esporo_an.diagnostico, esporo_an.casos_hum_dom, esporo_an.id_medc, esporo_an.dsg_medc, esporo_an.nm_casos_susp_an, 
+esporo_an.data_busca_ativa, esporo_an.data_ult_ava, esporo_an.data_final_trat,
 esporo_medc.nm_mdc_esp_an, 
 resultado_esporo.Nr_Pedido, resultado_esporo.Data_Pedido, resultado_esporo.Resultado,
 suvis.suvis,
 ruas.cep, ruas.da,
 origem.nm_origem,
-(SELECT COUNT(id_esp) FROM esporo_an WHERE ruas.id = esporo_an.id_rua ORDER BY pin DESC LIMIT 1) AS total_busca,
 (SELECT SUM(qtd_medc) FROM esporo_an_sd_medc
 WHERE esporo_an_sd_medc.id_an_esp = esporo_an.id_esp) AS total_medc,
 (SELECT  esporo_an_sd_medc.data_medc
@@ -83,13 +84,15 @@ $columns = array(
                 array('db' => 'nm_origem', 'dt' => 2),
                 array('db' => 'data_entrada', 'dt' => 3, 'formatter' => function ($d) {
                     switch($d){
+                        case '0000-00-00':
                         case ''; return '';
                         default: return date('d/m/Y', strtotime($d));
                     }
                 }),
                 array('db' => 'pedido', 'dt' => 4, 'formatter' => function ($d) {
-                    switch($d){ case 'null'; return '';
-                                case ''; return '';
+                    switch($d){
+                        case '0000-00-00':
+                        case ''; return '';
                         default: return ' '.$d;
                     }
                 }),
@@ -134,19 +137,21 @@ $columns = array(
                 }),
                 array('db' => 'data_medc_in', 'dt' => 18, 'formatter' => function ($d) {
                     switch($d){
+                        case '0000-00-00':
                         case ''; return '';
                         default: return date('d/m/Y', strtotime($d));
                     }
                 }),
                 array('db' => 'dsg_medc', 'dt' => 19, 'formatter' => function ($d) {
                     switch($d){
-                        case 'null'; return '';
+                        case null:
                         case ''; return '';
                         default: return ' '.$d;
                     }
                 }),
-                array('db' => 'data_medc_fn', 'dt' => 20, 'formatter' => function ($d) {
+                array('db' => 'data_final_trat', 'dt' => 20, 'formatter' => function ($d) {
                     switch($d){
+                        case '0000-00-00':
                         case ''; return '';
                         default: return date('d/m/Y', strtotime($d));
                     }
@@ -155,36 +160,38 @@ $columns = array(
                 array('db' => 'tutor', 'dt' => 22, 'formatter' => function ($d) {
                     return strtoupper($d);
                 }),
-                array('db' => 'telefone1', 'dt' => 23, 'formatter' => function ($d) {
+                ['db' => 'telefone1', 'dt' => 23, 'formatter' => function ($d) {
                     switch($d){
+                        case '':
                         case 'null';
-                            return '';
-                           case '';
                             return '';
                         default:
                             return ' '.$d;
                     }
-                }),
+                }],
                 array('db' => 'data_medc_fn', 'dt' => 24, 'formatter' => function ($d) {
                     switch($d){
+                        case '0000-00-00':
                         case ''; return '';
                         default: return date('d/m/Y', strtotime($d));
                     }
                 }),
                 array('db' => 'total_medc', 'dt' => 25),
-                array('db' => 'data_medc_fn', 'dt' => 26, 'formatter' => function ($d) {
+                array('db' => 'data_ult_ava', 'dt' => 26, 'formatter' => function ($d) {
                     switch($d){
+                        case '0000-00-00':
                         case ''; return '';
                         default: return date('d/m/Y', strtotime($d));
                     }
                 }),
-                array('db' => 'data_entrada', 'dt' => 27, 'formatter' => function ($d) {
+                array('db' => 'data_busca_ativa', 'dt' => 27, 'formatter' => function ($d) {
                     switch($d){
+                        case '0000-00-00':
                         case ''; return '';
                         default: return date('d/m/Y', strtotime($d));
                     }
                 }),
-                array('db' => 'total_busca', 'dt' => 28),
+                array('db' => 'nm_casos_susp_an', 'dt' => 28),
                 array('db' => 'casos_hum_dom', 'dt' => 29),
                 array('db' => 'obs', 'dt' => 30)
 );

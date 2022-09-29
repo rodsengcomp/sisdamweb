@@ -839,7 +839,7 @@ $(function() {
             }
         });
 
-        $("#cad-esporo-animal").validate({
+        $("#cad-esporo-animals").validate({
             rules: {
                 ruagoogle: {
                     required: true

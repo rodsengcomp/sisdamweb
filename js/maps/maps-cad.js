@@ -1,5 +1,5 @@
 function initialize() {
-    var latlng = new google.maps.LatLng(-23.4709651,-46.58083020000004);
+    var latlng = new google.maps.LatLng(-23.470965,-46.580830);
     var map = new google.maps.Map(document.getElementById('mapcad'), {
         center: latlng,
         zoom: 16

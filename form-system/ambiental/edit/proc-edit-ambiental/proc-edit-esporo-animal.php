@@ -17,10 +17,10 @@ $ruagoogle =   $_POST['ruagoogle'] ?? ''; // ID RUA GOOGLE
 $nve =         $_POST['nve'] ?? ''; // NVE
 $ano =         $_POST['ano'] ?? ''; // ANO
 $datanot =     $_POST['datanot'] ?? ''; // NOTIFICAÇÃO
-$dataua =     $_POST['dataua'] ?? ''; // DATA ÚLTIMA AVALIAÇÃO
-$databa =     $_POST['databa'] ?? ''; // DATA BUSCA ATIVA
-$datanot =     $_POST['datanot'] ?? ''; // NOTIFICAÇÃO
-$datanot =     $_POST['datanot'] ?? ''; // NOTIFICAÇÃO
+$dataua =      $_POST['dataua'] ?? ''; // DATA ÚLTIMA AVALIAÇÃO
+$databa =      $_POST['databa'] ?? ''; // DATA BUSCA ATIVA
+$num_ca_susp = $_POST['num_casos_susp'] ?? ''; // DATA ÚLTIMA AVALIAÇÃO
+$dataft =      $_POST['dataft'] ?? ''; // NOTIFICAÇÃO
 $nomeanimal =  $_POST['nomeanimal'] ?? ''; // ANIMAL
 $especie =     $_POST['especie'] ?? ''; // ESPÉCIE
 $esp_id =      $_POST['esp_id'] ?? ''; // ESPÉCIE
@@ -53,7 +53,7 @@ $nment =       $_POST['nment'] ?? ''; // NOME ENTREGADOR MEDICAMENTOS 1 EMTREGA
 $nmrecep =     $_POST['nmrecep'] ?? ''; // NOME RECEPTOR DE MEDICAMENTOS 1 ENTREGA
 $obs =         $_POST['obs'] ?? ''; // OBSERVAÇõES SOBRE
 $idrua =       $_POST['idrua'] ?? ''; // ID RUA
-$pin =         $_POST['pin'] ?? ''; // PINO MAPS
+$pin =         $_POST['pin'] ?? '0'; // PINO MAPS
 
 //GETS
 $acao_get = $_GET['acao'];
@@ -80,13 +80,13 @@ $resultado_situacao = $conectar->query($consulta_situacao);
 $situacao_id = mysqli_fetch_assoc($resultado_situacao);
 $id_sit = $situacao_id['id_st_esp'];
 
-// Trazendo o id do medicamento 1
+// Trazendo o id do medicamento
 $cs_med = "SELECT * FROM esporo_medc WHERE nm_mdc_esp_an='$med'";
 $rs_med = $conectar->query($cs_med);
 $med_id = mysqli_fetch_assoc($rs_med);
 $id_med = $med_id['id_med_esp'];
 
-// Trazendo o id da especie
+// Trazendo o id da origem
 $cs_origem = "SELECT * FROM origem WHERE nm_origem='$origem'";
 $rs_origem = $conectar->query($cs_origem);
 $origem_id = mysqli_fetch_assoc($rs_origem);
@@ -98,13 +98,27 @@ $rs_sexo = $conectar->query($cs_sexo);
 $sexo_id = mysqli_fetch_assoc($rs_sexo);
 $id_sexo = $sexo_id['id'];
 
-// Monta o caminho de destino com o nome do arquivo
+// Formata a data com / em formato data Y-mm-dd
 $data_s_w = str_replace("/", "-", $datanot);
 $data_n = date('Y-m-d', strtotime($data_s_w));
 
-// Monta o caminho de destino com o nome do arquivo
+// Formata a data com / em formato data Y-mm-dd
 $data_s_c = str_replace("/", "-", $dtent);
 $data_s = date('Y-m-d', strtotime($data_s_c));
+
+// Formata a data com / em formato data Y-mm-dd
+$data_u_a = str_replace("/", "-", $dataua);
+$data_ua = date('Y-m-d', strtotime($data_u_a));
+
+// Formata a data com / em formato data Y-mm-dd
+$data_b_a = str_replace("/", "-", $databa);
+$data_ba = date('Y-m-d', strtotime($data_b_a));
+
+// Formata a data com / em formato data Y-mm-dd
+$data_f_t = str_replace("/", "-", $dataft);
+$data_ft = date('Y-m-d', strtotime($data_f_t));
+
+
 
 //Se conectando com o Banco de Dados e tratando possível erro de conexão ...
 if ($conectar->connect_error) die ('<div class="form-group"><a href="javascript:history.back()" <button type=\'button\' class=\'btn btn-danger\' accesskey="V"><span class="glyphicon glyphicon-arrow-left"></span> <u>V</u>OLTAR</button></a><h4><strong><div class="alert alert-danger text-center" role="alert">ERROR : 01 FALHA AO CONECTAR !!! SE PERSISTIR CONTATE: sisdamjt@gmail.com</h4></strong></div>');
@@ -113,6 +127,8 @@ if ($conectar->connect_error) die ('<div class="form-group"><a href="javascript:
 $sql_nve = $conectar->query("SELECT * FROM esporo_an WHERE nve='$nve' AND tutor='$tutor' AND nome_animal='$nomeanimal' AND especie='$id_esp' AND id_esp<>'$id'");
 
 $sql_pino = $conectar->query ("SELECT pin FROM esporo_an WHERE id_rua='$idrua' AND numero='$num' AND id_esp<>$id");
+
+$sql_pin_igual = $conectar->query ("SELECT pin FROM esporo_an WHERE id_rua='$idrua' AND numero='$num' AND pin='$pin' AND id_esp<>$id");
 
 $pino = $conectar->query ("SELECT pin FROM esporo_an WHERE id_rua='$idrua' AND numero='$num' AND id_esp<>$id ORDER BY pin DESC LIMIT 1");
 $cs_pino = mysqli_fetch_assoc($pino);
@@ -137,38 +153,38 @@ else:
             // Separar os pontos de latitude e longitude repetidos
             if($sql_pino->num_rows > 0):
 
-                $cood = $conectar->query ("SELECT lat, lng FROM esporo_an WHERE id_rua='$idrua' AND numero='$num' AND pin='1'");
+                $cood = $conectar->query ("SELECT lat, lng FROM esporo_an WHERE id_rua='$idrua' AND numero='$num' AND pin='0'");
                 $cs_cood = mysqli_fetch_assoc($cood);
 
                 $latcood = $cs_cood['lat'];
                 $lngcood = $cs_cood['lng'];
 
 
+                // Esse registro contiver a conagem de registro no campo pin da tabela espor_an = 0 e já holver outro registro com mesmo id de rua e numero igual
                 if($pin == 0):
-                    if($pinos == 0): $pin = $pinos + 1;
-                    elseif($pinos == 1): $pin = $pinos + 1; $lat = $latcood; $lng = $lngcood + 0.000010;
-                    elseif($pinos == 2): $pin = $pinos + 1; $lat = $latcood - 0.000010; $lng = $lngcood;
-                    elseif($pinos == 3): $pin = $pinos + 1; $lat = $latcood; $lng = $lngcood - 0.000010;
-                    elseif($pinos == 4): $pin = $pinos + 1; $lat = $latcood + 0.000010; $lng = $lngcood;
-                    elseif($pinos == 5): $pin = $pinos + 1; $lat = $latcood + 0.000010; $lng = $lngcood + 0.000010;
-                    elseif($pinos == 6): $pin = $pinos + 1; $lat = $latcood - 0.000010; $lng = $lngcood + 0.000010;
-                    elseif($pinos == 7): $pin = $pinos + 1; $lat = $latcood - 0.000010; $lng = $lngcood - 0.000010;
-                    elseif($pinos == 8): $pin = $pinos + 1; $lat = $latcood + 0.000010; $lng = $lngcood - 0.000010;
-                    elseif($pinos == 9): $pin = $pinos + 1; $lat = $latcood + 0.000020; $lng = $lngcood;
-                    elseif($pinos == 10): $pin = $pinos + 1; $lat = $latcood; $lng = $lngcood - 0.000020;
+                    if($pinos == 0): $pin = $pinos + 1; $lat = $latcood; $lng = $lngcood + 0.000010;
+                    elseif($pinos == 1): $pin = $pinos + 1; $lat = $latcood - 0.000010; $lng = $lngcood;
+                    elseif($pinos == 2): $pin = $pinos + 1; $lat = $latcood; $lng = $lngcood - 0.000010;
+                    elseif($pinos == 3): $pin = $pinos + 1; $lat = $latcood + 0.000010; $lng = $lngcood;
+                    elseif($pinos == 4): $pin = $pinos + 1; $lat = $latcood + 0.000010; $lng = $lngcood + 0.000010;
+                    elseif($pinos == 5): $pin = $pinos + 1; $lat = $latcood - 0.000010; $lng = $lngcood + 0.000010;
+                    elseif($pinos == 6): $pin = $pinos + 1; $lat = $latcood - 0.000010; $lng = $lngcood - 0.000010;
+                    elseif($pinos == 7): $pin = $pinos + 1; $lat = $latcood + 0.000010; $lng = $lngcood - 0.000010;
+                    elseif($pinos == 8): $pin = $pinos + 1; $lat = $latcood + 0.000020; $lng = $lngcood;
+                    elseif($pinos == 9): $pin = $pinos + 1; $lat = $latcood; $lng = $lngcood - 0.000020;
+                    elseif($pinos == 10): $pin = $pinos + 1; $lat = $latcood - 0.000020; $lng = $lngcood;
                     elseif($pinos == 11): $pin = $pinos + 1; $lat = $latcood - 0.000020; $lng = $lngcood;
-                    elseif($pinos == 12): $pin = $pinos + 1; $lat = $latcood - 0.000020; $lng = $lngcood;
-                    elseif($pinos == 13): $pin = $pinos + 1; $lat = $latcood + 0.000020; $lng = + 0.000010;
-                    elseif($pinos == 14): $pin = $pinos + 1; $lat = $latcood + 0.000010; $lng = $lngcood + 0.000020;
-                    elseif($pinos == 15): $pin = $pinos + 1; $lat = $latcood - 0.000020; $lng = $lngcood + 0.000010;
-                    elseif($pinos == 16): $pin = $pinos + 1; $lat = $latcood - 0.000010; $lng = $lngcood + 0.000020;
-                    elseif($pinos == 17): $pin = $pinos + 1; $lat = $latcood - 0.000010; $lng = $lngcood - 0.000020;
-                    elseif($pinos == 18): $pin = $pinos + 1; $lat = $latcood - 0.000020; $lng = $lngcood - 0.000010;
-                    elseif($pinos == 19): $pin = $pinos + 1; $lat = $latcood + 0.000010; $lng = $lngcood - 0.000020;
-                    elseif($pinos == 20): $pin = $pinos + 1; $lat = $latcood + 0.000020; $lng = $lngcood - 0.000010;
-                    elseif($pinos == 21): $pin = $pinos + 1; $lat = $latcood + 0.000020; $lng = $lngcood + 0.000020;
-                    elseif($pinos == 22): $pin = $pinos + 1; $lat = $latcood - 0.000020; $lng = $lngcood + 0.000020;
-                    elseif($pinos == 23): $pin = $pinos + 1; $lat = $latcood - 0.000020; $lng = $lngcood - 0.000020;
+                    elseif($pinos == 12): $pin = $pinos + 1; $lat = $latcood + 0.000020; $lng = + 0.000010;
+                    elseif($pinos == 13): $pin = $pinos + 1; $lat = $latcood + 0.000010; $lng = $lngcood + 0.000020;
+                    elseif($pinos == 14): $pin = $pinos + 1; $lat = $latcood - 0.000020; $lng = $lngcood + 0.000010;
+                    elseif($pinos == 15): $pin = $pinos + 1; $lat = $latcood - 0.000010; $lng = $lngcood + 0.000020;
+                    elseif($pinos == 16): $pin = $pinos + 1; $lat = $latcood - 0.000010; $lng = $lngcood - 0.000020;
+                    elseif($pinos == 17): $pin = $pinos + 1; $lat = $latcood - 0.000020; $lng = $lngcood - 0.000010;
+                    elseif($pinos == 18): $pin = $pinos + 1; $lat = $latcood + 0.000010; $lng = $lngcood - 0.000020;
+                    elseif($pinos == 19): $pin = $pinos + 1; $lat = $latcood + 0.000020; $lng = $lngcood - 0.000010;
+                    elseif($pinos == 20): $pin = $pinos + 1; $lat = $latcood + 0.000020; $lng = $lngcood + 0.000020;
+                    elseif($pinos == 21): $pin = $pinos + 1; $lat = $latcood - 0.000020; $lng = $lngcood + 0.000020;
+                    elseif($pinos == 22): $pin = $pinos + 1; $lat = $latcood - 0.000020; $lng = $lngcood - 0.000020;
                     else: $pin = $pinos + 1; $lat = $latcood + 0.000020; $lng = $lngcood - 0.000020;
                     endif;
                 else:
@@ -247,12 +263,15 @@ else:
                 $diagnostico = 0;
             endif;
 
-            $conectar->query("UPDATE esporo_an SET nve = '$nve', ano = '$ano', origem = '$id_origem', data_entrada = '$data_n', pedido = '$pedido', nome_animal = '$nomeanimal', sexo='$id_sexo', idade = '$idade',diagnostico = '$diagnostico' , especie = '$id_esp', tutor = '$tutor',
-                                    id_rua = '$idrua', telefone1 = '$tel1', situacao = '$id_sit', rua_esp_a = '$ruagoogle', numero = '$num', complemento = '$comp',
-                                    lat = '$lat', lng = '$lng', casos_hum_dom = '$casoh', obs = '$obs', pin='$pin', alterado = '$usuariologin', data_alterado = NOW() WHERE id_esp ='$id'");
+            $conectar->query("UPDATE esporo_an SET nve = '$nve', ano = '$ano', origem = '$id_origem', data_entrada = '$data_n', pedido = '$pedido', nome_animal = '$nomeanimal',
+                                    sexo='$id_sexo', idade = '$idade',diagnostico = '$diagnostico' , especie = '$id_esp', tutor = '$tutor', id_rua = '$idrua', telefone1 = '$tel1', 
+                                    situacao = '$id_sit', rua_esp_a = '$ruagoogle', numero = '$num', complemento = '$comp', lat = '$lat', lng = '$lng', data_ult_ava = '$data_ua', 
+                                    data_busca_ativa = '$data_ba', nm_casos_susp_an = '$num_ca_susp', data_final_trat = '$data_ft', casos_hum_dom = '$casoh', 
+                                    obs = '$obs', pin='$pin', alterado = '$usuariologin', data_alterado = NOW() WHERE id_esp ='$id'");
             if($id_sd_med != ''):
-                $conectar->query("UPDATE esporo_an_sd_medc SET data_medc = '$data_s', id_medc = '$id_med', id_especie = '$id_esp', dsg_medc = '$dsg', qtd_medc = '$qtd',nm_ent_medc = '$nment', nm_rec_medc = '$nmrecep',
-                                        alterado = '$usuariologin', data_alterado = NOW() WHERE id_an_esp = '$id' AND id_sd = '$id_sd_med'");
+                $conectar->query("UPDATE esporo_an_sd_medc SET data_medc = '$data_s', id_medc = '$id_med', id_especie = '$id_esp', dsg_medc = '$dsg', 
+                                            qtd_medc = '$qtd', nm_ent_medc = '$nment', nm_rec_medc = '$nmrecep', alterado = '$usuariologin', data_alterado = NOW() 
+                                            WHERE id_an_esp = '$id' AND id_sd = '$id_sd_med'");
                 header("Location: suvisjt.php?pag=edit-esporo-animal&id=$id");
                 $_SESSION['msgedit'] = "<div class='alert alert-info text-center'><strong>MEDICAMENTO : </strong>$med - $dsg MG/DIA - $qtd CÁPSULAS - <strong>EDITADO COM SUCESSO !!!</strong></div>";
             else:

@@ -19,15 +19,6 @@ error_reporting(-1);
 // Recebe o id do cliente do cliente via GET
 // Recebe os dados enviados pela submissão
 $id = (isset($_GET['id'])) ? $_GET['id'] : '';
-$id_sd_med = $_GET['id_sd'] ?? '';
-$id_data = $_GET['data_medc'] ?? '';
-$id_med = $_GET['id_med'] ?? '';
-$id_dsg = $_GET['dsg'] ?? '';
-$id_qtd = $_GET['qtd'] ?? '';
-$id_nm_ent = $_GET['nm_ent_medc'] ?? '';
-$id_nm_rec = $_GET['nm_rec_medc'] ?? '';
-$id_lixeira = $_GET['lixeira'] ?? 'false';
-$id_edit = $_GET['edit'] ?? 'false';
 
 // Valida se existe um id e se ele é numérico
 
@@ -39,7 +30,7 @@ if (!empty($id) && is_numeric($id)):
         esporo_an.rua_esp_a, esporo_an.numero, esporo_an.complemento, esporo_an.tutor, esporo_an.rg, esporo_an.cpf, 
         esporo_an.telefone1, esporo_an.dsg_medc, esporo_medc.nm_mdc_esp_an, esporo_an_sd_medc.data_medc, esporo_an_sd_medc.qtd_medc, esporo_an_sd_medc.nm_rec_medc, 
         ruas.id AS id_rua, ruas.log, ruas.rua, ruas.bairro, ruas.cep,ruas.ruagoogle,
-        situacao_esporo.sit_esp, esporo_an.obs
+        situacao_esporo.sit_esp, esporo_an.obs, esporo_an.sexo, esporo_an.idade
         FROM esporo_an
         LEFT JOIN especie_animal ON esporo_an.especie = especie_animal.id_especie
         LEFT JOIN situacao_esporo ON esporo_an.situacao = situacao_esporo.id_st_esp
@@ -68,6 +59,22 @@ else:
     $_SESSION['msgedit'] = '<div class="alert alert-danger text-center text-uppercase" role="alert">
                                 <strong>ERRO AO EDITAR: DOCUMENTO COM O Nº : ' . $id . ' - ' . $id . ' - NÃO ENCONTRADO !!!</strong></div></div>';
 
+endif;
+
+$sexo = $ed_print['sexo'];
+
+if($sexo == 1):
+    $sexo = 'M';
+else:
+    $sexo = 'F';
+endif;
+
+$idade = $ed_print['idade'];
+
+if($idade == 1):
+    $ano = 'ANO';
+else:
+    $ano = 'ANOS';
 endif;
 
 ?>
@@ -165,10 +172,10 @@ margin-left:0cm;line-height:150%'><span style='font-family:"Arial",sans-serif'>E
                          Porte _______________________________</span></p>
 
                 <p class=MsoNormal style='margin-top:6.0pt;margin-right:0cm;margin-bottom:6.0pt;
-margin-left:0cm;line-height:150%'><span style='font-family:"Arial",sans-serif'>Sexo ______________________       Nº do RGA __________________________</span></p>
+margin-left:0cm;line-height:150%'><span style='font-family:"Arial",sans-serif'>Sexo <?php if(!empty($sexo)) : echo '<u>      '.$sexo.'      </u>'; else: echo '______________________      '; endif;?> Nº do RGA __________________________</span></p>
 
                 <p class=MsoNormal style='margin-top:6.0pt;margin-right:0cm;margin-bottom:6.0pt;
-margin-left:0cm;line-height:150%'><span style='font-family:"Arial",sans-serif'>Idade______________________       Microchip  ___________________________</span></p>
+margin-left:0cm;line-height:150%'><span style='font-family:"Arial",sans-serif'>Idade <?php if(!empty($ed_print['idade'])) : echo '<u>      '.$ed_print['idade'].'  '.$ano.'    </u>'; else: echo '______________________      '; endif;?> Microchip  ___________________________</span></p>
 
                 <p class=MsoNormal style='margin-top:24.0pt;margin-right:0cm;margin-bottom:
 12.0pt;margin-left:0cm;line-height:150%'><b><span style='line-height:150%;

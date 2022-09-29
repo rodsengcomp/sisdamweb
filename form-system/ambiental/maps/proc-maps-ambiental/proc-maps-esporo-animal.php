@@ -16,7 +16,7 @@ function parseToXML($htmlStr)
 
 $result_markers ="SELECT esporo_an.id_esp, esporo_an.nve, esporo_an.ano, esporo_an.data_entrada, esporo_an.nome_animal, esporo_an.lat,esporo_an.lng,
 especie_animal.especie, esporo_an.id_rua, ruas.id, ruas.log, ruas.rua, ruas.ruagoogle, esporo_an.rua_esp_a, esporo_an.numero, esporo_an.complemento,
-esporo_an.tutor, esporo_an.telefone1, esporo_an.dsg_medc, esporo_an.pin,
+esporo_an.tutor, esporo_an.telefone1, esporo_an.pin,
 esporo_medc.nm_mdc_esp_an, 
 situacao_esporo.sit_esp, esporo_an.obs,resultado_esporo.Nr_Pedido, resultado_esporo.Data_Pedido, resultado_esporo.Resultado,
     (CASE
