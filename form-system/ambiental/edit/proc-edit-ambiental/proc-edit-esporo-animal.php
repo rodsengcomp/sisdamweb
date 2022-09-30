@@ -163,37 +163,37 @@ else:
                 // Esse registro contiver a conagem de registro no campo pin da tabela espor_an = 0 e já holver outro registro com mesmo id de rua e numero igual
                 if($pin == 0):
                     if($pinos == 0): $pin = $pinos + 1; $lat = $latcood; $lng = $lngcood + 0.000010;
-                    elseif($pinos == 1): $pin = $pinos + 1; $lat = $latcood - 0.000010; $lng = $lngcood;
-                    elseif($pinos == 2): $pin = $pinos + 1; $lat = $latcood; $lng = $lngcood - 0.000010;
-                    elseif($pinos == 3): $pin = $pinos + 1; $lat = $latcood + 0.000010; $lng = $lngcood;
-                    elseif($pinos == 4): $pin = $pinos + 1; $lat = $latcood + 0.000010; $lng = $lngcood + 0.000010;
-                    elseif($pinos == 5): $pin = $pinos + 1; $lat = $latcood - 0.000010; $lng = $lngcood + 0.000010;
-                    elseif($pinos == 6): $pin = $pinos + 1; $lat = $latcood - 0.000010; $lng = $lngcood - 0.000010;
-                    elseif($pinos == 7): $pin = $pinos + 1; $lat = $latcood + 0.000010; $lng = $lngcood - 0.000010;
-                    elseif($pinos == 8): $pin = $pinos + 1; $lat = $latcood + 0.000020; $lng = $lngcood;
-                    elseif($pinos == 9): $pin = $pinos + 1; $lat = $latcood; $lng = $lngcood - 0.000020;
-                    elseif($pinos == 10): $pin = $pinos + 1; $lat = $latcood - 0.000020; $lng = $lngcood;
-                    elseif($pinos == 11): $pin = $pinos + 1; $lat = $latcood - 0.000020; $lng = $lngcood;
-                    elseif($pinos == 12): $pin = $pinos + 1; $lat = $latcood + 0.000020; $lng = + 0.000010;
-                    elseif($pinos == 13): $pin = $pinos + 1; $lat = $latcood + 0.000010; $lng = $lngcood + 0.000020;
-                    elseif($pinos == 14): $pin = $pinos + 1; $lat = $latcood - 0.000020; $lng = $lngcood + 0.000010;
-                    elseif($pinos == 15): $pin = $pinos + 1; $lat = $latcood - 0.000010; $lng = $lngcood + 0.000020;
-                    elseif($pinos == 16): $pin = $pinos + 1; $lat = $latcood - 0.000010; $lng = $lngcood - 0.000020;
-                    elseif($pinos == 17): $pin = $pinos + 1; $lat = $latcood - 0.000020; $lng = $lngcood - 0.000010;
-                    elseif($pinos == 18): $pin = $pinos + 1; $lat = $latcood + 0.000010; $lng = $lngcood - 0.000020;
-                    elseif($pinos == 19): $pin = $pinos + 1; $lat = $latcood + 0.000020; $lng = $lngcood - 0.000010;
-                    elseif($pinos == 20): $pin = $pinos + 1; $lat = $latcood + 0.000020; $lng = $lngcood + 0.000020;
-                    elseif($pinos == 21): $pin = $pinos + 1; $lat = $latcood - 0.000020; $lng = $lngcood + 0.000020;
-                    elseif($pinos == 22): $pin = $pinos + 1; $lat = $latcood - 0.000020; $lng = $lngcood - 0.000020;
+                        elseif($pinos == 1): $pin = $pinos + 1; $lat = $latcood - 0.000010; $lng = $lngcood;
+                        elseif($pinos == 2): $pin = $pinos + 1; $lat = $latcood; $lng = $lngcood - 0.000010;
+                        elseif($pinos == 3): $pin = $pinos + 1; $lat = $latcood + 0.000010; $lng = $lngcood;
+                        elseif($pinos == 4): $pin = $pinos + 1; $lat = $latcood + 0.000010; $lng = $lngcood + 0.000010;
+                        elseif($pinos == 5): $pin = $pinos + 1; $lat = $latcood - 0.000010; $lng = $lngcood + 0.000010;
+                        elseif($pinos == 6): $pin = $pinos + 1; $lat = $latcood - 0.000010; $lng = $lngcood - 0.000010;
+                        elseif($pinos == 7): $pin = $pinos + 1; $lat = $latcood + 0.000010; $lng = $lngcood - 0.000010;
+                        elseif($pinos == 8): $pin = $pinos + 1; $lat = $latcood + 0.000020; $lng = $lngcood;
+                        elseif($pinos == 9): $pin = $pinos + 1; $lat = $latcood; $lng = $lngcood - 0.000020;
+                        elseif($pinos == 10): $pin = $pinos + 1; $lat = $latcood - 0.000020; $lng = $lngcood;
+                        elseif($pinos == 11): $pin = $pinos + 1; $lat = $latcood - 0.000020; $lng = $lngcood;
+                        elseif($pinos == 12): $pin = $pinos + 1; $lat = $latcood + 0.000020; $lng = + 0.000010;
+                        elseif($pinos == 13): $pin = $pinos + 1; $lat = $latcood + 0.000010; $lng = $lngcood + 0.000020;
+                        elseif($pinos == 14): $pin = $pinos + 1; $lat = $latcood - 0.000020; $lng = $lngcood + 0.000010;
+                        elseif($pinos == 15): $pin = $pinos + 1; $lat = $latcood - 0.000010; $lng = $lngcood + 0.000020;
+                        elseif($pinos == 16): $pin = $pinos + 1; $lat = $latcood - 0.000010; $lng = $lngcood - 0.000020;
+                        elseif($pinos == 17): $pin = $pinos + 1; $lat = $latcood - 0.000020; $lng = $lngcood - 0.000010;
+                        elseif($pinos == 18): $pin = $pinos + 1; $lat = $latcood + 0.000010; $lng = $lngcood - 0.000020;
+                        elseif($pinos == 19): $pin = $pinos + 1; $lat = $latcood + 0.000020; $lng = $lngcood - 0.000010;
+                        elseif($pinos == 20): $pin = $pinos + 1; $lat = $latcood + 0.000020; $lng = $lngcood + 0.000020;
+                        elseif($pinos == 21): $pin = $pinos + 1; $lat = $latcood - 0.000020; $lng = $lngcood + 0.000020;
+                        elseif($pinos == 22): $pin = $pinos + 1; $lat = $latcood - 0.000020; $lng = $lngcood - 0.000020;
                     else: $pin = $pinos + 1; $lat = $latcood + 0.000020; $lng = $lngcood - 0.000020;
                     endif;
                 else:
 
                     $sql_ruaidem = $conectar->query ("SELECT pin FROM esporo_an WHERE id_rua='$idrua' AND numero='$num' AND id_esp<>$id");
 
-                    if($sql_ruaidem->num_rows > 0):
-                        $pin = $pinos + 1;
-                        if($pin == 1): $lat = $latcood; $lng = $lngcood;
+                if($sql_ruaidem->num_rows > 0):
+                    $pin = $pinos + 1;
+                    if($pin == 1): $lat = $latcood; $lng = $lngcood;
                         elseif($pin == 2): $lat = $latcood; $lng = $lngcood + 0.000010;
                         elseif($pin == 3): $lat = $latcood - 0.000010; $lng = $lngcood;
                         elseif($pin == 4): $lat = $latcood; $lng = $lngcood - 0.000010;
@@ -218,9 +218,9 @@ else:
                         elseif($pin == 23): $lat = $latcood - 0.000020; $lng = $lngcood + 0.000020;
                         elseif($pin == 24): $lat = $latcood - 0.000020; $lng = $lngcood - 0.000020;
                         elseif($pin == 25): $lat = $latcood + 0.000020; $lng = $lngcood - 0.000020;
-                        endif;
-                    else:
-                        if($pin == 1): $lat = $latcood; $lng = $lngcood;
+                    endif;
+                else:
+                    if($pin == 1): $lat = $latcood; $lng = $lngcood;
                         elseif($pin == 2): $lat = $latcood; $lng = $lngcood + 0.000010;
                         elseif($pin == 3): $lat = $latcood - 0.000010; $lng = $lngcood;
                         elseif($pin == 4): $lat = $latcood; $lng = $lngcood - 0.000010;
@@ -245,11 +245,11 @@ else:
                         elseif($pin == 23): $lat = $latcood - 0.000020; $lng = $lngcood + 0.000020;
                         elseif($pin == 24): $lat = $latcood - 0.000020; $lng = $lngcood - 0.000020;
                         elseif($pin == 25): $lat = $latcood + 0.000020; $lng = $lngcood - 0.000020;
-                        endif;
                     endif;
                 endif;
-                // ..... Seguem os ifs
             endif;
+                // ..... Seguem os ifs
+        endif;
 
             if($pin == 0):
                 $pin = $pin +1;
