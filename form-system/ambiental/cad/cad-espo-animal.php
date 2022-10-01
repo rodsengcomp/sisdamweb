@@ -247,33 +247,33 @@ include_once '../../conecta.php';
 
                         <label for="inputMedicamento" class="col-sm-2 control-label">MEDICAMENTO</label>
                         <div class="col-sm-2"><input type="text" tabindex="28" data-toggle="tooltip" title="Nome do Medicamento"
-                                                     class="form-control medicamento" name="medicamento1" placeholder="ITRACONAZOL"></div>
+                                                     class="form-control medicamento" name="medicamento" placeholder="ITRACONAZOL"></div>
 
                         <label for="inputMedicamento" class="col-sm-1 control-label">DOSAGEM</label>
                         <div class="col-sm-1"><input type="number" tabindex="29" data-toggle="tooltip" title="Dosagem do Medicamento" maxlength="5"
-                                                     class="form-control" name="dsg1" placeholder="100"></div>
+                                                     class="form-control" name="dsg" placeholder="100"></div>
                     </div>
 
                     <div class="form-group">
-                        <label for="inputDataEntrada" class="col-sm-1 control-label">DATA</label>
+                        <label for="inputDataMedicamento" class="col-sm-1 control-label">DATA</label>
                         <div class="col-sm-2"><input tabindex="30" type="text" class="form-control" data-toggle="tooltip"
-                                                     title="Data da 1ª entrega" name="dataentrada1" id="dataentcad" placeholder="00/00/0000"></div>
+                                                     title="Data da 1ª entrega" name="dataentrada" id="dataentcad" placeholder="00/00/0000"></div>
 
-                        <label for="inputDataEntrada" class="col-sm-1 control-label">QUANTIDADE</label>
+                        <label for="inputQuantidade" class="col-sm-1 control-label">QUANTIDADE</label>
                         <div class="col-sm-1"><input type="number" tabindex="31" data-toggle="tooltip" title="Quantidade de comprimidos" maxlength="5"
-                                                     class="form-control" name="qtd1" placeholder="000"></div>
+                                                     class="form-control" name="qtd" placeholder="000"></div>
 
-                        <label for="inputDataEntrada" class="col-sm-1 control-label">ENTREGUE</label>
+                        <label for="inputEntregue" class="col-sm-1 control-label">ENTREGUE</label>
                         <div class="col-sm-2"><input type="text" tabindex="32" data-toggle="tooltip" title="Para quem foi entregue? (Uvis ou DVZ)"
-                                                     class="form-control entregador" name="nment1" placeholder="Entregue:UVIS/DVZ"></div>
+                                                     class="form-control entregador" name="nment" placeholder="Entregue:UVIS/DVZ"></div>
 
-                        <label for="inputDataEntrada" class="col-sm-1 control-label">RECEBIDO</label>
+                        <label for="inputRecebido" class="col-sm-1 control-label">RECEBIDO</label>
                         <div class="col-sm-3"><input type="text" tabindex="33" data-toggle="tooltip" title="Quem recebeu o medicamento? (Nome)"
-                                                     class="form-control" name="nmrecep1" placeholder="Nome do Receptor" onchange="upperCaseF(this)"></div>
+                                                     class="form-control" name="nmrecep" placeholder="Nome do Receptor" onchange="upperCaseF(this)"></div>
                     </div>
 
                     <div class="form-group">
-                        <label class="col-sm-1 control-label">OBS</label>
+                        <label for="inputObs" class="col-sm-1 control-label">OBS</label>
                         <div class="col-sm-11"><textarea id="obs" tabindex="34" data-toggle="tooltip" title="Observações sobre o caso"
                                                          class="form-control" name="obs" onchange="upperCaseF(this)" placeholder="Informações sobre o caso de esporotricose animal" rows="1"></textarea></div>
                     </div>

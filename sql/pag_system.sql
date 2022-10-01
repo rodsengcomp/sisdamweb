@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: 10.47.171.110:3306
--- Tempo de geração: 19-Ago-2022 às 20:54
--- Versão do servidor: 10.4.13-MariaDB
--- versão do PHP: 7.4.7
+-- Host: 127.0.0.1
+-- Tempo de geração: 01-Out-2022 às 00:57
+-- Versão do servidor: 10.4.24-MariaDB
+-- versão do PHP: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -169,34 +169,19 @@ INSERT INTO `pag_system` (`id`, `name_pag`, `caminho`, `usuariocad`, `criado`, `
 (141, 'list-sivep-ial-covid-19', 'form-system/epidemio/list/list-sivep-ial-covid-19.php', 'D788796', '2020-03-23 15:53:48', 'D788796', '2020-03-23 15:54:32'),
 (142, 'list-anti-rabica', 'form-system/epidemio/list/list-anti-rabica.php', 'D788796', '2020-07-02 09:11:54', 'D788796', '2021-01-28 13:48:13'),
 (143, 'proc-edit-cnes', 'form-system/epidemio/edit/proc-edit-epidemio/edit-cnes.php', NULL, NULL, NULL, NULL),
-(144, 'list-esporo-animal', 'form-system/ambiental/list/list-esporo-animal.php', 'D788796', '2022-07-21 11:07:45', NULL, NULL),
+(144, 'listar-esporotricose-animal', 'form-system/ambiental/list/list-esporo-animal.php', 'D788796', '2022-07-21 11:07:45', NULL, NULL),
 (145, 'list-lab-esporo', 'form-system/ambiental/list/list-lab-esporo.php', 'D788796', '2022-07-21 11:37:41', NULL, NULL),
 (146, 'cadastro-esporotricose-animal', 'form-system/ambiental/cad/cad-espo-animal.php', 'D788796', '2022-07-28 15:24:45', NULL, NULL),
 (147, 'edit-esporo-animal', 'form-system/ambiental/edit/edit-esporo-animal.php', 'D788796', '2022-07-28 15:36:33', NULL, NULL),
 (148, 'proc-cad-esporo-animal', 'form-system/ambiental/cad/proc-cad-ambiental/proc-cad-esporo-animal.php', 'D788796', '2022-08-02 09:27:19', NULL, NULL),
 (149, 'proc-edit-esporo-animal', 'form-system/ambiental/edit/proc-edit-ambiental/proc-edit-esporo-animal.php', 'D788796', '2022-08-12 14:24:20', NULL, NULL),
-(150, 'cad-med-an-esp-an', 'form-system/ambiental/cad/cad-med-sd-espo-animal.php', 'D788796', '2022-08-15 11:24:32', NULL, NULL),
-(151, 'imprimir-ficha-esporo-animal', 'form-system/ambiental/print/print-esporo-animal.php', 'D788796', '2022-08-19 15:08:18', NULL, NULL);
-
---
--- Índices para tabelas despejadas
---
-
---
--- Índices para tabela `pag_system`
---
-ALTER TABLE `pag_system`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT de tabelas despejadas
---
-
---
--- AUTO_INCREMENT de tabela `pag_system`
---
-ALTER TABLE `pag_system`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=152;
+(150, 'cadastro-medicamento-esporo-animal', 'form-system/ambiental/cad/cad-med-ent-espo-animal.php', 'D788796', '2022-08-15 11:24:32', NULL, NULL),
+(151, 'imprimir-ficha-esporo-animal', 'form-system/ambiental/print/print-esporo-animal.php', 'D788796', '2022-08-19 15:08:18', NULL, NULL),
+(152, 'listar-medicamentos-esporotricose-animal', 'form-system/ambiental/list/list-esporo-medical.php', 'D788796', '2022-08-21 21:17:44', NULL, NULL),
+(153, 'listar-saida-de-medicamentos-esporotricose-animal', 'form-system/ambiental/list/list-esporo-medical-saida.php', 'D788796', '2022-08-24 07:49:32', NULL, NULL),
+(154, 'edicao-medicamento-esporo-animal', 'form-system/ambiental/edit/edit-med-ent-espo-animal.php', NULL, NULL, NULL, NULL),
+(155, 'mapa-esporotricose-animal', 'form-system/ambiental/maps/mapa-esporo-animal.php', 'D788796', '2022-08-30 14:51:44', NULL, NULL),
+(156, 'relatorio-esporotricose-animal', 'form-system/ambiental/list/relatorio-esporo-animal.php', 'D788796', '2022-09-22 13:26:25', 'D788796', '2022-09-22 13:29:18');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

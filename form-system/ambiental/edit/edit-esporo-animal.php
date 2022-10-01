@@ -173,18 +173,6 @@ $countlixo = $contarlixo->num_rows;
                  ?>>
             <form class="form-horizontal" id="edit-esporo-animal" method="POST" action="suvisjt.php?pag=proc-edit-esporo-animal">
 
-                <?php
-                // Consulta para obter a latitude e longitude do primeiro pino
-                $cood = $conectar->query ("SELECT lat, lng FROM esporo_an WHERE id_esp='$id'");
-                $cs_cood = mysqli_fetch_assoc($cood);
-
-                $latcood = $cs_cood['lat']; // Latitude do primeiro pino
-                $lngcood = $cs_cood['lng']; // Longitude do primeiro pino
-
-                echo $latcood + 0.000010;
-                echo $lngcood;
-                ?>
-
                 <div class="form-group" id="apresentacao">
                     <input id="searchInput" tabindex="15" style="margin-top: 10px;" class="form-control" type="text"
                            name="ruagoogle" placeholder="Digite o local" value="<?=$editar_esp_an['rua_esp_a']; ?>">

@@ -42,18 +42,12 @@ $da =          $_POST['da'] ?? ''; // DA
 $setor =       $_POST['setor'] ?? ''; // SETOR
 $pgguia =      $_POST['pgguia'] ?? ''; // PGGUIA
 $ubs =         $_POST['localvd'] ?? ''; // UBS
-$dtent1 =      $_POST['dataentrada1'] ?? ''; // ENTREGA
-$med1 =        $_POST['medicamento1'] ?? ''; // NOME MEDICAMENTO 1 ENTREGA
-$dsg1 =        $_POST['dsg1'] ?? ''; // DOSAGEM 1 ENTREGA
-$qtd1 =        $_POST['qtd1'] ?? ''; // QUANTIDADE DE MEDICAMENTOS/COMPRIMIDOS 1 ENTREGA
-$nment1 =      $_POST['nment1'] ?? ''; // NOME ENTREGADOR MEDICAMENTOS 1 EMTREGA
-$nmrecep1 =    $_POST['nmrecep1'] ?? ''; // NOME RECEPTOR DE MEDICAMENTOS 1 ENTREGA
-$dtent2 =      $_POST['dataentrada2'] ?? ''; // ENTREGA
-$med2 =        $_POST['medicamento2'] ?? ''; // NOME MEDICAMENTO 1 ENTREGA
-$dsg2 =        $_POST['dsg2'] ?? ''; // DOSAGEM 1 ENTREGA
-$qtd2=         $_POST['qtd2'] ?? ''; // QUANTIDADE DE MEDICAMENTOS/COMPRIMIDOS 2 ENTREGA
-$nment2 =      $_POST['nment2'] ?? ''; // NOME ENTREGADOR MEDICAMENTOS 2 EMTREGA
-$nmrecep2 =    $_POST['nmrecep2'] ?? ''; // NOME RECEPTOR DE MEDICAMENTOS 2 ENTREGA
+$dtent =       $_POST['dataentrada'] ?? ''; // ENTREGA
+$med =         $_POST['medicamento'] ?? ''; // NOME MEDICAMENTO 1 ENTREGA
+$dsg =         $_POST['dsg'] ?? ''; // DOSAGEM 1 ENTREGA
+$qtd =         $_POST['qtd'] ?? ''; // QUANTIDADE DE MEDICAMENTOS/COMPRIMIDOS 1 ENTREGA
+$nment =       $_POST['nment'] ?? ''; // NOME ENTREGADOR MEDICAMENTOS 1 EMTREGA
+$nmrecep =     $_POST['nmrecep'] ?? ''; // NOME RECEPTOR DE MEDICAMENTOS 1 ENTREGA
 $obs =         $_POST['obs'] ?? ''; // OBSERVAÇõES SOBRE
 $idrua =       $_POST['idrua'] ?? ''; // ID RUA
 $pin =         $_POST['pin'] ?? '0'; // PINO MAPS
@@ -89,12 +83,13 @@ $sexo_id = mysqli_fetch_assoc($rs_sexo);
 $id_sexo = $sexo_id['id'];
 
 // Monta o caminho de destino com o nome do arquivo
-$data_s_c = str_replace("/", "-", $dtent1);
-$data_s = date('Y-m-d', strtotime($data_s_c));
 
-// Monta o caminho de destino com o nome do arquivo
-$data_s_c2 = str_replace("/", "-", $dtent2);
-$data_s2 = date('Y-m-d', strtotime($data_s_c2));
+if(!empty($dtent)):
+$data_s_c = str_replace("/", "-", $dtent);
+$data_s = date('Y-m-d', strtotime($data_s_c));
+else:
+    $data_s = '';
+endif;
 
 // Monta o caminho de destino com o nome do arquivo
 $datanot_s_c = str_replace("/", "-", $datanot);
@@ -202,11 +197,7 @@ $pinos = $cs_pino['pin'];
 
             if(!empty($data_s)):
                 $conectar->query("INSERT INTO esporo_an_sd_medc (id_an_esp ,data_medc ,id_medc , dsg_medc, qtd_medc ,nm_ent_medc ,nm_rec_medc, criado ,data_criado)
-                                    VALUES ('$ultimo_id', '$data_s','$id_med', '$dsg1', '$qtd1', '$nment1', '$nmrecep1', '$usuariologin', NOW())");
-            endif;
-            if(!empty($data_s2)):
-                $conectar->query("INSERT INTO esporo_an_sd_medc (id_an_esp ,data_medc ,id_medc , dsg_medc, qtd_medc ,nm_ent_medc ,nm_rec_medc , criado ,data_criado)
-                                    VALUES ('$ultimo_id', '$data_s2','$id_med', '$dsg2', '$qtd2', '$nment2', '$nmrecep2', '$usuariologin', NOW())");
+                                    VALUES ('$ultimo_id', '$data_s','$id_med', '$dsg', '$qtd', '$nment', '$nmrecep', '$usuariologin', NOW())");
             endif;
 
             header("Location: suvisjt.php?pag=cadastro-esporotricose-animal");
@@ -217,7 +208,7 @@ $pinos = $cs_pino['pin'];
     if($acao === 'cadastro-medicamento') :
         if(!empty($dtent)):
             $conectar->query("INSERT INTO esporo_an_ent_medc (dt_cadastro, nm_esp_medc ,dsg_esp_medc, qtd_esp_medc , criado ,dt_criado)
-                                        VALUES ('$data_s', '$id_med', '$dsg1', '$qtd1', '$usuariologin', NOW())");
+                                        VALUES ('$data_s', '$id_med', '$dsg', '$qtd', '$usuariologin', NOW())");
             header("Location: suvisjt.php?pag=cadastro-medicamento-esporo-animal");
             $_SESSION['msgcad'] = "<div class='alert alert-success text-center' id='msgcad' role='alert'><strong>MEDICAMENTO : </strong>$med<strong> - DOSAGEM : </strong>$dsg1<strong> MG - QUANTIDADE : </strong>$qtd1<strong> 
                                         CAP. - CADASTRADO COM SUCESSO!!!</strong></div>";

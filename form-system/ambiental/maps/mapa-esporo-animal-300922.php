@@ -6,11 +6,7 @@
  * Time: 14:38
  */
 
-/* https://github.com/googlemaps/v3-utility-library/tree/master/packages/markerclustererplus */
-
 error_reporting(1);
-
-$resultado = $_GET['resultado'] ?? '';
 
 $contar = $conectar->query("SELECT lixeira FROM esporo_an WHERE lixeira = 0");
 $count = $contar->num_rows;
@@ -49,7 +45,7 @@ $row_exame_esporo = mysqli_fetch_assoc($cs_exame_esporo);
                     <li class="active">Sem Coleta <span role="button" class="btn btn-warning rounded-circle"><?=$countexamesex?></span>
                 </ol>
                 <button type="button" style="opacity: unset" class="disabled btn btn-success btn-labeled btn-lg btn-block" data-toggle="tooltip" title="Lista de Bloqueios 1ª Via" ><span class="btn-label"><i
-                                class="fa fa-globe-americas"></i></span>MAPA DE CASOS DE ESPOROTRICOSE ANIMAL - <?php echo date("Y")?></button>
+                                class="fa fa-globe-americas"></i></span>CASOS DE ESPOROTRICOSE ANIMAL - <?php echo date("Y")?></button>
             </div>
         </div>
     </div>
@@ -123,7 +119,7 @@ $row_exame_esporo = mysqli_fetch_assoc($cs_exame_esporo);
         var infowindow = new google.maps.InfoWindow();
 
         // Altere isso dependendo do nome do seu arquivo PHP ou XML
-        downloadUrl('form-system/ambiental/maps/proc-maps-ambiental/proc-maps-esporo-animal.php?resultado=<?=$resultado?>', function(data) {
+        downloadUrl('form-system/ambiental/maps/proc-maps-ambiental/proc-maps-esporo-animal.php', function(data) {
             var xml = data.responseXML;
             var markers = xml.documentElement.getElementsByTagName("marker");
             for (var i = 0; i < markers.length; i++) {

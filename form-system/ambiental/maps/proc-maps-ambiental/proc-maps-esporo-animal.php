@@ -2,22 +2,11 @@
 
 include_once '../../../../conecta.php';
 
-function parseToXML($htmlStr)
-{
-    $xmlStr = str_replace('<', '&lt;', $htmlStr);
-    $xmlStr = str_replace('>', '&gt;', $xmlStr);
-    $xmlStr = str_replace('"', '&quot;', $xmlStr);
-    $xmlStr = str_replace("'", '&#39;', $xmlStr);
-    $xmlStr = str_replace("&", '&amp;', $xmlStr);
-    return $xmlStr;
-}
-
 // Select all the rows in the markers table
 
 $result_markers ="SELECT esporo_an.id_esp, esporo_an.nve, esporo_an.ano, esporo_an.data_entrada, esporo_an.nome_animal, esporo_an.lat,esporo_an.lng,
 especie_animal.especie, esporo_an.id_rua, ruas.id, ruas.log, ruas.rua, ruas.ruagoogle, esporo_an.rua_esp_a, esporo_an.numero, esporo_an.complemento,
 esporo_an.tutor, esporo_an.telefone1, esporo_an.pin,
-esporo_medc.nm_mdc_esp_an, 
 situacao_esporo.sit_esp, esporo_an.obs,resultado_esporo.Nr_Pedido, resultado_esporo.Data_Pedido, resultado_esporo.Resultado,
     (CASE
         WHEN especie_animal.id_especie = 1 THEN 'FELINA'
@@ -28,8 +17,6 @@ situacao_esporo.sit_esp, esporo_an.obs,resultado_esporo.Nr_Pedido, resultado_esp
     LEFT JOIN especie_animal ON esporo_an.especie = especie_animal.id_especie
     LEFT JOIN situacao_esporo ON esporo_an.situacao = situacao_esporo.id_st_esp
     LEFT JOIN ruas ON esporo_an.id_rua = ruas.id
-    LEFT JOIN  esporo_an_sd_medc ON esporo_an.id_esp = esporo_an_sd_medc.id_an_esp 
-    LEFT JOIN esporo_medc ON esporo_an_sd_medc.id_medc = esporo_medc.id_med_esp
     LEFT JOIN resultado_esporo ON esporo_an.pedido = resultado_esporo.Nr_Pedido
     ORDER BY `type` DESC";
 
