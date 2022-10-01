@@ -135,7 +135,7 @@ endif;
                 <img src="../../../imagens/esporo_animal/logo_ficha_esporo_animal1.jpg"><br><br> <!-- Logo da prefeitura -->
 
                 <p class=MsoNormal align=center style='margin-top:24.0pt;margin-right:0cm;
-margin-bottom:18.0pt;margin-left:0cm;text-align:center;line-height:150%'><b><span style='font-size:12.0pt;line-height:150%;font-family:"Arial",sans-serif'>Termo de Compromisso para Tratamento de Animal com Esporotricose <?=$ed_print['id_rua']?></span></b></p>
+margin-bottom:18.0pt;margin-left:0cm;text-align:center;line-height:150%'><b><span style='font-size:12.0pt;line-height:150%;font-family:"Arial",sans-serif'>Termo de Compromisso para Tratamento de Animal com Esporotricose</span></b></p>
 
                 <p class=MsoNormal style='margin-top:6.0pt;margin-right:0cm;margin-bottom:6.0pt;margin-left:0cm;line-height:150%'>
                     <span style='font-family:"Arial",sans-serif'>Eu,<?php if(!empty($ed_print['tutor'])) : echo '<u> '.ucwords(strtolower(mb_convert_encoding($ed_print['tutor'],'HTML-ENTITIES','UTF-8'))).'</u>';
