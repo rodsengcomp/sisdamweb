@@ -32,7 +32,7 @@ $row_exame_esporo = mysqli_fetch_assoc($cs_exame_esporo);
                 "sProcessing": "Processando...","sZeroRecords": "Nenhum registro encontrado","sSearch": "Pesquisar","oPaginate": {"sNext": "Próximo","sPrevious": "Anterior","sFirst": "Primeiro","sLast": "Último"},
                 "oAria": {"sSortAscending": "Ordenar colunas de forma ascendente","sPrevious": "Ordenar colunas de forma descendente"}},
             dom: "lBfrtip",processing: true, serverside: true, ajax: 'form-system/ambiental/list/proc-list-ambiental/relatorio-esporo.php',
-            "lengthMenu": [[4, 10, 25, 50, -1], [4, 10, 25, 50, "Todos"]],
+            "lengthMenu": [[4, 10, 25, 50, -1], [4, 10, 25, 50, "Todos"]], "aaSorting": [ 3, 'asc' ],
             "aoColumnDefs": [],
             buttons: [ {extend:'excel',title:'Controle de Acompanhamento de Casos de Esporotricose Animal JT - <?=date('Y')?>',header: 'Controle de Acompanhamento de Casos de Esporotricose Animal JT - <?=date('Y')?>',filename:'Controle de Acompanhamento de Casos de Esporotricose Animal JT - <?=date('Y')?>',className: 'btn btn-success',text:'<span class="fal fa-file-excel"></span>' },
                 {extend: 'pdfHtml5',exportOptions: {columns: ':visible'},title:'Controle de Acompanhamento de Casos de Esporotricose Animal JT - <?=date('Y')?>',header: 'Controle de Acompanhamento de Casos de Esporotricose Animal JT - <?=date('Y')?>',filename:'Controle de Acompanhamento de Casos de Esporotricose Animal JT - <?=date('Y')?>',orientation: 'landscape',pageSize: 'LEGAL',className: 'btn btn-danger',text:'<span class="fa fa-file-pdf-o"></span>'},

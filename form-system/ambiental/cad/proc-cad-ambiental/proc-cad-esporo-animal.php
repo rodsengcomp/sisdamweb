@@ -91,22 +91,37 @@ else:
     $data_s = '';
 endif;
 
-// Monta o caminho de destino com o nome do arquivo
-$datanot_s_c = str_replace("/", "-", $datanot);
-$datanot_s = date('Y-m-d', strtotime($datanot_s_c));
+// Formata a data com / em formato data Y-mm-dd
+$data_s_w = str_replace("/", "-", $datanot);
+if(!empty($data_s_w)):
+    $data_n = date('Y-m-d', strtotime($data_s_w));
+else:
+    $data_n = '0000-00-00';
+endif;
 
 // Formata a data com / em formato data Y-mm-dd
 $data_u_a = str_replace("/", "-", $dataua);
-$data_ua = date('Y-m-d', strtotime($data_u_a));
+if(!empty($data_u_a)):
+    $data_ua = date('Y-m-d', strtotime($data_u_a));
+else:
+    $data_ua = '0000-00-00';
+endif;
 
 // Formata a data com / em formato data Y-mm-dd
 $data_b_a = str_replace("/", "-", $databa);
-$data_ba = date('Y-m-d', strtotime($data_b_a));
+if(!empty($data_b_a)):
+    $data_ba = date('Y-m-d', strtotime($data_b_a));
+else:
+    $data_ba = '0000-00-00';
+endif;
 
 // Formata a data com / em formato data Y-mm-dd
 $data_f_t = str_replace("/", "-", $dataft);
-$data_ft = date('Y-m-d', strtotime($data_f_t));
-
+if(!empty($data_f_t)):
+    $data_ft = date('Y-m-d', strtotime($data_f_t));
+else:
+    $data_ft = '0000-00-00';
+endif;
 
 //Se conectando com o Banco de Dados e tratando possível erro de conexão ...
 if ($conectar->connect_error) die ('<div class="form-group"><a href="javascript:history.back()" <button type=\'button\' class=\'btn btn-danger\' accesskey="V"><span class="glyphicon glyphicon-arrow-left"></span> <u>V</u>OLTAR</button></a><h4><strong><div class="alert alert-danger text-center" role="alert">ERROR : 01 FALHA AO CONECTAR !!! SE PERSISTIR CONTATE: sisdamjt@gmail.com</h4></strong></div>');
@@ -187,7 +202,7 @@ $pinos = $cs_pino['pin'];
             $conectar->query("INSERT INTO esporo_an (nve, ano, origem, data_entrada, pedido, nome_animal, sexo, idade, diagnostico, especie, tutor, id_rua, 
                                     telefone1, situacao, rua_esp_a, numero, complemento, lat, lng, data_ult_ava, data_busca_ativa, casos_hum_dom, nm_casos_susp_an, data_final_trat, 
                                     obs, pin, criado, data_criado)
-                                    VALUES ('$nve', '$ano', '$id_origem', '$datanot_s', '$pedido','$nomeanimal', '$id_sexo', '$idade', '$diagnostico', '$id_esp', '$tutor', '$idrua', 
+                                    VALUES ('$nve', '$ano', '$id_origem', '$data_n', '$pedido','$nomeanimal', '$id_sexo', '$idade', '$diagnostico', '$id_esp', '$tutor', '$idrua', 
                                             '$tel1', '$id_sit', '$ruagoogle', '$num', '$comp', '$lat', '$lng', '$data_ua', '$data_ba', '$casoh', '$num_ca_susp', '$data_ft', '$obs', 
                                             '$pin', '$usuariologin', NOW())");
             $id_ea = "SELECT MAX(id_esp) as id_esp FROM esporo_an";

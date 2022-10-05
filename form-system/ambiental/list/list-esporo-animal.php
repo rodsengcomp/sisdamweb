@@ -23,9 +23,6 @@ $countexameneg = $cnexameneg->num_rows;
 
 $countexamesex = $count - ($countexamepos + $countexameneg);
 
-$cs_sinan = $conectar->query("SELECT CREATE_TIME FROM information_schema.tables WHERE TABLE_NAME = 'esporo_an' ORDER BY `CREATE_TIME` DESC");
-$row_sinan = mysqli_fetch_assoc($cs_sinan);
-
 $cs_exame_esporo = $conectar->query("SELECT CREATE_TIME FROM information_schema.tables WHERE TABLE_NAME = 'resultado_esporo' ORDER BY `CREATE_TIME` DESC");
 $row_exame_esporo = mysqli_fetch_assoc($cs_exame_esporo);
 
@@ -164,7 +161,6 @@ $total_p = substr($total_r, 1);
                 <ol class="breadcrumb">
                     <li><i class="fa fa-database"></i> <a href="suvisjt.php">Sisdam Web</a></li>
                     <li class="active">Lista de Esporotricose Animal</li>
-                    <li class="active">Sinan At. em - <?php echo date("d/m/Y",strtotime($row_sinan['CREATE_TIME'])) ; ?> às <?php echo date("H:i:s",strtotime($row_sinan['CREATE_TIME'])) ; ?></li>
                     <li class="active">Exames At. em - <?php echo date("d/m/Y",strtotime($row_exame_esporo['CREATE_TIME'])) ; ?> às <?php echo date("H:i:s",strtotime($row_exame_esporo['CREATE_TIME'])) ; ?></li>
                     <li class="active">Resultados : Positivos <span role="button" class="btn btn-danger rounded-circle"><?=$countexamepos?></span>
                     <li class="active">Negativos <span role="button" class="btn btn-success rounded-circle"><?=$countexameneg?></span>

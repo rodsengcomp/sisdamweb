@@ -56,17 +56,17 @@ $idrua =       $_POST['idrua'] ?? ''; // ID RUA
 $pin =         $_POST['pin'] ?? '0'; // PINO MAPS
 
 //GETS
-$acao_get = $_GET['acao'];
+$acao_get =      $_GET['acao'];
 $id_get =        $_GET['id'];
-$id_sd_med_get = $_GET['id_sd'];
+$id_sd_get =     $_GET['id_sd'];
 $id_data_get =   $_GET['data_medc'] ?? '';
 $id_med_get =    $_GET['id_med'] ?? '';
 $id_dsg_get =    $_GET['dsg'] ?? '';
 $id_qtd_get =    $_GET['qtd'] ?? '';
 $id_nm_ent_get = $_GET['nm_ent_medc'] ?? '';
 $id_nm_rec_get = $_GET['nm_rec_medc'] ?? '';
-$id_nm_tutor = $_GET['nm_tutor'] ?? '';
-$id_nm_animal = $_GET['nm_animal'] ?? '';
+$id_nm_tutor =   $_GET['nm_tutor'] ?? '';
+$id_nm_animal =  $_GET['nm_animal'] ?? '';
 
 // Trazendo o id da especie
 $consulta_especie = "SELECT * FROM especie_animal WHERE especie='$especie'";
@@ -100,25 +100,43 @@ $id_sexo = $sexo_id['id'];
 
 // Formata a data com / em formato data Y-mm-dd
 $data_s_w = str_replace("/", "-", $datanot);
+if(!empty($data_s_w)):
 $data_n = date('Y-m-d', strtotime($data_s_w));
+else:
+    $data_n = '0000-00-00';
+endif;
 
 // Formata a data com / em formato data Y-mm-dd
 $data_s_c = str_replace("/", "-", $dtent);
+if(!empty($data_s_c)):
 $data_s = date('Y-m-d', strtotime($data_s_c));
+else:
+    $data_s = '0000-00-00';
+endif;
 
 // Formata a data com / em formato data Y-mm-dd
 $data_u_a = str_replace("/", "-", $dataua);
+if(!empty($data_u_a)):
 $data_ua = date('Y-m-d', strtotime($data_u_a));
+else:
+$data_ua = '0000-00-00';
+endif;
 
 // Formata a data com / em formato data Y-mm-dd
 $data_b_a = str_replace("/", "-", $databa);
+if(!empty($data_b_a)):
 $data_ba = date('Y-m-d', strtotime($data_b_a));
+else:
+$data_ba = '0000-00-00';
+endif;
 
 // Formata a data com / em formato data Y-mm-dd
 $data_f_t = str_replace("/", "-", $dataft);
+if(!empty($data_f_t)):
 $data_ft = date('Y-m-d', strtotime($data_f_t));
-
-
+else:
+    $data_ft = '0000-00-00';
+endif;
 
 //Se conectando com o Banco de Dados e tratando possível erro de conexão ...
 if ($conectar->connect_error) die ('<div class="form-group"><a href="javascript:history.back()" <button type=\'button\' class=\'btn btn-danger\' accesskey="V"><span class="glyphicon glyphicon-arrow-left"></span> <u>V</u>OLTAR</button></a><h4><strong><div class="alert alert-danger text-center" role="alert">ERROR : 01 FALHA AO CONECTAR !!! SE PERSISTIR CONTATE: sisdamjt@gmail.com</h4></strong></div>');
@@ -138,7 +156,9 @@ $pinos = $cs_pino['pin'];
 
 if ($_SESSION['usuarioNivelAcesso'] == "") :
     header("Location: suvisjt.php");
-
+elseif(empty($id)):
+    header("Location: suvisjt.php?pag=listar-esporotricose-animal");
+    $_SESSION['msgedit'] = "<div class='alert alert-danger text-center' id='msgerroredit' role='alert'><strong>ANIMAL NÃO ENCONTRADO !!!</strong></div>";
 else:
         if($acao === ''):
             header("Location: suvisjt.php");
@@ -302,14 +322,14 @@ else:
         endif;
 
         if(!empty($acao_get) && $acao_get === 'deletar-saida-medicamento') :
-            $conectar->query("UPDATE esporo_an_sd_medc SET lixeira = 1, excluido = '$usuariologin', data_excluido = NOW() WHERE id_sd = '$id_get' AND id_an_esp = '$id_sd_med_get'");
-            header("Location: suvisjt.php?pag=listar-saida-de-medicamentos-esporotricose-animal");
+            $conectar->query("UPDATE esporo_an_sd_medc SET lixeira = 1, excluido = '$usuariologin', data_excluido = NOW() WHERE id_sd = '$id_get' AND id_an_esp = '$id_sd_get'");
+            header("Location: suvisjt.php?pag=edit-esporo-animal&id=$id_sd_get");
             $_SESSION['msgedit'] = "<div class='alert alert-success text-center' id='msgedit' role='alert'><strong>MEDICAMENTO : </strong>$id_med_get - $id_dsg_get MG/DIA - $id_qtd_get CÁPSULAS - <strong>ENVIADO A LIXEIRA COM SUCESSO !!!</strong></div>";
         endif;
 
         if(!empty($acao_get) && $acao_get == 'reativar-saida-medicamento') :
-            $conectar->query("UPDATE esporo_an_sd_medc SET lixeira = 0, reativado = '$usuariologin', data_reativado = NOW() WHERE id_sd = '$id_get' AND id_an_esp = '$id_sd_med_get'");
-            header("Location: suvisjt.php?pag=listar-saida-de-medicamentos-esporotricose-animal");
+            $conectar->query("UPDATE esporo_an_sd_medc SET lixeira = 0, reativado = '$usuariologin', data_reativado = NOW() WHERE id_sd = '$id_get' AND id_an_esp = '$id_sd_get'");
+            header("Location: suvisjt.php?pag=edit-esporo-animal&id=$id_sd_get");
             $_SESSION['msgedit'] = "<div class='alert alert-success text-center' id='msgedit' role='alert'><strong>MEDICAMENTO : </strong>$id_med_get - $id_dsg_get MG/DIA - $id_qtd_get CÁPSULAS - <strong>REATIVADO COM SUCESSO !!!</strong></div>";
         endif;
 endif;

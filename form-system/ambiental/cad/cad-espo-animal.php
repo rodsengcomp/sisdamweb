@@ -33,40 +33,34 @@ include_once '../../conecta.php';
 
     <!-- Pagina de Titulo -->
     <div class="row">
-        <div class="col-md-12">
-            <div class="page-header">
+        <div class="col-md-12 pt-5">
 
-                <button type="button" class="btn btn-success btn-labeled btn-lg btn-block"><span class="btn-label"><i
-                                class="fa fa-plus-sign"></i></span>CADASTRAR ESPOROTRICOSE ANIMAL</button>
-            </div>
+            <ol class="breadcrumb">
+                <li><i class="fa fa-database"></i> <a href="suvisjt.php">Sisdam Web</a></li>
+                <li class="active">Eporotricose Animal</li>
+            </ol>
+            <button type="button" style="opacity: inherit;color: #338113" class="btn btn-success btn-labeled btn-lg btn-block" disabled><span class="btn-label"><i
+                            class="fa fa-plus-circle"></i></span>CADASTRAR ESPOROTRICOSE ANIMAL</button>
         </div>
     </div>
     <!-- Fim da Pagina de Titulo -->
 
-    <div class="form-group text-center">
-        <div class="alert alert-danger text-center" style="<?php if ($_SESSION['usuarioNivelAcesso'] < 3) {
-            echo 'display: none;';
-        } ?>" role="alert"><strong>SEU NÍVEL DE USUÁRIO NÃO PERMITE CADASTRAR !!!</strong></div>
-    </div>
+    <?php if ($_SESSION['usuarioNivelAcesso'] > 3):?>
+        <div class="form-group text-center"><div class="alert alert-danger text-center" role="alert"><strong>SEU NÍVEL DE USUÁRIO NÃO PERMITE EDITAR !!!</strong></div></div>
+    <?php endif;?>
 
-    <div class="form-group text-center">
-        <div class="alert alert-danger text-center" style="<?php if ($_SESSION['usuarioNivelAcesso'] <> "") {
-            echo 'display:none';
-        } ?>" role="alert"><strong>PARA CADASTRAR É NECESSARIO FAZER O LOGIN!!!</strong></div>
-    </div>
+    <?php if ($_SESSION['usuarioNivelAcesso'] == ''):?>
+        <div class="form-group text-center"><div class="alert alert-danger text-center" role="alert"><strong>PARA CADASTRAR É NECESSARIO FAZER O LOGIN!!!</strong></div></div>
+    <?php endif;?>
 
-    <div class="form-group text-center">
-        <?php
-        if (isset($_SESSION['msgcad'])) {
-            echo $_SESSION['msgcad'];
-            unset($_SESSION['msgcad']);
-        }
-        if (isset($_SESSION['msgerrocad'])) {
-            echo $_SESSION['msgerrocad'];
-            unset($_SESSION['msgerrocad']);
-        }
-        ?>
-    </div>
+    <?php
+    if (isset($_SESSION['msgcad'])):
+        echo '<div class="form-group text-center">'.$_SESSION['msgcad'].'</div>';
+    endif;
+    if (isset($_SESSION['msgerrocad'])):
+        echo '<div class="form-group text-center">'.$_SESSION['msgerrocad'].'</div>';
+    endif;
+    ?>
 
     <div class="row">
 
@@ -81,7 +75,7 @@ include_once '../../conecta.php';
                     <div class="form-group" id="apresentacao">
                         <input id="searchInput" tabindex="15" style="margin-top: 10px;" class="form-control" type="text"
                                name="ruagoogle" placeholder="Digite o local">
-                        <div id="mapcad"></div>
+                        <div id="mapcad" style="margin-bottom: inherit"></div>
                     </div>
 
                     <div class="form-group">
@@ -103,7 +97,7 @@ include_once '../../conecta.php';
 
                         <label class="col-sm-1 control-label">ESPÉCIE</label>
                         <div class="col-sm-2">
-                            <input type="text" tabindex="4" class="form-control especie" name="especie"  data-toggle="tooltip" title="Cão ou Gato" onchange="upperCaseF(this)"></div>
+                            <input type="text" tabindex="4" class="form-control especie" name="especie"  data-toggle="tooltip" title="Espécie : FELINA ou CANINA" onchange="upperCaseF(this)"></div>
                     </div>
 
                     <div class="form-group">
@@ -240,7 +234,7 @@ include_once '../../conecta.php';
 
                     <div class="form-group">
                         <label class="col-sm-1 control-label">SITUAÇÃO</label>
-                        <div class="col-sm-2"><input type="text" tabindex="26" class="form-control situacao" name="situacao" data-toggle="tooltip" title="Situação do tratamento"></div>
+                        <div class="col-sm-2"><input type="text" tabindex="26" class="form-control situacao" name="situacao" data-toggle="tooltip" title="Situação : ALTA/DESPARECIDO ..."></div>
 
                         <label class="col-sm-1 control-label">DIAGNÓST.</label>
                         <div class="col-sm-2"><input type="text" onchange="upperCaseF(this)" tabindex="27" class="form-control diagnostico" name="diagnostico" data-toggle="tooltip" title="POSITIVO/NEGATIVO"></div>
@@ -275,7 +269,7 @@ include_once '../../conecta.php';
                     <div class="form-group">
                         <label for="inputObs" class="col-sm-1 control-label">OBS</label>
                         <div class="col-sm-11"><textarea id="obs" tabindex="34" data-toggle="tooltip" title="Observações sobre o caso"
-                                                         class="form-control" name="obs" onchange="upperCaseF(this)" placeholder="Informações sobre o caso de esporotricose animal" rows="1"></textarea></div>
+                                                         class="form-control" name="obs" onchange="upperCaseF(this)" placeholder="Informações sobre o caso de esporotricose animal" rows="2"></textarea></div>
                     </div>
 
                     <input type="hidden" name="ano" value="<?php echo date('Y') ;?>">
@@ -284,28 +278,28 @@ include_once '../../conecta.php';
                     <input type="hidden" name="acao" value="cadastrar">
                     <input type="hidden" name="pin" value="0">
 
-        <div class="form-group text-center">
-            <div class="col-sm-12">
-                <button type="submit" tabindex="35" accesskey="G" style="<?php if ($_SESSION['usuarioNivelAcesso'] == 4) {
-                    echo 'display: none;';
-                } ?>" data-toggle="tooltip" title="GRAVAR OS DADOS" class="btn btn-labeled btn-success mb-2 mr-sm-4"><span
-                            class="btn-label"><i class="fa fa-compact-disc"></i></span> <u>G</u>RAVAR
-                </button>
-                <a href='suvisjt.php?pag=listar-esporotricose-animal' role='button' tabindex="36" data-toggle="tooltip" title="LISTAR REGISTROS" accesskey="L"
-                   class="btn btn-labeled btn-info mb-2 mr-sm-4"><span class="btn-label"><i
-                                class="fa fa-list"></i></span> <u>L</u>ISTAR</a>
-                <a target="_blank"
-                   href='http://www.buscacep.correios.com.br/sistemas/buscacep/buscaCepEndereco.cfm'
-                   role='button' tabindex="37" data-toggle="tooltip" title="BUSCA CEP CORREIOS" accesskey="S"
-                   class="btn btn-labeled btn-default mb-2 mr-sm-4"><span class="btn-label"><img
-                                src="imagens/correios.png" width="20"/></span></span> BUSCA CEP</a>
-            </div>
+                    <div class="form-group text-center">
+                        <div class="col-sm-12">
+                            <button type="submit" tabindex="35" accesskey="G" style="<?php if ($_SESSION['usuarioNivelAcesso'] == 4) {
+                                echo 'display: none;';
+                            } ?>" data-toggle="tooltip" title="GRAVAR OS DADOS" class="btn btn-labeled btn-success mb-2 mr-sm-4"><span
+                                        class="btn-label"><i class="fa fa-compact-disc"></i></span> <u>G</u>RAVAR
+                            </button>
+                            <a href='suvisjt.php?pag=listar-esporotricose-animal' role='button' tabindex="36" data-toggle="tooltip" title="LISTAR REGISTROS" accesskey="L"
+                               class="btn btn-labeled btn-info mb-2 mr-sm-4"><span class="btn-label"><i
+                                            class="fa fa-list"></i></span> <u>L</u>ISTAR</a>
+                            <a target="_blank"
+                               href='http://www.buscacep.correios.com.br/sistemas/buscacep/buscaCepEndereco.cfm'
+                               role='button' tabindex="37" data-toggle="tooltip" title="BUSCA CEP CORREIOS" accesskey="S"
+                               class="btn btn-labeled btn-default mb-2 mr-sm-4"><span class="btn-label"><img
+                                            src="imagens/correios.png" width="20"/></span></span> BUSCA CEP</a>
+                        </div>
+                    </div>
+                </form>
+            </fieldset>
         </div>
-        </form>
-        </fieldset>
     </div>
 </div>
-</div> <!-- /container -->
 
 <script type="text/javascript"
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAhlslumr1saHPVEJHkzPssYLEsWZJQQKU&libraries=places"></script>

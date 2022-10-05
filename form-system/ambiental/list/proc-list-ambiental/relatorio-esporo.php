@@ -79,7 +79,13 @@ EOT;
 // índices
 
 $columns = array(
-                array('db' => 'nve', 'dt' => 0),
+                array('db' => 'nve', 'dt' => 0, 'formatter' => function ($d) {
+                    switch($d){
+                        case '0':
+                        case ''; return '';
+                        default: return $d;
+                    }
+                }),
                 array('db' => 'ano', 'dt' => 1, 'formatter' => function ($d) { return substr($d,2); }),
                 array('db' => 'nm_origem', 'dt' => 2),
                 array('db' => 'data_entrada', 'dt' => 3, 'formatter' => function ($d) {
@@ -91,9 +97,9 @@ $columns = array(
                 }),
                 array('db' => 'pedido', 'dt' => 4, 'formatter' => function ($d) {
                     switch($d){
-                        case '0000-00-00':
+                        case '0':
                         case ''; return '';
-                        default: return ' '.$d;
+                        default: return $d;
                     }
                 }),
                 array('db' => 'rua', 'dt' => 5, 'formatter' => function ($d) {
@@ -118,7 +124,13 @@ $columns = array(
                         default: return $d;
                     }
                 }),
-                array('db' => 'idade', 'dt' => 13),
+                array('db' => 'idade', 'dt' => 13, 'formatter' => function ($d) {
+                    switch($d){
+                        case '0':
+                        case ''; return '';
+                        default: return $d;
+                    }
+                }),
                 array('db' => 'diagnostico', 'dt' => 14, 'formatter' => function ($d) {
                     switch($d){
                         case 0; return 'EM INVESTIGAÇÃO';
@@ -145,8 +157,9 @@ $columns = array(
                 array('db' => 'dsg_medc', 'dt' => 19, 'formatter' => function ($d) {
                     switch($d){
                         case null:
+                        case '0':
                         case ''; return '';
-                        default: return ' '.$d;
+                        default: return $d;
                     }
                 }),
                 array('db' => 'data_final_trat', 'dt' => 20, 'formatter' => function ($d) {
@@ -166,7 +179,7 @@ $columns = array(
                         case 'null';
                             return '';
                         default:
-                            return ' '.$d;
+                            return $d;
                     }
                 }],
                 array('db' => 'data_medc_fn', 'dt' => 24, 'formatter' => function ($d) {
@@ -191,7 +204,13 @@ $columns = array(
                         default: return date('d/m/Y', strtotime($d));
                     }
                 }),
-                array('db' => 'nm_casos_susp_an', 'dt' => 28),
+                array('db' => 'nm_casos_susp_an', 'dt' => 28, 'formatter' => function ($d) {
+                    switch($d){
+                        case '0':
+                        case ''; return '';
+                        default: return $d;
+                    }
+                }),
                 array('db' => 'casos_hum_dom', 'dt' => 29),
                 array('db' => 'obs', 'dt' => 30)
 );

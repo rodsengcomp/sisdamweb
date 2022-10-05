@@ -60,13 +60,23 @@ EOT;
 // índices
 
 $columns = array(
-                array('db' => 'nve', 'dt' => 0),
-                array('db' => 'ano', 'dt' => 1),
-                array('db' => 'data_entrada', 'dt' => 2, 'formatter' => function ($d) {
-                    switch($d){
+                array('db' => 'nve', 'dt' => 0, 'formatter' => function ($d) {
+                    switch ($d) {
+                        case null:
+                        case '0':
                         case '';
                             return '';
-                            break;
+                        default:
+                            return $d;
+                    }
+                }),
+                array('db' => 'ano', 'dt' => 1),
+                array('db' => 'data_entrada', 'dt' => 2, 'formatter' => function ($d) {
+                    switch ($d) {
+                        case null:
+                        case '0':
+                        case '';
+                            return '';
                         default:
                             return date('d/m/Y', strtotime($d));
                     }
@@ -81,69 +91,62 @@ $columns = array(
                 }),
                 array('db' => 'telefone1', 'dt' => 7, 'formatter' => function ($d) {
                     switch($d){
-                        case 'null';
-                            return '';
-                           case '';
-                            return '';
-                            break;
-                        default:
-                            return ' '.$d;
+                        case null:
+                        case '0':
+                        case ''; return '';
+                        default: return $d;
                     }
                 }),
                 array('db' => 'sit_esp', 'dt' => 8),
                 array('db' => 'nm_mdc_esp_an', 'dt' => 9, 'formatter' => function ($d) {
                     switch($d){
-                        case '';
-                            return '';
-                            break;
-                        default:
-                            return ''.$d;
+                        case null:
+                        case '0':
+                        case ''; return '';
+                        default: return $d;
                     }
                 }),
                 array('db' => 'dsg_medc', 'dt' => 10, 'formatter' => function ($d) {
                     switch($d){
-                        case '';
-                            return '';
-                            break;
+                        case null:
+                        case '0':
+                        case ''; return '';
                         default:
                             return ''.$d.' mg/dia';
                     }
                 }),
                 array('db' => 'data_medc', 'dt' => 11, 'formatter' => function ($d) {
                     switch($d){
-                        case '';
-                            return '';
-                            break;
+                        case null:
+                        case '0':
+                        case ''; return '';
                         default:
                             return date('d/m/Y', strtotime($d));
                     }
                 }),
                 array('db' => 'qtd_medc', 'dt' => 12, 'formatter' => function ($d) {
                     switch($d){
-                        case 0:
-                        case 'null';
-                            return '';
-                        case '';
-                            return '';
-                            break;
+                        case null:
+                        case '0':
+                        case ''; return '';
                         default:
                             return ''.$d.' comp.';
                     }
                 }),
                 array('db' => 'nm_ent_medc', 'dt' => 13, 'formatter' => function ($d) {
                     switch($d){
-                        case '';
-                            return '';
-                            break;
+                        case null:
+                        case '0':
+                        case ''; return '';
                         default:
                             return 'ENT: '.$d;
                     }
                 }),
                 array('db' => 'nm_rec_medc', 'dt' => 14, 'formatter' => function ($d) {
                     switch($d){
-                        case '';
-                            return '';
-                            break;
+                        case null:
+                        case '0':
+                        case ''; return '';
                         default:
                             return 'REC: '.$d;
                     }
@@ -155,9 +158,9 @@ $columns = array(
                 array('db' => 'numero', 'dt' => 19),
                 array('db' => 'Data_Pedido', 'dt' => 20, 'formatter' => function ($d) {
                     switch($d){
-                        case '';
-                            return '';
-                            break;
+                        case null:
+                        case '0':
+                        case ''; return '';
                         default:
                             return $d;
                     }
