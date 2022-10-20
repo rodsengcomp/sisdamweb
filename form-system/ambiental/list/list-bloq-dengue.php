@@ -51,6 +51,8 @@ WHERE ((($agravo_sinan_sql.ID_DISTRIT)=\"70\") AND (($agravo_tabela_sql.nDoc) Is
                     <li class="active">Casos de Dengue</li>
                     <li class="active">Sinan At. em - <?php echo date("d/m/Y",strtotime($row_result_dengue['CREATE_TIME'])) ; ?> às
                         <?php echo date("H:i:s",strtotime($row_result_dengue['CREATE_TIME'])) ; ?></li>
+                    <li class="active">CCZ At. em - <?php echo date("d/m/Y",strtotime($row_result_ccz_dengue['CREATE_TIME'])) ; ?> às
+                        <?php echo date("H:i:s",strtotime($row_result_ccz_dengue['CREATE_TIME'])) ; ?></li>
                     <li class="active">Resultados : Positivos <a data-toggle="tooltip" data-placement="bottom" title="Mapa dos Casos Positivos" href="suvisjt.php?pag=mapa-dengue-positivo" role="button" class="btn btn-danger rounded-circle">
                         <?php foreach($conectar->query($pos_den_total) as $row) {echo $row[$count_ndoc_dengue];}?></a>
                     <li class="active">Sem Coleta <span role="button" class="btn btn-warning rounded-circle">
