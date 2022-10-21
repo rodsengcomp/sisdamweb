@@ -144,11 +144,11 @@ if ($conectar->connect_error) die ('<div class="form-group"><a href="javascript:
 # Verificando se tabela já tem id com nve e nome do animal.
 $sql_nve = $conectar->query("SELECT * FROM esporo_an WHERE nve='$nve' AND tutor='$tutor' AND nome_animal='$nomeanimal' AND especie='$id_esp' AND id_esp<>'$id'");
 
-$sql_pino = $conectar->query ("SELECT pin FROM esporo_an WHERE id_rua='$idrua' AND numero='$num' AND id_esp<>$id");
+$sql_pino = $conectar->query ("SELECT pin FROM esporo_an WHERE id_rua='$idrua' AND numero='$num' AND id_esp<>'$id'");
 
-$sql_pin_igual = $conectar->query ("SELECT pin FROM esporo_an WHERE id_rua='$idrua' AND numero='$num' AND pin='$pin' AND id_esp<>$id");
+$sql_pin_igual = $conectar->query ("SELECT pin FROM esporo_an WHERE id_rua='$idrua' AND numero='$num' AND pin='$pin' AND id_esp<>'$id'");
 
-$pino = $conectar->query ("SELECT pin FROM esporo_an WHERE id_rua='$idrua' AND numero='$num' AND id_esp<>$id ORDER BY pin DESC LIMIT 1");
+$pino = $conectar->query ("SELECT pin FROM esporo_an WHERE id_rua='$idrua' AND numero='$num' AND id_esp<>'$id' ORDER BY pin DESC LIMIT 1");
 $cs_pino = mysqli_fetch_assoc($pino);
 
 $pinos = $cs_pino['pin'];
@@ -156,10 +156,7 @@ $pinos = $cs_pino['pin'];
 
 if ($_SESSION['usuarioNivelAcesso'] == "") :
     header("Location: suvisjt.php");
-elseif(empty($id)):
-    header("Location: suvisjt.php?pag=listar-esporotricose-animal");
-    $_SESSION['msgedit'] = "<div class='alert alert-danger text-center' id='msgerroredit' role='alert'><strong>ANIMAL NÃO ENCONTRADO !!!</strong></div>";
-else:
+elseif(!empty($id)):
         if($acao === ''):
             header("Location: suvisjt.php");
         endif;
@@ -256,7 +253,7 @@ else:
                                                 qtd_medc = '$qtd', nm_ent_medc = '$nment', nm_rec_medc = '$nmrecep', alterado = '$usuariologin', data_alterado = NOW() 
                                                 WHERE id_an_esp = '$id' AND id_sd = '$id_sd_med'");
                     header("Location: suvisjt.php?pag=edit-esporo-animal&id=$id");
-                    $_SESSION['msgedit'] = "<div class='alert alert-info text-center'><strong>MEDICAMENTO : </strong>$med - $dsg MG/DIA - $qtd CÁPSULAS - <strong>EDITADO COM SUCESSO !!!</strong></div>";
+                    $_SESSION['msgedit'] = "<div class='alert alert-success text-center'><strong>MEDICAMENTO : </strong>$med - $dsg MG/DIA - $qtd CÁPSULAS - <strong>EDITADO COM SUCESSO !!!</strong></div>";
                 else:
                     if ($id_med != ''):
                         $conectar->query("INSERT INTO esporo_an_sd_medc (id_an_esp ,data_medc ,id_medc , id_especie, dsg_medc, qtd_medc ,nm_ent_medc ,nm_rec_medc , criado ,data_criado)
@@ -297,6 +294,8 @@ else:
             endif;
         endif;
 
+elseif (!empty($id_get)) :
+
         if(!empty($acao_get) && $acao_get == 'deletar') :
             $conectar->query("UPDATE esporo_an SET lixeira = 1, excluido = '$usuariologin', data_excluido = NOW() WHERE id_esp = '$id_get'");
             header("Location: suvisjt.php?pag=listar-esporotricose-animal");
@@ -323,15 +322,18 @@ else:
 
         if(!empty($acao_get) && $acao_get === 'deletar-saida-medicamento') :
             $conectar->query("UPDATE esporo_an_sd_medc SET lixeira = 1, excluido = '$usuariologin', data_excluido = NOW() WHERE id_sd = '$id_get' AND id_an_esp = '$id_sd_get'");
-            header("Location: suvisjt.php?pag=edit-esporo-animal&id=$id_sd_get");
+            header("Location: suvisjt.php?pag=listar-saida-de-medicamentos-esporotricose-animal");
             $_SESSION['msgedit'] = "<div class='alert alert-success text-center' id='msgedit' role='alert'><strong>MEDICAMENTO : </strong>$id_med_get - $id_dsg_get MG/DIA - $id_qtd_get CÁPSULAS - <strong>ENVIADO A LIXEIRA COM SUCESSO !!!</strong></div>";
         endif;
 
         if(!empty($acao_get) && $acao_get == 'reativar-saida-medicamento') :
             $conectar->query("UPDATE esporo_an_sd_medc SET lixeira = 0, reativado = '$usuariologin', data_reativado = NOW() WHERE id_sd = '$id_get' AND id_an_esp = '$id_sd_get'");
-            header("Location: suvisjt.php?pag=edit-esporo-animal&id=$id_sd_get");
+            header("Location: suvisjt.php?pag=listar-saida-de-medicamentos-esporotricose-animal");
             $_SESSION['msgedit'] = "<div class='alert alert-success text-center' id='msgedit' role='alert'><strong>MEDICAMENTO : </strong>$id_med_get - $id_dsg_get MG/DIA - $id_qtd_get CÁPSULAS - <strong>REATIVADO COM SUCESSO !!!</strong></div>";
         endif;
+else :
+    header("Location: suvisjt.php?pag=listar-esporotricose-animal");
+    $_SESSION['msgedit'] = "<div class='alert alert-danger text-center' id='msgerroredit' role='alert'><strong>ANIMAL NÃO ENCONTRADO !!!</strong></div>";
 endif;
 
 ?>

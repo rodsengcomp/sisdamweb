@@ -204,7 +204,9 @@ $total_p = substr($total_r, 1);
             ?>
         </div>
     </div>
-    <!--------------------------------------------- * Tabela de Bloqueios * --------------------------------------->
+
+    <!--------------------------------------------- * Tabela de Saída de Medicamentos * --------------------------------------->
+
     <table id="list-esporo-medical" class="table table-hover table-striped table-bordered" cellspacing="0" width="100%">
         <thead>
         <tr>
@@ -222,7 +224,8 @@ $total_p = substr($total_r, 1);
 
         </tbody>
     </table>
-    <!--------------------------------------------- * Fim da Tabela de Bloqueios * --------------------------------------->
+
+    <!--------------------------------------------- * Fim da Tabela de Saída de Medicamentos * --------------------------------------->
 
 </div>
 

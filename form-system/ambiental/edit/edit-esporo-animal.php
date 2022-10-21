@@ -13,7 +13,7 @@ $id_qtd = $_GET['qtd'] ?? '';
 $id_nm_ent = $_GET['nm_ent_medc'] ?? '';
 $id_nm_rec = $_GET['nm_rec_medc'] ?? '';
 $id_lixeira = $_GET['lixeira'] ?? 'false';
-$id_edit = $_GET['edit'] ?? 'false';
+$id_edit = $_REQUEST['edit'] ?? 'false';
 
 $consulta_esp_an = $conectar->query("SELECT * FROM esporo_an WHERE id_esp='$id'");
 $editar_esp_an = mysqli_fetch_assoc($consulta_esp_an);
@@ -61,6 +61,7 @@ $countlixo = $contarlixo->num_rows;
 
 <style>
     #mapesp {width: 1140px; height: 200px; border: 10px solid #ccc; margin-bottom: 20px;}
+    .gm-style-iw-c > button {display: none !important;}
     #apresentacao {width: 1140px; margin: 1% auto; overflow: hidden;}
     #searchInput {background-color: #fff; font-size: 15px; font-weight: 300; margin-left: 12px; padding: 0 11px 0 13px; text-overflow: ellipsis; width: 50%;}
 </style>
@@ -142,7 +143,7 @@ $countlixo = $contarlixo->num_rows;
                     <li><i class="fa fa-database"></i> <a href="suvisjt.php">Sisdam Web</a></li>
                     <li class="active">Eporotricose Animal</li>
                 </ol>
-                <button type="button" style="opacity: inherit;color: #1d2124" class="btn btn-warning btn-labeled btn-lg btn-block" disabled><span class="btn-label"><i
+                <button type="button" style="opacity: inherit;color: #1d2124" class="btn btn-warning btn-labeled btn-lg btn-block mb-3" disabled><span class="btn-label"><i
                                 class="fa fa-pencil"></i></span>EDITAR ESPOROTRICOSE ANIMAL</button>
         </div>
     </div>

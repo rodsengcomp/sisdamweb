@@ -135,34 +135,27 @@ $total_p = substr($total_r, 1);
     </div>
 
     <div class="row espaco">
-            <div class="col-md-3"><div class="panel panel-success"><div class="panel-heading"><strong>TOTAL DE ENTRADAS</strong></div><div class="panel-body">
-                <?php if($total_e < 1) : echo '<p><strong style="color: #1c7430">ITRACONAZOL 100 MG : 0 CÁPSULAS</strong>';
-                else : echo '<strong style="color: #1c7430">ITRACONAZOL 100 MG : '.$total_e.' CÁPSULAS</strong>'; endif;?>
-            </div></div></div>
-            <div class="col-md-3"><div class="panel panel-danger"><div class="panel-heading"><strong>TOTAL DE SAÍDAS</strong></div><div class="panel-body">
-                <?php if($total_e < 1) : echo '<p><strong style="color: #9f191f">ITRACONAZOL 100 MG : 0 CÁPSULAS</strong>';
-                else : echo '<strong style="color: #9f191f">ITRACONAZOL 100 MG : '.$total_s.' CÁPSULAS</strong>'; endif;?>
-            </div></div></div>
-            <div class="col-md-3"><div class="panel panel-primary"><div class="panel-heading"><strong>TOTAL DE ESTOQUE</strong></div><div class="panel-body">
-                <?php if($total_e < 1) : echo '<p><strong style="color: #0d6aad">ITRACONAZOL 100 MG : 0 CÁPSULAS</strong>';
-                else : echo '<strong style="color: #0d6aad">ITRACONAZOL 100 MG : '.$total_r.' CÁPSULAS</strong>'; endif;?>
-            </div></div></div>
-            <div class="col-md-3"><div class="panel panel-warning"><div class="panel-heading"><strong>MEDICAMENTO A SOLICITAR</strong></div><div class="panel-body">
-                        <?php if($total_r < 0) : echo '<strong style="color: #e0a800">ITRACONAZOL 100 MG : '.$total_p.' CÁPSULAS</strong>';
-                        else : echo '<strong style="color: #e0a800">ITRACONAZOL 100 MG : 0 CÁPSULAS</strong>'; endif;?>
-            </div></div></div>
+        <div class="col-md-3"><div class="panel panel-success"><div class="panel-heading"><strong>TOTAL DE ENTRADAS</strong></div><div class="panel-body">
+                    <?php if($total_e < 1) : echo '<p><strong style="color: #1c7430">ITRACONAZOL 100 MG : 0 CÁPSULAS</strong>';
+                    else : echo '<strong style="color: #1c7430">ITRACONAZOL 100 MG : '.$total_e.' CÁPSULAS</strong>'; endif;?>
+                </div></div></div>
+        <div class="col-md-3"><div class="panel panel-danger"><div class="panel-heading"><strong>TOTAL DE SAÍDAS</strong></div><div class="panel-body">
+                    <?php if($total_e < 1) : echo '<p><strong style="color: #9f191f">ITRACONAZOL 100 MG : 0 CÁPSULAS</strong>';
+                    else : echo '<strong style="color: #9f191f">ITRACONAZOL 100 MG : '.$total_s.' CÁPSULAS</strong>'; endif;?>
+                </div></div></div>
+        <div class="col-md-3"><div class="panel panel-primary"><div class="panel-heading"><strong>TOTAL DE ESTOQUE</strong></div><div class="panel-body">
+                    <?php if($total_e < 1) : echo '<p><strong style="color: #0d6aad">ITRACONAZOL 100 MG : 0 CÁPSULAS</strong>';
+                    else : echo '<strong style="color: #0d6aad">ITRACONAZOL 100 MG : '.$total_r.' CÁPSULAS</strong>'; endif;?>
+                </div></div></div>
+        <div class="col-md-3"><div class="panel panel-warning"><div class="panel-heading"><strong>MEDICAMENTO A SOLICITAR</strong></div><div class="panel-body">
+                    <?php if($total_r < 0) : echo '<strong style="color: #e0a800">ITRACONAZOL 100 MG : '.$total_p.' CÁPSULAS</strong>';
+                    else : echo '<strong style="color: #e0a800">ITRACONAZOL 100 MG : 0 CÁPSULAS</strong>'; endif;?>
+                </div></div></div>
     </div>
 
     <div class="row espaco">
         <div class="text-center">
-            <?=$countlixo_medc_sd?>
-            <?=$lixo?>
-
             <?php if($lixo === '0' && $_SESSION['usuarioNivelAcesso'] <> "") : ?>
-                <a href="suvisjt.php?pag=listar-esporotricose-animal" role="button" style="';
-                    <?php if ($_SESSION['usuarioNivelAcesso'] == 4) : echo 'display: none;';  endif; ?>
-                        " accesskey="N" data-toggle="tooltip" title="Lista de Medicamentos de Esporotricose Animal - JT"
-                            class="btn btn-labeled btn-success mb-2 mr-sm-4"><span class="btn-label"><i class="fa fa-plus-circle"></i> </span> <u>N</u>OVO</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <a href='suvisjt.php?pag=listar-esporotricose-animal' role='button' tabindex="26" data-toggle="tooltip" title="LISTAR REGISTROS" accesskey="L"
                    class="btn btn-labeled btn-info mb-2 mr-sm-4"><span class="btn-label"><i class="glyphicon glyphicon-list"></i></span> <u>L</u>ISTAR</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <a href="suvisjt.php?pag=listar-medicamentos-esporotricose-animal" role="button" accesskey="E" data-toggle="tooltip" title="SAÍDAS DE MEDICAMENTOS"
