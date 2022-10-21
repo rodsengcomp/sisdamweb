@@ -445,8 +445,24 @@ $countlixo = $contarlixo->num_rows;
                        role='button' tabindex="38" data-toggle="tooltip" title="BUSCA CEP CORREIOS" accesskey="S"
                        class="btn btn-labeled btn-default mb-2 mr-sm-4"><span class="btn-label"><img
                                     src="imagens/correios.png" width="20"/></span></span> BUSCA CEP</a>
+
+                    <button type="button" class="btn btn-danger rounded-circle mb-2 mr-sm-4" data-toggle="modal" data-target="#ModalLixoEsp"><i class="fa fa-trash-alt"></i></button>
+
                 </div>
             </div>
+
+            <div class="modal fade" id="ModalLixoEsp" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-sm"><div class="modal-content"><div class="modal-header-danger">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h3 class="modal-title text-center"><i class="fa fa-trash-alt"></i>&nbsp;&nbsp; Deletar Medicamento</h3></div>
+                        <div class="modal-body"><h3 class="text-center"> Deseja apagar <?=$editar_esp_an['nm_mdc_esp_an'].' - '.$editar_esp_an['dsg_esp_medc'].' Mg - '.$editar_esp_an['qtd_esp_medc'];?> Cápsulas ?</h3></div>
+                        <div class="modal-footer text-center"><button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-minus-octagon"></i>  NÃO</button>
+                            '&nbsp;&nbsp;&nbsp;&nbsp;<a href="suvisjt.php?pag=proc-edit-esporo-animal&id=<?=$editar_esp_an['id_esp_ent']?>&id_med=<?=$edit_medc['nm_mdc_esp_an'];?>&data_medc=<?=date('d/m/Y', strtotime($editar_esp_an['dt_cadastro']));?>&dsg=<?=$editar_esp_an['dsg_esp_medc'];?>&qtd=<?=$editar_esp_an['qtd_esp_medc'];?>&acao=deletar-entrada-medicamento" role="button" class="btn btn-success"><i class="fa fa-check-circle-o"></i><strong>  SIM</strong></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             </form>
 
         </div>

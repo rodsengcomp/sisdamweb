@@ -29,7 +29,7 @@ $countlixo_medc_ent = $contarlixo_medc_ent->num_rows;
             dom: "lBfrtip",processing: true, serverside: true, ajax: 'form-system/ambiental/list/proc-list-ambiental/list-esporo-medical.php?lixeira=<?=$lixo?>',
             "lengthMenu": [[4, 10, 25, 50, -1], [4, 10, 25, 50, "Todos"]],
             "aoColumnDefs": [
-                {"bVisible": false,"aTargets": [7]},
+                //{"bVisible": false,"aTargets": [7]},
                 {
                     "aTargets": [3], // o numero 6 é o nº da coluna
                     "mRender": function (data, type, full) { //aqui é uma funçãozinha para pegar os ids
