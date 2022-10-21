@@ -58,7 +58,7 @@ $countlixo_medc_sd  = $contarlixo_medc_sd->num_rows;
                             '<h3 class="modal-title-dark text-center"><i class="fa fa-trash-alt"></i>&nbsp;&nbsp; Reativar Medicamento</h3></div>' +
                             '<div class="modal-body"><h3 class="text-center"> Deseja reativar ' + full[2] + ' - ' + full[4] + ' Cápsulas ?</h3></div>' +
                             '<div class="modal-footer text-center"><button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-minus-octagon"></i>  NÃO</button>' +
-                            '&nbsp;&nbsp;&nbsp;&nbsp;<a href="suvisjt.php?pag=proc-edit-esporo-animal&id='+ full[11]+'&id_sd=' + full[0] + '&data_medc=' + full[1] + '&id_med=' + full[2] + '&dsg=' + full[3] + '&qtd='+ full[4] +'&nm_ent_medc='+ full[5] + '&nm_rec_medc='+ full[6] + '&acao=reativar-saida-medicamento" role="button" class="btn btn-success"><i class="fa fa-check-circle-o"></i><strong>  SIM</strong></a></div></div></div></div>' +
+                            '&nbsp;&nbsp;&nbsp;&nbsp;<a href="suvisjt.php?pag=proc-edit-esporo-animal&id='+ full[11]+'&id_sd=' + full[0] + '&data_medc=' + full[1] + '&id_med=' + full[2] + '&dsg=' + full[3] + '&qtd='+ full[4] +'&nm_ent_medc='+ full[5] + '&nm_rec_medc='+ full[6] + '&acao=reativar-saida-medicamento-lista" role="button" class="btn btn-success"><i class="fa fa-check-circle-o"></i><strong>  SIM</strong></a></div></div></div></div>' +
                             '<button type="button" class="btn btn-warning rounded-circle" data-toggle="modal" data-target="#ModalLixoEsp"><i class="fa fa-arrow-alt-circle-up"></i></button>';
                     }
                 },
@@ -78,7 +78,7 @@ $countlixo_medc_sd  = $contarlixo_medc_sd->num_rows;
                             '<h3 class="modal-title text-center"><i class="fa fa-trash-alt"></i>&nbsp;&nbsp; Deletar Medicamento</h3></div>' +
                             '<div class="modal-body"><h3 class="text-center"> Deseja apagar ' + full[2] + ' - ' + full[4] + ' Cápsulas ?</h3></div>' +
                             '<div class="modal-footer text-center"><button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-minus-octagon"></i>  NÃO</button>' +
-                            '&nbsp;&nbsp;&nbsp;&nbsp;<a href="suvisjt.php?pag=proc-edit-esporo-animal&id='+ full[11]+'&id_sd=' + full[0] + '&data_medc=' + full[1] + '&id_med=' + full[2] + '&dsg=' + full[3] + '&qtd='+ full[4] +'&nm_ent_medc='+ full[5] + '&nm_rec_medc='+ full[6] + '&acao=deletar-saida-medicamento" role="button" class="btn btn-success"><i class="fa fa-check-circle-o"></i><strong>  SIM</strong></a></div></div></div></div>' +
+                            '&nbsp;&nbsp;&nbsp;&nbsp;<a href="suvisjt.php?pag=proc-edit-esporo-animal&id='+ full[11]+'&id_sd=' + full[0] + '&data_medc=' + full[1] + '&id_med=' + full[2] + '&dsg=' + full[3] + '&qtd='+ full[4] +'&nm_ent_medc='+ full[5] + '&nm_rec_medc='+ full[6] + '&acao=deletar-saida-medicamento-lista" role="button" class="btn btn-success"><i class="fa fa-check-circle-o"></i><strong>  SIM</strong></a></div></div></div></div>' +
                             '<button type="button" class="btn btn-danger rounded-circle" data-toggle="modal" data-target="#ModalLixoEsp"><i class="fa fa-trash-alt"></i></button>';
                     }
                 },
@@ -158,18 +158,16 @@ $total_p = substr($total_r, 1);
             <?php if($lixo === '0' && $_SESSION['usuarioNivelAcesso'] <> "") : ?>
                 <a href='suvisjt.php?pag=listar-esporotricose-animal' role='button' tabindex="26" data-toggle="tooltip" title="LISTAR REGISTROS" accesskey="L"
                    class="btn btn-labeled btn-info mb-2 mr-sm-4"><span class="btn-label"><i class="glyphicon glyphicon-list"></i></span> <u>L</u>ISTAR</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <a href="suvisjt.php?pag=listar-medicamentos-esporotricose-animal" role="button" accesskey="E" data-toggle="tooltip" title="SAÍDAS DE MEDICAMENTOS"
-                            class="btn btn-labeled btn-success mb-2 mr-sm-4"><span class="btn-label"><i class="fa fa-pills"></i></span> <u>E</u>NTRADAS</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <?php if($countlixo_medc_sd >= '1' && $_SESSION['usuarioNivelAcesso'] <> "") : ?>
-                        <a href="suvisjt.php?pag=listar-saida-de-medicamentos-esporotricose-animal&lixeira=1" role="button" accesskey="L" data-toggle="tooltip" title="LIXEIRA"
-                            class="btn btn-labeled btn-default mb-2 mr-sm-4"><span class="btn-label"><i class="fa fa-trash-alt"></i></span><span class="badge" style="background-color: #c9302c"><?=$countlixo_medc_sd?></span> &nbsp;<u>L</u>IXEIRA</a>
-                    <?php endif;
-                elseif ($countlixo_medc_sd >= '1' && $lixo === '1' && $_SESSION['usuarioNivelAcesso'] <> "") :
-                    echo '<a href="suvisjt.php?pag=listar-saida-de-medicamentos-esporotricose-animal" role="button" accesskey="L" data-toggle="tooltip" title="SAIR DA LIXEIRA" 
+                <a href="suvisjt.php?pag=listar-medicamentos-esporotricose-animal" role="button" accesskey="E" data-toggle="tooltip" title="SAÍDAS DE MEDICAMENTOS"
+                   class="btn btn-labeled btn-success mb-2 mr-sm-4"><span class="btn-label"><i class="fa fa-pills"></i></span> <u>E</u>NTRADAS</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <?php if($countlixo_medc_sd >= '1' && $_SESSION['usuarioNivelAcesso'] <> "") : ?>
+                    <a href="suvisjt.php?pag=listar-saida-de-medicamentos-esporotricose-animal&lixeira=1" role="button" accesskey="L" data-toggle="tooltip" title="LIXEIRA"
+                       class="btn btn-labeled btn-default mb-2 mr-sm-4"><span class="btn-label"><i class="fa fa-trash-alt"></i></span><span class="badge" style="background-color: #c9302c"><?=$countlixo_medc_sd?></span> &nbsp;<u>L</u>IXEIRA</a>
+                <?php endif;
+            else:
+                echo '<a href="suvisjt.php?pag=listar-saida-de-medicamentos-esporotricose-animal" role="button" accesskey="L" data-toggle="tooltip" title="SAIR DA LIXEIRA" 
                                                 class="btn btn-labeled btn-warning mb-2 mr-sm-4"><span class="btn-label"><i class="fa fa-arrow-alt-circle-left"></i></span><u>V</u>OLTAR</a>';
-                else :
-                    echo '';
-                endif;
+            endif;
             ?>
         </div>
     </div>

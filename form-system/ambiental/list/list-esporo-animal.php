@@ -31,7 +31,7 @@ $row_exame_esporo = mysqli_fetch_assoc($cs_exame_esporo);
 <!-- Todos os chamamentos javascript e códigos de modal's -->
 <script type="text/javascript">
     $(document).ready(function() {
-            $('[data-toggle="tooltip"]').tooltip()
+        $('[data-toggle="tooltip"]').tooltip()
 
         $('#list-esporo').DataTable({responsive: {details: {display: $.fn.dataTable.Responsive.display.modal({header: function (row) {var data = row.data();
                             return data[5] + ' ' + data[4];}}),renderer: function ( api, rowIdx, columns ) {var data = $.map( columns, function ( col, i ) {
@@ -91,20 +91,20 @@ $row_exame_esporo = mysqli_fetch_assoc($cs_exame_esporo);
                 {
                     "aTargets": [3], // o numero 6 é o nº da coluna
                     "mRender": function (data, type, full) { //aqui é uma funçãozinha para pegar os ids
-                        return '<a href="#" role="button" class="btn btn-danger rounded-circle disabled"><strong><span class="fa fa-ban"></strong></a>';
+                        return full[3] + ' <a href="#" role="button" class="btn btn-danger rounded-circle disabled"><strong><span class="fa fa-ban"></strong></a>';
                     }
                 },
                 {
                     "aTargets": [13], // o numero 6 é o nº da coluna
                     "mRender": function (data, type, full) { //aqui é uma funçãozinha para pegar os ids
-                        return '<div class="modal fade" id="ModalLixoEsp" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">' +
+                        return '<div class="modal fade" id="ModalLixoEsp' + full[16] +'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">' +
                             '<div class="modal-dialog modal-sm"><div class="modal-content"><div class="modal-header-warning">' +
                             '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
                             '<h3 class="modal-title-dark text-center"><i class="fa fa-trash-alt"></i>&nbsp;&nbsp; Reativar ' + full[4] + '</h3></div>' +
                             '<div class="modal-body"><h3 class="text-center"> Deseja reativar ' + full[4] + ' - ' + full[3] + ' ?</h3></div>' +
                             '<div class="modal-footer text-center"><button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-minus-octagon"></i>  NÃO</button>' +
                             '&nbsp;&nbsp;&nbsp;&nbsp;<a href="suvisjt.php?pag=proc-edit-esporo-animal&id='+ full[16]+'&nm_tutor='+ full[6] + '&nm_animal='+ full[3] + '&acao=reativar" role="button" class="btn btn-success"><i class="fa fa-check-circle-o"></i><strong>  SIM</strong></a></div></div></div></div>' +
-                            '<button type="button" class="btn btn-warning rounded-circle" data-toggle="modal" data-target="#ModalLixoEsp"><i class="fa fa-arrow-alt-circle-up"></i></button>';
+                            '<button type="button" class="btn btn-warning rounded-circle" data-toggle="modal" data-target="#ModalLixoEsp' + full[16] +'"><i class="fa fa-arrow-alt-circle-up"></i></button>';
                     }
                 },
                 <?php else : ?>
@@ -117,14 +117,14 @@ $row_exame_esporo = mysqli_fetch_assoc($cs_exame_esporo);
                 {
                     "aTargets": [13], // o numero 6 é o nº da coluna
                     "mRender": function (data, type, full) { //aqui é uma funçãozinha para pegar os ids
-                        return '<div class="modal fade" id="ModalLixoEsp" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">' +
+                        return '<div class="modal fade" id="ModalLixoEsp' + full[16] +'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">' +
                             '<div class="modal-dialog modal-sm"><div class="modal-content"><div class="modal-header-danger">' +
                             '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
                             '<h3 class="modal-title text-center"><i class="fa fa-trash-alt"></i>&nbsp;&nbsp; Deletar ' + full[4] + '</h3></div>' +
                             '<div class="modal-body"><h3 class="text-center"> Deseja apagar ' + full[4] + ' - ' + full[3] + ' ?</h3></div>' +
                             '<div class="modal-footer text-center"><button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-minus-octagon"></i>  NÃO</button>' +
                             '&nbsp;&nbsp;&nbsp;&nbsp;<a href="suvisjt.php?pag=proc-edit-esporo-animal&id='+ full[16]+'&nm_tutor='+ full[6] + '&nm_animal='+ full[3] + '&acao=deletar" role="button" class="btn btn-success"><i class="fa fa-check-circle-o"></i><strong>  SIM</strong></a></div></div></div></div>' +
-                            '<button type="button" class="btn btn-danger rounded-circle" data-toggle="modal" data-target="#ModalLixoEsp"><i class="fa fa-trash-alt"></i></button>';
+                            '<button type="button" class="btn btn-danger rounded-circle" data-toggle="modal" data-target="#ModalLixoEsp' + full[16] +'"><i class="fa fa-trash-alt"></i></button>';
                     }
                 },
                 <?php endif; ?>
@@ -168,16 +168,16 @@ $total_p = substr($total_r, 1);
                 </ol>
 
                 <button type="button"  data-toggle="tooltip" title="Lista de Casos de Esporotricose Animal - JT" class="btn btn-<?php if($lixo === '1') : echo 'default'; else : echo 'dark'; endif; ?> btn-labeled btn-lg btn-block"><i class="btn-label"><i
-                    class="fa fa-<?php if($lixo === '1') : echo 'trash-alt'; else : echo 'pills'; endif; ?>"></i></i><?php if($lixo === '1') : echo 'LIXEIRA '; else : echo 'LISTA'; endif; ?>DE CASOS - ESPOROTRICOSE ANIMAL - JT</button>
+                                class="fa fa-<?php if($lixo === '1') : echo 'trash-alt'; else : echo 'pills'; endif; ?>"></i></i><?php if($lixo === '1') : echo 'LIXEIRA '; else : echo 'LISTA'; endif; ?>DE CASOS - ESPOROTRICOSE ANIMAL - JT</button>
 
             </div>
             <?php
-                if (isset($_SESSION['msgsuccess'])) {echo $_SESSION['msgsuccess'];unset($_SESSION['msgsuccess']);} /*Mensagem Teste Rapido Reagente*/
-                if (isset($_SESSION['msgdanger'])) {echo $_SESSION['msgdanger'];unset($_SESSION['msgdanger']);} /**/
-                if (isset($_SESSION['msgwarning'])) {echo $_SESSION['msgwarning'];unset($_SESSION['msgwarning']);} /* Mensagem Teste Rapido Não Reagente*/
-                if (isset($_SESSION['msgerro'])) {echo $_SESSION['msgerro'];unset($_SESSION['msgerro']);} /**/
-                if (isset($_SESSION['msgedit'])) {echo $_SESSION['msgedit'];unset($_SESSION['msgedit']);}
-                if (isset($_SESSION['msgerroredit'])) {echo $_SESSION['msgerroredit'];unset($_SESSION['msgerroredit']);}
+            if (isset($_SESSION['msgsuccess'])) {echo $_SESSION['msgsuccess'];unset($_SESSION['msgsuccess']);} /*Mensagem Teste Rapido Reagente*/
+            if (isset($_SESSION['msgdanger'])) {echo $_SESSION['msgdanger'];unset($_SESSION['msgdanger']);} /**/
+            if (isset($_SESSION['msgwarning'])) {echo $_SESSION['msgwarning'];unset($_SESSION['msgwarning']);} /* Mensagem Teste Rapido Não Reagente*/
+            if (isset($_SESSION['msgerro'])) {echo $_SESSION['msgerro'];unset($_SESSION['msgerro']);} /**/
+            if (isset($_SESSION['msgedit'])) {echo $_SESSION['msgedit'];unset($_SESSION['msgedit']);}
+            if (isset($_SESSION['msgerroredit'])) {echo $_SESSION['msgerroredit'];unset($_SESSION['msgerroredit']);}
             ?>
         </div>
     </div>
@@ -219,11 +219,10 @@ $total_p = substr($total_r, 1);
                     <a href="suvisjt.php?pag=listar-esporotricose-animal&lixeira=1" role="button" accesskey="L" data-toggle="tooltip" title="LIXEIRA"
                        class="btn btn-labeled btn-default mb-2 mr-sm-4"><span class="btn-label"><i class="fa fa-trash-alt"></i></span><span class="badge" style="background-color: #c9302c"><?=$countlixo?></span> &nbsp;<u>L</u>IXEIRA</a>
                 <?php endif;
-                elseif ($countlixo >= '1' && $lixo === '1') : ?>
+            else: ?>
                 <a href="suvisjt.php?pag=listar-esporotricose-animal" role="button" accesskey="L" data-toggle="tooltip" title="SAIR DA LIXEIRA"
                    class="btn btn-labeled btn-warning mb-2 mr-sm-4"><span class="btn-label"><i class="fa fa-arrow-alt-circle-left"></i></span><u>V</u>OLTAR</a>
             <?php
-                else : echo '';
             endif;
             ?>
 
