@@ -29,7 +29,7 @@ $countlixo_medc_sd  = $contarlixo_medc_sd->num_rows;
             dom: "lBfrtip",processing: true, serverside: true, ajax: 'form-system/ambiental/list/proc-list-ambiental/list-esporo-medical-saida.php?lixeira=<?=$lixo?>',
             "lengthMenu": [[4, 10, 25, 50, -1], [4, 10, 25, 50, "Todos"]],
             "aoColumnDefs": [
-                {"bVisible": false,"aTargets": [10]},
+                //{"bVisible": false,"aTargets": [10]},
                 {
                     "aTargets": [6], // o numero 6 é o nº da coluna
                     "mRender": function (data, type, full) { //aqui é uma funçãozinha para pegar os ids
@@ -58,7 +58,7 @@ $countlixo_medc_sd  = $contarlixo_medc_sd->num_rows;
                             '<h3 class="modal-title-dark text-center"><i class="fa fa-trash-alt"></i>&nbsp;&nbsp; Reativar Medicamento</h3></div>' +
                             '<div class="modal-body"><h3 class="text-center"> Deseja reativar ' + full[2] + ' - ' + full[4] + ' Cápsulas ?</h3></div>' +
                             '<div class="modal-footer text-center"><button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-minus-octagon"></i>  NÃO</button>' +
-                            '&nbsp;&nbsp;&nbsp;&nbsp;<a href="suvisjt.php?pag=proc-edit-esporo-animal&id='+ full[11]+'&id_sd=' + full[0] + '&data_medc=' + full[1] + '&id_med=' + full[2] + '&dsg=' + full[3] + '&qtd='+ full[4] +'&nm_ent_medc='+ full[5] + '&nm_rec_medc='+ full[6] + '&acao=reativar-saida-medicamento" role="button" class="btn btn-success"><i class="fa fa-check-circle-o"></i><strong>  SIM</strong></a></div></div></div></div>' +
+                            '&nbsp;&nbsp;&nbsp;&nbsp;<a href="suvisjt.php?pag=proc-edit-esporo-animal&id='+ full[11]+'&id_sd=' + full[0] + '&data_medc=' + full[1] + '&id_med=' + full[2] + '&dsg=' + full[3] + '&qtd='+ full[4] +'&nm_ent_medc='+ full[5] + '&nm_rec_medc='+ full[6] + '&acao=reativar-saida-medicamento-lista" role="button" class="btn btn-success"><i class="fa fa-check-circle-o"></i><strong>  SIM</strong></a></div></div></div></div>' +
                             '<button type="button" class="btn btn-warning rounded-circle" data-toggle="modal" data-target="#ModalLixoEsp"><i class="fa fa-arrow-alt-circle-up"></i></button>';
                     }
                 },
@@ -78,7 +78,7 @@ $countlixo_medc_sd  = $contarlixo_medc_sd->num_rows;
                             '<h3 class="modal-title text-center"><i class="fa fa-trash-alt"></i>&nbsp;&nbsp; Deletar Medicamento</h3></div>' +
                             '<div class="modal-body"><h3 class="text-center"> Deseja apagar ' + full[2] + ' - ' + full[4] + ' Cápsulas ?</h3></div>' +
                             '<div class="modal-footer text-center"><button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-minus-octagon"></i>  NÃO</button>' +
-                            '&nbsp;&nbsp;&nbsp;&nbsp;<a href="suvisjt.php?pag=proc-edit-esporo-animal&id='+ full[11]+'&id_sd=' + full[0] + '&data_medc=' + full[1] + '&id_med=' + full[2] + '&dsg=' + full[3] + '&qtd='+ full[4] +'&nm_ent_medc='+ full[5] + '&nm_rec_medc='+ full[6] + '&acao=deletar-saida-medicamento" role="button" class="btn btn-success"><i class="fa fa-check-circle-o"></i><strong>  SIM</strong></a></div></div></div></div>' +
+                            '&nbsp;&nbsp;&nbsp;&nbsp;<a href="suvisjt.php?pag=proc-edit-esporo-animal&id='+ full[11]+'&id_sd=' + full[0] + '&data_medc=' + full[1] + '&id_med=' + full[2] + '&dsg=' + full[3] + '&qtd='+ full[4] +'&nm_ent_medc='+ full[5] + '&nm_rec_medc='+ full[6] + '&acao=deletar-saida-medicamento-lista" role="button" class="btn btn-success"><i class="fa fa-check-circle-o"></i><strong>  SIM</strong></a></div></div></div></div>' +
                             '<button type="button" class="btn btn-danger rounded-circle" data-toggle="modal" data-target="#ModalLixoEsp"><i class="fa fa-trash-alt"></i></button>';
                     }
                 },
@@ -135,48 +135,39 @@ $total_p = substr($total_r, 1);
     </div>
 
     <div class="row espaco">
-            <div class="col-md-3"><div class="panel panel-success"><div class="panel-heading"><strong>TOTAL DE ENTRADAS</strong></div><div class="panel-body">
-                <?php if($total_e < 1) : echo '<p><strong style="color: #1c7430">ITRACONAZOL 100 MG : 0 CÁPSULAS</strong>';
-                else : echo '<strong style="color: #1c7430">ITRACONAZOL 100 MG : '.$total_e.' CÁPSULAS</strong>'; endif;?>
-            </div></div></div>
-            <div class="col-md-3"><div class="panel panel-danger"><div class="panel-heading"><strong>TOTAL DE SAÍDAS</strong></div><div class="panel-body">
-                <?php if($total_e < 1) : echo '<p><strong style="color: #9f191f">ITRACONAZOL 100 MG : 0 CÁPSULAS</strong>';
-                else : echo '<strong style="color: #9f191f">ITRACONAZOL 100 MG : '.$total_s.' CÁPSULAS</strong>'; endif;?>
-            </div></div></div>
-            <div class="col-md-3"><div class="panel panel-primary"><div class="panel-heading"><strong>TOTAL DE ESTOQUE</strong></div><div class="panel-body">
-                <?php if($total_e < 1) : echo '<p><strong style="color: #0d6aad">ITRACONAZOL 100 MG : 0 CÁPSULAS</strong>';
-                else : echo '<strong style="color: #0d6aad">ITRACONAZOL 100 MG : '.$total_r.' CÁPSULAS</strong>'; endif;?>
-            </div></div></div>
-            <div class="col-md-3"><div class="panel panel-warning"><div class="panel-heading"><strong>MEDICAMENTO A SOLICITAR</strong></div><div class="panel-body">
-                        <?php if($total_r < 0) : echo '<strong style="color: #e0a800">ITRACONAZOL 100 MG : '.$total_p.' CÁPSULAS</strong>';
-                        else : echo '<strong style="color: #e0a800">ITRACONAZOL 100 MG : 0 CÁPSULAS</strong>'; endif;?>
-            </div></div></div>
+        <div class="col-md-3"><div class="panel panel-success"><div class="panel-heading"><strong>TOTAL DE ENTRADAS</strong></div><div class="panel-body">
+                    <?php if($total_e < 1) : echo '<p><strong style="color: #1c7430">ITRACONAZOL 100 MG : 0 CÁPSULAS</strong>';
+                    else : echo '<strong style="color: #1c7430">ITRACONAZOL 100 MG : '.$total_e.' CÁPSULAS</strong>'; endif;?>
+                </div></div></div>
+        <div class="col-md-3"><div class="panel panel-danger"><div class="panel-heading"><strong>TOTAL DE SAÍDAS</strong></div><div class="panel-body">
+                    <?php if($total_e < 1) : echo '<p><strong style="color: #9f191f">ITRACONAZOL 100 MG : 0 CÁPSULAS</strong>';
+                    else : echo '<strong style="color: #9f191f">ITRACONAZOL 100 MG : '.$total_s.' CÁPSULAS</strong>'; endif;?>
+                </div></div></div>
+        <div class="col-md-3"><div class="panel panel-primary"><div class="panel-heading"><strong>TOTAL DE ESTOQUE</strong></div><div class="panel-body">
+                    <?php if($total_e < 1) : echo '<p><strong style="color: #0d6aad">ITRACONAZOL 100 MG : 0 CÁPSULAS</strong>';
+                    else : echo '<strong style="color: #0d6aad">ITRACONAZOL 100 MG : '.$total_r.' CÁPSULAS</strong>'; endif;?>
+                </div></div></div>
+        <div class="col-md-3"><div class="panel panel-warning"><div class="panel-heading"><strong>MEDICAMENTO A SOLICITAR</strong></div><div class="panel-body">
+                    <?php if($total_r < 0) : echo '<strong style="color: #e0a800">ITRACONAZOL 100 MG : '.$total_p.' CÁPSULAS</strong>';
+                    else : echo '<strong style="color: #e0a800">ITRACONAZOL 100 MG : 0 CÁPSULAS</strong>'; endif;?>
+                </div></div></div>
     </div>
 
     <div class="row espaco">
         <div class="text-center">
-            <?=$countlixo_medc_sd?>
-            <?=$lixo?>
-
             <?php if($lixo === '0' && $_SESSION['usuarioNivelAcesso'] <> "") : ?>
-                <a href="suvisjt.php?pag=listar-esporotricose-animal" role="button" style="';
-                    <?php if ($_SESSION['usuarioNivelAcesso'] == 4) : echo 'display: none;';  endif; ?>
-                        " accesskey="N" data-toggle="tooltip" title="Lista de Medicamentos de Esporotricose Animal - JT"
-                            class="btn btn-labeled btn-success mb-2 mr-sm-4"><span class="btn-label"><i class="fa fa-plus-circle"></i> </span> <u>N</u>OVO</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <a href='suvisjt.php?pag=listar-esporotricose-animal' role='button' tabindex="26" data-toggle="tooltip" title="LISTAR REGISTROS" accesskey="L"
                    class="btn btn-labeled btn-info mb-2 mr-sm-4"><span class="btn-label"><i class="glyphicon glyphicon-list"></i></span> <u>L</u>ISTAR</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <a href="suvisjt.php?pag=listar-medicamentos-esporotricose-animal" role="button" accesskey="E" data-toggle="tooltip" title="SAÍDAS DE MEDICAMENTOS"
-                            class="btn btn-labeled btn-success mb-2 mr-sm-4"><span class="btn-label"><i class="fa fa-pills"></i></span> <u>E</u>NTRADAS</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <?php if($countlixo_medc_sd >= '1' && $_SESSION['usuarioNivelAcesso'] <> "") : ?>
-                        <a href="suvisjt.php?pag=listar-saida-de-medicamentos-esporotricose-animal&lixeira=1" role="button" accesskey="L" data-toggle="tooltip" title="LIXEIRA"
-                            class="btn btn-labeled btn-default mb-2 mr-sm-4"><span class="btn-label"><i class="fa fa-trash-alt"></i></span><span class="badge" style="background-color: #c9302c"><?=$countlixo_medc_sd?></span> &nbsp;<u>L</u>IXEIRA</a>
-                    <?php endif;
-                elseif ($countlixo_medc_sd >= '1' && $lixo === '1' && $_SESSION['usuarioNivelAcesso'] <> "") :
-                    echo '<a href="suvisjt.php?pag=listar-saida-de-medicamentos-esporotricose-animal" role="button" accesskey="L" data-toggle="tooltip" title="SAIR DA LIXEIRA" 
+                <a href="suvisjt.php?pag=listar-medicamentos-esporotricose-animal" role="button" accesskey="E" data-toggle="tooltip" title="SAÍDAS DE MEDICAMENTOS"
+                   class="btn btn-labeled btn-success mb-2 mr-sm-4"><span class="btn-label"><i class="fa fa-pills"></i></span> <u>E</u>NTRADAS</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <?php if($countlixo_medc_sd >= '1' && $_SESSION['usuarioNivelAcesso'] <> "") : ?>
+                    <a href="suvisjt.php?pag=listar-saida-de-medicamentos-esporotricose-animal&lixeira=1" role="button" accesskey="L" data-toggle="tooltip" title="LIXEIRA"
+                       class="btn btn-labeled btn-default mb-2 mr-sm-4"><span class="btn-label"><i class="fa fa-trash-alt"></i></span><span class="badge" style="background-color: #c9302c"><?=$countlixo_medc_sd?></span> &nbsp;<u>L</u>IXEIRA</a>
+                <?php endif;
+            else:
+                echo '<a href="suvisjt.php?pag=listar-saida-de-medicamentos-esporotricose-animal" role="button" accesskey="L" data-toggle="tooltip" title="SAIR DA LIXEIRA" 
                                                 class="btn btn-labeled btn-warning mb-2 mr-sm-4"><span class="btn-label"><i class="fa fa-arrow-alt-circle-left"></i></span><u>V</u>OLTAR</a>';
-                else :
-                    echo '';
-                endif;
+            endif;
             ?>
         </div>
     </div>

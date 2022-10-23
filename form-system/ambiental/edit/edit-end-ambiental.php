@@ -58,6 +58,8 @@ while($rows_edit_end = mysqli_fetch_assoc($resultado_edit_end)){?>
                 border: 10px solid #ccc;
             }
 
+            .gm-style-iw-c > button {display: none !important;}
+
             #apresentacao {
                 width: 1140px;
                 margin: 1% auto;

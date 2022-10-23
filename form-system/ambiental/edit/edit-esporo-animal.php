@@ -13,7 +13,7 @@ $id_qtd = $_GET['qtd'] ?? '';
 $id_nm_ent = $_GET['nm_ent_medc'] ?? '';
 $id_nm_rec = $_GET['nm_rec_medc'] ?? '';
 $id_lixeira = $_GET['lixeira'] ?? 'false';
-$id_edit = $_GET['edit'] ?? 'false';
+$id_edit = $_REQUEST['edit'] ?? 'false';
 
 $consulta_esp_an = $conectar->query("SELECT * FROM esporo_an WHERE id_esp='$id'");
 $editar_esp_an = mysqli_fetch_assoc($consulta_esp_an);
@@ -61,6 +61,7 @@ $countlixo = $contarlixo->num_rows;
 
 <style>
     #mapesp {width: 1140px; height: 200px; border: 10px solid #ccc; margin-bottom: 20px;}
+    .gm-style-iw-c > button {display: none !important;}
     #apresentacao {width: 1140px; margin: 1% auto; overflow: hidden;}
     #searchInput {background-color: #fff; font-size: 15px; font-weight: 300; margin-left: 12px; padding: 0 11px 0 13px; text-overflow: ellipsis; width: 50%;}
 </style>
@@ -142,7 +143,7 @@ $countlixo = $contarlixo->num_rows;
                     <li><i class="fa fa-database"></i> <a href="suvisjt.php">Sisdam Web</a></li>
                     <li class="active">Eporotricose Animal</li>
                 </ol>
-                <button type="button" style="opacity: inherit;color: #1d2124" class="btn btn-warning btn-labeled btn-lg btn-block" disabled><span class="btn-label"><i
+                <button type="button" style="opacity: inherit;color: #1d2124" class="btn btn-warning btn-labeled btn-lg btn-block mb-3" disabled><span class="btn-label"><i
                                 class="fa fa-pencil"></i></span>EDITAR ESPOROTRICOSE ANIMAL</button>
         </div>
     </div>
@@ -444,8 +445,25 @@ $countlixo = $contarlixo->num_rows;
                        role='button' tabindex="38" data-toggle="tooltip" title="BUSCA CEP CORREIOS" accesskey="S"
                        class="btn btn-labeled btn-default mb-2 mr-sm-4"><span class="btn-label"><img
                                     src="imagens/correios.png" width="20"/></span></span> BUSCA CEP</a>
+
+                    <button type="button" class="btn btn-danger rounded-circle mb-2 mr-sm-4" data-toggle="modal" data-target="#ModalLixoE"><i class="fa fa-trash-alt"></i></button>
+
                 </div>
             </div>
+
+            <div class="modal fade" id="ModalLixoE" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-sm"><div class="modal-content"><div class="modal-header-danger">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h3 class="modal-title text-center"><i class="fa fa-trash-alt"></i>&nbsp;&nbsp; Deletar Medicamento</h3></div>
+                        <div class="modal-body"><h3 class="text-center"> Deseja apagar <?=$editar_esp_an['nome_animal'].' - '.$editar_esp_an['tutor'];?> ?</h3></div>
+                        <div class="modal-footer text-center"><button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-minus-octagon"></i>  NÃO</button>
+                            '&nbsp;&nbsp;&nbsp;&nbsp;
+                            <a href="suvisjt.php?pag=proc-edit-esporo-animal&id=<?=$editar_esp_an['id_esp']?>&nm_tutor=<?=$edit_medc['tutor'];?>&nm_animal=<?=$edit_medc['nome_animal'];?>&acao=deletar" role="button" class="btn btn-success"><i class="fa fa-check-circle-o"></i><strong>  SIM</strong></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             </form>
 
         </div>

@@ -29,7 +29,7 @@ $countlixo_medc_ent = $contarlixo_medc_ent->num_rows;
             dom: "lBfrtip",processing: true, serverside: true, ajax: 'form-system/ambiental/list/proc-list-ambiental/list-esporo-medical.php?lixeira=<?=$lixo?>',
             "lengthMenu": [[4, 10, 25, 50, -1], [4, 10, 25, 50, "Todos"]],
             "aoColumnDefs": [
-                {"bVisible": false,"aTargets": [7]},
+                //{"bVisible": false,"aTargets": [7]},
                 {
                     "aTargets": [3], // o numero 6 é o nº da coluna
                     "mRender": function (data, type, full) { //aqui é uma funçãozinha para pegar os ids
@@ -204,7 +204,9 @@ $total_p = substr($total_r, 1);
             ?>
         </div>
     </div>
-    <!--------------------------------------------- * Tabela de Bloqueios * --------------------------------------->
+
+    <!--------------------------------------------- * Tabela de Saída de Medicamentos * --------------------------------------->
+
     <table id="list-esporo-medical" class="table table-hover table-striped table-bordered" cellspacing="0" width="100%">
         <thead>
         <tr>
@@ -222,7 +224,8 @@ $total_p = substr($total_r, 1);
 
         </tbody>
     </table>
-    <!--------------------------------------------- * Fim da Tabela de Bloqueios * --------------------------------------->
+
+    <!--------------------------------------------- * Fim da Tabela de Saída de Medicamentos * --------------------------------------->
 
 </div>
 

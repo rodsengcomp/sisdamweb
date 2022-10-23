@@ -225,7 +225,7 @@ $pinos = $cs_pino['pin'];
             $conectar->query("INSERT INTO esporo_an_ent_medc (dt_cadastro, nm_esp_medc ,dsg_esp_medc, qtd_esp_medc , criado ,dt_criado)
                                         VALUES ('$data_s', '$id_med', '$dsg', '$qtd', '$usuariologin', NOW())");
             header("Location: suvisjt.php?pag=cadastro-medicamento-esporo-animal");
-            $_SESSION['msgcad'] = "<div class='alert alert-success text-center' id='msgcad' role='alert'><strong>MEDICAMENTO : </strong>$med<strong> - DOSAGEM : </strong>$dsg1<strong> MG - QUANTIDADE : </strong>$qtd1<strong> 
+            $_SESSION['msgcad'] = "<div class='alert alert-success text-center' id='msgcad' role='alert'><strong>MEDICAMENTO : </strong>$med<strong> - DOSAGEM : </strong>$dsg<strong> MG - QUANTIDADE : </strong>$qtd<strong> 
                                         CAP. - CADASTRADO COM SUCESSO!!!</strong></div>";
         else:
             header("Location: suvisjt.php?pag=cadastro-medicamento-esporo-animal");
