@@ -52,6 +52,7 @@ $qtd =         $_POST['qtd'] ?? ''; // QUANTIDADE DE MEDICAMENTOS/COMPRIMIDOS 1 
 $nment =       $_POST['nment'] ?? ''; // NOME ENTREGADOR MEDICAMENTOS 1 EMTREGA
 $nmrecep =     $_POST['nmrecep'] ?? ''; // NOME RECEPTOR DE MEDICAMENTOS 1 ENTREGA
 $obs =         $_POST['obs'] ?? ''; // OBSERVAÇõES SOBRE
+$obs_med =         $_POST['obs_med'] ?? ''; // OBSERVAÇõES SOBRE
 $idrua =       $_POST['idrua'] ?? ''; // ID RUA
 $pin =         $_POST['pin'] ?? '0'; // PINO MAPS
 
@@ -256,14 +257,14 @@ elseif(!empty($id)):
                                         obs = '$obs', pin='$pin', alterado = '$usuariologin', data_alterado = NOW() WHERE id_esp ='$id'");
             if($id_sd_med !== ''):
                 $conectar->query("UPDATE esporo_an_sd_medc SET data_medc = '$data_s', id_medc = '$id_med', id_especie = '$id_esp', dsg_medc = '$dsg', 
-                                                qtd_medc = '$qtd', nm_ent_medc = '$nment', nm_rec_medc = '$nmrecep', alterado = '$usuariologin', data_alterado = NOW() 
+                                                qtd_medc = '$qtd', nm_ent_medc = '$nment', nm_rec_medc = '$nmrecep', obs_med = '$obs_med', alterado = '$usuariologin', data_alterado = NOW() 
                                                 WHERE id_an_esp = '$id' AND id_sd = '$id_sd_med'");
                 header("Location: suvisjt.php?pag=edit-esporo-animal&id=$id");
                 $_SESSION['msgedit'] = "<div class='alert alert-success text-center'><strong>MEDICAMENTO : </strong>$med - $dsg MG/DIA - $qtd CÁPSULAS - <strong>EDITADO COM SUCESSO !!!</strong></div>";
             else:
-                if ($id_med !== ''):
-                    $conectar->query("INSERT INTO esporo_an_sd_medc (id_an_esp ,data_medc ,id_medc , id_especie, dsg_medc, qtd_medc ,nm_ent_medc ,nm_rec_medc , criado ,data_criado)
-                                                VALUES ('$id', '$data_s','$id_med', '$id_esp', '$dsg', '$qtd', '$nment', '$nmrecep', '$usuariologin', NOW())");
+                if (isset($id_med)):
+                    $conectar->query("INSERT INTO esporo_an_sd_medc (id_an_esp ,data_medc ,id_medc , id_especie, dsg_medc, qtd_medc ,nm_ent_medc ,nm_rec_medc , obs_med, criado ,data_criado)
+                                                VALUES ('$id', '$data_s','$id_med', '$id_esp', '$dsg', '$qtd', '$nment', '$nmrecep', '$obs_med', '$usuariologin', NOW())");
                     header("Location: suvisjt.php?pag=edit-esporo-animal&id=$id");
                     $_SESSION['msgedit'] = "<div class='alert alert-success text-center' id='msgedit' role='alert'><strong>MEDICAMENTO : </strong>$med - $dsg MG/DIA - $qtd CÁPSULAS - <strong>INSERIDO COM SUCESSO !!!</strong></div>";
                 else:

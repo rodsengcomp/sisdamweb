@@ -48,6 +48,7 @@ $dsg =         $_POST['dsg'] ?? ''; // DOSAGEM 1 ENTREGA
 $qtd =         $_POST['qtd'] ?? ''; // QUANTIDADE DE MEDICAMENTOS/COMPRIMIDOS 1 ENTREGA
 $nment =       $_POST['nment'] ?? ''; // NOME ENTREGADOR MEDICAMENTOS 1 EMTREGA
 $nmrecep =     $_POST['nmrecep'] ?? ''; // NOME RECEPTOR DE MEDICAMENTOS 1 ENTREGA
+$obs_med =         $_POST['obs_med'] ?? ''; // OBSERVAÇõES SOBRE ENTREGA DE MEDICAMENTO
 $obs =         $_POST['obs'] ?? ''; // OBSERVAÇõES SOBRE
 $idrua =       $_POST['idrua'] ?? ''; // ID RUA
 $pin =         $_POST['pin'] ?? '0'; // PINO MAPS
@@ -211,8 +212,8 @@ $pinos = $cs_pino['pin'];
             $ultimo_id = $row['id_esp'];
 
             if(!empty($data_s)):
-                $conectar->query("INSERT INTO esporo_an_sd_medc (id_an_esp ,data_medc ,id_medc , dsg_medc, qtd_medc ,nm_ent_medc ,nm_rec_medc, criado ,data_criado)
-                                    VALUES ('$ultimo_id', '$data_s','$id_med', '$dsg', '$qtd', '$nment', '$nmrecep', '$usuariologin', NOW())");
+                $conectar->query("INSERT INTO esporo_an_sd_medc (id_an_esp ,data_medc ,id_medc , dsg_medc, qtd_medc ,nm_ent_medc ,nm_rec_medc, obs_med, criado ,data_criado)
+                                    VALUES ('$ultimo_id', '$data_s','$id_med', '$dsg', '$qtd', '$nment', '$nmrecep', '$obs_med', '$usuariologin', NOW())");
             endif;
 
             header("Location: suvisjt.php?pag=cadastro-esporotricose-animal");

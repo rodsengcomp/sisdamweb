@@ -241,11 +241,11 @@ include_once '../../conecta.php';
 
                         <label for="inputMedicamento" class="col-sm-2 control-label">MEDICAMENTO</label>
                         <div class="col-sm-2"><input type="text" tabindex="28" data-toggle="tooltip" title="Nome do Medicamento"
-                                                     class="form-control medicamento" name="medicamento" placeholder="ITRACONAZOL"></div>
+                                                     class="form-control medicamento" name="medicamento" placeholder="ITRACONAZOL" value="ITRACONAZOL"></div>
 
                         <label for="inputMedicamento" class="col-sm-1 control-label">DOSAGEM</label>
                         <div class="col-sm-1"><input type="number" tabindex="29" data-toggle="tooltip" title="Dosagem do Medicamento" maxlength="5"
-                                                     class="form-control" name="dsg" placeholder="100"></div>
+                                                     class="form-control" name="dsg" placeholder="100" value="100"></div>
                     </div>
 
                     <div class="form-group">
@@ -259,7 +259,7 @@ include_once '../../conecta.php';
 
                         <label for="inputEntregue" class="col-sm-1 control-label">ENTREGUE</label>
                         <div class="col-sm-2"><input type="text" tabindex="32" data-toggle="tooltip" title="Para quem foi entregue? (Uvis ou DVZ)"
-                                                     class="form-control entregador" name="nment" placeholder="Entregue:UVIS/DVZ"></div>
+                                                     class="form-control entregador" name="nment" placeholder="Entregue:UVIS/DVZ" value="UVIS"></div>
 
                         <label for="inputRecebido" class="col-sm-1 control-label">RECEBIDO</label>
                         <div class="col-sm-3"><input type="text" tabindex="33" data-toggle="tooltip" title="Quem recebeu o medicamento? (Nome)"
@@ -267,8 +267,14 @@ include_once '../../conecta.php';
                     </div>
 
                     <div class="form-group">
+                        <label class="col-sm-1 control-label">OBS MED.</label>
+                        <div class="col-sm-11"><textarea id="obs_med" tabindex="34" data-toggle="tooltip" title="Observações sobre entrega do medicamento"
+                                                         class="form-control" name="obs_med" onchange="upperCaseF(this)" placeholder="Informações sobre entrega do medicamento" rows="1"></textarea></div>
+                    </div>
+
+                    <div class="form-group">
                         <label for="inputObs" class="col-sm-1 control-label">OBS</label>
-                        <div class="col-sm-11"><textarea id="obs" tabindex="34" data-toggle="tooltip" title="Observações sobre o caso"
+                        <div class="col-sm-11"><textarea id="obs" tabindex="35" data-toggle="tooltip" title="Observações sobre o caso"
                                                          class="form-control" name="obs" onchange="upperCaseF(this)" placeholder="Informações sobre o caso de esporotricose animal" rows="2"></textarea></div>
                     </div>
 
@@ -280,17 +286,17 @@ include_once '../../conecta.php';
 
                     <div class="form-group text-center">
                         <div class="col-sm-12">
-                            <button type="submit" tabindex="35" accesskey="G" style="<?php if ($_SESSION['usuarioNivelAcesso'] == 4) {
+                            <button type="submit" tabindex="36" accesskey="G" style="<?php if ($_SESSION['usuarioNivelAcesso'] == 4) {
                                 echo 'display: none;';
                             } ?>" data-toggle="tooltip" title="GRAVAR OS DADOS" class="btn btn-labeled btn-success mb-2 mr-sm-4"><span
                                         class="btn-label"><i class="fa fa-compact-disc"></i></span> <u>G</u>RAVAR
                             </button>
-                            <a href='suvisjt.php?pag=listar-esporotricose-animal' role='button' tabindex="36" data-toggle="tooltip" title="LISTAR REGISTROS" accesskey="L"
+                            <a href='suvisjt.php?pag=listar-esporotricose-animal' role='button' tabindex="37" data-toggle="tooltip" title="LISTAR REGISTROS" accesskey="L"
                                class="btn btn-labeled btn-info mb-2 mr-sm-4"><span class="btn-label"><i
                                             class="fa fa-list"></i></span> <u>L</u>ISTAR</a>
                             <a target="_blank"
                                href='http://www.buscacep.correios.com.br/sistemas/buscacep/buscaCepEndereco.cfm'
-                               role='button' tabindex="37" data-toggle="tooltip" title="BUSCA CEP CORREIOS" accesskey="S"
+                               role='button' tabindex="38" data-toggle="tooltip" title="BUSCA CEP CORREIOS" accesskey="S"
                                class="btn btn-labeled btn-default mb-2 mr-sm-4"><span class="btn-label"><img
                                             src="imagens/correios.png" width="20"/></span></span> BUSCA CEP</a>
                         </div>

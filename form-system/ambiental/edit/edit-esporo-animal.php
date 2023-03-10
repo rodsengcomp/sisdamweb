@@ -12,6 +12,7 @@ $id_dsg = $_GET['dsg'] ?? '';
 $id_qtd = $_GET['qtd'] ?? '';
 $id_nm_ent = $_GET['nm_ent_medc'] ?? '';
 $id_nm_rec = $_GET['nm_rec_medc'] ?? '';
+$id_obs_med = $_GET['obs_med'] ?? '';
 $id_lixeira = $_GET['lixeira'] ?? 'false';
 $id_edit = $_REQUEST['edit'] ?? 'false';
 
@@ -181,7 +182,7 @@ $countlixo = $contarlixo->num_rows;
                 <div class="form-group">
                     <label for="inputNve" class="col-sm-1 control-label">NVE</label>
                     <div class="col-sm-1">
-                        <input type="text" id="nve" <?php if($id_edit != 'true'): echo 'autofocus'; endif;?> tabindex="1" data-toggle="tooltip" title="Ex: 10" maxlength="5"
+                        <input type="text" id="nve" tabindex="1" data-toggle="tooltip" title="Ex: 10" maxlength="5"
                                class="form-control" name="nve" placeholder="000" value="<?=$editar_esp_an['nve']; ?>"></div>
 
                     <label for="inputDataNot" class="col-sm-1 control-label">ENTRADA</label>
@@ -380,8 +381,23 @@ $countlixo = $contarlixo->num_rows;
                                              elseif ($dgt == 2): echo 'NEGATIVO';
                                              else: echo 'EM INVESTIGACAO'; endif; ?>"></div>
 
+                <?php
+                    if ($id_edit == 'true'):
+                        if(!isset($id_med) || $id_med == 'null'):
+                            $id_med = 'ITRACONAZOL';
+                        endif;
+                        if(!isset($id_dsg) || $id_dsg == 0):
+                            $id_dsg = 100;
+                        endif;
+                        if(!isset($id_nm_ent) || $id_nm_ent == 0  || $id_nm_ent == NULL):
+                            $id_nm_ent = 'UVIS';
+                        endif;
+                        unset($id_edit);
+                    endif;
+                ?>
+
                 <label class="col-sm-2 control-label">MEDICAMENTO</label>
-                <div class="col-sm-2"><input type="text" <?php if($id_edit == 'true'): echo 'autofocus'; endif;?> tabindex="28" data-toggle="tooltip" title="Nome do Medicamento"
+                <div class="col-sm-2"><input type="text" tabindex="28" data-toggle="tooltip" title="Nome do Medicamento"
                            class="form-control medicamento" name="medicamento" placeholder="ITRACONAZOL" value="<?=$id_med; ?>"></div>
 
                 <label class="col-sm-1 control-label">DOSAGEM</label>
@@ -396,7 +412,7 @@ $countlixo = $contarlixo->num_rows;
                 <div class="form-group">
                         <label for="inputDataMedicamento" class="col-sm-1 control-label">DATA</label>
                         <div class="col-sm-2"><input tabindex="30" type="text" class="form-control" data-toggle="tooltip"
-                             title="Data da 1ª entrega" name="dataentrada" id="dataentesp" placeholder="00/00/0000" value="<?=$id_data; ?>"></div>
+                             title="Data da 1ª entrega" name="dataentrada" id="dataentesp" placeholder="00/00/0000" value="<?=$id_data; ?>" <?php if(!isset($id_edit)): echo 'autofocus'; endif;?>></div>
 
                         <label for="inputQuantidade" class="col-sm-1 control-label">QUANTIDADE</label>
                         <div class="col-sm-1"><input type="number" tabindex="31" data-toggle="tooltip" title="Quantidade de comprimidos" maxlength="5"
@@ -412,8 +428,14 @@ $countlixo = $contarlixo->num_rows;
                 </div>
 
                 <div class="form-group">
+                    <label class="col-sm-1 control-label">OBS MED.</label>
+                    <div class="col-sm-11"><textarea id="obs_med" tabindex="34" data-toggle="tooltip" title="Observações sobre entrega do medicamento"
+                                                     class="form-control" name="obs_med" onchange="upperCaseF(this)" placeholder="Observações sobre entrega do medicamento" rows="1"><?=$id_obs_med;?></textarea></div>
+                </div>
+
+                <div class="form-group">
                     <label class="col-sm-1 control-label">OBS</label>
-                    <div class="col-sm-11"><textarea id="obs" tabindex="34" data-toggle="tooltip" title="Observações sobre o caso"
+                    <div class="col-sm-11"><textarea id="obs" tabindex="35" data-toggle="tooltip" title="Observações sobre o caso"
                                                      class="form-control" name="obs" onchange="upperCaseF(this)" placeholder="Informações sobre o caso de esporotricose animal" rows="2"><?=$editar_esp_an['obs'];?></textarea></div>
                 </div>
 
@@ -430,19 +452,19 @@ $countlixo = $contarlixo->num_rows;
             <div class="form-group text-center">
                 <div class="col-sm-12">
                     <?php if ($_SESSION['usuarioNivelAcesso'] <> ''):?>
-                        <button type="submit" tabindex="35" accesskey="G" data-toggle="tooltip" title="GRAVAR OS DADOS" class="btn btn-labeled btn-success mb-2 mr-sm-4"><span
+                        <button type="submit" tabindex="36" accesskey="G" data-toggle="tooltip" title="GRAVAR OS DADOS" class="btn btn-labeled btn-success mb-2 mr-sm-4"><span
                                     class="btn-label"><i class="fa fa-floppy-o"></i></span> <u>G</u>RAVAR</button>
                     <?php endif; ?>
 
-                    <a target=”_blank” tabindex="36" href="form-system/ambiental/print/print-esporo-animal.php?id=<?=$id?>" role="button" accesskey="I" data-toggle="tooltip" title="IMPRIMIR"
+                    <a target=”_blank” tabindex="37" href="form-system/ambiental/print/print-esporo-animal.php?id=<?=$id?>" role="button" accesskey="I" data-toggle="tooltip" title="IMPRIMIR"
                        class="btn btn-labeled btn-default mb-2 mr-sm-4"><span class="btn-label"><i class="fa fa-print"></i></span> <u>I</u>MPRIMIR</a>
 
-                    <a href='suvisjt.php?pag=listar-esporotricose-animal' role='button' tabindex="37" data-toggle="tooltip" title="LISTAR REGISTROS" accesskey="L"
+                    <a href='suvisjt.php?pag=listar-esporotricose-animal' role='button' tabindex="38" data-toggle="tooltip" title="LISTAR REGISTROS" accesskey="L"
                        class="btn btn-labeled btn-info mb-2 mr-sm-4"><span class="btn-label"><i
                                     class="fa fa-list"></i></span> <u>L</u>ISTAR</a>
                     <a target="_blank"
                        href='http://www.buscacep.correios.com.br/sistemas/buscacep/buscaCepEndereco.cfm'
-                       role='button' tabindex="38" data-toggle="tooltip" title="BUSCA CEP CORREIOS" accesskey="S"
+                       role='button' tabindex="39" data-toggle="tooltip" title="BUSCA CEP CORREIOS" accesskey="S"
                        class="btn btn-labeled btn-default mb-2 mr-sm-4"><span class="btn-label"><img
                                     src="imagens/correios.png" width="20"/></span></span> BUSCA CEP</a>
 
@@ -479,7 +501,7 @@ $countlixo = $contarlixo->num_rows;
                             if ($countlixo == 0):
                                 echo '<button type="button" style="opacity: inherit" class="btn btn-primary btn-labeled btn-lg btn-block disabled"><span class="btn-label"><i
                                             class="fa fa-pills"></i></span>ENTREGA DE MEDICAMENTOS ESPOROTRICOSE ANIMAL</button><br>';
-                                echo '<a href="suvisjt.php?pag=edit-esporo-animal&id='.$id.'&edit=true" role="button" tabindex="39" accesskey="I" data-toggle="tooltip" title="NOVO MEDICAMENTO" 
+                                echo '<a href="suvisjt.php?pag=edit-esporo-animal&id='.$id.'&id_med=ITRACONAZOL&dsg=100&nm_ent_medc=UVIS&edit=true" role="button" tabindex="39" accesskey="I" data-toggle="tooltip" title="NOVO MEDICAMENTO" 
                                             class="btn btn-labeled btn-success mb-2 mr-sm-4"><span class="btn-label"><i class="fa fa-pills"></i></span> <u>N</u>OVO</a>';
                                 echo '<a href="suvisjt.php?pag=listar-medicamentos-esporotricose-animal" role="button" tabindex="40" accesskey="E" data-toggle="tooltip" title="ENTRADAS DE MEDICAMENTOS" 
                                             class="btn btn-labeled btn-success mb-2 mr-sm-4"><span class="btn-label"><i class="fa fa-pills"></i></span> <u>E</u>NTRADAS</a>';
@@ -488,6 +510,8 @@ $countlixo = $contarlixo->num_rows;
                             elseif ($id_lixeira === 'false'):
                                 echo '<button type="button" class="btn btn-primary btn-labeled btn-lg btn-block"><span class="btn-label"><i
                                             class="fa fa-pills"></i></span>ENTREGA DE MEDICAMENTOS ESPOROTRICOSE ANIMAL</button><br>';
+                                echo '<a href="suvisjt.php?pag=edit-esporo-animal&id='.$id.'&id_med=ITRACONAZOL&dsg=100&nm_ent_medc=UVIS&edit=true" role="button" tabindex="39" accesskey="I" data-toggle="tooltip" title="NOVO MEDICAMENTO" 
+                                            class="btn btn-labeled btn-success mb-2 mr-sm-4"><span class="btn-label"><i class="fa fa-pills"></i></span> <u>N</u>OVO</a>';
                                 echo '<a href="suvisjt.php?pag=edit-esporo-animal&id='.$id.'&lixeira=true" role="button" accesskey="L" data-toggle="tooltip" title="GRAVAR OS DADOS" 
                                             class="btn btn-labeled btn-default mb-2 mr-sm-4"><span class="btn-label"><i class="fa fa-trash-alt"></i></span><span class="badge" style="background-color: #c9302c">'.$countlixo.'</span> &nbsp;<u>L</u>IXEIRA</a>';
                                 echo '<a href="suvisjt.php?pag=listar-medicamentos-esporotricose-animal" role="button" accesskey="E" data-toggle="tooltip" title="ENTRADAS DE MEDICAMENTOS" 
@@ -515,6 +539,7 @@ $countlixo = $contarlixo->num_rows;
                             <th class="text-center"><i class="fal fa-light fa-briefcase-medical"></i> QUANTIDADE</th>
                             <th class="text-center"><i class="fal fa-user-check"></i> ENTREGUE</th>
                             <th class="text-center"><i class="fal fa-user-check"></i> RECEBIDO</th>
+                            <th class="text-center"><i class="fal fa-user-check"></i> OBS</th>
                             <th class="text-center"><?php if($id_lixeira === 'true'): echo '<i class="fal fa-thin fa-arrow-alt-circle-up"></i> REATIVAR'; else : echo '<i class="fal fa-thin fa-trash-alt"></i> LIXO'; endif; ?></th>
                         </tr>
                         </thead>

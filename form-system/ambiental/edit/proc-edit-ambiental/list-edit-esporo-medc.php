@@ -32,7 +32,7 @@ $primaryKey = 'id_an_esp';
 if($lixo === 'true'):
     $table = <<<EOT
      ( 
-    SELECT esporo_an_sd_medc.id_sd, esporo_an_sd_medc.id_medc, esporo_an_sd_medc.data_medc, esporo_an_sd_medc.dsg_medc, esporo_an_sd_medc.qtd_medc, esporo_an_sd_medc.nm_ent_medc, esporo_an_sd_medc.nm_rec_medc, 
+    SELECT esporo_an_sd_medc.id_sd, esporo_an_sd_medc.id_medc, esporo_an_sd_medc.data_medc, esporo_an_sd_medc.dsg_medc, esporo_an_sd_medc.qtd_medc, esporo_an_sd_medc.nm_ent_medc, esporo_an_sd_medc.nm_rec_medc, esporo_an_sd_medc.obs_med, 
     esporo_an_sd_medc.id_an_esp,
     esporo_medc.nm_mdc_esp_an
     FROM esporo_an_sd_medc
@@ -44,7 +44,7 @@ EOT;
     else:
         $table = <<<EOT
         ( 
-            SELECT esporo_an_sd_medc.id_sd, esporo_an_sd_medc.id_medc, esporo_an_sd_medc.data_medc, esporo_an_sd_medc.dsg_medc, esporo_an_sd_medc.qtd_medc, esporo_an_sd_medc.nm_ent_medc, esporo_an_sd_medc.nm_rec_medc, 
+            SELECT esporo_an_sd_medc.id_sd, esporo_an_sd_medc.id_medc, esporo_an_sd_medc.data_medc, esporo_an_sd_medc.dsg_medc, esporo_an_sd_medc.qtd_medc, esporo_an_sd_medc.nm_ent_medc, esporo_an_sd_medc.nm_rec_medc, esporo_an_sd_medc.obs_med, 
             esporo_an_sd_medc.id_an_esp,
             esporo_medc.nm_mdc_esp_an
             FROM esporo_an_sd_medc
@@ -80,7 +80,8 @@ $columns = array(
                 }),
                 array('db' => 'nm_ent_medc', 'dt' => 5),
                 array('db' => 'nm_rec_medc', 'dt' => 6),
-                array('db' => 'id_sd', 'dt' => 7)
+                array('db' => 'obs_med', 'dt' => 7),
+                array('db' => 'id_sd', 'dt' => 8)
 
 );
 
