@@ -16,7 +16,7 @@
 $table = <<<EOT
  ( 
 SELECT dengnet.NU_NOTIFIC, resultado_ccz.SINAN, resultado_ccz.PACIENTE, dengnet.NM_LOGRADO ,resultado_ccz.Resultado_IgM_Focus, resultado_ccz.Resultado_IgM_Panbio,
-resultado_ccz.Resultado_NS1, resultado_ccz.Sintoma, resultado_ccz.ENTRADA, resultado_ccz.Coleta, resultado_ccz.LIBERACAO_EM, resultado_ccz.OBSERVACAO
+resultado_ccz.Resultado_NS1, resultado_ccz.Sintoma, resultado_ccz.ENTRADA, resultado_ccz.Coleta, resultado_ccz.`Data Resultado` , resultado_ccz.OBSERVACAO
 FROM resultado_ccz 
 LEFT JOIN dengnet ON resultado_ccz.SINAN = dengnet.NU_NOTIFIC
 )temp
@@ -25,7 +25,6 @@ EOT;
 
 // chave primária da tabela
 $primaryKey = 'NU_NOTIFIC';
-
 
 // Array de colunas de banco de dados que devem ser lidas e enviadas de volta para DataTables.
 // O parâmetro `db` representa o nome da coluna no banco de dados, enquanto o` dt`
@@ -41,7 +40,7 @@ $columns = array(
     array('db' => 'PACIENTE', 'dt' => 5),
     array('db' => 'NM_LOGRADO', 'dt' => 6),
     array('db' => 'Coleta', 'dt' => 7),
-    array('db' => 'LIBERACAO_EM', 'dt' => 8),
+    array('db' => 'Data Resultado', 'dt' => 8),
     array('db' => 'ENTRADA', 'dt' => 9),
     array('db' => 'OBSERVACAO', 'dt' => 10)
 );

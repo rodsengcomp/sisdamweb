@@ -14,8 +14,7 @@
 
 -- Script criado para carregar tabelas extraídas de bancos de dados -> SinanNet, Getwin e GAL-Instituto Adolfo Lutz
 --
--- Carregandoesuu
-
+-- Carregando
 
 
 -- script anti-rabica --
@@ -355,11 +354,11 @@ ALTER TABLE `sarampo_ial` ADD `id` INT NOT NULL AUTO_INCREMENT FIRST, ADD PRIMAR
 
 -- Criando a tabela resultado_ccz
 CREATE TABLE `resultado_ccz` (`ENTRADA` varchar(10) DEFAULT NULL,`PEDIDO` int(8) DEFAULT NULL,`UNIDADE_DE_SAUDE` varchar(30) DEFAULT NULL,`D_A` varchar(17) DEFAULT NULL,
-  `SUVIS` varchar(30) DEFAULT NULL,`SINAN` varchar(8) DEFAULT NULL,`PACIENTE` varchar(50) DEFAULT NULL,`SEXO` varchar(1) DEFAULT NULL,`NASCIMENTO` varchar(10) DEFAULT NULL,
+  `UVIS` varchar(30) DEFAULT NULL,`SINAN` varchar(8) DEFAULT NULL,`PACIENTE` varchar(50) DEFAULT NULL,`SEXO` varchar(1) DEFAULT NULL,`NASCIMENTO` varchar(10) DEFAULT NULL,
   `Sintoma` varchar(16) DEFAULT NULL,`Coleta` varchar(16) DEFAULT NULL,`Nr_da_Amostra` varchar(8) DEFAULT NULL,`Resultado_IgM_Panbio` varchar(17) DEFAULT NULL,
   `Kit_IgM` varchar(6) DEFAULT NULL,`Nova_Coleta_Panbio` varchar(3) DEFAULT NULL,`Resultado_IgM_Focus` varchar(17) DEFAULT NULL,`Kit_IgM1` varchar(5) DEFAULT NULL,
   `Nova_Coleta_Focus` varchar(3) DEFAULT NULL,`NS1` varchar(3) DEFAULT NULL,`Nr_AM_NS1` varchar(10) DEFAULT NULL,`Resultado_NS1` varchar(12) DEFAULT NULL,
-  `Kit_NS1` varchar(6) DEFAULT NULL,`LIBERACAO_EM` varchar(10) DEFAULT NULL,`OBSERVACAO` varchar(57) DEFAULT NULL) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `Kit_NS1` varchar(6) DEFAULT NULL,`Data Resultado` varchar(10) DEFAULT NULL,`OBSERVACAO` varchar(57) DEFAULT NULL) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Exportando novos resultados do ccz dengue
 LOAD DATA INFILE 'e:/csv/RadGridExport.csv'
@@ -382,18 +381,19 @@ ALTER TABLE resultado_ccz DROP COLUMN id;
 ALTER TABLE `resultado_ccz`ADD PRIMARY KEY (`PEDIDO`);
 
 -- Criando a tabela resultado_ccz_lepto
-CREATE TABLE `resultado_ccz_lepto` (`ENTRADA` varchar(10) DEFAULT NULL,`PEDIDO` varchar(8) DEFAULT NULL,`UNIDADE_DE_SAUDE` varchar(43) DEFAULT NULL,`D_A` varchar(21) DEFAULT NULL,
-  `SUVIS` varchar(30) DEFAULT NULL,`SINAN` varchar(26) DEFAULT NULL,`PACIENTE` varchar(41) DEFAULT NULL,`SEXO` varchar(10) DEFAULT NULL,`NASCIMENTO` varchar(10) DEFAULT NULL,
-  `Nr_da_Amostra` varchar(10) DEFAULT NULL,`Sintoma` varchar(13) DEFAULT NULL,`Coleta` varchar(13) DEFAULT NULL,`RES_ELISA` varchar(12) DEFAULT NULL,`CO` varchar(5) DEFAULT NULL,
-  `DO` varchar(8) DEFAULT NULL,`RES_MAT` varchar(12) DEFAULT NULL,`NOVA_COLETA` varchar(19) DEFAULT NULL,`1o_SOROVAR` varchar(19) DEFAULT NULL,`1o_TIT` varchar(9) DEFAULT NULL,
-  `2o_SOROVAR` varchar(13) DEFAULT NULL,`2o_TIT` varchar(9) DEFAULT NULL,`3o_SOROVAR` varchar(10) DEFAULT NULL,`3o_TIT` varchar(5) DEFAULT NULL,`4o_SOROVAR` varchar(11) DEFAULT NULL,
-  `4o_TIT` varchar(9) DEFAULT NULL,`5o_SOROVAR` varchar(11) DEFAULT NULL,`5o_TIT` varchar(11) DEFAULT NULL,`6o_SOROVAR` varchar(11) DEFAULT NULL,`6o_TIT` varchar(9) DEFAULT NULL,
-  `7o_SOROVAR` varchar(11) DEFAULT NULL,`7o_TIT` varchar(6) DEFAULT NULL,`8o_SOROVAR` varchar(9) DEFAULT NULL,`8o_TIT` varchar(3) DEFAULT NULL,`9o_SOROVAR` varchar(11) DEFAULT NULL,
-  `9o_TIT` varchar(3) DEFAULT NULL,`10o_SOROVAR` varchar(9) DEFAULT NULL,`10o_TIT` varchar(5) DEFAULT NULL,`11o_SOROVAR` varchar(6) DEFAULT NULL,`11o_TIT` varchar(3) DEFAULT NULL,
-  `12o_SOROVAR` varchar(10) DEFAULT NULL,`12o_TIT` varchar(4) DEFAULT NULL,`13_SOROVAR` varchar(9) DEFAULT NULL,`13_TIT` varchar(4) DEFAULT NULL,`14o_SOROVAR` varchar(10) DEFAULT NULL,
-  `14o_TIT` varchar(10) DEFAULT NULL,`15o_SOROVAR` varchar(10) DEFAULT NULL,`15o_TIT` varchar(10) DEFAULT NULL,`16o_SOROVAR` varchar(10) DEFAULT NULL,`16o_TIT` varchar(10) DEFAULT NULL,
-  `17o_SOROVAR` varchar(10) DEFAULT NULL,`17o_TIT` varchar(10) DEFAULT NULL,`18o_SOROVAR` varchar(10) DEFAULT NULL,`18o_TIT` varchar(10) DEFAULT NULL,`19o_SOROVAR` varchar(10) DEFAULT NULL,
-  `19o_TIT` varchar(10) DEFAULT NULL,`LIBERACAO_EM` varchar(10) DEFAULT NULL,`OBSERVACAO` varchar(75) DEFAULT NULL) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE `resultado_ccz_lepto` ( `ENTRADA` varchar(10) DEFAULT NULL, `Nº Pedido` int(8) DEFAULT NULL, `UNDADE_DE_SAUDE` varchar(32) DEFAULT NULL, `D_A` varchar(15) DEFAULT NULL, `UVIS` varchar(30) DEFAULT NULL,
+     `SINAN` varchar(7) DEFAULT NULL, `PACIENTE` varchar(43) DEFAULT NULL, `Sexo` varchar(1) DEFAULT NULL, `Nascimento` varchar(10) DEFAULT NULL, `Coleta` varchar(13) DEFAULT NULL,
+     `RES_ELISA_PANBIO` varchar(12) DEFAULT NULL, `CO_PANBIO` varchar(4) DEFAULT NULL, `DO_PANBIO` varchar(6) DEFAULT NULL, `RES_ELISA_SERION` varchar(10) DEFAULT NULL, `CO_SERION` varchar(10) DEFAULT NULL,
+     `DO_SERION` varchar(10) DEFAULT NULL, `RES_MAT` varchar(12) DEFAULT NULL, `NOVA_COLETA` varchar(3) DEFAULT NULL, `1o_SOROVAR` varchar(19) DEFAULT NULL, `1o_TIT` varchar(5) DEFAULT NULL,
+     `2o_SOROVAR` varchar(11) DEFAULT NULL, `2o_TIT` varchar(4) DEFAULT NULL, `3o_SOROVAR` varchar(11) DEFAULT NULL, `3o_TIT` varchar(5) DEFAULT NULL, `4o_SOROVAR` varchar(11) DEFAULT NULL,
+     `4o_TIT` varchar(5) DEFAULT NULL,  `5o_SOROVAR` varchar(11) DEFAULT NULL, `5o_TIT` varchar(5) DEFAULT NULL, `6o_SOROVAR` varchar(10) DEFAULT NULL, `6o_TIT` varchar(4) DEFAULT NULL,
+     `7o_SOROVAR` varchar(9) DEFAULT NULL, `7o_TIT` varchar(4) DEFAULT NULL,  `8o_SOROVAR` varchar(10) DEFAULT NULL, `8o_TIT` varchar(10) DEFAULT NULL, `9o_SOROVAR` varchar(10) DEFAULT NULL,
+     `9o_TIT` varchar(10) DEFAULT NULL, `10o_SOROVAR` varchar(10) DEFAULT NULL, `10o_TIT` varchar(10) DEFAULT NULL, `11o_SOROVAR` varchar(10) DEFAULT NULL, `11o_TIT` varchar(10) DEFAULT NULL,
+     `12o_SOROVAR` varchar(10) DEFAULT NULL, `12o_TIT` varchar(10) DEFAULT NULL, `13_SOROVAR` varchar(10) DEFAULT NULL, `13_TIT` varchar(10) DEFAULT NULL,
+     `14o_SOROVAR` varchar(10) DEFAULT NULL, `14o_TIT` varchar(10) DEFAULT NULL, `15o_SOROVAR` varchar(10) DEFAULT NULL, `15o_TIT` varchar(10) DEFAULT NULL, `16o_SOROVAR` varchar(10) DEFAULT NULL,
+     `16o_TIT` varchar(10) DEFAULT NULL, `17o_SOROVAR` varchar(10) DEFAULT NULL, `17o_TIT` varchar(10) DEFAULT NULL, `18o_SOROVAR` varchar(10) DEFAULT NULL, `18o_TIT` varchar(10) DEFAULT NULL,
+     `19o_SOROVAR` varchar(10) DEFAULT NULL, `19o_TIT` varchar(10) DEFAULT NULL, `Data Resultado` varchar(10) DEFAULT NULL, `OBSERVACAO` varchar(10) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Exportando novos resultados do ccz dengue
 LOAD DATA INFILE 'e:/csv/RadGridExportLepto.csv'
@@ -406,14 +406,14 @@ IGNORE 1 ROWS;
 ALTER TABLE `resultado_ccz_lepto` ADD `id` INT NOT NULL AUTO_INCREMENT FIRST, ADD PRIMARY KEY (`id`);
 
 -- Comando SQL para apagar um ou mais dos de cada registro duplicado (mantém um dos registros)
-DELETE a FROM resultado_ccz_lepto AS a, resultado_ccz_lepto AS b WHERE a.PEDIDO=b.PEDIDO AND a.id < b.id;
-DELETE a FROM resultado_ccz_lepto AS a WHERE a.PEDIDO < 100;
+DELETE a FROM resultado_ccz_lepto AS a, resultado_ccz_lepto AS b WHERE a.`Nº Pedido`=b.`Nº Pedido` AND a.id < b.id;
+DELETE a FROM resultado_ccz_lepto AS a WHERE a.`Nº Pedido` < 100;
 
 -- Apagando a coluna id criada apenas para encontrar registros duplicados
 ALTER TABLE resultado_ccz_lepto DROP COLUMN id;
 
 -- Inserindo chave primária
-ALTER TABLE `resultado_ccz_lepto`ADD PRIMARY KEY (`PEDIDO`);
+ALTER TABLE `resultado_ccz_lepto`ADD PRIMARY KEY (`Nº Pedido`);
 
 -- Criando a tabela resultado_esporo
 CREATE TABLE `resultado_esporo` (`Data_Pedido` varchar(10) DEFAULT NULL,`Nr_Pedido` int(8) NOT NULL,`SeqProcedimento` int(1) DEFAULT NULL,`Solicitante` varchar(31) DEFAULT NULL,

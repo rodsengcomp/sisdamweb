@@ -22,7 +22,7 @@ leptonet.NU_NOTIFIC, leptonet.DT_NOTIFIC, leptonet.SEM_NOT, leptonet.NM_PACIENT,
 leptonet.SEM_PRI,leptonet.DS_OBS, leptonet.NU_NUMERO, leptonet.NU_DDD_TEL,leptonet.NU_TELEFON,
 sv2.sinan as sinansv2,
 ruas.da, ruas.setor, ruas.log, ruas.cep, ruas.bairro, ruas.pgguia, ruas.id, ruas.ubs,ruas.rua,
-resultado_ccz_lepto.RES_ELISA, resultado_ccz_lepto.RES_MAT,resultado_ccz_lepto.LIBERACAO_EM
+resultado_ccz_lepto.RES_ELISA_PANBIO, resultado_ccz_lepto.RES_MAT,resultado_ccz_lepto.`Data Resultado` 
 FROM tbllepto INNER JOIN leptonet ON tbllepto.nDoc = leptonet.NU_NOTIFIC 
 LEFT JOIN resultado_ccz_lepto ON tbllepto.nDoc = resultado_ccz_lepto.SINAN
 LEFT JOIN ruas ON tbllepto.idRua = ruas.id
@@ -43,7 +43,7 @@ $columns = array(
     array('db' => 'nDoc', 'dt' => 0),
     array('db' => 'sinansv2', 'dt' => 1),
     array('db' => 'nDoc', 'dt' => 2),
-    array('db' => 'RES_ELISA', 'dt' => 3),
+    array('db' => 'RES_ELISA_PANBIO', 'dt' => 3),
     array('db' => 'RES_MAT', 'dt' => 4),
     array('db' => 'DT_SIN_PRI', 'dt' => 5),
     array('db' => 'NM_PACIENT', 'dt' => 6),

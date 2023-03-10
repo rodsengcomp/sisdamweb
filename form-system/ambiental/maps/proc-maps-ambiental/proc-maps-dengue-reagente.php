@@ -24,7 +24,7 @@ WHEN ResultadoTr='Reagente' THEN 'Positivo'
 
 END) AS type,
 tbldengue.Data1Sintomas,tbldengue.NomeSolicitante,tbldengue.ResultadoTr,tbldengue.latitude, tbldengue.longitude,tbldengue.N,tbldengue.Complemento,
-resultado_ccz.Resultado_IgM_Focus, resultado_ccz.Resultado_IgM_Panbio,resultado_ccz.Resultado_NS1,resultado_ccz.LIBERACAO_EM,
+resultado_ccz.Resultado_IgM_Focus, resultado_ccz.Resultado_IgM_Panbio,resultado_ccz.Resultado_NS1, resultado_ccz.`Data Resultado` ,
 ruas.ruagoogle,ruas.log,ruas.rua,ruas.id,
 dengnet.NU_NOTIFIC, dengnet.CLASSI_FIN, dengnet.NM_PACIENT, dengnet.DT_SIN_PRI
 FROM tbldengue INNER JOIN dengnet ON tbldengue.nDoc = dengnet.NU_NOTIFIC 

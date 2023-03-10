@@ -37,9 +37,10 @@ $columns = array(
                 array('db' => 'id_esp_ent', 'dt' => 0),
                 array('db' => 'dt_cadastro', 'dt' => 1, 'formatter' => function ($d) {
                     switch($d){
-                        case '';
-                            return '';
-                            break;
+                        case null:
+                        case '0':
+                        case '0000-00-00':
+                        case ''; return '';
                         default:
                             return date('d/m/Y', strtotime($d));
                     }
@@ -52,9 +53,10 @@ $columns = array(
                 }),
                 array('db' => 'dt_criado', 'dt' => 6, 'formatter' => function ($d) {
                     switch($d){
-                        case '';
-                            return '';
-                            break;
+                        case null:
+                        case '0':
+                        case '0000-00-00':
+                        case ''; return '';
                         default:
                             return date('d/m/Y', strtotime($d));
                     }

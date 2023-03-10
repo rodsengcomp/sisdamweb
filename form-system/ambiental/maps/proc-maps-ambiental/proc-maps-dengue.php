@@ -33,7 +33,7 @@ ELSE 'Alerta'
 
 END) AS type,
 tbldengue.Data1Sintomas,tbldengue.NomeSolicitante,tbldengue.ResultadoTr,tbldengue.latitude, tbldengue.longitude,tbldengue.N,tbldengue.Complemento,
-resultado_ccz.Resultado_IgM_Focus, resultado_ccz.Coleta,resultado_ccz.Resultado_IgM_Panbio,resultado_ccz.Resultado_NS1,resultado_ccz.LIBERACAO_EM,
+resultado_ccz.Resultado_IgM_Focus, resultado_ccz.Coleta,resultado_ccz.Resultado_IgM_Panbio,resultado_ccz.Resultado_NS1,resultado_ccz.`Data Resultado` ,
 ruas.ruagoogle,ruas.log,ruas.rua,ruas.id,
 dengnet.NU_NOTIFIC, dengnet.CLASSI_FIN, dengnet.NM_PACIENT, dengnet.DT_SIN_PRI, dengnet.DT_NOTIFIC
 FROM tbldengue INNER JOIN dengnet ON tbldengue.nDoc = dengnet.NU_NOTIFIC 
@@ -48,7 +48,7 @@ ORDER BY `type` DESC";
 
 // SELECT nDoc, NomeSolicitante, IF(da = '38' AND Setor1='3802', 'N/A', da) da FROM tbldengue
 
-//SELECT tbldengue.nDoc,IF(type = 'Dengue' AND Resultado_IgM_Focus='Reagente', 'Wallace', type) type, tbldengue.Data1Sintomas,tbldengue.NomeSolicitante,tbldengue.ResultadoTr, tbldengue.longitude, resultado_ccz.Resultado_IgM_Focus, resultado_ccz.Resultado_NS1,resultado_ccz.LIBERACAO_EM,ruas.ruagoogle,ruas.latitude, ruas.longitude FROM tbldengue LEFT JOIN resultado_ccz ON tbldengue.nDoc = resultado_ccz.SINAN LEFT JOIN ruas ON tbldengue.idRua = ruas.id
+//SELECT tbldengue.nDoc,IF(type = 'Dengue' AND Resultado_IgM_Focus='Reagente', 'Wallace', type) type, tbldengue.Data1Sintomas,tbldengue.NomeSolicitante,tbldengue.ResultadoTr, tbldengue.longitude, resultado_ccz.Resultado_IgM_Focus, resultado_ccz.Resultado_NS1, resultado_ccz.`Data Resultado` ,ruas.ruagoogle,ruas.latitude, ruas.longitude FROM tbldengue LEFT JOIN resultado_ccz ON tbldengue.nDoc = resultado_ccz.SINAN LEFT JOIN ruas ON tbldengue.idRua = ruas.id
 
 $resultado_markers = mysqli_query($conectar, $result_markers);
 
@@ -67,7 +67,7 @@ while ($row_markers = mysqli_fetch_assoc($resultado_markers)) {
     echo 'dtnot="'. $row_markers['DT_NOTIFIC'].'" ';
     echo 'teste="'. $row_markers['ResultadoTr'].'" ';
     echo 'coleta="'. $row_markers['Coleta'].'" ';
-    echo 'dtres="'. $row_markers['LIBERACAO_EM'].'" ';
+    echo 'dtres="'. $row_markers['Data Resultado'].'" ';
     echo 'igm="'. $row_markers['Resultado_IgM_Focus'].'" ';
     echo 'igmpan="'. $row_markers['Resultado_IgM_Panbio'].'" ';
     echo 'ns1="'. $row_markers['Resultado_NS1'].'" ';

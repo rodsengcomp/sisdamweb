@@ -27,20 +27,20 @@ tbldengue.Descarte, tbldengue.DataBloqueio, tbldengue.DataNeb, tbldengue.usuario
 tblDengue.usuarioLer, tblDengue.Impressao, tbldengue.ruagoogle, tbldengue.latitude, tbldengue.longitude, tbldengue.agravo, 
 DENGNET.NU_NOTIFIC, DENGNET.DT_NOTIFIC, DENGNET.SEM_NOT, DENGNET.NM_PACIENT, DENGNET.CS_SEXO,DENGNET.DT_NASC, DENGNET.DT_SIN_PRI, DENGNET.SEM_PRI,DENGNET.DS_OBS,
 DENGNET.NU_NUMERO, DENGNET.NU_DDD_TEL,DENGNET.NU_TELEFON,
-resultado_ccz.Resultado_IgM_Focus, Resultado_IgM_Panbio, resultado_ccz.Resultado_NS1,resultado_ccz.LIBERACAO_EM, resultado_ccz.Coleta
+resultado_ccz.Resultado_IgM_Focus, Resultado_IgM_Panbio, resultado_ccz.Resultado_NS1,resultado_ccz.`Data Resultado` , resultado_ccz.Coleta
 FROM tblDengue INNER JOIN DENGNET ON tblDengue.nDoc = DENGNET.NU_NOTIFIC 
 LEFT JOIN resultado_ccz ON tblDengue.nDoc = resultado_ccz.SINAN 
 WHERE tblDengue.nDoc='$nDoc'";}
 else {
-    $consulta_sinan = "SELECT tbllepto.UnidadeNotificadora, tbllepto.DataEntrada, tbllepto.nDoc, tbllepto.Endereco1, tbllepto.N,
+    $consulta_sinan = "SELECT  tbllepto.id, tbllepto.UnidadeNotificadora, tbllepto.DataEntrada, tbllepto.nDoc, tbllepto.Endereco1, tbllepto.N,
 tbllepto.Complemento, tbllepto.Logradouro, tbllepto.Cep1, tbllepto.PgGuia1, tbllepto.Bairro1, tbllepto.Da,
 tbllepto.Setor1, tbllepto.UBS1, tbllepto.Descarte, tbllepto.DataBloqueio, tbllepto.usuarioAlteracao,tbllepto.NomeSolicitante,
 tbllepto.DataAlteracao, tbllepto.DataLer, tbllepto.usuarioLer, tbllepto.Impressao, tbllepto.ruagoogle, tbllepto.latitude,
 tbllepto.longitude, tbllepto.agravo,
 leptonet.NU_NOTIFIC, leptonet.DT_NOTIFIC, leptonet.SEM_NOT, leptonet.NM_PACIENT, leptonet.CS_SEXO,leptonet.DT_NASC,
 leptonet.DT_SIN_PRI, leptonet.SEM_PRI,leptonet.DS_OBS, leptonet.NU_NUMERO, leptonet.NU_DDD_TEL,leptonet.NU_TELEFON,
-resultado_ccz_lepto.RES_ELISA, resultado_ccz_lepto.RES_MAT,resultado_ccz_lepto.LIBERACAO_EM, resultado_ccz_lepto.Coleta,resultado_ccz_lepto.CO,resultado_ccz_lepto.DO,
-resultado_ccz_lepto.Coleta, resultado_ccz_lepto.Nr_da_Amostra, resultado_ccz_lepto.NOVA_COLETA, resultado_ccz_lepto.1o_SOROVAR, resultado_ccz_lepto.1o_TIT
+resultado_ccz_lepto.RES_ELISA_PANBIO, resultado_ccz_lepto.RES_MAT,resultado_ccz_lepto.`Data Resultado` , resultado_ccz_lepto.Coleta,resultado_ccz_lepto.CO_PANBIO,resultado_ccz_lepto.DO_PANBIO,
+resultado_ccz_lepto.Coleta, resultado_ccz_lepto.`Nº Pedido`, resultado_ccz_lepto.NOVA_COLETA, resultado_ccz_lepto.1o_SOROVAR, resultado_ccz_lepto.1o_TIT
 FROM tbllepto INNER JOIN leptonet ON tbllepto.nDoc = leptonet.NU_NOTIFIC
 LEFT JOIN resultado_ccz_lepto ON tbllepto.nDoc = resultado_ccz_lepto.SINAN
 WHERE tbllepto.nDoc='$nDoc'";
@@ -52,7 +52,7 @@ $editar_sinan_suvis = mysqli_fetch_assoc($resultado_sinan);
 $resultado_igm = $editar_sinan_suvis['Resultado_IgM_Focus'];
 $resultado_igm_panbio = $editar_sinan_suvis['Resultado_IgM_Panbio'];
 $resultado_ns1 = $editar_sinan_suvis['Resultado_NS1'];
-$resultado_elisa = $editar_sinan_suvis['RES_ELISA'];
+$resultado_elisa = $editar_sinan_suvis['RES_ELISA_PANBIO'];
 $resultado_mat = $editar_sinan_suvis['RES_MAT'];
 $data_col_exame_ccz = $editar_sinan_suvis['Coleta'];
 $data_lib_exame_ccz = $editar_sinan_suvis['LIBERACAO_EM'];
@@ -165,7 +165,7 @@ $imageGoogleDengueError = "imagens/mapasp.jpg";
                             </div><!--/.col-xs-6.col-lg-4-->
                         <?php } else {?>
                             <div class="col-xs-6 col-lg-4">
-                                <h5><p><strong>AMOSTRA: <?php echo $editar_sinan_suvis['Nr_da_Amostra'] ?>&nbsp;&nbsp;RECOLETA: <?php echo $editar_sinan_suvis['NOVA_COLETA'] ?></strong></p></h5>
+                                <h5><p><strong>AMOSTRA: <?php echo $editar_sinan_suvis['Nº Pedido'] ?>&nbsp;&nbsp;RECOLETA: <?php echo $editar_sinan_suvis['NOVA_COLETA'] ?></strong></p></h5>
                             </div><!--/.col-xs-6.col-lg-4-->
                             <div class="col-xs-6 col-lg-4">
                                 <h5><p><strong>ELISA: <?php if ($resultado_elisa == "") {echo "Exame Não Realizado";} else { echo $resultado_elisa;} ?>

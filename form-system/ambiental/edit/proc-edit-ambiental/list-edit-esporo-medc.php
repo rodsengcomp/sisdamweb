@@ -62,7 +62,14 @@ endif;
 $columns = array(
                 array('db' => 'id_an_esp', 'dt' => 0),
                 array('db' => 'data_medc', 'dt' => 1, 'formatter' => function ($d) {
-                    return date('d/m/Y', strtotime($d));
+                    switch($d){
+                        case null:
+                        case '0':
+                        case '0000-00-00':
+                        case ''; return '';
+                        default:
+                            return date('d/m/Y', strtotime($d));
+                    }
                 }),
                 array('db' => 'nm_mdc_esp_an', 'dt' => 2,),
                 array('db' => 'dsg_medc', 'dt' => 3, 'formatter' => function ($d) {

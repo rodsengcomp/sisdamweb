@@ -20,8 +20,8 @@ dengnet.CLASSI_FIN,dengnet.CRITERIO,dengnet.NM_LOGRADO, dengnet.ID_DISTRIT, deng
 dengnet.DS_OBS,dengnet.NU_DDD_TEL,
 tbldengue.UBS1,tbldengue.Cep1,tbldengue.UnidadeNotificadora,tbldengue.ResultadoTr,tbldengue.Endereco1,tbldengue.Setor1,tbldengue.DataBloqueio,tbldengue.DataNeb,
 tbldengue.Latitude, tbldengue.Longitude,
-Resultado_CCZ.SINAN, Resultado_CCZ.Resultado_IgM_Focus,Resultado_CCZ.Resultado_IgM_Panbio, Resultado_CCZ.Resultado_NS1, Resultado_CCZ.ENTRADA, Resultado_CCZ.Coleta, Resultado_CCZ.LIBERACAO_EM,
-Resultado_CCZ.Sintoma, Resultado_CCZ.D_A, Resultado_CCZ.SUVIS
+Resultado_CCZ.SINAN, Resultado_CCZ.Resultado_IgM_Focus,Resultado_CCZ.Resultado_IgM_Panbio, Resultado_CCZ.Resultado_NS1, Resultado_CCZ.ENTRADA, Resultado_CCZ.Coleta, resultado_ccz.`Data Resultado` ,
+Resultado_CCZ.Sintoma, Resultado_CCZ.D_A, Resultado_CCZ.UVIS
 FROM dengnet LEFT JOIN tbldengue ON dengnet.NU_NOTIFIC = tbldengue.nDoc   
 LEFT JOIN resultado_ccz ON dengnet.NU_NOTIFIC = resultado_ccz.SINAN
 WHERE (((dengnet.ID_DISTRIT) Like "70")))temp
@@ -55,7 +55,7 @@ $columns = array(
     array( 'db' => 'NU_TELEFON', 'dt' => 15),
     array( 'db' => 'ENTRADA', 'dt' => 16),
     array( 'db' => 'Coleta', 'dt' => 17),
-    array( 'db' => 'LIBERACAO_EM', 'dt' => 18),
+    array( 'db' => 'Data Resultado', 'dt' => 18),
     array( 'db' => 'Resultado_IgM_Focus', 'dt' => 19),
     array( 'db' => 'Resultado_IgM_Panbio', 'dt' => 20),
     array( 'db' => 'Resultado_NS1', 'dt' => 21),

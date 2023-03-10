@@ -86,39 +86,39 @@ $id_sexo = $sexo_id['id'];
 
 if(!empty($dtent)):
 $data_s_c = str_replace("/", "-", $dtent);
-$data_s = date('Y-m-d', strtotime($data_s_c));
+$data_s = date('Y-d-m', strtotime($data_s_c));
 else:
-    $data_s = '';
+    $data_s = '0000-00-00';
 endif;
 
 // Formata a data com / em formato data Y-mm-dd
 $data_s_w = str_replace("/", "-", $datanot);
-if(!empty($data_s_w)):
-    $data_n = date('Y-m-d', strtotime($data_s_w));
+if(isset($data_s_w)):
+    $data_n = date('Y-d-m', strtotime($data_s_w));
 else:
     $data_n = '0000-00-00';
 endif;
 
 // Formata a data com / em formato data Y-mm-dd
 $data_u_a = str_replace("/", "-", $dataua);
-if(!empty($data_u_a)):
-    $data_ua = date('Y-m-d', strtotime($data_u_a));
+if(isset($data_u_a)):
+    $data_ua = date('Y-d-m', strtotime($data_u_a));
 else:
     $data_ua = '0000-00-00';
 endif;
 
 // Formata a data com / em formato data Y-mm-dd
 $data_b_a = str_replace("/", "-", $databa);
-if(!empty($data_b_a)):
-    $data_ba = date('Y-m-d', strtotime($data_b_a));
+if(isset($data_b_a)):
+    $data_ba = date('Y-d-m', strtotime($data_b_a));
 else:
     $data_ba = '0000-00-00';
 endif;
 
 // Formata a data com / em formato data Y-mm-dd
 $data_f_t = str_replace("/", "-", $dataft);
-if(!empty($data_f_t)):
-    $data_ft = date('Y-m-d', strtotime($data_f_t));
+if(isset($data_f_t)):
+    $data_ft = date('Y-d-m', strtotime($data_f_t));
 else:
     $data_ft = '0000-00-00';
 endif;

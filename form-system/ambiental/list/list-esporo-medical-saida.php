@@ -158,16 +158,16 @@ $total_p = substr($total_r, 1);
             <?php if($lixo === '0' && $_SESSION['usuarioNivelAcesso'] <> "") : ?>
                 <a href='suvisjt.php?pag=listar-esporotricose-animal' role='button' tabindex="26" data-toggle="tooltip" title="LISTAR REGISTROS" accesskey="L"
                    class="btn btn-labeled btn-info mb-2 mr-sm-4"><span class="btn-label"><i class="glyphicon glyphicon-list"></i></span> <u>L</u>ISTAR</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <a href="suvisjt.php?pag=listar-medicamentos-esporotricose-animal" role="button" accesskey="E" data-toggle="tooltip" title="SAÍDAS DE MEDICAMENTOS"
-                   class="btn btn-labeled btn-success mb-2 mr-sm-4"><span class="btn-label"><i class="fa fa-pills"></i></span> <u>E</u>NTRADAS</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <?php if($countlixo_medc_sd >= '1' && $_SESSION['usuarioNivelAcesso'] <> "") : ?>
-                    <a href="suvisjt.php?pag=listar-saida-de-medicamentos-esporotricose-animal&lixeira=1" role="button" accesskey="L" data-toggle="tooltip" title="LIXEIRA"
-                       class="btn btn-labeled btn-default mb-2 mr-sm-4"><span class="btn-label"><i class="fa fa-trash-alt"></i></span><span class="badge" style="background-color: #c9302c"><?=$countlixo_medc_sd?></span> &nbsp;<u>L</u>IXEIRA</a>
-                <?php endif;
-            else:
-                echo '<a href="suvisjt.php?pag=listar-saida-de-medicamentos-esporotricose-animal" role="button" accesskey="L" data-toggle="tooltip" title="SAIR DA LIXEIRA" 
+                        <a href="suvisjt.php?pag=listar-medicamentos-esporotricose-animal" role="button" accesskey="E" data-toggle="tooltip" title="SAÍDAS DE MEDICAMENTOS"
+                            class="btn btn-labeled btn-success mb-2 mr-sm-4"><span class="btn-label"><i class="fa fa-pills"></i></span> <u>E</u>NTRADAS</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <?php if($countlixo_medc_sd >= '1' && $_SESSION['usuarioNivelAcesso'] <> "") : ?>
+                        <a href="suvisjt.php?pag=listar-saida-de-medicamentos-esporotricose-animal&lixeira=1" role="button" accesskey="L" data-toggle="tooltip" title="LIXEIRA"
+                            class="btn btn-labeled btn-default mb-2 mr-sm-4"><span class="btn-label"><i class="fa fa-trash-alt"></i></span><span class="badge" style="background-color: #c9302c"><?=$countlixo_medc_sd?></span> &nbsp;<u>L</u>IXEIRA</a>
+                    <?php endif;
+                else:
+                    echo '<a href="suvisjt.php?pag=listar-saida-de-medicamentos-esporotricose-animal" role="button" accesskey="L" data-toggle="tooltip" title="SAIR DA LIXEIRA" 
                                                 class="btn btn-labeled btn-warning mb-2 mr-sm-4"><span class="btn-label"><i class="fa fa-arrow-alt-circle-left"></i></span><u>V</u>OLTAR</a>';
-            endif;
+                endif;
             ?>
         </div>
     </div>

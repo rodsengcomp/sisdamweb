@@ -79,38 +79,39 @@ EOT;
 // índices
 
 $columns = array(
-                array('db' => 'nve', 'dt' => 0, 'formatter' => function ($d) {
+                array('db' => 'suvis', 'dt' => 0, 'formatter' => function ($d) {
+                    return $d = 'UVIS Jaçanã/Tremembé';
+                        //.ucwords(strtolower($d));
+                }),
+                array('db' => 'nve', 'dt' => 1, 'formatter' => function ($d) {
                     switch($d){
                         case '0':
                         case ''; return '';
                         default: return $d;
                     }
                 }),
-                array('db' => 'ano', 'dt' => 1, 'formatter' => function ($d) { return substr($d,2); }),
-                array('db' => 'nm_origem', 'dt' => 2),
-                array('db' => 'data_entrada', 'dt' => 3, 'formatter' => function ($d) {
+                array('db' => 'ano', 'dt' => 2, 'formatter' => function ($d) { return substr($d,2); }),
+                array('db' => 'nm_origem', 'dt' => 3),
+                array('db' => 'data_entrada', 'dt' => 4, 'formatter' => function ($d) {
                     switch($d){
                         case '0000-00-00':
                         case ''; return '';
                         default: return date('d/m/Y', strtotime($d));
                     }
                 }),
-                array('db' => 'pedido', 'dt' => 4, 'formatter' => function ($d) {
+                array('db' => 'pedido', 'dt' => 5, 'formatter' => function ($d) {
                     switch($d){
                         case '0':
                         case ''; return '';
                         default: return $d;
                     }
                 }),
-                array('db' => 'rua', 'dt' => 5, 'formatter' => function ($d) {
+                array('db' => 'rua', 'dt' => 6, 'formatter' => function ($d) {
                     return ucwords(strtolower(trim($d, '*')));
                 }),
-                array('db' => 'numero', 'dt' => 6),
-                array('db' => 'cep', 'dt' => 7),
-                array('db' => 'da', 'dt' => 8),
-                array('db' => 'suvis', 'dt' => 9, 'formatter' => function ($d) {
-                    return ucwords(strtolower($d));
-                }),
+                array('db' => 'numero', 'dt' => 7),
+                array('db' => 'cep', 'dt' => 8),
+                array('db' => 'da', 'dt' => 9),
                 array('db' => 'especie', 'dt' => 10, 'formatter' => function ($d) {
                     return ucwords(strtolower($d));
                 }),
@@ -154,26 +155,18 @@ $columns = array(
                         default: return date('d/m/Y', strtotime($d));
                     }
                 }),
-                array('db' => 'dsg_medc', 'dt' => 19, 'formatter' => function ($d) {
-                    switch($d){
-                        case null:
-                        case '0':
-                        case ''; return '';
-                        default: return $d;
-                    }
-                }),
-                array('db' => 'data_final_trat', 'dt' => 20, 'formatter' => function ($d) {
+                array('db' => 'data_final_trat', 'dt' => 19, 'formatter' => function ($d) {
                     switch($d){
                         case '0000-00-00':
                         case ''; return '';
                         default: return date('d/m/Y', strtotime($d));
                     }
                 }),
-                array('db' => 'sit_esp', 'dt' => 21),
-                array('db' => 'tutor', 'dt' => 22, 'formatter' => function ($d) {
+                array('db' => 'sit_esp', 'dt' => 20),
+                array('db' => 'tutor', 'dt' => 21, 'formatter' => function ($d) {
                     return strtoupper($d);
                 }),
-                ['db' => 'telefone1', 'dt' => 23, 'formatter' => function ($d) {
+                ['db' => 'telefone1', 'dt' => 22, 'formatter' => function ($d) {
                     switch($d){
                         case '':
                         case 'null';
@@ -182,6 +175,14 @@ $columns = array(
                             return $d;
                     }
                 }],
+                array('db' => 'dsg_medc', 'dt' => 23, 'formatter' => function ($d) {
+                    switch($d){
+                        case null:
+                        case '0':
+                        case ''; return '';
+                        default: return $d;
+                    }
+                }),
                 array('db' => 'data_medc_fn', 'dt' => 24, 'formatter' => function ($d) {
                     switch($d){
                         case '0000-00-00':
@@ -197,22 +198,34 @@ $columns = array(
                         default: return date('d/m/Y', strtotime($d));
                     }
                 }),
-                array('db' => 'data_busca_ativa', 'dt' => 27, 'formatter' => function ($d) {
+                [
+                    'db' => 'data_busca_ativa', 'dt' => 27, 'formatter' => function ($d) {
                     switch($d){
-                        case '0000-00-00':
-                        case ''; return '';
+                        case '0000-00-00';
+                        case '1970-01-01';
+                        case '';
+                        return '';
                         default: return date('d/m/Y', strtotime($d));
                     }
+                }
+                ],
+                array('db' => 'data_busca_ativa', 'dt' => 28, 'formatter' => function ($d) {
+                    switch($d){
+                        case '0000-00-00':
+                        case '1970-01-01';
+                        case ''; return 'NÃO REALIZADA';
+                        default: return 'REALIZADA';
+                    }
                 }),
-                array('db' => 'nm_casos_susp_an', 'dt' => 28, 'formatter' => function ($d) {
+                array('db' => 'nm_casos_susp_an', 'dt' => 29, 'formatter' => function ($d) {
                     switch($d){
                         case '0':
                         case ''; return '';
                         default: return $d;
                     }
                 }),
-                array('db' => 'casos_hum_dom', 'dt' => 29),
-                array('db' => 'obs', 'dt' => 30)
+                array('db' => 'casos_hum_dom', 'dt' => 30),
+                array('db' => 'obs', 'dt' => 31)
 );
 
 // SQL server connection information

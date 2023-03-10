@@ -20,7 +20,7 @@ tbldengue.ResultadoTr, tbldengue.Descarte, tbldengue.DataBloqueio, tbldengue.Dat
 tbldengue.idrua, tbldengue.ruagoogle,tbldengue.Setor1, tbldengue.UBS1,tbldengue.Endereco1,tbldengue.Logradouro,
 dengnet.NU_NOTIFIC, dengnet.DT_NOTIFIC, dengnet.NM_PACIENT,dengnet.DT_SIN_PRI, dengnet.DS_OBS,
 dengnet.NU_TELEFON,
-resultado_ccz.Resultado_IgM_Panbio, resultado_ccz.Resultado_IgM_Focus, resultado_ccz.Resultado_NS1,resultado_ccz.LIBERACAO_EM
+resultado_ccz.Resultado_IgM_Panbio, resultado_ccz.Resultado_IgM_Focus, resultado_ccz.Resultado_NS1,resultado_ccz.`Data Resultado` 
 FROM tbldengue INNER JOIN dengnet ON tbldengue.nDoc = dengnet.NU_NOTIFIC
 LEFT JOIN resultado_ccz ON tbldengue.nDoc = resultado_ccz.SINAN
 WHERE (((dengnet.ID_DISTRIT) Like "70")))temp
@@ -31,7 +31,7 @@ tbldengue.ResultadoTr, tbldengue.Descarte, tbldengue.DataBloqueio, tbldengue.Dat
 tbldengue.idrua, tbldengue.ruagoogle,tbldengue.Setor1, tbldengue.UBS1,tbldengue.Endereco1,tbldengue.Logradouro,
 tbldengue.NU_NOTIFIC, tbldengue.DT_NOTIFIC, tbldengue.NM_PACIENT,tbldengue.DT_SIN_PRI, tbldengue.DS_OBS,
 tbldengue.NU_TELEFON,
-tbldengue.Resultado_IgM_Panbio, tbldengue.Resultado_IgM_Focus, tbldengue.Resultado_NS1,tbldengue.LIBERACAO_EM
+tbldengue.Resultado_IgM_Panbio, tbldengue.Resultado_IgM_Focus, tbldengue.Resultado_NS1,tbldengue.Data Resultado
 FROM tbldengue */
 
 // chave primária da tabela

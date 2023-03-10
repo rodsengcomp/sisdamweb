@@ -15,7 +15,7 @@ function parseToXML($htmlStr)
 
 // Select all the rows in the markers table
 $result_markers = "SELECT tbldengue.nDoc,tbldengue.type, tbldengue.Data1Sintomas,tbldengue.NomeSolicitante,tbldengue.ResultadoTr, tbldengue.longitude,
-resultado_ccz.Resultado_IgM_Focus, resultado_ccz.Resultado_NS1,resultado_ccz.LIBERACAO_EM,ruas.ruagoogle,ruas.latitude, ruas.longitude
+resultado_ccz.Resultado_IgM_Focus, resultado_ccz.Resultado_NS1, resultado_ccz.`Data Resultado` , ruas.ruagoogle,ruas.latitude, ruas.longitude
 FROM tbldengue
 LEFT JOIN resultado_ccz ON tbldengue.nDoc = resultado_ccz.SINAN
 LEFT JOIN ruas ON tbldengue.idRua = ruas.id";

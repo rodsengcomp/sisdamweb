@@ -75,6 +75,7 @@ $columns = array(
                     switch ($d) {
                         case null:
                         case '0':
+                        case '0000-00-00':
                         case '';
                             return '';
                         default:
@@ -119,6 +120,7 @@ $columns = array(
                     switch($d){
                         case null:
                         case '0':
+                        case '0000-00-00':
                         case ''; return '';
                         default:
                             return date('d/m/Y', strtotime($d));
@@ -160,6 +162,7 @@ $columns = array(
                     switch($d){
                         case null:
                         case '0':
+                        case '0000-00-00':
                         case ''; return '';
                         default:
                             return $d;

@@ -279,23 +279,23 @@ $pos_lep_total = "SELECT COUNT(tbllepto.nDoc)
 FROM tbllepto
 INNER JOIN leptonet ON tbllepto.nDoc = leptonet.NU_NOTIFIC
 LEFT JOIN resultado_ccz_lepto ON tbllepto.nDoc = resultado_ccz_lepto.SINAN
-WHERE resultado_ccz_lepto.RES_ELISA='Reagente' AND leptonet.CLASSI_FIN='1'
+WHERE resultado_ccz_lepto.RES_ELISA_PANBIO='Reagente' AND leptonet.CLASSI_FIN='1'
 OR resultado_ccz_lepto.RES_MAT='Reagente' AND leptonet.CLASSI_FIN='1'";
 
 //Sql Total de Não Reagentes tbllepto
 $neg_lep_total ="SELECT COUNT(tbllepto.nDoc)
 FROM tbllepto INNER JOIN leptonet ON tbllepto.nDoc = leptonet.NU_NOTIFIC
 LEFT JOIN resultado_ccz_lepto ON tbllepto.nDoc = resultado_ccz_lepto.SINAN
-WHERE resultado_ccz_lepto.RES_ELISA='Não Reagente'";
+WHERE resultado_ccz_lepto.RES_ELISA_PANBIO='Não Reagente'";
 
 //Sql Total Inconclusivo tbllepto
 $sem_col_lep_total = "SELECT COUNT(tbllepto.nDoc)
 FROM tbllepto LEFT JOIN resultado_ccz_lepto ON tbllepto.nDoc = resultado_ccz_lepto.SINAN
-WHERE resultado_ccz_lepto.RES_ELISA IS NULL AND resultado_ccz_lepto.RES_MAT IS NULL";
+WHERE resultado_ccz_lepto.RES_ELISA_PANBIO IS NULL AND resultado_ccz_lepto.RES_MAT IS NULL";
 
 //Sql Inconclusivo Total
 $inco_lep_total = "SELECT COUNT(tbllepto.nDoc) FROM tbllepto LEFT JOIN resultado_ccz_lepto ON tbllepto.nDoc = resultado_ccz_lepto.SINAN
-WHERE resultado_ccz_lepto.RES_ELISA='Inconclusivo'
+WHERE resultado_ccz_lepto.RES_ELISA_PANBIO='Inconclusivo'
 OR resultado_ccz_lepto.RES_MAT='Inconclusivo'";
 
 

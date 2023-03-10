@@ -65,6 +65,7 @@ $row_exame_esporo = mysqli_fetch_assoc($cs_exame_esporo);
     <table id="relatorio-esporo" class="table table-hover table-striped table-bordered" cellspacing="0" width="100%">
         <thead>
         <tr>
+            <th class="text-center">UVIS</th>
             <th class="text-center">FICHA Nº</th>
             <th class="text-center">ANO</th>
             <th class="text-center">ORIGEM</th>
@@ -74,7 +75,6 @@ $row_exame_esporo = mysqli_fetch_assoc($cs_exame_esporo);
             <th class="text-center">NÚMERO</th>
             <th class="text-center">CEP</th>
             <th class="text-center">D.A.</th>
-            <th class="text-center">UVIS</th>
             <th class="text-center">ESPECIE</th>
             <th class="text-center">NOME ANIMAL</th>
             <th class="text-center">SEXO</th>
@@ -84,15 +84,16 @@ $row_exame_esporo = mysqli_fetch_assoc($cs_exame_esporo);
             <th class="text-center">DATA DO RESULTADO</th>
             <th class="text-center">USO DE ITRACONAZOL</th>
             <th class="text-center">DATA INICIO ITRACONAZOL</th>
-            <th class="text-center">DOSE PRESCRITA</th>
             <th class="text-center">DATA FINAL DO TRATAMENTO</th>
             <th class="text-center">DESFECHO</th>
             <th class="text-center">PROPRIETARIO</th>
             <th class="text-center">TELEFONE</th>
+            <th class="text-center">DOSE PRESCRITA</th>
             <th class="text-center">DATA DA ÚLTIMA ENTREGA DA MEDICAÇÃO</th>
             <th class="text-center">QUANTIDADE DE MEDICAMENTO ENTREGUE (CÁPSULAS)</th>
             <th class="text-center">DATA DA ÚLTIMA AVALIAÇÃO DO ANIMAL</th>
             <th class="text-center">DATA DA REALIZAÇÃO DE BUSCA ATIVA DE CASOS NO ENTORNO</th>
+            <th class="text-center">BUSCA ATIVA</th>
             <th class="text-center">Nº DE CASOS SUSPEITOS DE ANIMAIS IDENTIFICADOS NA BUSCA ATIVA</th>
             <th class="text-center">CASOS HUMANOS NO DOMICÍLIO (S OU N)</th>
             <th class="text-center">OBSERVAÇÃO</th>

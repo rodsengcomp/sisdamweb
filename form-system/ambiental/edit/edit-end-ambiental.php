@@ -75,7 +75,6 @@ while($rows_edit_end = mysqli_fetch_assoc($resultado_edit_end)){?>
                 text-overflow: ellipsis;
                 width: 50%;
             }
-            .gm-style-iw-c > button {display: none !important;}
         </style>
 
         <script type="text/javascript">
