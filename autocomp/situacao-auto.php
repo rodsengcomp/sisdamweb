@@ -12,7 +12,7 @@ if (isset($_REQUEST['query'])) {
 
     $query = $_REQUEST['query'];
 
-    $sql = mysqli_query($conectar, "SELECT * FROM situacao_esporo WHERE sit_esp LIKE '%{$query}%'");
+    $sql = mysqli_query($conectar, "SELECT * FROM situacao_esporo WHERE sit_esp LIKE '%{$query}%'  ORDER BY `situacao_esporo`.`sit_esp` ASC");
     $array = array();
 
     while ($row = mysqli_fetch_assoc($sql)) {

@@ -1,11 +1,13 @@
 <style type="text/css">
     .jumbotron {
         position: relative;
-        background: #000 url(./imagens/campanha_meses/cada_cor_mes_1.jpg) no-repeat center center;
+        background: #222222 no-repeat center center;
         color: white;
         text-shadow: black 0 3px 3px;
         width: 100%;
-        height: 100%;
+        height: 350px;
+        display: flex;
+        align-items: center;
         background-size: cover;
         overflow: hidden;
     }

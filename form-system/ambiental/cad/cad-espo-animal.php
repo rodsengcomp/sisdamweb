@@ -281,30 +281,30 @@ include_once '../../conecta.php';
                     <input type="hidden" name="ano" value="<?php echo date('Y') ;?>">
                     <input type="hidden" name="datacadastro" value="<?php echo date("d/m/Y"); ?>">
                     <input type="hidden" id="idrua" name="idrua"></div>
-                    <input type="hidden" name="acao" value="cadastrar">
-                    <input type="hidden" name="pin" value="0">
+        <input type="hidden" name="acao" value="cadastrar">
+        <input type="hidden" name="pin" value="0">
 
-                    <div class="form-group text-center">
-                        <div class="col-sm-12">
-                            <button type="submit" tabindex="36" accesskey="G" style="<?php if ($_SESSION['usuarioNivelAcesso'] == 4) {
-                                echo 'display: none;';
-                            } ?>" data-toggle="tooltip" title="GRAVAR OS DADOS" class="btn btn-labeled btn-success mb-2 mr-sm-4"><span
-                                        class="btn-label"><i class="fa fa-compact-disc"></i></span> <u>G</u>RAVAR
-                            </button>
-                            <a href='suvisjt.php?pag=listar-esporotricose-animal' role='button' tabindex="37" data-toggle="tooltip" title="LISTAR REGISTROS" accesskey="L"
-                               class="btn btn-labeled btn-info mb-2 mr-sm-4"><span class="btn-label"><i
-                                            class="fa fa-list"></i></span> <u>L</u>ISTAR</a>
-                            <a target="_blank"
-                               href='http://www.buscacep.correios.com.br/sistemas/buscacep/buscaCepEndereco.cfm'
-                               role='button' tabindex="38" data-toggle="tooltip" title="BUSCA CEP CORREIOS" accesskey="S"
-                               class="btn btn-labeled btn-default mb-2 mr-sm-4"><span class="btn-label"><img
-                                            src="imagens/correios.png" width="20"/></span></span> BUSCA CEP</a>
-                        </div>
-                    </div>
-                </form>
-            </fieldset>
+        <div class="form-group text-center">
+            <div class="col-sm-12">
+                <button type="submit" tabindex="36" accesskey="G" style="<?php if ($_SESSION['usuarioNivelAcesso'] == 4) {
+                    echo 'display: none;';
+                } ?>" data-toggle="tooltip" title="GRAVAR OS DADOS" class="btn btn-labeled btn-success mb-2 mr-sm-4"><span
+                            class="btn-label"><i class="fa fa-compact-disc"></i></span> <u>G</u>RAVAR
+                </button>
+                <a href='suvisjt.php?pag=listar-esporotricose-animal' role='button' tabindex="37" data-toggle="tooltip" title="LISTAR REGISTROS" accesskey="L"
+                   class="btn btn-labeled btn-info mb-2 mr-sm-4"><span class="btn-label"><i
+                                class="fa fa-list"></i></span> <u>L</u>ISTAR</a>
+                <a target="_blank"
+                   href='http://www.buscacep.correios.com.br/sistemas/buscacep/buscaCepEndereco.cfm'
+                   role='button' tabindex="38" data-toggle="tooltip" title="BUSCA CEP CORREIOS" accesskey="S"
+                   class="btn btn-labeled btn-default mb-2 mr-sm-4"><span class="btn-label"><img
+                                src="imagens/correios.png" width="20"/></span></span> BUSCA CEP</a>
+            </div>
         </div>
+        </form>
+        </fieldset>
     </div>
+</div>
 </div>
 
 <script type="text/javascript"

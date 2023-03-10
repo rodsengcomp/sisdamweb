@@ -17,7 +17,7 @@ error_reporting(0);
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="http://10.47.171.110/sisdamwebsite/" data-toggle="tooltip" title="SISDAM-WEB - SUVIS JAÇANÃ-TREMEMBÉ"><img
+        <a class="navbar-brand" href="http://10.47.171.110/sisdamweb/" data-toggle="tooltip" title="SISDAM-WEB - SUVIS JAÇANÃ-TREMEMBÉ"><img
                     src="imagens/icone-inicial-4.png" alt="SisdamWeb"></a>
         <!--<a class="navbar-brand" href='suvisjt.php' data-toggle="tooltip" data-placement="left" title="SISDAM-WEB - SUVIS JAÇANÃ-TREMEMBÉ">Sisdam Web</a>-->
     </div>

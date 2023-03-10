@@ -86,8 +86,8 @@ $id_sexo = $sexo_id['id'];
 // Monta o caminho de destino com o nome do arquivo
 
 if(!empty($dtent)):
-$data_s_c = str_replace("/", "-", $dtent);
-$data_s = date('Y-d-m', strtotime($data_s_c));
+    $data_s_c = str_replace("/", "-", $dtent);
+    $data_s = date('Y-d-m', strtotime($data_s_c));
 else:
     $data_s = '0000-00-00';
 endif;
@@ -138,12 +138,12 @@ else:
     endif;
 
 // Consultando a existência de outro id com o mesmo endereço e número
-$sql_pino = $conectar->query ("SELECT pin FROM esporo_an WHERE id_rua='$idrua' AND numero='$num'");
+    $sql_pino = $conectar->query ("SELECT pin FROM esporo_an WHERE id_rua='$idrua' AND numero='$num'");
 
 // Consultando o último pino cadastrado com o mesmo endereço e número
-$pino = $conectar->query ("SELECT pin FROM esporo_an WHERE id_rua='$idrua' AND numero='$num' ORDER BY pin DESC LIMIT 1");
-$cs_pino = mysqli_fetch_assoc($pino);
-$pinos = $cs_pino['pin'];
+    $pino = $conectar->query ("SELECT pin FROM esporo_an WHERE id_rua='$idrua' AND numero='$num' ORDER BY pin DESC LIMIT 1");
+    $cs_pino = mysqli_fetch_assoc($pino);
+    $pinos = $cs_pino['pin'];
 
     // Ifs para cadastramento
     if(!empty($acao) && $acao === 'cadastrar') :
@@ -155,12 +155,12 @@ $pinos = $cs_pino['pin'];
             // If para tratar rua e endereço caso já existam outros endereços
             if($sql_pino->num_rows > 0):
 
-            // Consulta para obter a latitude e longitude do primeiro pino
-            $cood = $conectar->query ("SELECT lat, lng FROM esporo_an WHERE id_rua='$idrua' AND numero='$num' AND pin='0'");
-            $cs_cood = mysqli_fetch_assoc($cood);
+                // Consulta para obter a latitude e longitude do primeiro pino
+                $cood = $conectar->query ("SELECT lat, lng FROM esporo_an WHERE id_rua='$idrua' AND numero='$num' AND pin='0'");
+                $cs_cood = mysqli_fetch_assoc($cood);
 
-            $latcood = $cs_cood['lat']; // Latitude do primeiro pino
-            $lngcood = $cs_cood['lng']; // Longitude do primeiro pino
+                $latcood = $cs_cood['lat']; // Latitude do primeiro pino
+                $lngcood = $cs_cood['lng']; // Longitude do primeiro pino
 
                 // If para tratar a latitude e longitude duplicada
                 if($pin == 0):

@@ -48,7 +48,7 @@ $usuariologin = $_SESSION['usuarioLogin'];
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
 
     <!--Chamada Autocomplete-->
-    <!-- <script type="text/javascript" src="js/jquery/jquery.js"></script> -->
+    <script type="text/javascript" src="js/jquery/jquery.js"></script>
 
     <!--Chamada filtro tabela--->
     <script src="js/jquery/1.12.4.jquery.min.js"></script>
@@ -67,8 +67,8 @@ $usuariologin = $_SESSION['usuarioLogin'];
         });
     </script>
 
-    <!-- <script type="text/javascript"
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAhlslumr1saHPVEJHkzPssYLEsWZJQQKU&libraries=places"></script> -->
+    <script type="text/javascript"
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAhlslumr1saHPVEJHkzPssYLEsWZJQQKU&libraries=places"></script>
     <!-- Validações de Formularios -->
     <script type="text/javascript" src="js/jquery/validation/val-admin.js"></script>
     <script type="text/javascript" src="js/jquery/validation/val_contato.js"></script>

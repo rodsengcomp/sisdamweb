@@ -6,7 +6,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="http://10.47.171.110/sisdamwebsite/" data-toggle="tooltip" title="SISDAM-WEB - SUVIS JAÇANÃ-TREMEMBÉ"><img
+        <a class="navbar-brand" href="http://10.47.171.110/sisdamweb/" data-toggle="tooltip" title="SISDAM-WEB - SUVIS JAÇANÃ-TREMEMBÉ"><img
                     src="imagens/icone-inicial-4.png" alt="SisdamWeb"></a>
         <!--<a class="navbar-brand" href='suvisjt.php' data-toggle="tooltip" data-placement="left" title="SISDAM-WEB - SUVIS JAÇANÃ-TREMEMBÉ">Sisdam Web</a>-->
     </div>
@@ -68,7 +68,7 @@
             <button type="submit" id="buttonlogin1" class="btn btn-labeled btn-success"><span class="btn-label"><i
                             class="fal fa-user"></i></span> Acessar
             </button>
-            <a href='./esqueci-senha.php'
+            <a href='./esqueci-senha.php'>
             <button type="submit" id="buttonlogin" class="btn btn-labeled btn-danger"><span class="btn-label"><i
                             class="fal fa-question-circle"></i></span>Esqueci senha
             </button>
